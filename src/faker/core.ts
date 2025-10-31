@@ -3,6 +3,7 @@ import type { SeededRandom } from './rand'
 import { UnsupportedGenerationError } from './errors'
 import { generateString } from './strings'
 import { generateNumber } from './numbers'
+import { generateArray } from './arrays'
 
 /**
  * Normalized options with defaults applied.
@@ -90,7 +91,7 @@ export function generateValue(
       return null
 
     case 'array':
-      throw new Error('Array generation not yet implemented (M3)')
+      return generateArray(schema, context)
 
     case 'object':
       throw new Error('Object generation not yet implemented (M4)')
