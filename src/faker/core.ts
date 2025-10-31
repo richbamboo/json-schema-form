@@ -74,6 +74,25 @@ export function generateValue(
     return schema.examples[0]
   }
 
+  // Handle composition keywords before type dispatch
+  if (schema.allOf) {
+    const { handleAllOf } = require('./composition')
+    return handleAllOf(schema, context)
+  }
+
+  if (schema.anyOf) {
+    const { handleAnyOf } = require('./composition')
+    return handleAnyOf(schema, context)
+  }
+
+  if (schema.oneOf) {
+    const { handleOneOf } = require('./composition')
+    return handleOneOf(schema, context)
+  }
+
+  // Note: 'not' is not actively handled - would require generating complement
+  // Trust retry loop to catch violations
+
   // Dispatch by type
   const type = getSchemaType(schema)
 

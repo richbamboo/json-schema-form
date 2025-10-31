@@ -203,6 +203,13 @@ Example test files:
   - Implement branch switching, simple-not complements, array salvage for `uniqueItems`/`contains`, and JSON-Logic simple-op solver.
   - Tests accordingly.
 
+- **M12: Conditionals (if/then/else) - OPTIONAL**
+  - Implement `if/then/else` conditional schema application.
+  - Evaluate `if` condition, apply `then` or `else` branch accordingly.
+  - Merge conditional branch with base schema.
+  - Tests for various conditional scenarios.
+  - Note: Deferred as optional post-MVP enhancement.
+
 ## Invocation Examples
 
 ```ts
