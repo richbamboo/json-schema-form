@@ -185,8 +185,12 @@ Example test files:
   - Tests accordingly.
 
 - **M7: x-jsf-logic (validations)**
-  - Validate rules via existing validator; no guided solving in MVP. On failure, rely on subtree re-generation.
+  - x-jsf-logic is a custom extension that adds JSON Logic rules for cross-field validation and computed attributes.
+  - Strategy: No active generation logic needed. The validator (`validateJsonLogicRules`) checks `x-jsf-logic-validations`.
+  - If validation fails, the retry loop regenerates. This "trust the validator" approach is sufficient for MVP.
+  - Known limitation: Cross-field equality constraints (e.g., password === confirmPassword) are nearly impossible to satisfy via random retry.
   - Tests: simple relational rules over fields should pass when generation aligns with constraints.
+  - Note: `x-jsf-logic-computedAttrs` are applied during validation/mutation, not during generation.
 
 - **M8: Formats round-out**
   - Fill remaining formats from `format.ts` with faker or helpers, ensure compliance with patterns.
