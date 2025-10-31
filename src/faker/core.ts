@@ -90,6 +90,12 @@ export function generateValue(
     return handleOneOf(schema, context)
   }
 
+  // Handle if/then/else conditionals
+  if (schema.if) {
+    const { handleConditional } = require('./composition')
+    return handleConditional(schema, context)
+  }
+
   // Note: 'not' is not actively handled - would require generating complement
   // Trust retry loop to catch violations
 

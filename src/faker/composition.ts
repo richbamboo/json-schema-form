@@ -32,12 +32,23 @@ export function handleAllOf(
   // Handle special cases: properties and required need deep merging
   // Note: For conflicting constraints (e.g., multiple minimum values), last value wins.
   // Trust retry loop to catch invalid combinations.
-  const mergedSchema: NonBooleanJsfSchema = {}
-  const allProperties: Record<string, JsfSchema> = {}
-  const allRequired: string[] = []
+  
+  // Start with the base schema (includes root-level properties/required)
+  const mergedSchema: NonBooleanJsfSchema = { ...schema }
+  delete mergedSchema.allOf // Remove allOf since we're merging it
+  
+  const allProperties: Record<string, JsfSchema> = { ...schema.properties }
+  const allRequired: string[] = [...(schema.required || [])]
+  const conditionals: NonBooleanJsfSchema[] = []
   
   for (const subSchema of schema.allOf) {
     if (typeof subSchema === 'object') {
+      // If this subschema has if/then/else, save it for later
+      if (subSchema.if) {
+        conditionals.push(subSchema)
+        continue // Don't merge conditional schemas directly
+      }
+      
       // Merge properties
       if (subSchema.properties) {
         Object.assign(allProperties, subSchema.properties)
@@ -59,6 +70,16 @@ export function handleAllOf(
   }
   if (allRequired.length > 0) {
     mergedSchema.required = [...new Set(allRequired)] // Deduplicate
+  }
+
+  // If there are conditionals, apply them to the merged schema
+  if (conditionals.length > 0) {
+    // For now, just apply the first conditional
+    // In the future, we could handle multiple conditionals
+    const conditional = conditionals[0]
+    mergedSchema.if = conditional.if
+    mergedSchema.then = conditional.then
+    mergedSchema.else = conditional.else
   }
 
   return generateValue(mergedSchema as JsfSchema, context)
@@ -104,4 +125,84 @@ export function handleOneOf(
   // The retry loop will validate that it matches exactly one
   const chosenSchema = rng.pick(schema.oneOf) as JsfSchema
   return generateValue(chosenSchema, context)
+}
+
+/**
+ * Handle if/then/else conditionals.
+ * Strategy: Try both branches (then and else), pick one randomly, generate and validate.
+ * The retry loop will try the other branch if validation fails.
+ */
+export function handleConditional(
+  schema: NonBooleanJsfSchema,
+  context: GeneratorContext,
+): SchemaValue {
+  const { generateValue } = require('./core')
+  const { rng } = context
+  
+  if (!schema.if) {
+    throw new Error('Conditional schema must have if clause')
+  }
+
+  // Create base schema without conditional keywords
+  const baseSchema: NonBooleanJsfSchema = { ...schema }
+  delete baseSchema.if
+  delete baseSchema.then
+  delete baseSchema.else
+
+  // Randomly pick which branch to try first (then or else)
+  // The retry loop will validate and retry if needed
+  const tryThenFirst = rng.boolean()
+  const branches = [
+    { name: 'then', schema: schema.then },
+    { name: 'else', schema: schema.else },
+  ]
+  
+  if (!tryThenFirst) {
+    branches.reverse()
+  }
+
+  // Try to merge and generate with the chosen branch
+  for (const branch of branches) {
+    if (!branch.schema || typeof branch.schema !== 'object') {
+      continue
+    }
+
+    const branchObj = branch.schema as NonBooleanJsfSchema
+    
+    // Merge branch schema with base (similar to allOf)
+    const mergedSchema: NonBooleanJsfSchema = { ...baseSchema }
+    
+    // Deep merge properties, handling false schemas
+    if (branchObj.properties) {
+      mergedSchema.properties = { ...baseSchema.properties }
+      for (const [key, propSchema] of Object.entries(branchObj.properties)) {
+        if (propSchema === false) {
+          // false schema means property should not exist - remove it
+          delete mergedSchema.properties[key]
+        } else {
+          mergedSchema.properties[key] = propSchema
+        }
+      }
+    }
+    
+    // Merge required fields
+    if (branchObj.required) {
+      const existingRequired = mergedSchema.required || []
+      mergedSchema.required = [...new Set([...existingRequired, ...branchObj.required])]
+    }
+    
+    // Copy other constraints from branch (last wins)
+    for (const [key, val] of Object.entries(branchObj)) {
+      if (key !== 'properties' && key !== 'required') {
+        ;(mergedSchema as any)[key] = val
+      }
+    }
+
+    // Generate from merged schema
+    // The retry loop will validate this against the full schema (including if/then/else)
+    return generateValue(mergedSchema as JsfSchema, context)
+  }
+
+  // No branches to apply, generate from base
+  return generateValue(baseSchema as JsfSchema, context)
 }

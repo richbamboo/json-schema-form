@@ -1,15 +1,16 @@
 # JSON Schema Faker — Implementation Plan
 
-## 🎉 MVP Status: COMPLETE
+## 🎉 MVP Status: COMPLETE + M12 BONUS
 
-**All core milestones (M0-M8, M10) are complete and tested.**
+**All core milestones (M0-M8, M10, M12) are complete and tested.**
 
-- ✅ **47 test suites** passing with **1,488+ tests**
+- ✅ **48 test suites** passing with **1,497+ tests**
 - ✅ All JSON Schema keywords supported (strings, numbers, arrays, objects, composition, formats)
+- ✅ **if/then/else conditionals fully supported** (M12)
 - ✅ 20+ format types implemented (email, uuid, uri, date-time, etc.)
-- ✅ Real-world integration tests with complex schemas
+- ✅ Real-world integration tests with complex schemas (including Albania onboarding)
 - ✅ CLI test harness tool (`npm run generate-fake`)
-- ⏸️ Optional features deferred: file inputs (M9), guided retries (M11), if/then/else (M12)
+- ⏸️ Optional features deferred: file inputs (M9), guided retries (M11)
 
 **Quick Start:**
 ```bash
@@ -256,12 +257,13 @@ Example test files:
   - Tests accordingly.
   - Status: Deferred - current retry strategy sufficient for MVP.
 
-- ⏸️ **M12: Conditionals (if/then/else) - OPTIONAL**
+- ✅ **M12: Conditionals (if/then/else)**
   - Implement `if/then/else` conditional schema application.
   - Evaluate `if` condition, apply `then` or `else` branch accordingly.
   - Merge conditional branch with base schema.
   - Tests for various conditional scenarios.
-  - Status: Not supported in MVP - use `--remove-if-then-else` flag in CLI tool as workaround.
+  - Status: **COMPLETE** - Full support for conditionals, including within `allOf`.
+  - Works with real-world schemas like Albania onboarding without workarounds.
 
 ## Invocation Examples
 
