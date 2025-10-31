@@ -2,6 +2,7 @@ import type { JsfSchema, NonBooleanJsfSchema, SchemaValue } from '../types'
 import type { SeededRandom } from './rand'
 import { UnsupportedGenerationError } from './errors'
 import { generateString } from './strings'
+import { generateNumber } from './numbers'
 
 /**
  * Normalized options with defaults applied.
@@ -80,7 +81,7 @@ export function generateValue(
 
     case 'number':
     case 'integer':
-      throw new Error('Number generation not yet implemented (M2)')
+      return generateNumber(schema, context)
 
     case 'boolean':
       return context.rng.boolean()
