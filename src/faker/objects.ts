@@ -1,14 +1,47 @@
-import type { NonBooleanJsfSchema, SchemaValue } from '../types'
+import type { JsfSchema, NonBooleanJsfSchema, ObjectValue } from '../types'
 import type { GeneratorContext } from './core'
 
 /**
- * Generate an object satisfying schema constraints.
- * Handles: properties, required, additionalProperties: false.
- * TODO: Implement in M4.
+ * Generate an object value satisfying schema constraints.
+ * Handles: properties, required.
+ * Note: additionalProperties and patternProperties are not actively generated,
+ * but won't cause validation errors if schema allows them.
  */
 export function generateObject(
   schema: NonBooleanJsfSchema,
   context: GeneratorContext,
-): Record<string, SchemaValue> {
-  throw new Error('generateObject not yet implemented')
+): ObjectValue {
+  const { rng, options } = context
+  const { generateValue } = require('./core')
+
+  const result: ObjectValue = {}
+
+  // No properties defined, return empty object
+  if (!schema.properties || typeof schema.properties !== 'object') {
+    return result
+  }
+
+  // Generate required properties first
+  const requiredProps = Array.isArray(schema.required) ? schema.required : []
+  for (const key of requiredProps) {
+    const propertySchema = schema.properties[key]
+    if (propertySchema) {
+      result[key] = generateValue(propertySchema as JsfSchema, context)
+    }
+  }
+
+  // Generate optional properties based on includeOptionalProbability
+  for (const [key, propertySchema] of Object.entries(schema.properties)) {
+    // Skip if already generated (required)
+    if (key in result) {
+      continue
+    }
+
+    // Include optional property based on probability
+    if (rng.random() < options.includeOptionalProbability) {
+      result[key] = generateValue(propertySchema as JsfSchema, context)
+    }
+  }
+
+  return result
 }

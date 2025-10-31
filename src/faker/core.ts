@@ -4,6 +4,7 @@ import { UnsupportedGenerationError } from './errors'
 import { generateString } from './strings'
 import { generateNumber } from './numbers'
 import { generateArray } from './arrays'
+import { generateObject } from './objects'
 
 /**
  * Normalized options with defaults applied.
@@ -94,12 +95,12 @@ export function generateValue(
       return generateArray(schema, context)
 
     case 'object':
-      throw new Error('Object generation not yet implemented (M4)')
+      return generateObject(schema, context)
 
     default:
-      // No type specified; default to object
+      // No type specified; default to object if it has object-like keywords
       if (schema.properties || schema.required) {
-        throw new Error('Object generation not yet implemented (M4)')
+        return generateObject(schema, context)
       }
       // Fallback: generate a simple string
       return 'generated-value'
