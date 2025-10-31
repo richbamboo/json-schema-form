@@ -7,3 +7,10 @@ export {
   type ValidationResult,
 } from './form'
 export { modifySchema as modify } from './modify-schema'
+export { generateFromSchema, type GenerateOptions } from './faker'
+export {
+  GenerationError,
+  UnsupportedGenerationError,
+  UnsatisfiableSchemaError,
+  MaxAttemptsExceededError,
+} from './faker/errors'
