@@ -25,15 +25,16 @@ export function generateObject(
   const requiredProps = Array.isArray(schema.required) ? schema.required : []
   for (const key of requiredProps) {
     const propertySchema = schema.properties[key]
-    if (propertySchema) {
+    // Skip if property schema is false (forbidden property)
+    if (propertySchema !== undefined && propertySchema !== false) {
       result[key] = generateValue(propertySchema as JsfSchema, context)
     }
   }
 
   // Generate optional properties based on includeOptionalProbability
   for (const [key, propertySchema] of Object.entries(schema.properties)) {
-    // Skip if already generated (required)
-    if (key in result) {
+    // Skip if already generated (required) or if property schema is false (forbidden property)
+    if (key in result || propertySchema === false) {
       continue
     }
 

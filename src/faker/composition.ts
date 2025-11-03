@@ -49,9 +49,20 @@ export function handleAllOf(
         continue // Don't merge conditional schemas directly
       }
       
-      // Merge properties
+      // Merge properties (deep merge to preserve base constraints)
       if (subSchema.properties) {
-        Object.assign(allProperties, subSchema.properties)
+        for (const [key, propSchema] of Object.entries(subSchema.properties)) {
+          if (propSchema === false) {
+            // false schema means property is forbidden - remove it
+            delete allProperties[key]
+          } else if (allProperties[key] && typeof allProperties[key] === 'object' && typeof propSchema === 'object') {
+            // Merge with existing property schema
+            allProperties[key] = { ...allProperties[key], ...propSchema } as JsfSchema
+          } else {
+            // No existing schema or can't merge - just assign
+            allProperties[key] = propSchema
+          }
+        }
       }
       
       // Collect required fields
@@ -198,13 +209,31 @@ export function handleConditional(
     // Deep merge properties, handling false schemas
     if (branchObj.properties) {
       mergedSchema.properties = { ...baseSchema.properties }
+      const forbiddenProps: string[] = []
+      
       for (const [key, propSchema] of Object.entries(branchObj.properties)) {
         if (propSchema === false) {
           // false schema means property should not exist - remove it
           delete mergedSchema.properties[key]
+          forbiddenProps.push(key)
+        } else if (typeof propSchema === 'object') {
+          // Merge with existing property schema if it exists
+          const existingProp = mergedSchema.properties?.[key]
+          if (existingProp && typeof existingProp === 'object') {
+            mergedSchema.properties[key] = { ...existingProp, ...propSchema }
+          } else {
+            mergedSchema.properties[key] = propSchema
+          }
         } else {
           mergedSchema.properties[key] = propSchema
         }
+      }
+      
+      // Remove forbidden properties from required array
+      if (forbiddenProps.length > 0 && mergedSchema.required) {
+        mergedSchema.required = mergedSchema.required.filter(
+          (prop) => !forbiddenProps.includes(prop)
+        )
       }
     }
     

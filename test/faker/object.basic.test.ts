@@ -96,4 +96,20 @@ describe('object basic generation', () => {
     expect(result).toHaveProperty('field')
     expect(validateSchema(result, schema)).toEqual([])
   })
+
+  it('should not generate properties with false schema', () => {
+    const schema = {
+      type: 'object' as const,
+      properties: {
+        allowed: { type: 'string' as const },
+        forbidden: false,
+      },
+      required: ['allowed'],
+    }
+    const result = generateFromSchema(schema, { seed: SEED, includeOptionalProbability: 1 }) as ObjectValue
+
+    expect(result).toHaveProperty('allowed')
+    expect(result).not.toHaveProperty('forbidden')
+    expect(validateSchema(result, schema)).toEqual([])
+  })
 })
