@@ -1,0 +1,1392 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 325556,
+            "x-jsf-errorMessage": {
+              "minimum": "In Argentina, full-time employees are entitled to a minimum annual salary of $3,255.56."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "ARS"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 385881600,
+            "x-jsf-errorMessage": {
+              "minimum": "In Argentina, full-time employees are entitled to a minimum annual salary of ARS 3,858,816.00."
+            },
+            "x-jsf-presentation": {
+              "currency": "ARS"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "compensation_currency_code": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Before you complete the employee's contract details, please confirm with them that they have a bank account in this currency.",
+                "severity": "info",
+                "title": "The employee will be paid in United States Dollar (USD)"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_duration_fixed_term_reason": false,
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_end_date",
+          "contract_duration_fixed_term_reason"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "minimum": 14,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 14 days per year"
+            }
+          },
+          "work_hours_per_week": {
+            "maximum": 48,
+            "minimum": 36,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 48 hours per week",
+              "minimum": "Must be at least 36 hours per week"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "minimum": 0
+          },
+          "work_hours_per_week": {
+            "maximum": 35,
+            "minimum": 1,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 35 hours per week",
+              "minimum": "Must be at least 1 hour per week"
+            }
+          }
+        },
+        "required": [
+          "work_hours_per_week"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "monthly_teleworking_contribution": {
+            "minimum": 875000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 8750.00 ARS"
+            },
+            "x-jsf-presentation": {
+              "currency": "ARS"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_amount": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          },
+          "monthly_teleworking_contribution": {
+            "minimum": 2500,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 25.00 USD"
+            },
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          },
+          "signing_bonus_amount": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_probation_period": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "indefinite"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_probation_period": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "type": [
+              "number"
+            ]
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_probation_period": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {},
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 14,
+            "default": 14,
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In Argentina, employees are entitled to a minimum of 14 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+                "title": "Minimum of <strong>14 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_bonus_ack": {
+      "const": "acknowledged",
+      "description": "In Argentina, employees receive a 13th month salary (usually called Christmas bonus). This salary is not part of their annual gross salary and its amount is affected by bonuses and commissions.",
+      "title": "I understand I must pay this employee a 13th month salary in addition to their annual gross salary",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about bonus salaries",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20076431521421,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ARS",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "In Argentina, employees are entitled to a minimum of 14 paid time off days per year. Please pro-rate for part-time employment. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "fde6a2ba-6294-411f-9883-db750b8d16ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "525d79eb-31e3-4d14-9050-39253919de12",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "fde6a2ba-6294-411f-9883-db750b8d16ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "cc167d12-1299-44a4-aa6a-2a8560c3811b",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "fde6a2ba-6294-411f-9883-db750b8d16ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "b67102c4-ce74-4ae9-afde-b4f57757ec86",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "fde6a2ba-6294-411f-9883-db750b8d16ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "f8a5771b-8643-4cb7-a59b-1a6a94d5ab5a",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "fde6a2ba-6294-411f-9883-db750b8d16ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "6bd2b891-1d5e-4baa-8979-77fa36acfa88",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance_2025": {
+          "oneOf": [
+            {
+              "const": "Basic (Prepagas (OSDE and Swiss) - Basic (OSDE and Swiss Medical))",
+              "title": "Basic - Starting at ~69 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Team members can choose between <strong>OSDE 260</strong> or <strong>Swiss Medical SMG30.</strong>\n\nThe plans include coverage for medical, dental, and vision care.  <strong>Coverage limits apply to this tier.</strong>\n\nFor more details on the cost refer to our <a href=\"https://support.remote.com/hc/en-us/articles/32654381872525-How-much-does-health-insurance-in-Argentina-cost-for-customers\" target=\"_blank\">Help Center</a>",
+                "meta": {
+                  "benefitGroupId": "0f2d2786-0bc3-4d6f-a868-c976c5b54a82",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-argentina-basic",
+                  "displayCost": "Starting at ~69 USD/mo",
+                  "id": "fd5f1c0a-9596-4fb9-9c93-5fddb18caed4",
+                  "providerName": "Prepagas (OSDE and Swiss)",
+                  "tierName": "Basic",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard (Prepagas (OSDE and Swiss) - Standard (OSDE and Swiss Medical))",
+              "title": "Standard - Starting at ~98 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Team members can choose between <strong>OSDE 360</strong> or <strong>Swiss Medical SMG40.</strong>\n\nThe plans include coverage for medical, dental, and vision care.  <strong>Coverage limits apply to this tier.</strong>\n\nFor more details on the cost refer to our <a href=\"https://support.remote.com/hc/en-us/articles/32654381872525-How-much-does-health-insurance-in-Argentina-cost-for-customers\" target=\"_blank\">Help Center</a>",
+                "meta": {
+                  "benefitGroupId": "0f2d2786-0bc3-4d6f-a868-c976c5b54a82",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-argentina-standard",
+                  "displayCost": "Starting at ~98 USD/mo",
+                  "id": "8c0d0f60-9963-4dba-8bcb-b732961179c0",
+                  "providerName": "Prepagas (OSDE and Swiss)",
+                  "tierName": "Standard",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium (Prepagas (OSDE and Swiss) - Premium (OSDE and Swiss Medical))",
+              "title": "Premium - Starting at ~114 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Team members can choose between <strong>OSDE 430</strong> or <strong>Swiss Medical SMG50.</strong>\n\nThe plans include coverage for medical, dental, and vision care.  <strong>Coverage limits apply to this tier.</strong>\n\nFor more details on the cost refer to our <a href=\"https://support.remote.com/hc/en-us/articles/32654381872525-How-much-does-health-insurance-in-Argentina-cost-for-customers\" target=\"_blank\">Help Center</a>",
+                "meta": {
+                  "benefitGroupId": "0f2d2786-0bc3-4d6f-a868-c976c5b54a82",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-argentina-premium",
+                  "displayCost": "Starting at ~114 USD/mo",
+                  "id": "e1e96672-2340-43be-89f4-fd0ab78ab574",
+                  "providerName": "Prepagas (OSDE and Swiss)",
+                  "tierName": "Premium",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance 2025",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "510b69d8-db0e-45db-b68c-8e8abba07f5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "ed10613d-e555-4210-911c-6ec36c0a1a2e",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "510b69d8-db0e-45db-b68c-8e8abba07f5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "560b76c9-7753-4887-9aff-895a7608b4c2",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "510b69d8-db0e-45db-b68c-8e8abba07f5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "692c0698-f642-447f-9e27-36061b37f0ee",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "510b69d8-db0e-45db-b68c-8e8abba07f5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "e8ff6e52-ac33-4643-97c9-e09bebe864be",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "510b69d8-db0e-45db-b68c-8e8abba07f5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "fe87f40a-abf3-4ac6-b397-7118c35edd69",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "health_insurance_2025",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance_2025",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "We offer optional supplemental health plans through OSDE and Swiss Medical, also known as <strong>\"Prepagas\" </strong>which include coverage for the employees and their eligible dependents.\n</br>\n<strong>Important:</strong> In Argentina, the healthcare system is financed by mandatory social contributions from both employers and employees. Employees contribute 3% of their gross monthly salary up to a regulatory cap, while employers add 6% without any cap. Even if you opt to offer a private plan (\"Prepaga\"), <strong>\"you must still make these contributions</strong>, which employees can direct towards the healthcare plan and provider of their choice.",
+        "extra": "The majority of this benefit cost is already covered by the existing mandatory social program contributions from both employer and employee each month. The final cost of the plan will depend on whether the total plan cost surpasses the contributions collected in Remote’s shared pool. If there is an excess, it will be evenly distributed among all customers within the same tier, promoting fairness and transparency in cost-sharing\n</br>\nPrices are listed in USD, local currency equivalent will be determined based on exchange rate at the time of invoicing.\n</br>\nPlease note that all local payroll deductions for required coverages are included in the Cost Calculator.\n</br>\nPricing listed is subject to change based on age of the employee (age banding) and/or plan changes/renewals. Any pricing updates will be communicated in advance of updated billing.\n</br>\nImportant: All employees should choose an Obra Social at Onboarding stage.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ARS",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "compensation_currency_code": {
+      "description": "The currency you want the employee to be paid in.",
+      "oneOf": [
+        {
+          "const": "ARS",
+          "title": "Argentine Peso (ARS)"
+        },
+        {
+          "const": "USD",
+          "title": "United States Dollar (USD)"
+        }
+      ],
+      "title": "Contract currency",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_fixed_term_reason": {
+      "description": "Please provide a description of when the task for which the employee has been engaged is considered completed.",
+      "maxLength": 10000,
+      "title": "Reason for fixed term contract",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration_type": {
+      "description": "Please note, fixed-term contracts in Argentina are discouraged if there is a possibility to renew it. Continuous use of such fixed-term contracts or in excess of legal requirements will automatically convert it into a permanent labor contract.",
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_probation_period": {
+      "description": "We recommend selecting Yes. In the unfortunate event of a necessary termination, probation periods make the process much easier.",
+      "oneOf": [
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        },
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Include a probation period?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "statement": {
+          "description": "If you need Remote to terminate a post-probation employee in Argentina because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee.\n\nDuring probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "monthly_teleworking_contribution": {
+      "description": "Argentina law requires employers to contribute an amount towards the employee's electricity & internet costs as they need this to perform their work. Minimum of ARS 8750.00 or 25.00 USD monthly.",
+      "title": "Monthly Teleworking Contribution",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "---",
+        "inputType": "money"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length": {
+      "description": "In Argentina, probation periods can last up to 6 months. Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "maximum": 6,
+      "minimum": 1,
+      "title": "Probation period, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "maximum": "Must be smaller or equal to 6",
+        "minimum": "Must be at least 1 month"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ARS",
+        "inputType": "money"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "compensation_currency_code",
+    "contract_duration_type",
+    "annual_bonus_ack",
+    "available_pto",
+    "available_pto_type",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_signing_bonus",
+    "monthly_teleworking_contribution",
+    "role_description",
+    "work_address_is_home_address",
+    "work_hours_per_week",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "annual_bonus_ack"
+      ],
+      "title": "Annual gross salary"
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "contract_duration_fixed_term_reason",
+    "work_schedule",
+    "work_hours_per_week",
+    "has_probation_period",
+    "probation_length",
+    "available_pto_type",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "compensation_currency_code",
+    "annual_gross_salary",
+    "annual_bonus_ack",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "monthly_teleworking_contribution",
+    "benefits"
+  ],
+  "x-jsf-presentation": {
+    "inputType": "fieldset"
+  }
+}

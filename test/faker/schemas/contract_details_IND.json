@@ -1,0 +1,1531 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 333694,
+            "x-jsf-errorMessage": {
+              "minimum": "In India, full-time employees are entitled to a minimum annual salary of $3,336.94."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "INR"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 28603200,
+            "x-jsf-errorMessage": {
+              "minimum": "In India, full-time employees are entitled to a minimum annual salary of ₹286,032.00."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "compensation_currency_code": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Before you complete the employee's contract details, please confirm with them that they have a bank account in this currency.",
+                "severity": "info",
+                "title": "The employee will be paid in Indian Rupee (INR)"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_probation_period": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Please note that Statutory, Bank Holidays and Public Holidays in the employee's country of residence are excluded from the above."
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "sick_leave": {
+            "minimum": 12,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 12 days per year."
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sick_leave": {
+            "minimum": 0
+          },
+          "work_hours_per_week": {
+            "description": "In India, part-time employees can work up to 35 hours per week.",
+            "maximum": 35,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 35 hours per week."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_non_compete_clause": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_non_compete_clause"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_compete_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_day_start": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "work_day_start"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "available_pto": {
+              "minimum": 15,
+              "x-jsf-errorMessage": {
+                "minimum": "Must be at least 15 days per year."
+              }
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "part_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "available_pto": {
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 15,
+            "default": 15,
+            "title": "Minimum paid time off days"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          },
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "description": "In United States Dollars (USD).",
+            "type": "integer",
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          },
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_amount": {
+            "description": "In United States Dollars (USD).",
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "INR",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "According to employment laws in India, a minimum of 15 days privilege leave must be offered each year. Please do not include statutory, bank, or public holidays in the number you enter.",
+      "title": "Privilege leave",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "5ef2b1e4-c38a-440f-b10f-1bb0103dc1ff",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "ca70496a-cc83-4ba0-b2f6-ba643682bfb3",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "5ef2b1e4-c38a-440f-b10f-1bb0103dc1ff",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "20fd0ab9-fcfa-4daf-a601-760fbf9c86fb",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "5ef2b1e4-c38a-440f-b10f-1bb0103dc1ff",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "71881e31-2f8f-4f77-ab43-5fcb75688ad9",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "5ef2b1e4-c38a-440f-b10f-1bb0103dc1ff",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "9dc4fdf7-d77e-4f30-8ff0-fcebf9a7928f",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "5ef2b1e4-c38a-440f-b10f-1bb0103dc1ff",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "aaa90c07-c707-4d0f-9813-81e8a9416fb7",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health": {
+          "oneOf": [
+            {
+              "const": "Platinum Tier (Plum [ICICI Lombard] - Accident and Disability Plan 2025; Plum [ICICI Lombard] - Dental Plan 2025; Plum [ICICI Lombard] - Platinum Plan 2025; Plum [ICICI Lombard] - Vision Plan 2025)",
+              "title": "Platinum Tier - 4,366 INR/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance for the employee, spouse, and up to 4 children. Accident and disability insurance only covers the employee. \nSum insured per year: ₹2,000,000.",
+                "meta": {
+                  "benefitGroupId": "40f77025-d613-48f2-bfc8-8cd537a0673a",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-india-platinum",
+                  "displayCost": "4,366 INR/mo",
+                  "id": "be6dd566-e348-4e98-99df-06b700575da4",
+                  "providerName": "Plum [ICICI Lombard]",
+                  "tierName": "Platinum Tier",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Premium Tier (Plum [ICICI Lombard] - Accident and Disability Plan 2025; Plum [ICICI Lombard] - Dental Plan 2025; Plum [ICICI Lombard] - Platinum Premium 2025; Plum [ICICI Lombard] - Vision Plan 2025)",
+              "title": "Platinum Premium Tier - 5,371 INR/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance for the employee, spouse, and up to 4 children. Accident and disability insurance only covers the employee.\nSum insured per year: ₹4,000,000.",
+                "meta": {
+                  "benefitGroupId": "40f77025-d613-48f2-bfc8-8cd537a0673a",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-india-platinum-premium",
+                  "displayCost": "5,371 INR/mo",
+                  "id": "b3314f2f-7630-4bfa-8f97-573a94950f8e",
+                  "providerName": "Plum [ICICI Lombard]",
+                  "tierName": "Platinum Premium Tier",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Diamond Tier (Plum [ICICI Lombard] - Accident and Disability Plan 2025; Plum [ICICI Lombard] - Dental Plan 2025; Plum [ICICI Lombard] - Diamond Plan 2025; Plum [ICICI Lombard] - Vision Plan 2025)",
+              "title": "Diamond Tier - 9,796 INR/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance for the employee, spouse, up to 4 children, parents, and parents-in-law. Accident and disability insurance only covers the employee.\nSum insured per year: ₹2,000,000.",
+                "meta": {
+                  "benefitGroupId": "40f77025-d613-48f2-bfc8-8cd537a0673a",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-india-diamond",
+                  "displayCost": "9,796 INR/mo",
+                  "id": "e0088b9d-3863-4a23-b562-d768294e5ac1",
+                  "providerName": "Plum [ICICI Lombard]",
+                  "tierName": "Diamond Tier",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Diamond Premium Tier (Plum [ICICI Lombard] - Accident and Disability Plan 2025; Plum [ICICI Lombard] - Dental Plan 2025; Plum [ICICI Lombard] - Diamond Premium 2025; Plum [ICICI Lombard] - Vision Plan 2025)",
+              "title": "Diamond Premium Tier - 12,121 INR/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance for the employee, spouse, up to 4 children, parents, and parents-in-law. Accident and disability insurance only covers the employee.\nSum insured per year: ₹4,000,000.",
+                "meta": {
+                  "benefitGroupId": "40f77025-d613-48f2-bfc8-8cd537a0673a",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-india-diamond-premium",
+                  "displayCost": "12,121 INR/mo",
+                  "id": "3107cd4a-228c-4e9c-97af-25dd5aa4cafe",
+                  "providerName": "Plum [ICICI Lombard]",
+                  "tierName": "Diamond Premium Tier",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "meal_voucher": {
+          "oneOf": [
+            {
+              "const": "Meal Voucher - Flexi Benefit (Pazcare - Meal Voucher - Flex Benefits)",
+              "title": "Meal Voucher - Flexi Benefit - No cost",
+              "x-jsf-presentation": {
+                "description": "Remote offers a ₹2,200 monthly meal voucher via salary deduction paid through Pazcare with no extra cost to you.",
+                "meta": {
+                  "benefitGroupId": "ae25c02a-1386-4447-b4ba-eb02020d9e20",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-india-meal-voucher",
+                  "displayCost": "No cost",
+                  "id": "94119b10-9d02-40ab-81bf-c9605685917b",
+                  "providerName": "Pazcare",
+                  "tierName": "Meal Voucher - Flexi Benefit",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Meal Voucher",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "824a6e01-8247-4b55-b8f3-40237a6e4de6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "d9c56f07-7c6f-4d61-9051-59e3c8ca926f",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "824a6e01-8247-4b55-b8f3-40237a6e4de6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "46db95a1-390b-46e0-a7b0-aa81f827776f",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "824a6e01-8247-4b55-b8f3-40237a6e4de6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "ed599be4-99a7-4246-b11d-1696000331e2",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "824a6e01-8247-4b55-b8f3-40237a6e4de6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "193efccc-3e68-48ac-80d6-ae9bcf79bd5e",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "824a6e01-8247-4b55-b8f3-40237a6e4de6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "e2b28c0a-8e35-4c22-8ce6-8a02dcd95ad5",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "health",
+        "meal_voucher",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health",
+        "mental_health_program",
+        "meal_voucher",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "We provide supplemental, comprehensive coverage for employees and their dependents through our partnership with Plum (insurer ICICI Lombard). Coverage options vary by plan, including options for spouse and children, or extended family.\n<a href=\"https://remote.com/benefits-guide/india\" target=\"_blank\" rel=\"nofollow noreferrer noopener\" class=\"sc-d712774a-4 ipXXBI\">View more details ↗</a>",
+        "extra": "Please note that all local payroll deductions for required coverages are included in the Employee Cost Calculator.\n\nPricing note: Benefit contributions will be charged after the enrolment window closes. This means your first payment will include the previous and current month, based on your employees selections.\n\nPricing listed is subject to change based on age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance of updated billing.\n\nEmployers must offer the same benefits to all employees in this country",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "INR",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "compensation_currency_code": {
+      "description": "Salary currency as listed in the employment agreement, not necessarily the currency the employee will be paid in.",
+      "oneOf": [
+        {
+          "const": "INR",
+          "title": "Indian Rupee (INR)"
+        },
+        {
+          "const": "USD",
+          "title": "United States Dollar (USD)"
+        }
+      ],
+      "title": "Salary currency in contract",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "employee_provident_fund": {
+      "description": "For the Employee Provident Fund, will the employee make a 12% contribution calculated against their basic salary or India's base minimum salary? An employee's basic salary is calculated as 50% of their annual salary, while the base minimum salary is the country's minimum wage.",
+      "enum": [
+        "basic_salary",
+        "base_minimum_salary"
+      ],
+      "oneOf": [
+        {
+          "const": "basic_salary",
+          "title": "Basic salary"
+        },
+        {
+          "const": "base_minimum_salary",
+          "title": "India's base minimum salary"
+        }
+      ],
+      "title": "Employee Provident Fund",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_non_compete_clause": {
+      "description": "This will prevent the employee from reaching out to your company’s clients or customers for their own benefit, after their employment with you is done.",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-solicitation clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 33174956569741,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_probation_period": {
+      "description": "We recommend selecting Yes. In the unfortunate event of a necessary termination, probation periods make the process much easier.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Include a probation period?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "Enter a number between 1 and 12. We recommend 12.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Length of non-solicitation clause, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "payout_currency_code": {
+      "const": "INR",
+      "default": "INR",
+      "description": "The currency the employee will be paid in.",
+      "title": "Payout currency",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "hidden"
+      }
+    },
+    "probation_length": {
+      "description": "In India, probation periods can last up to 6 months. Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "maximum": 6,
+      "minimum": 1,
+      "title": "Probation period, in months",
+      "type": "number",
+      "x-jsf-errorMessage": {
+        "maximum": "Must be no more than 6 months",
+        "minimum": "Must be at least 1 month"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "sick_leave": {
+      "description": "According to employment laws in India, a minimum of 12 days sick and casual leave must be offered each year. Please pro-rate for part-time employment.",
+      "title": "Sick and Casual leave",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "INR",
+        "inputType": "money"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_day_start": {
+      "description": "Which day does this employee’s work week start? It can’t be Saturday or Sunday.",
+      "enum": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday"
+      ],
+      "oneOf": [
+        {
+          "const": "monday",
+          "title": "Monday"
+        },
+        {
+          "const": "tuesday",
+          "title": "Tuesday"
+        },
+        {
+          "const": "wednesday",
+          "title": "Wednesday"
+        },
+        {
+          "const": "thursday",
+          "title": "Thursday"
+        },
+        {
+          "const": "friday",
+          "title": "Friday"
+        }
+      ],
+      "title": "Work week start day",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "placeholder": "Work week start day"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "In India, employees can work a maximum of 48 hours per week.",
+      "maximum": 48,
+      "minimum": 1,
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-errorMessage": {
+        "maximum": "Must be no more than 48 hours per week.",
+        "minimum": "Must be at least 1 hour per week."
+      },
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "compensation_currency_code",
+    "available_pto_type",
+    "available_pto",
+    "contract_duration_type",
+    "employee_provident_fund",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_non_compete_clause",
+    "has_probation_period",
+    "has_signing_bonus",
+    "role_description",
+    "sick_leave",
+    "work_address_is_home_address",
+    "work_hours_per_week",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "work_day_start",
+    "has_probation_period",
+    "probation_length",
+    "available_pto_type",
+    "available_pto",
+    "sick_leave",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "compensation_currency_code",
+    "annual_gross_salary",
+    "payout_currency_code",
+    "part_time_salary_confirmation",
+    "employee_provident_fund",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "has_non_compete_clause",
+    "non_compete_clause_halt_period_months",
+    "benefits"
+  ]
+}

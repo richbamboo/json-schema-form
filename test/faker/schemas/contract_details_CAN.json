@@ -1,0 +1,2657 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "benefits": {
+            "properties": {
+              "retirement": {
+                "oneOf": [
+                  {
+                    "const": "Basic Retirement (Canada Life - Basic Retirement 2025)",
+                    "title": "Basic Retirement - 0% match",
+                    "x-jsf-presentation": {
+                      "description": "You won't match the employee's contribution, but the employee will still be enrolled in the basic retirement plan.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-basic",
+                        "displayCost": "0% match",
+                        "id": "08030b8e-5de6-4dcc-b565-7edce11e71ab",
+                        "providerName": "Canada Life",
+                        "tierName": "Basic Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Standard Retirement (Canada Life - Standard Retirement 2025)",
+                    "title": "Standard Retirement - 3% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 3% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-standard",
+                        "displayCost": "3% match",
+                        "id": "a43f08f8-f108-4b1c-b265-dfa3395ec922",
+                        "providerName": "Canada Life",
+                        "tierName": "Standard Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Plus Retirement (Canada Life - Plus Retirement 2025)",
+                    "title": "Plus Retirement - 4% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 4% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-plus",
+                        "displayCost": "4% match",
+                        "id": "c0c1857b-72da-480a-82b1-897f8523199c",
+                        "providerName": "Canada Life",
+                        "tierName": "Plus Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Premium Retirement (Canada Life - Premium Retirement 2025)",
+                    "title": "Premium Retirement - 5% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 5% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-premium",
+                        "displayCost": "5% match",
+                        "id": "03abc1d0-194c-4275-ad27-236b43ed0a1a",
+                        "providerName": "Canada Life",
+                        "tierName": "Premium Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Premium Enhanced Retirement (Canada Life - Premium Enhanced Retirement 2025)",
+                    "title": "Premium Enhanced Retirement - 6% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 6% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-premium-enhanced",
+                        "displayCost": "6% match",
+                        "id": "23e0e25b-ac77-4bc5-aac2-b116ce793e8b",
+                        "providerName": "Canada Life",
+                        "tierName": "Premium Enhanced Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Platinum Retirement (Canada Life - Platinum Retirement 2025)",
+                    "title": "Platinum Retirement - 7% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 7% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-platinum",
+                        "displayCost": "7% match",
+                        "id": "08d73a8d-31b5-4ebc-a29a-c7a2d542588a",
+                        "providerName": "Canada Life",
+                        "tierName": "Platinum Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_hours_per_week": {
+            "minimum": 20
+          },
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_hours_per_week",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "benefits": {
+            "properties": {
+              "retirement": {
+                "oneOf": [
+                  {
+                    "const": "Basic Retirement (Canada Life - Basic Retirement 2025)",
+                    "title": "Basic Retirement - 0% match",
+                    "x-jsf-presentation": {
+                      "description": "You won't match the employee's contribution, but the employee will still be enrolled in the basic retirement plan.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-basic",
+                        "displayCost": "0% match",
+                        "id": "08030b8e-5de6-4dcc-b565-7edce11e71ab",
+                        "providerName": "Canada Life",
+                        "tierName": "Basic Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Standard Retirement (Canada Life - Standard Retirement 2025)",
+                    "title": "Standard Retirement - 3% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 3% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-standard",
+                        "displayCost": "3% match",
+                        "id": "a43f08f8-f108-4b1c-b265-dfa3395ec922",
+                        "providerName": "Canada Life",
+                        "tierName": "Standard Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Plus Retirement (Canada Life - Plus Retirement 2025)",
+                    "title": "Plus Retirement - 4% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 4% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-plus",
+                        "displayCost": "4% match",
+                        "id": "c0c1857b-72da-480a-82b1-897f8523199c",
+                        "providerName": "Canada Life",
+                        "tierName": "Plus Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Premium Retirement (Canada Life - Premium Retirement 2025)",
+                    "title": "Premium Retirement - 5% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 5% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-premium",
+                        "displayCost": "5% match",
+                        "id": "03abc1d0-194c-4275-ad27-236b43ed0a1a",
+                        "providerName": "Canada Life",
+                        "tierName": "Premium Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Premium Enhanced Retirement (Canada Life - Premium Enhanced Retirement 2025)",
+                    "title": "Premium Enhanced Retirement - 6% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 6% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-premium-enhanced",
+                        "displayCost": "6% match",
+                        "id": "23e0e25b-ac77-4bc5-aac2-b116ce793e8b",
+                        "providerName": "Canada Life",
+                        "tierName": "Premium Enhanced Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Platinum Retirement (Canada Life - Platinum Retirement 2025)",
+                    "title": "Platinum Retirement - 7% match",
+                    "x-jsf-presentation": {
+                      "description": "You match the employee's contribution into the plan dollar for dollar, up to 7% of the employee's salary.",
+                      "meta": {
+                        "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                        "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-platinum",
+                        "displayCost": "7% match",
+                        "id": "08d73a8d-31b5-4ebc-a29a-c7a2d542588a",
+                        "providerName": "Canada Life",
+                        "tierName": "Platinum Retirement",
+                        "types": [
+                          "pension"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "compensation_currency_code": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Before you complete the employee's contract details, please confirm with them that they have a bank account in this currency.",
+                "severity": "info",
+                "title": "The employee will be paid in Canadian Dollar (CAD)"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "compensation_currency_code": {
+            "x-jsf-presentation": {
+              "description": "The employee will be paid in Canadian Dollar (CAD)"
+            }
+          },
+          "signing_bonus_amount": {
+            "x-jsf-presentation": {
+              "currency": "CAD"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "Annual gross salary in USD.",
+            "x-jsf-logic-computedAttrs": {
+              "minimum": "minimum_annual_gross_salary_cents",
+              "x-jsf-errorMessage": {
+                "minimum": "{{minimum_annual_gross_salary}} $ is the national minimum wage converted to USD. Certain states and localities mandate a minimum wage higher than federal law. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out to us so we can help you set the correct salary."
+              }
+            },
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          },
+          "signing_bonus_amount": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Please note that Statutory, Bank Holidays and Public Holidays in the employee's country of residence are excluded from the above."
+          }
+        }
+      }
+    },
+    {
+      "if": false,
+      "then": {
+        "required": [
+          "province_of_employment"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 29,
+            "minimum": 1
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": false,
+          "work_hours_per_week": {
+            "maximum": 40,
+            "minimum": 30
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 10,
+            "default": 10,
+            "description": "Do not include public or bank holidays in this number. Please note that employees are legally entitled to vacation pay at 4% to 8% of their salary for the year.",
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Minimum of <strong>10 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_clause_halt_period_months": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "non_compete_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_solicitation_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_solicitation_clause": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_solicitation_clause"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_solicitation_clause_halt_period_months": {
+            "minimum": 1
+          }
+        },
+        "required": [
+          "non_solicitation_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length": false,
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        }
+      },
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "pattern": "."
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {}
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "AB"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": false,
+          "probation_length_days": {
+            "description": "Please enter a value between 0 and 90 days (legal maximum).",
+            "maximum": 90,
+            "minimum": 0
+          },
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length_days"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "BC"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "Please enter a value between 0 and 3 months (legal maximum).",
+            "maximum": 3,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "MB"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": false,
+          "probation_length_days": {
+            "description": "Please enter a value between 0 and 30 days (legal maximum).",
+            "maximum": 30,
+            "minimum": 0
+          },
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length_days"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "NB"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "Please enter a value between 0 and 6 months (legal maximum).",
+            "maximum": 6,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "NL"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "Please enter a value between 0 and 3 months (legal maximum).",
+            "maximum": 3,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "NS"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "Please enter a value between 0 and 3 months (legal maximum).",
+            "maximum": 3,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "else": {
+        "required": [
+          "non_compete_clause"
+        ]
+      },
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "ON"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_clause": false,
+          "non_compete_clause_halt_period_months": false,
+          "probation_length": {
+            "description": "Please enter a value between 0 and 3 months (legal maximum).",
+            "maximum": 3,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "PE"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "Please enter a value between 0 and 6 months (legal maximum).",
+            "maximum": 6,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "QC"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "Please enter a value between 0 and 3 months (legal maximum).",
+            "maximum": 3,
+            "minimum": 0
+          },
+          "probation_length_days": false,
+          "probation_length_weeks": false
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "SK"
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": false,
+          "probation_length_days": false,
+          "probation_length_weeks": {
+            "description": "Please enter a value between 0 and 13 weeks (legal maximum).",
+            "maximum": 13,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "probation_length_weeks"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "compensation_currency_code": {
+      "description": "Salary currency as listed in the employment agreement, not necessarily the currency the employee will be paid in.",
+      "oneOf": [
+        {
+          "const": "CAD",
+          "title": "Canadian Dollar (CAD)"
+        },
+        {
+          "const": "USD",
+          "title": "United States Dollar (USD)"
+        }
+      ],
+      "title": "Salary currency in contract",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "training_required_for_position": {
+      "description": "Is there any specific training required for the position? If yes, please let us know.",
+      "maxLength": 10000,
+      "title": "Training requirement",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please provide the number of weekly hours the employee will be working. Typically, a full-time employee works for 40 hours per week, while less than 30 hours are classified as part-time.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_clause_halt_period_months": {
+      "description": "The clause begins after the termination of the employment agreement.",
+      "title": "Duration of non-solicit, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "non_compete_clause": {
+      "description": "Non-competes carry a significant cost and we’re unable to enforce them. Because of these details, we recommend selecting No.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-compete clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "annual_gross_salary": {
+      "description": "Annual gross salary in Canadian Dollars.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-logic-computedAttrs": {
+        "minimum": "minimum_annual_gross_salary_cents",
+        "x-jsf-errorMessage": {
+          "minimum": "CA${{minimum_annual_gross_salary}} is the national minimum wage. Certain states and localities mandate a minimum wage higher than federal law. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out to us so we can help you set the correct salary."
+        }
+      },
+      "x-jsf-presentation": {
+        "currency": "CAD",
+        "inputType": "money"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "description": "A contract with no end date",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "description": "A contract with a specific end date",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration type",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "There is more flexibility for termination on expiry of a fixed term employment agreement. For this reason, we suggest you consider utilising a fixed term employment agreement.",
+          "severity": "info",
+          "title": "Information on termination - contract duration"
+        }
+      }
+    },
+    "available_pto": {
+      "description": "We recommend at least 20 days. Do not include public or bank holidays in this number. Please note that employees are legally entitled to vacation pay at 4% to 8% of their salary for the year.",
+      "minimum": 10,
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18759054075021,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "payout_currency_code": {
+      "const": "CAD",
+      "default": "CAD",
+      "description": "The currency the employee will be paid in.",
+      "title": "Payout currency",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "hidden"
+      }
+    },
+    "probation_length": {
+      "description": "Please enter a value between 0 and 6 months (legal maximum). Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "title": "Probation period, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "During probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.\n\nIf you need Remote to terminate a post-probation employee in Canada because of your company’s economic or organizational circumstances, it is advisable to reach an agreement with the employee. Otherwise, the termination will be deemed “without cause”, and could lead to extra costs for you.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Select the role's experience level based on the job description, not the employee's overall experience.",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "bonus_details": {
+      "description": "Let us know if the bonus is paid one time, monthly, or yearly. Please also indicate when it should be paid.",
+      "maxLength": 1000,
+      "title": "Bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Why do I need to do this?",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "signing_bonus_amount": {
+      "description": "This is the amount the employee will receive before taxes.",
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "CAD",
+        "inputType": "money"
+      }
+    },
+    "probation_length_weeks": {
+      "description": "Please enter a value between 0 and 13 weeks (legal maximum). Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "title": "Probation period, in weeks",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "During probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.\n\nIf you need Remote to terminate a post-probation employee in Canada because of your company’s economic or organizational circumstances, it is advisable to reach an agreement with the employee. Otherwise, the termination will be deemed “without cause”, and could lead to extra costs for you.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "province_of_residency": {
+      "oneOf": [
+        {
+          "const": "AB",
+          "title": "Alberta (AB)"
+        },
+        {
+          "const": "BC",
+          "title": "British Columbia (BC)"
+        },
+        {
+          "const": "MB",
+          "title": "Manitoba (MB)"
+        },
+        {
+          "const": "NB",
+          "title": "New Brunswick (NB)"
+        },
+        {
+          "const": "NL",
+          "title": "Newfoundland and Labrador (NL)"
+        },
+        {
+          "const": "NS",
+          "title": "Nova Scotia (NS)"
+        },
+        {
+          "const": "ON",
+          "title": "Ontario (ON)"
+        },
+        {
+          "const": "PE",
+          "title": "Prince Edward Island (PE)"
+        },
+        {
+          "const": "QC",
+          "title": "Quebec (QC)"
+        },
+        {
+          "const": "SK",
+          "title": "Saskatchewan (SK)"
+        }
+      ],
+      "title": "Employee's province of residence",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "commissions_details": {
+      "description": "Include the commission amount, when it should be paid, and how or when the employee is eligible for it.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "non_solicitation_clause": {
+      "description": "This restricts the employee from seeking business from your company's current or prospective customers for a competitor.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-solicit clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "The clause begins after the termination of the employment agreement.",
+      "minimum": 1,
+      "title": "Duration of non-compete, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "4a2f97e6-2d7a-4e58-ae39-57fd9407f84f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "2b29497c-e50c-41e1-a228-bcb9538bc216",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "4a2f97e6-2d7a-4e58-ae39-57fd9407f84f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "6fa886f4-f049-49bd-a298-f5ab927949fc",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "4a2f97e6-2d7a-4e58-ae39-57fd9407f84f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "8e32016f-3250-444b-8218-32e8e3fb41e5",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "4a2f97e6-2d7a-4e58-ae39-57fd9407f84f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "7f78fd17-5515-483f-a210-fff3ea788b8c",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "4a2f97e6-2d7a-4e58-ae39-57fd9407f84f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "102c4352-229a-4465-b669-7f05fc458589",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic - Family (Canada Life - Basic AD&D 2025; Canada Life - Basic Dental - Family 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Health - Family 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+              "title": "Basic - Family - 150.26 CAD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions up to $5000 annually & employee assistance program (EAP); life and AD&D insurance coverage up to $25,000",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-basic-family",
+                  "displayCost": "150.26 CAD/mo",
+                  "id": "2f6bdff3-58d0-41bb-a520-649fa87eefd9",
+                  "providerName": "Canada Life",
+                  "tierName": "Basic",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "employee-assistance-program",
+                    "health",
+                    "life",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Basic - Single (Canada Life - Basic AD&D 2025; Canada Life - Basic Dental - Single 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Health - Single 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+              "title": "Basic - Single - 107.89 CAD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions up to $5000 annually & employee assistance program (EAP); life and AD&D insurance coverage up to $25,000",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-basic-single",
+                  "displayCost": "107.89 CAD/mo",
+                  "id": "3e32f370-61d5-4d87-8351-51e929b49f3f",
+                  "providerName": "Canada Life",
+                  "tierName": "Basic - Single",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "employee-assistance-program",
+                    "health",
+                    "life",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Basic Enhanced - Family (Canada Life - Basic AD&D 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Enhanced Dental - Family 2025; Canada Life - Basic Enhanced Dependent Life 2025; Canada Life - Basic Enhanced Health - Family 2025; Canada Life - Basic Enhanced Long Term Disability 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+              "title": "Basic Enhanced - Family - 214.10 CAD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance, long term disability, Child and Spouse Life; drug prescriptions up to $10000 annually & employee assistance program (EAP); life and AD&D insurance coverage up to $25,000",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-basic-enhanced-family",
+                  "displayCost": "214.10 CAD/mo",
+                  "id": "0cb3d9bb-aa23-433f-b434-99ed968221c3",
+                  "providerName": "Canada Life",
+                  "tierName": "Basic Enhanced",
+                  "types": [
+                    "ad&d",
+                    "employee-assistance-program",
+                    "dental",
+                    "life",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Basic Enhanced - Single (Canada Life - Basic AD&D 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Enhanced Dental - Single 2025; Canada Life - Basic Enhanced Dependent Life 2025; Canada Life - Basic Enhanced Health - Single 2025; Canada Life - Basic Enhanced Long Term Disability 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+              "title": "Basic Enhanced - Single - 170.04 CAD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance, long term disability, Child and Spouse Life; drug prescriptions up to $10000 annually & employee assistance program (EAP); life and AD&D insurance coverage up to $25,000",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-basic-enhanced-single",
+                  "displayCost": "170.04 CAD/mo",
+                  "id": "91872b82-84ff-4051-b978-d527bf11abd3",
+                  "providerName": "Canada Life",
+                  "tierName": "Basic Enhanced - Single",
+                  "types": [
+                    "ad&d",
+                    "employee-assistance-program",
+                    "dental",
+                    "life",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard - Family (Canada Life - Standard AD&D 2025; Canada Life - Standard Dental - Family 2025; Canada Life - Standard Dependent Life 2025; Canada Life - Standard EAP 2025; Canada Life - Standard Health - Family 2025; Canada Life - Standard Life 2025; Canada Life - Standard Long Term Disability 2025; Canada Life - Standard Short Term Disability 2025; Canada Life - Standard Vision 2025)",
+              "title": "Standard - Family - 362.16 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (1x annual salary); spouse and dependent life insurance; short- and long-term disability (66.7% weekly earnings—limits apply).",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-standard-family",
+                  "displayCost": "362.16 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "6dfc07fc-7b5e-46f1-9f49-e7b6ea05a9ec",
+                  "providerName": "Canada Life",
+                  "tierName": "Standard",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard - Single (Canada Life - Standard AD&D 2025; Canada Life - Standard Dental - Single 2025; Canada Life - Standard Dependent Life 2025; Canada Life - Standard EAP 2025; Canada Life - Standard Health - Single 2025; Canada Life - Standard Life 2025; Canada Life - Standard Long Term Disability 2025; Canada Life - Standard Short Term Disability 2025; Canada Life - Standard Vision 2025)",
+              "title": "Standard - Single - 213.77 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (1x annual salary); spouse and dependent life insurance; short- and long-term disability (66.7% weekly earnings—limits apply).",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-standard-single",
+                  "displayCost": "213.77 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "2d2bad98-33c0-4c21-9cb9-de34b93503c0",
+                  "providerName": "Canada Life",
+                  "tierName": "Standard - Single",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus - Family (Canada Life - Plus Dental - Family 2025; Canada Life - Plus AD&D 2025; Canada Life - Plus Dependent Life 2025; Canada Life - Plus Life 2025; Canada Life - Plus Long Term Disability 2025; Canada Life - Plus Short Term Disability 2025; Canada Life - Plus Vision 2025; Canada Life - Plus Health - Family 2025; Canada Life - Plus EAP 2025)",
+              "title": "Plus - Family - 468.19 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (2x annual salary); spouse and dependent life insurance; short- and long-term disability (70% weekly earnings—limits apply).",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-plus-family",
+                  "displayCost": "468.19 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "c79a792d-4cf2-46a4-a3e7-3b8dc81a2b6f",
+                  "providerName": "Canada Life",
+                  "tierName": "Plus",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus - Single (Canada Life - Plus Dental - Single 2025; Canada Life - Plus AD&D 2025; Canada Life - Plus Dependent Life 2025; Canada Life - Plus Life 2025; Canada Life - Plus Long Term Disability 2025; Canada Life - Plus Short Term Disability 2025; Canada Life - Plus Vision 2025; Canada Life - Plus Health - Single 2025; Canada Life - Plus EAP 2025)",
+              "title": "Plus - Single - 253.04 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (2x annual salary); spouse and dependent life insurance; short- and long-term disability (70% weekly earnings—limits apply).",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-plus-single",
+                  "displayCost": "253.04 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "18b997de-7f4c-4212-a763-6a60b106e2d9",
+                  "providerName": "Canada Life",
+                  "tierName": "Plus - Single",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium - Family (Canada Life - Premium AD&D 2025; Canada Life - Premium Dental - Family 2025; Canada Life - Premium Dependent Life 2025; Canada Life - Premium EAP 2025; Canada Life - Premium Health - Family 2025; Canada Life - Premium Life 2025; Canada Life - Premium Long Term Disability 2025; Canada Life - Premium Short Term Disability 2025; Canada Life - Premium Vision 2025)",
+              "title": "Premium - Family - 507.66 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (3x annual salary); spouse and dependent life insurance; short- and long-term disability (75% weekly earnings—limits apply).",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-premium-family",
+                  "displayCost": "507.66 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "2f58b0a1-63f0-4863-8890-02019861f322",
+                  "providerName": "Canada Life",
+                  "tierName": "Premium",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium - Single (Canada Life - Premium AD&D 2025; Canada Life - Premium Dental - Single 2025; Canada Life - Premium Dependent Life 2025; Canada Life - Premium EAP 2025; Canada Life - Premium Health - Single 2025; Canada Life - Premium Life 2025; Canada Life - Premium Long Term Disability 2025; Canada Life - Premium Short Term Disability 2025; Canada Life - Premium Vision 2025)",
+              "title": "Premium - Single - 273.75 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (3x annual salary); spouse and dependent life insurance; short- and long-term disability (75% weekly earnings—limits apply).",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-premium-single",
+                  "displayCost": "273.75 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "4f27e741-0a44-4764-bb58-05faf99af170",
+                  "providerName": "Canada Life",
+                  "tierName": "Premium - Single",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Enhanced - Family (Canada Life - Enhanced Premium Dental - Family 2025; Canada Life - Enhanced Premium Health - Family 2025; Canada Life - Premium AD&D 2025; Canada Life - Premium Dental - Family 2025; Canada Life - Premium Dependent Life 2025; Canada Life - Premium EAP 2025; Canada Life - Premium Life 2025; Canada Life - Premium Long Term Disability 2025; Canada Life - Premium Short Term Disability 2025; Canada Life - Premium Vision 2025)",
+              "title": "Premium Enhanced - Family - 515.12 CAD/mo + variable costs",
+              "x-jsf-presentation": {
+                "description": "Includes medical, dental, and vision insurance; drug prescriptions & employee assistance program (EAP); life and AD&D insurance (3x annual salary); spouse and dependent life insurance; short- and long-term disability (75% weekly earnings—limits apply). This plan also includes Gender Affirming Care coverage up to CAD 40k.",
+                "meta": {
+                  "benefitGroupId": "de07ef7c-af87-421e-8759-d90e4abc15d6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-health-enhanced-premium-family",
+                  "displayCost": "515.12 CAD/mo + variable costs",
+                  "displayCostDisclaimer": "Some plans in this benefit package include premium costs based on the employee salary. These costs are not included in the listed monthly estimate.",
+                  "id": "222d35df-acfa-401f-8cd4-77dc361b965b",
+                  "providerName": "Canada Life",
+                  "tierName": "Premium Enhanced",
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "life",
+                    "employee-assistance-program",
+                    "health",
+                    "disability",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "ad&d",
+                    "dental",
+                    "employee-assistance-program",
+                    "health",
+                    "life",
+                    "vision",
+                    "disability"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Premium Enhanced - Family (Canada Life - Enhanced Premium Dental - Family 2025; Canada Life - Enhanced Premium Health - Family 2025; Canada Life - Premium AD&D 2025; Canada Life - Premium Dental - Family 2025; Canada Life - Premium Dependent Life 2025; Canada Life - Premium EAP 2025; Canada Life - Premium Life 2025; Canada Life - Premium Long Term Disability 2025; Canada Life - Premium Short Term Disability 2025; Canada Life - Premium Vision 2025)",
+                    "Premium - Family (Canada Life - Premium AD&D 2025; Canada Life - Premium Dental - Family 2025; Canada Life - Premium Dependent Life 2025; Canada Life - Premium EAP 2025; Canada Life - Premium Health - Family 2025; Canada Life - Premium Life 2025; Canada Life - Premium Long Term Disability 2025; Canada Life - Premium Short Term Disability 2025; Canada Life - Premium Vision 2025)",
+                    "Plus - Family (Canada Life - Plus Dental - Family 2025; Canada Life - Plus AD&D 2025; Canada Life - Plus Dependent Life 2025; Canada Life - Plus Life 2025; Canada Life - Plus Long Term Disability 2025; Canada Life - Plus Short Term Disability 2025; Canada Life - Plus Vision 2025; Canada Life - Plus Health - Family 2025; Canada Life - Plus EAP 2025)",
+                    "Standard - Family (Canada Life - Standard AD&D 2025; Canada Life - Standard Dental - Family 2025; Canada Life - Standard Dependent Life 2025; Canada Life - Standard EAP 2025; Canada Life - Standard Health - Family 2025; Canada Life - Standard Life 2025; Canada Life - Standard Long Term Disability 2025; Canada Life - Standard Short Term Disability 2025; Canada Life - Standard Vision 2025)",
+                    "Basic Enhanced - Family (Canada Life - Basic AD&D 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Enhanced Dental - Family 2025; Canada Life - Basic Enhanced Dependent Life 2025; Canada Life - Basic Enhanced Health - Family 2025; Canada Life - Basic Enhanced Long Term Disability 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+                    "Basic - Family (Canada Life - Basic AD&D 2025; Canada Life - Basic Dental - Family 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Health - Family 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Premium - Single (Canada Life - Premium AD&D 2025; Canada Life - Premium Dental - Single 2025; Canada Life - Premium Dependent Life 2025; Canada Life - Premium EAP 2025; Canada Life - Premium Health - Single 2025; Canada Life - Premium Life 2025; Canada Life - Premium Long Term Disability 2025; Canada Life - Premium Short Term Disability 2025; Canada Life - Premium Vision 2025)",
+                    "Plus - Single (Canada Life - Plus Dental - Single 2025; Canada Life - Plus AD&D 2025; Canada Life - Plus Dependent Life 2025; Canada Life - Plus Life 2025; Canada Life - Plus Long Term Disability 2025; Canada Life - Plus Short Term Disability 2025; Canada Life - Plus Vision 2025; Canada Life - Plus Health - Single 2025; Canada Life - Plus EAP 2025)",
+                    "Standard - Single (Canada Life - Standard AD&D 2025; Canada Life - Standard Dental - Single 2025; Canada Life - Standard Dependent Life 2025; Canada Life - Standard EAP 2025; Canada Life - Standard Health - Single 2025; Canada Life - Standard Life 2025; Canada Life - Standard Long Term Disability 2025; Canada Life - Standard Short Term Disability 2025; Canada Life - Standard Vision 2025)",
+                    "Basic Enhanced - Single (Canada Life - Basic AD&D 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Enhanced Dental - Single 2025; Canada Life - Basic Enhanced Dependent Life 2025; Canada Life - Basic Enhanced Health - Single 2025; Canada Life - Basic Enhanced Long Term Disability 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+                    "Basic - Single (Canada Life - Basic AD&D 2025; Canada Life - Basic Dental - Single 2025; Canada Life - Basic EAP 2025; Canada Life - Basic Health - Single 2025; Canada Life - Basic Life 2025; Canada Life - Basic Vision 2025)",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "c2c52a59-370e-4780-8652-c8f0109dbf63",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "d7cafc39-0b60-4498-88d1-1008619159ef",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "c2c52a59-370e-4780-8652-c8f0109dbf63",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "02e20912-101b-4a93-8323-125dd7aa0301",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "c2c52a59-370e-4780-8652-c8f0109dbf63",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "4535ef90-a6e8-4bc0-bcad-72f5554f6368",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "c2c52a59-370e-4780-8652-c8f0109dbf63",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "56a0bb61-27fb-4577-93b4-378d01fc3c6f",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "c2c52a59-370e-4780-8652-c8f0109dbf63",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "17c7d7fc-f41f-4024-8df3-f79c954b4dd7",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "retirement": {
+          "oneOf": [
+            {
+              "const": "Basic Retirement (Canada Life - Basic Retirement 2025)",
+              "title": "Basic Retirement - 0% match",
+              "x-jsf-presentation": {
+                "description": "You won't match the employee's contribution, but the employee will still be enrolled in the basic retirement plan.",
+                "meta": {
+                  "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-basic",
+                  "displayCost": "0% match",
+                  "id": "08030b8e-5de6-4dcc-b565-7edce11e71ab",
+                  "providerName": "Canada Life",
+                  "tierName": "Basic Retirement",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Retirement (Canada Life - Standard Retirement 2025)",
+              "title": "Standard Retirement - 3% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan dollar for dollar, up to 3% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-standard",
+                  "displayCost": "3% match",
+                  "id": "a43f08f8-f108-4b1c-b265-dfa3395ec922",
+                  "providerName": "Canada Life",
+                  "tierName": "Standard Retirement",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Retirement (Canada Life - Plus Retirement 2025)",
+              "title": "Plus Retirement - 4% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan dollar for dollar, up to 4% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-plus",
+                  "displayCost": "4% match",
+                  "id": "c0c1857b-72da-480a-82b1-897f8523199c",
+                  "providerName": "Canada Life",
+                  "tierName": "Plus Retirement",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Retirement (Canada Life - Premium Retirement 2025)",
+              "title": "Premium Retirement - 5% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan dollar for dollar, up to 5% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-premium",
+                  "displayCost": "5% match",
+                  "id": "03abc1d0-194c-4275-ad27-236b43ed0a1a",
+                  "providerName": "Canada Life",
+                  "tierName": "Premium Retirement",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Enhanced Retirement (Canada Life - Premium Enhanced Retirement 2025)",
+              "title": "Premium Enhanced Retirement - 6% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan dollar for dollar, up to 6% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-premium-enhanced",
+                  "displayCost": "6% match",
+                  "id": "23e0e25b-ac77-4bc5-aac2-b116ce793e8b",
+                  "providerName": "Canada Life",
+                  "tierName": "Premium Enhanced Retirement",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Retirement (Canada Life - Platinum Retirement 2025)",
+              "title": "Platinum Retirement - 7% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan dollar for dollar, up to 7% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "68132073-5675-4f77-995c-6b6ed0668c48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-canada-retirement-platinum",
+                  "displayCost": "7% match",
+                  "id": "08d73a8d-31b5-4ebc-a29a-c7a2d542588a",
+                  "providerName": "Canada Life",
+                  "tierName": "Platinum Retirement",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Retirement",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "retirement",
+        "business_travel_insurance",
+        "mental_health_program",
+        "health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "retirement",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "<strong>From January 1st, 2025 to December 31st, 2025</strong>, we are offering our team members a range of supplemental and comprehensive group benefit coverages. Medical Insurance is provided in partnership with Canada Life, which now includes our Employee Assistance Program (EAP) as part of the plan. Additionally, we are pleased to offer a Mental Health Program and Business Travel Insurance, ensuring our team has robust support for both their physical and mental well-being, as well coverage during business travel.\n</br>\nNow, team members under the \"Single\" medical class will be able to add dependents at their own cost.\n</br",
+        "extra": "The package you have selected will apply to any current and future employees in Canada. Your decision will be locked in until the next renewal in January 1, 2026.\n<br>\n<br><br><strong>Pricing note</strong>: Benefit contributions are billed post-enrollment window closure, with the first payment covering both the previous and current months. The listed pricing may change based on plan annual renewals, with any adjustments communicated ahead of updated billing.",
+        "inputType": "fieldset"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "company_business_description": {
+      "description": "Tell us what your company does for business. For example, information technology.",
+      "maxLength": 1000,
+      "title": "Company's business description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Will the employee work from home?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "CAD",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "probation_length_days": {
+      "description": "Please enter a value between 0 and 90 days (legal maximum). Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "title": "Probation period, in days",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "During probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.\n\nIf you need Remote to terminate a post-probation employee in Canada because of your company’s economic or organizational circumstances, it is advisable to reach an agreement with the employee. Otherwise, the termination will be deemed “without cause”, and could lead to extra costs for you.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This would be included in the employee's first or second paycheck.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "compensation_currency_code",
+    "annual_gross_salary",
+    "available_pto",
+    "available_pto_type",
+    "company_business_description",
+    "contract_duration_type",
+    "equity_compensation",
+    "experience_level",
+    "has_signing_bonus",
+    "has_bonus",
+    "has_commissions",
+    "non_solicitation_clause",
+    "province_of_residency",
+    "role_description",
+    "work_address_is_home_address",
+    "work_hours_per_week",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-logic": {
+    "computedValues": {
+      "minimum_annual_gross_salary": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                {
+                  "var": "compensation_currency_code"
+                },
+                {
+                  "var": "work_schedule"
+                }
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "full_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "CAD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    2138500,
+                    0.01
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "full_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "USD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    1560994,
+                    0.01
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "part_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "CAD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    1675,
+                    52,
+                    0.01
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "part_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "USD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    1223,
+                    52,
+                    0.01
+                  ]
+                },
+                0
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "minimum_annual_gross_salary_cents": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                {
+                  "var": "compensation_currency_code"
+                },
+                {
+                  "var": "work_schedule"
+                }
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "full_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "CAD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    2138500
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "full_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "USD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    1560994
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "part_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "CAD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    1675,
+                    52
+                  ]
+                },
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "work_schedule"
+                        },
+                        "part_time"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "compensation_currency_code"
+                        },
+                        "USD"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    1223,
+                    52
+                  ]
+                },
+                0
+              ]
+            },
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "company_business_description",
+    "province_of_residency",
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "probation_length",
+    "probation_length_days",
+    "probation_length_weeks",
+    "available_pto_type",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "training_required_for_position",
+    "work_address_is_home_address",
+    "compensation_currency_code",
+    "annual_gross_salary",
+    "payout_currency_code",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "non_compete_clause",
+    "non_compete_clause_halt_period_months",
+    "non_solicitation_clause",
+    "non_solicitation_clause_halt_period_months",
+    "benefits"
+  ]
+}

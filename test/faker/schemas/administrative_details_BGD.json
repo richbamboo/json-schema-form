@@ -1,0 +1,305 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "partner_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "enum": [
+              "married",
+              "civil_partnership"
+            ]
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "partner_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "previous_employment": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_previous_employment": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_previous_employment"
+        ]
+      },
+      "then": {
+        "required": [
+          "previous_employment"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "degree_details": {
+      "properties": {
+        "graduation_date": {
+          "format": "date",
+          "title": "Date of graduation",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "institute_name": {
+          "maxLength": 255,
+          "title": "Name of the institute",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "title": {
+          "maxLength": 255,
+          "title": "Title achieved",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "title": "Highest level of education",
+      "type": "object",
+      "x-jsf-order": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "father_full_name": {
+      "description": "This is required for the employment agreement. Please provide a guardian’s name if you do not have your father’s name.",
+      "maxLength": 255,
+      "title": "Father's name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_previous_employment": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Have you been employed before?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID/Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "id_number_type": {
+      "oneOf": [
+        {
+          "const": "passport",
+          "title": "Passport"
+        },
+        {
+          "const": "national_id_number",
+          "title": "National identity card"
+        }
+      ],
+      "title": "ID number type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "mother_full_name": {
+      "description": "This is required for the employment agreement. Please provide a guardian’s name if you do not have your mother’s name.",
+      "maxLength": 255,
+      "title": "Mother's name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "partner_details": {
+      "properties": {
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full name of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "full_name"
+      ],
+      "title": "Partner details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "previous_employment": {
+      "properties": {
+        "company_name": {
+          "maxLength": 255,
+          "title": "Name of the company",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "end_employment_date": {
+          "format": "date",
+          "title": "End employment date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "job_title": {
+          "maxLength": 255,
+          "title": "Job title",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "start_employment_date": {
+          "format": "date",
+          "title": "Start employment date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        }
+      },
+      "required": [
+        "company_name",
+        "job_title",
+        "start_employment_date",
+        "end_employment_date"
+      ],
+      "title": "Employment experience from your latest job",
+      "type": "object",
+      "x-jsf-order": [
+        "company_name",
+        "job_title",
+        "start_employment_date",
+        "end_employment_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax number [tax identification number]",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "father_full_name",
+    "mother_full_name",
+    "marital_status",
+    "id_number_type",
+    "id_number",
+    "tax_number",
+    "degree_details",
+    "has_previous_employment"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "father_full_name",
+    "mother_full_name",
+    "marital_status",
+    "partner_details",
+    "id_number_type",
+    "id_number",
+    "tax_number",
+    "degree_details",
+    "has_previous_employment",
+    "previous_employment"
+  ]
+}

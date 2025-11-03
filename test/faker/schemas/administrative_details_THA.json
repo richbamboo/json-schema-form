@@ -1,0 +1,190 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "citizenship": {
+      "enum": [
+        "citizen",
+        "non_citizen"
+      ],
+      "oneOf": [
+        {
+          "const": "citizen",
+          "title": "Citizen"
+        },
+        {
+          "const": "non_citizen",
+          "title": "Non-Citizen"
+        }
+      ],
+      "title": "Citizenship",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID/Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "id_type": {
+      "oneOf": [
+        {
+          "const": "id",
+          "title": "National ID"
+        },
+        {
+          "const": "passport",
+          "title": "Passport"
+        }
+      ],
+      "title": "Document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "privacy_policy_acknowledgement": {
+      "const": "acknowledged",
+      "description": "I acknowledge that I have read and accept the privacy policy",
+      "title": "Accept privacy policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "I acknowledge that I have read and accept the <a href='https://cdn.employ-assets.remote.com/employee_onboarding/thailand_remote_privacy_policy.pdf' target=\"_blank\" rel=\"noopener noreferrer\">privacy policy</a>",
+        "inputType": "checkbox"
+      }
+    },
+    "social_security_branch_number": {
+      "maxLength": 255,
+      "title": "Social Security Branch Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "ssid_number": {
+      "maxLength": 255,
+      "title": "Social Security ID Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "citizenship",
+    "id_type",
+    "id_number",
+    "marital_status",
+    "privacy_policy_acknowledgement"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "citizenship",
+    "ssid_number",
+    "social_security_branch_number",
+    "id_type",
+    "id_number",
+    "tax_number",
+    "marital_status",
+    "privacy_policy_acknowledgement",
+    "prior_inventions"
+  ]
+}

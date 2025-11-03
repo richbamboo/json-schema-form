@@ -1,0 +1,2281 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 1218000,
+            "x-jsf-errorMessage": {
+              "minimum": "In Portugal, full-time employees are entitled to a minimum annual salary of €12,180.00."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "work_hours_per_week": false
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "full_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "properties": {
+          "part_time_salary_confirmation": false
+        },
+        "then": {
+          "properties": {
+            "work_hours_per_week": {
+              "const": 40,
+              "default": 40,
+              "description": "All employees in Portugal are required to work 40 hours in a full-time position.",
+              "x-jsf-presentation": {
+                "statement": {
+                  "title": "Total of <b>40 hours</b> per week."
+                }
+              }
+            }
+          },
+          "required": [
+            "work_hours_per_week"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "const": "acknowledged"
+          },
+          "work_hours_per_week": {
+            "maximum": 39,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation",
+          "work_hours_per_week"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "maximum_working_hours_regime": false
+        }
+      },
+      "if": {
+        "properties": {
+          "working_hours_exemption": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "working_hours_exemption"
+        ]
+      },
+      "then": {
+        "required": [
+          "maximum_working_hours_regime"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "working_hours_exemption_allowance": false
+        }
+      },
+      "if": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 1
+          },
+          "maximum_working_hours_regime": {
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "work_hours_per_week": {
+            "minimum": 1
+          },
+          "working_hours_exemption": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "working_hours_exemption",
+          "maximum_working_hours_regime",
+          "work_hours_per_week"
+        ]
+      },
+      "then": {
+        "else": {
+          "properties": {
+            "working_hours_exemption_allowance": {
+              "x-jsf-logic-computedAttrs": {
+                "const": "working_hours_exemption_allowance_no_max_hours_value_in_cents",
+                "default": "working_hours_exemption_allowance_no_max_hours_value_in_cents",
+                "x-jsf-presentation": {
+                  "statement": {
+                    "description": "As this employee will need to work outside regular hours, you’ll need to pay them an <strong>additional {{working_hours_exemption_allowance_no_max_hours_value}} EUR monthly</strong>, on top of their salary.",
+                    "severity": "info",
+                    "title": "You’ll need to pay an extended work hours allowance"
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "working_hours_exemption_allowance"
+          ]
+        },
+        "if": {
+          "properties": {
+            "maximum_working_hours_regime": {
+              "const": "yes"
+            }
+          },
+          "required": [
+            "maximum_working_hours_regime"
+          ]
+        },
+        "then": {
+          "properties": {
+            "working_hours_exemption_allowance": {
+              "x-jsf-logic-computedAttrs": {
+                "const": "working_hours_exemption_allowance_with_max_hours_value_in_cents",
+                "default": "working_hours_exemption_allowance_with_max_hours_value_in_cents",
+                "x-jsf-presentation": {
+                  "statement": {
+                    "description": "As this employee will need to work outside regular hours and for more than 8 hours a day, you’ll need to pay them an <strong>additional {{working_hours_exemption_allowance_with_max_hours_value}} EUR monthly</strong>, on top of their salary.",
+                    "severity": "info",
+                    "title": "You’ll need to pay an extended work hours allowance"
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "working_hours_exemption_allowance"
+          ]
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false,
+          "signing_bonus_clawback": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "required": [
+          "signing_bonus_amount",
+          "signing_bonus_clawback"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "available_pto": {
+              "minimum": 22
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "part_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "available_pto": {
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 22,
+            "default": 22,
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In Portugal, employees are entitled to a minimum of 22 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+                "title": "Minimum of <strong>22 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "probation_length_days": {
+            "const": 0
+          }
+        },
+        "required": [
+          "probation_length_days"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length_days": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "probation_length_days"
+      ]
+    },
+    {
+      "required": [
+        "probation_length"
+      ]
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "annual_training_hours_ack": {
+      "const": "acknowledged",
+      "description": "In Portugal, employees with indefinite contracts must complete 40 hours of training annually during work hours. If training hours aren't met, employees get paid for unused hours at offboarding.",
+      "title": "I acknowledge Portugal's annual training requirement",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18006437022605,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto": {
+      "description": "In Portugal, employees are entitled to a minimum of 22 paid time off days per year. Please pro-rate for part-time employment. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "776bc8b8-3f38-46fc-ab71-d22ac564e585",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "91b4a680-09a5-467d-84b7-dddfea760d61",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "776bc8b8-3f38-46fc-ab71-d22ac564e585",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "6ac216b1-7e84-459d-9ec6-02ad5a68bfb2",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "776bc8b8-3f38-46fc-ab71-d22ac564e585",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "363ac040-fec7-4553-9623-11b8dc1a3061",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "776bc8b8-3f38-46fc-ab71-d22ac564e585",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "75c31e73-beac-4715-bf0d-7f6174ab9a9e",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "776bc8b8-3f38-46fc-ab71-d22ac564e585",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "dd100d5b-6311-417c-9a37-85e0d8e3b0e1",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance_2025": {
+          "oneOf": [
+            {
+              "const": "Basic Health Plan 2025 (Single) (Advance Care/ Tranquilidade - Basic Health Plan 2025 (Single))",
+              "title": "Basic Health Plan 2025 (Single) - 45.40 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee only for hospitalization, childbirth, outpatient services, and dental care. Employee covers 20% for dental; 10% for all other services, with insurer covering the rest.",
+                "meta": {
+                  "benefitGroupId": "9c567d9f-4de5-4cb0-a527-072fa4e97b19",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-basic",
+                  "displayCost": "45.40 EUR/mo",
+                  "id": "745cb9e1-fad4-4a64-8ace-c0a338e306ec",
+                  "providerName": "Advance Care/ Tranquilidade",
+                  "tierName": "Basic Health Plan 2025 (Single)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Health Plan 2025 (Single) (Advance Care/ Tranquilidade - Standard Health Plan 2025 (Single))",
+              "title": "Standard Health Plan 2025 (Single) - 51.81 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee only for hospitalization, childbirth, outpatient services, dental care, and vision. Employee covers 20% for dental and vision; 10% for all other services, with insurer covering the rest.",
+                "meta": {
+                  "benefitGroupId": "9c567d9f-4de5-4cb0-a527-072fa4e97b19",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-standard",
+                  "displayCost": "51.81 EUR/mo",
+                  "id": "03129665-6e03-4985-ae0e-d39d54479a51",
+                  "providerName": "Advance Care/ Tranquilidade",
+                  "tierName": "Standard Health Plan 2025 (Single)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Health Plan 2025 (Single) (Advance Care/ Tranquilidade - Premium Health Plan 2025 (Single))",
+              "title": "Premium Health Plan 2025 (Single) - 76.33 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee only for hospitalization, childbirth, outpatient services, dental, vision, medications and serious illness. Employee covers 20% for dental, vision, and medications; 10% for all other services, with insurer covering the rest.",
+                "meta": {
+                  "benefitGroupId": "9c567d9f-4de5-4cb0-a527-072fa4e97b19",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-health-premium",
+                  "displayCost": "76.33 EUR/mo",
+                  "id": "6dbab3f6-ccdb-4b74-bd44-dfcd4c804c32",
+                  "providerName": "Advance Care/ Tranquilidade",
+                  "tierName": "Premium Health Plan 2025 (Single)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Basic Health Plan 2025 (Family) (Advance Care/ Tranquilidade - Basic Health Plan 2025 (Family))",
+              "title": "Basic Health Plan 2025 (Family) - ~162.74 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee and dependents for hospitalization, childbirth, outpatient services, and dental care. Employee covers 20% for dental; 10% for all other services, with insurer covering the rest.",
+                "meta": {
+                  "benefitGroupId": "9c567d9f-4de5-4cb0-a527-072fa4e97b19",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-basic-family",
+                  "displayCost": "~162.74 EUR/mo",
+                  "id": "cc412d23-9f6e-4986-ba76-e27116125fe6",
+                  "providerName": "Advance Care/ Tranquilidade",
+                  "tierName": "Basic Health Plan 2025 (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Health Plan 2025 (Family) (Advance Care/ Tranquilidade - Standard Health Plan 2025 (Family))",
+              "title": "Standard Health Plan 2025 (Family) - ~187.14 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee and dependents for hospitalization, childbirth, outpatient services, dental care, and vision. Employee covers 20% for dental and vision; 10% for all other services, with insurer covering the rest.",
+                "meta": {
+                  "benefitGroupId": "9c567d9f-4de5-4cb0-a527-072fa4e97b19",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-standard-family",
+                  "displayCost": "~187.14 EUR/mo",
+                  "id": "06888d6c-79ea-409e-aa54-f322ba57ebc6",
+                  "providerName": "Advance Care/ Tranquilidade",
+                  "tierName": "Standard Health Plan 2025 (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Health Plan 2025 (Family) (Advance Care/ Tranquilidade - Premium Health Plan 2025 (Family))",
+              "title": "Premium Health Plan 2025 (Family) - ~276.82 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee and dependents for hospitalization, childbirth, outpatient services, dental, vision, medications and serious illness. Employee covers 20% for dental, vision, and medications; 10% for all other services, with insurer covering the rest.",
+                "meta": {
+                  "benefitGroupId": "9c567d9f-4de5-4cb0-a527-072fa4e97b19",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-premium-family",
+                  "displayCost": "~276.82 EUR/mo",
+                  "id": "1f4e873a-a94d-452b-b7ac-1f09df0054f1",
+                  "providerName": "Advance Care/ Tranquilidade",
+                  "tierName": "Premium Health Plan 2025 (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance 2025",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Premium Health Plan 2025 (Single) (Advance Care/ Tranquilidade - Premium Health Plan 2025 (Single))",
+                    "Standard Health Plan 2025 (Single) (Advance Care/ Tranquilidade - Standard Health Plan 2025 (Single))",
+                    "Basic Health Plan 2025 (Single) (Advance Care/ Tranquilidade - Basic Health Plan 2025 (Single))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Premium Health Plan 2025 (Family) (Advance Care/ Tranquilidade - Premium Health Plan 2025 (Family))",
+                    "Standard Health Plan 2025 (Family) (Advance Care/ Tranquilidade - Standard Health Plan 2025 (Family))",
+                    "Basic Health Plan 2025 (Family) (Advance Care/ Tranquilidade - Basic Health Plan 2025 (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "life_insurance": {
+          "oneOf": [
+            {
+              "const": "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+              "title": "Life Insurance - $50K - 5.64 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $50,000. This means that regardless of an employee's salary, the payout will not exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-plan-50k",
+                  "displayCost": "5.64 USD/mo",
+                  "id": "7d26dcbe-ed62-4b56-b190-9117b257a6bd",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $50K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+              "title": "Life Insurance - $100K - 11.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $100,000. This means that regardless of an employee's salary, the payout will not exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-100k",
+                  "displayCost": "11.28 USD/mo",
+                  "id": "34b3892f-20d1-4115-8502-30df9756a968",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $100K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+              "title": "Life Insurance - $200K - 22.56 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $200,000. This means that regardless of an employee's salary, the payout will not exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-200k",
+                  "displayCost": "22.56 USD/mo",
+                  "id": "1331316b-5e88-42fe-86e3-5a8bea4bd542",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $200K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+              "title": "Life Insurance - $400K - 45.12 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $400,000. This means that regardless of an employee's salary, the payout will not exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-400k",
+                  "displayCost": "45.12 USD/mo",
+                  "id": "33763186-fa51-441d-8ebf-870336b102fa",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $400K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+              "title": "Life Insurance - $500K - 56.40 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $500,000. This means that regardless of an employee's salary, the payout will not exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-500k",
+                  "displayCost": "56.40 USD/mo",
+                  "id": "9c9d3792-ff41-4dcf-b365-751686dfa445",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $500K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+              "title": "Life Insurance - $600K - 67.68 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $600,000. This means that regardless of an employee's salary, the payout will not exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-600k",
+                  "displayCost": "67.68 USD/mo",
+                  "id": "0a8f1a78-b241-45dc-8c11-6df193ba6242",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $600K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - Life 50k; Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - PD 50k)",
+              "title": "Life, Accidental Death & Permanent Disability - $50k - 12.04 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. \nIn the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $50,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $50,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-50k",
+                  "displayCost": "12.04 USD/mo",
+                  "id": "ad820e4d-757b-4268-a2ce-5d28295662b7",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $50k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - AD&D 100k; Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - PD 100k)",
+              "title": "Life, Accidental Death & Permanent Disability - $100k - 24.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $100,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $100,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-100k",
+                  "displayCost": "24.08 USD/mo",
+                  "id": "2d6136ba-2da0-4c45-8d5c-0f0e729654a5",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $100k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - AD&D 200k; Allianz Life - Global Life - PD 200k)",
+              "title": "Life, Accidental Death & Permanent Disability - $200k - 48.14 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. \n In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $200,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $200,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-200k",
+                  "displayCost": "48.14 USD/mo",
+                  "id": "83875172-9faa-4667-9002-85a0723ca2b7",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $200k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - AD&D 400k; Allianz Life - Global Life - PD 400k; Allianz Life - Global Life - Life 400k)",
+              "title": "Life, Accidental Death & Permanent Disability - $400k - 96.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. \n In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $400,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $400,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-400k",
+                  "displayCost": "96.28 USD/mo",
+                  "id": "b2569dbb-fe9d-4e15-a7be-b8a3d02cf47a",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $400k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - AD&D 500k; Allianz Life - Global Life - Life 500k; Allianz Life - Global Life - PD 500k)",
+              "title": "Life, Accidental Death & Permanent Disability - $500k - 120.36 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. \n In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $500,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $500,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-500k",
+                  "displayCost": "120.36 USD/mo",
+                  "id": "5f523894-6aaf-476b-888f-3573ddabe44b",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $500k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - Life 600k; Allianz Life - Global Life - PD 600k; Allianz Life - Global Life - AD&D 600k)",
+              "title": "Life, Accidental Death & Permanent Disability - $600k - 144.43 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. \n In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $600,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $600,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "e5c13d29-dc6f-4e6a-ac20-5aaded3c6c7f",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-600k",
+                  "displayCost": "144.43 USD/mo",
+                  "id": "691db030-6663-4108-882a-fb01ea8e2719",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $600k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "life",
+                    "ad&d",
+                    "disability"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Life Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "basic",
+                  "label": "Basic",
+                  "optionValues": [
+                    "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+                    "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+                    "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+                    "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+                    "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+                    "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "comprehensive",
+                  "label": "Comprehensive",
+                  "optionValues": [
+                    "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - Life 600k; Allianz Life - Global Life - PD 600k; Allianz Life - Global Life - AD&D 600k)",
+                    "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - AD&D 500k; Allianz Life - Global Life - Life 500k; Allianz Life - Global Life - PD 500k)",
+                    "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - AD&D 400k; Allianz Life - Global Life - PD 400k; Allianz Life - Global Life - Life 400k)",
+                    "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - AD&D 200k; Allianz Life - Global Life - PD 200k)",
+                    "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - AD&D 100k; Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - PD 100k)",
+                    "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - Life 50k; Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - PD 50k)",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "meal_benefit": {
+          "oneOf": [
+            {
+              "const": "Meal Allowance Standard 2025 (Meal Allowance - Meal Allowance Standard 2025)",
+              "title": "Meal Allowance Standard 2025 - ~100 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "100% Employer paid Meal Allowance (4,77 EUR per working day)\nPaid on the payslip together with the salary",
+                "meta": {
+                  "benefitGroupId": "be13e9be-5281-486e-9175-b97e90719894",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-meal-allowance",
+                  "displayCost": "~100 EUR/mo",
+                  "id": "d48ee9c6-0488-4658-8f92-238a0e05a12a",
+                  "providerName": "Meal Allowance",
+                  "tierName": "Meal Allowance Standard 2025",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Meal Allowance Premium 2025 (Meal Allowance - Meal Allowance Premium 2025)",
+              "title": "Meal Allowance Premium 2025 - ~126 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "100% Employer-Paid Meal Allowance with Maximum Exempt Amount: Currently costing €6.00 EUR per worked day.\n\nPaid on the payslip together with the salary",
+                "meta": {
+                  "benefitGroupId": "be13e9be-5281-486e-9175-b97e90719894",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-meal-allowance-premium",
+                  "displayCost": "~126 EUR/mo",
+                  "id": "941516c3-62f2-4a35-bfb5-7bb4345688e9",
+                  "providerName": "Meal Allowance",
+                  "tierName": "Meal Allowance Premium 2025",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Meal Card Standard 2025 (Coverflex - Meal Card Standard 2025)",
+              "title": "Meal Card Standard 2025 - ~160 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "100% Employer paid – Meal Card (7,63 EUR per working day)\nPaid through Coverflex",
+                "meta": {
+                  "benefitGroupId": "be13e9be-5281-486e-9175-b97e90719894",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-meal-card",
+                  "displayCost": "~160 EUR/mo",
+                  "id": "cd91452d-1874-4eee-951b-7a41144005d0",
+                  "providerName": "Coverflex",
+                  "tierName": "Meal Card Standard 2025",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Meal Card Premium 2025 (Coverflex - Meal Card Premium 2025)",
+              "title": "Meal Card Premium 2025 - ~212 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "100% Employer-Paid Meal Card with Maximum Exempt Amount: Currently costing €10.20 EUR per worked day.\n\nPaid through Coverflex",
+                "meta": {
+                  "benefitGroupId": "be13e9be-5281-486e-9175-b97e90719894",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-portugal-meal-card-premium",
+                  "displayCost": "~212 EUR/mo",
+                  "id": "7aa57f80-a7d2-4f98-b835-c70d95bc0be1",
+                  "providerName": "Coverflex",
+                  "tierName": "Meal Card Premium 2025",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Meal Benefit",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "77b7176e-3cd5-4b67-99d1-29d189e5fb5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "be0dbd1a-c538-45ea-b995-2373e7403062",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "77b7176e-3cd5-4b67-99d1-29d189e5fb5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "e26ea592-0ca0-4326-89aa-b541652a9073",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "77b7176e-3cd5-4b67-99d1-29d189e5fb5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "c51c6364-2f93-4a48-9505-1ab0abdcde35",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "77b7176e-3cd5-4b67-99d1-29d189e5fb5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "7c53729f-f010-4528-88dc-9f81e344ea3c",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "77b7176e-3cd5-4b67-99d1-29d189e5fb5e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "4960d0eb-9e8d-48b5-a2b1-434644bc67cb",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "meal_benefit",
+        "mental_health_program",
+        "business_travel_insurance",
+        "health_insurance_2025",
+        "life_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "meal_benefit",
+        "health_insurance_2025",
+        "life_insurance",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "We offer our employees supplemental benefits - Meal and Health Insurance (In partnership with Advance Care/Tranquilidade and Coverflex)",
+        "extra": "New: Health Insurance is now optional for new hires in Portugal.\r\nPlease note that all local payroll deductions for required coverages are included in the TCE.\r\nAny pricing changes will be communicated in advance of updated billing.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here.",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "const": "indefinite",
+      "description": "I acknowledge that only Indefinite-term Contracts are available. Remote does not support Fixed-term Contracts in Portugal.",
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "deprecated": true,
+      "format": "date",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract End Date (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because Contract Duration can only be 'indefinite'."
+        },
+        "inputType": "date"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "maximum_working_hours_regime": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Will this employee need to work more than 8 hours a day?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length": {
+      "deprecated": true,
+      "description": "Please enter a value between 0 and 6 months (legal maximum). Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "maximum": 6,
+      "minimum": 0,
+      "readOnly": true,
+      "title": "Probation period (in months) (deprecated)",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated in favor of 'Probation period (in days)'."
+        },
+        "inputType": "number",
+        "statement": {
+          "description": "If you need Remote to terminate a post-probation employee in Portugal because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee.\n\nPerformance-related terminations must meet a high threshold of compliance. \n\nIt is common for employees in Remote to bring claims and employers to pay settlements or to opt for termination by mutual agreement. \n\nDuring probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "probation_length_days": {
+      "description": "Please enter a value between 15 and 240 days (legal maximum).",
+      "maximum": 240,
+      "minimum": 15,
+      "title": "Probation period, in days",
+      "type": "number",
+      "x-jsf-errorMessage": {
+        "maximum": "Probation must be at most 240 days",
+        "minimum": "Probation must be at least 15 days"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 9013034328205,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "If you need Remote to terminate a post-probation employee in Portugal because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee.\n\nPerformance-related terminations must meet a high threshold of compliance. \n\nIt is common for employees in Remote to bring claims and employers to pay settlements or to opt for termination by mutual agreement. \n\nDuring probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Why do I need to do this?",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "salary_installments_confirmation": {
+      "const": "acknowledged",
+      "description": "In Portugal, employees receive 13th and 14th month salaries (usually called vacation and Christmas allowances) as part of their annual gross salary. The 13th and 14th salary amounts are based on an employee's regular salary and aren't affected by bonuses or commissions.",
+      "title": "I confirm the annual gross salary includes 13th and 14th salaries",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about bonus salaries",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 21980576563725,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "signing_bonus_clawback": {
+      "description": "This would require the employee to return the bonus if they leave your company before the first year.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a signing bonus clawback?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_address": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "address": false,
+              "address_line_2": false,
+              "city": false,
+              "postal_code": false,
+              "work_in_person_days_per_week": false
+            }
+          },
+          "if": {
+            "properties": {
+              "is_home_address": {
+                "const": "no"
+              }
+            },
+            "required": [
+              "is_home_address"
+            ]
+          },
+          "then": {
+            "required": [
+              "address",
+              "city",
+              "postal_code",
+              "work_in_person_days_per_week"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "address": {
+          "description": "Address number and street name.",
+          "maxLength": 255,
+          "title": "Work address line 1",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "address_line_2": {
+          "description": "Apartment number or building number if applicable.",
+          "maxLength": 255,
+          "title": "Work address line 2 (optional)",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "city": {
+          "maxLength": 255,
+          "title": "City",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "is_home_address": {
+          "enum": [
+            "yes",
+            "no"
+          ],
+          "title": "Local",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "column",
+            "inputType": "radio",
+            "options": [
+              {
+                "description": "Select this option if the employee is fully remote.",
+                "label": "Same as the employee's residential address",
+                "value": "yes"
+              },
+              {
+                "description": "Select this option if the employee is under a hybrid work regime.",
+                "label": "Different than the employee's residential address",
+                "value": "no"
+              }
+            ]
+          }
+        },
+        "postal_code": {
+          "maxLength": 255,
+          "title": "Postal code",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "work_in_person_days_per_week": {
+          "description": "The number of days per week the employee will work from this location.",
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Number of days per week",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        }
+      },
+      "required": [
+        "is_home_address"
+      ],
+      "title": "Work Address",
+      "type": "object",
+      "x-jsf-order": [
+        "is_home_address",
+        "address",
+        "address_line_2",
+        "city",
+        "postal_code",
+        "work_in_person_days_per_week"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "work_from_home_allowance": {
+      "deprecated": true,
+      "description": "This helps employees cover additional work-from-home expenses. We recommend EUR 50 based on Portugal's practices.",
+      "minimum": 5000,
+      "readOnly": true,
+      "title": "Monthly work-from-home allowance",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "minimum": "Must be greater or equal to 50 EUR.",
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated because of the new 'I acknowledge Portugal's work-from-home allowance' field. No longer available to customers."
+        },
+        "inputType": "money"
+      }
+    },
+    "work_from_home_allowance_ack": {
+      "const": "acknowledged",
+      "description": "In Portugal, this allowance is required by law. However, the allowance amount is based on a few different factors.",
+      "title": "I acknowledge Portugal's work-from-home allowance",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20498497190285,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "working_hours_exemption": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Will this employee need to work outside regular work hours?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "<h1 data-component=\"HeadingIcon\">What do I need to know?</h1><p>Portuguese law allows 3 types of employees to work outside legally defined regular work hours:</p><ul><li>Those on company boards or in senior management.</li><li>Those whose work by nature has to take place outside regular work hours.</li><li>Those who do remote work.</li></ul><p>Employers must pay every employee who works outside regular work hours a monthly allowance. The value of this allowance depends on which days and what time an employee works outside work hour.</p><p>If you have an employee in Portugal who will work outside regular work hours, we'll calculate their allowance for you and you'll pay it on top of their salary.</p>",
+            "title": "Working hours exemption"
+          }
+        }
+      }
+    },
+    "working_hours_exemption_allowance": {
+      "description": "",
+      "title": "Extended work hours allowance",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money",
+        "statement": {
+          "severity": "info",
+          "title": "You’ll need to pay an extended work hours allowance"
+        }
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "contract_duration_type",
+    "work_schedule",
+    "work_from_home_allowance_ack",
+    "annual_training_hours_ack",
+    "salary_installments_confirmation",
+    "has_signing_bonus",
+    "has_bonus",
+    "has_commissions",
+    "equity_compensation",
+    "available_pto",
+    "available_pto_type",
+    "role_description",
+    "experience_level",
+    "work_address",
+    "working_hours_exemption",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "salary_installments_confirmation"
+      ],
+      "title": "Annual gross salary"
+    },
+    "extended_work_hours": {
+      "propertiesByName": [
+        "working_hours_exemption",
+        "maximum_working_hours_regime",
+        "working_hours_exemption_allowance"
+      ],
+      "title": "Extended work hours"
+    }
+  },
+  "x-jsf-logic": {
+    "computedValues": {
+      "working_hours_exemption_allowance_no_max_hours_value": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "var": "annual_gross_salary"
+                },
+                {
+                  "var": "work_hours_per_week"
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "/": [
+                        {
+                          "*": [
+                            {
+                              "var": "annual_gross_salary"
+                            },
+                            12,
+                            1.25,
+                            2,
+                            4
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            52,
+                            14
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "/": [
+                            {
+                              "*": [
+                                {
+                                  "var": "annual_gross_salary"
+                                },
+                                12,
+                                1.25,
+                                2,
+                                4
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "var": "work_hours_per_week"
+                                },
+                                52,
+                                14
+                              ]
+                            }
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "working_hours_exemption_allowance_no_max_hours_value_in_cents": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "var": "annual_gross_salary"
+                },
+                {
+                  "var": "work_hours_per_week"
+                }
+              ]
+            },
+            {
+              "-": [
+                {
+                  "/": [
+                    {
+                      "*": [
+                        {
+                          "var": "annual_gross_salary"
+                        },
+                        12,
+                        1.25,
+                        2,
+                        4
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        52,
+                        14
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "%": [
+                    {
+                      "/": [
+                        {
+                          "*": [
+                            {
+                              "var": "annual_gross_salary"
+                            },
+                            12,
+                            1.25,
+                            2,
+                            4
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            52,
+                            14
+                          ]
+                        }
+                      ]
+                    },
+                    1
+                  ]
+                }
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "working_hours_exemption_allowance_with_max_hours_value": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "var": "annual_gross_salary"
+                },
+                {
+                  "var": "work_hours_per_week"
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "/": [
+                        {
+                          "*": [
+                            {
+                              "var": "annual_gross_salary"
+                            },
+                            12,
+                            1.25,
+                            22
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            52,
+                            14
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "/": [
+                            {
+                              "*": [
+                                {
+                                  "var": "annual_gross_salary"
+                                },
+                                12,
+                                1.25,
+                                22
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "var": "work_hours_per_week"
+                                },
+                                52,
+                                14
+                              ]
+                            }
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "working_hours_exemption_allowance_with_max_hours_value_in_cents": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "var": "annual_gross_salary"
+                },
+                {
+                  "var": "work_hours_per_week"
+                }
+              ]
+            },
+            {
+              "-": [
+                {
+                  "/": [
+                    {
+                      "*": [
+                        {
+                          "var": "annual_gross_salary"
+                        },
+                        12,
+                        1.25,
+                        22
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        52,
+                        14
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "%": [
+                    {
+                      "/": [
+                        {
+                          "*": [
+                            {
+                              "var": "annual_gross_salary"
+                            },
+                            12,
+                            1.25,
+                            22
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            52,
+                            14
+                          ]
+                        }
+                      ]
+                    },
+                    1
+                  ]
+                }
+              ]
+            },
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "probation_length",
+    "probation_length_days",
+    "available_pto_type",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "work_address",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "salary_installments_confirmation",
+    "work_from_home_allowance_ack",
+    "annual_training_hours_ack",
+    "work_from_home_allowance",
+    "working_hours_exemption",
+    "maximum_working_hours_regime",
+    "working_hours_exemption_allowance",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "signing_bonus_clawback",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "benefits"
+  ]
+}

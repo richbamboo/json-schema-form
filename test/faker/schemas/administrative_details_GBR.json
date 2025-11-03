@@ -1,0 +1,982 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": false,
+      "then": {
+        "properties": {
+          "wm_indicator": {
+            "const": null
+          }
+        },
+        "required": [
+          "wm_indicator"
+        ]
+      }
+    },
+    {
+      "if": false,
+      "then": {
+        "properties": {
+          "tax_code": {
+            "const": null
+          }
+        },
+        "required": [
+          "tax_code"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "tax_code": {
+            "x-jsf-presentation": {
+              "inputType": "hidden"
+            }
+          },
+          "wm_indicator": {
+            "x-jsf-presentation": {
+              "inputType": "hidden"
+            }
+          }
+        }
+      },
+      "if": false,
+      "then": {
+        "required": [
+          "tax_code",
+          "wm_indicator"
+        ]
+      }
+    },
+    {
+      "if": true,
+      "then": {
+        "properties": {
+          "total_pay_to_date": {
+            "const": null,
+            "x-jsf-presentation": {
+              "inputType": "hidden"
+            }
+          },
+          "total_tax_to_date": {
+            "const": null,
+            "x-jsf-presentation": {
+              "inputType": "hidden"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "post_graduate_loan_repayment_direct_debit": false,
+          "post_graduate_studies_status": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_post_graduate_loan": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_post_graduate_loan"
+        ]
+      },
+      "then": {
+        "required": [
+          "post_graduate_studies_status",
+          "post_graduate_loan_repayment_direct_debit"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "student_loan_plan_type": false,
+          "student_loan_repayment_direct_debit": false,
+          "student_loan_studies_progress": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_student_loan": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_student_loan"
+        ]
+      },
+      "then": {
+        "required": [
+          "student_loan_plan_type",
+          "student_loan_studies_progress",
+          "student_loan_repayment_direct_debit"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "first_civil_employment_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_veteran": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "is_veteran"
+        ]
+      },
+      "then": {
+        "required": [
+          "first_civil_employment_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "nin": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_national_insurance_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_national_insurance_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "nin"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "right_to_work_share_code": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_foreign_national": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "is_foreign_national"
+        ]
+      },
+      "then": {
+        "required": [
+          "right_to_work_share_code"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "number_of_dependents_under_ten_years": false
+        }
+      },
+      "if": {
+        "properties": {
+          "number_of_dependents": {
+            "minimum": 1
+          }
+        },
+        "required": [
+          "number_of_dependents"
+        ]
+      },
+      "then": {
+        "if": {
+          "properties": {
+            "number_of_dependents": {
+              "minimum": 1,
+              "type": "number"
+            }
+          },
+          "required": [
+            "number_of_dependents"
+          ]
+        },
+        "then": {
+          "properties": {
+            "number_of_dependents_under_ten_years": {
+              "minimum": 0,
+              "type": "number"
+            }
+          },
+          "required": [
+            "number_of_dependents_under_ten_years"
+          ]
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "employee_pension_rate": {
+            "maximum": 100,
+            "minimum": 5,
+            "x-jsf-presentation": {
+              "inputType": "number",
+              "percentage": true
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "employee_contribution_type": {
+            "const": "fixed"
+          }
+        },
+        "required": [
+          "employee_contribution_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "employee_pension_rate": {
+            "x-jsf-presentation": {
+              "currency": "GBP",
+              "inputType": "money"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "additional_voluntary_employee_contribution": {
+            "maximum": 100,
+            "minimum": 0,
+            "x-jsf-presentation": {
+              "inputType": "number",
+              "percentage": true
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "additional_voluntary_employee_contribution_type": {
+            "const": "fixed"
+          }
+        },
+        "required": [
+          "additional_voluntary_employee_contribution_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "additional_voluntary_employee_contribution": {
+            "x-jsf-presentation": {
+              "currency": "GBP",
+              "inputType": "money"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "additional_voluntary_employee_contribution": {
+      "description": "The part of your salary you want to pay additionally into your pension.",
+      "title": "Additional voluntary pension contribution",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "additional_voluntary_employee_contribution_type": {
+      "default": "percentage",
+      "oneOf": [
+        {
+          "const": "percentage",
+          "title": "Percentage of earnings"
+        },
+        {
+          "const": "fixed",
+          "title": "Fixed amount"
+        }
+      ],
+      "title": "Additional voluntary pension contribution",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "employee_contribution_type": {
+      "default": "percentage",
+      "oneOf": [
+        {
+          "const": "percentage",
+          "title": "Percentage of earnings"
+        },
+        {
+          "const": "fixed",
+          "title": "Fixed amount"
+        }
+      ],
+      "title": "Employee contribution",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "employee_pension_pay_immediately": {
+      "description": "You can start paying into your pension from your 1st payslip, or postpone for three months.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Pay into your pension immediately?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio",
+        "options": [
+          {
+            "description": "I want to pay into my pension starting with my 1st payslip.",
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "description": "I want to postpone my pension for three months.",
+            "label": "No",
+            "value": "no"
+          }
+        ]
+      }
+    },
+    "employee_pension_rate": {
+      "description": "The part of your salary you want to pay into your pension.",
+      "title": "Pension contribution",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "first_civil_employment_date": {
+      "description": "Please indicate the date of the first civil employment.",
+      "format": "date",
+      "title": "First civil employment date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "has_national_insurance_number": {
+      "enum": [
+        "yes",
+        "no",
+        "currently-applying",
+        "dont-know"
+      ],
+      "title": "Do you have a National Insurance number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          },
+          {
+            "label": "I’m currently applying",
+            "value": "currently-applying"
+          },
+          {
+            "label": "I don’t know",
+            "value": "dont-know"
+          }
+        ]
+      }
+    },
+    "has_post_graduate_loan": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a postgraduate loan amount to be paid?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_student_loan": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a student loan amount to be paid?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "maxLength": 255,
+      "title": "Passport or birth certificate number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_foreign_national": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you a foreign national?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "is_veteran": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Employee is a veteran?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        },
+        {
+          "const": "prefer_not_to_answer",
+          "title": "Prefer not to answer"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "ni_table": {
+      "default": "A",
+      "description": "The National Insurance category letter determines how much the employee needs to contribute. Leave blank if you are unsure.",
+      "oneOf": [
+        {
+          "const": "A",
+          "title": "A"
+        },
+        {
+          "const": "B",
+          "title": "B"
+        },
+        {
+          "const": "C",
+          "title": "C"
+        },
+        {
+          "const": "F",
+          "title": "F"
+        },
+        {
+          "const": "H",
+          "title": "H"
+        },
+        {
+          "const": "I",
+          "title": "I"
+        },
+        {
+          "const": "J",
+          "title": "J"
+        },
+        {
+          "const": "L",
+          "title": "L"
+        },
+        {
+          "const": "M",
+          "title": "M"
+        },
+        {
+          "const": "S",
+          "title": "S"
+        },
+        {
+          "const": "V",
+          "title": "V"
+        },
+        {
+          "const": "X",
+          "title": "X"
+        },
+        {
+          "const": "Z",
+          "title": "Z"
+        },
+        {
+          "const": null,
+          "title": "Doesn't apply"
+        }
+      ],
+      "title": "National Insurance Category",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "nin": {
+      "maxLength": 255,
+      "pattern": "^[A-CEGHJ-NOPR-TW-Z]{2}[0-9]{6}[ABCD\\s]{1}$",
+      "title": "National Insurance Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "number_of_dependents": {
+      "description": "The total number of dependents you claim.",
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "number_of_dependents_under_ten_years": {
+      "title": "Dependents ten years old or younger",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "post_graduate_loan_repayment_direct_debit": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you repaying your student loan directly to the Student Loans Company by direct debit?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "post_graduate_studies_status": {
+      "enum": [
+        "to-be-completed",
+        "incomplete"
+      ],
+      "title": "What is the status of your studies?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Completed on or before April 6th of the current year",
+            "value": "to-be-completed"
+          },
+          {
+            "label": "Incomplete",
+            "value": "incomplete"
+          }
+        ]
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "right_to_work_share_code": {
+      "maxLength": 255,
+      "title": "Right to work share code",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "description": "Required only if you are not a UK national. If you need one, you can get your <a href=\"https://www.gov.uk/prove-right-to-work\" target=\"_blank\" rel=\"noopener noreferrer\">share code here</a>.",
+        "inputType": "text"
+      }
+    },
+    "student_loan_plan_type": {
+      "enum": [
+        "plan-type-1",
+        "plan-type-2",
+        "plan-type-4"
+      ],
+      "title": "What is your student plan type?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "description": "You lived in Scotland or Northern Ireland when you started your course (undergraduate or postgraduate) OR you lived in England or Wales and you started your undergraduate course before 1 Sep 2012",
+            "label": "Plan Type 1",
+            "value": "plan-type-1"
+          },
+          {
+            "description": "You live in England and Wales and started your undergraduate course on or after 1 Sep 2012 OR Your loan is a part time maintenance loan, or advanced learner loan or postgraduate healthcare loan",
+            "label": "Plan Type 2",
+            "value": "plan-type-2"
+          },
+          {
+            "description": "You lived in Scotland when you started your course anywhere in UK (undergraduate or postgraduate) on or after 1st Sept 1998",
+            "label": "Plan Type 4",
+            "value": "plan-type-4"
+          }
+        ]
+      }
+    },
+    "student_loan_repayment_direct_debit": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you repaying your student loan directly to the Student Loans Company by direct debit?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "student_loan_studies_progress": {
+      "enum": [
+        "to-be-completed",
+        "incomplete"
+      ],
+      "title": "What is the status of your studies?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Completed on or before April 6th of the current year",
+            "value": "to-be-completed"
+          },
+          {
+            "label": "Incomplete",
+            "value": "incomplete"
+          }
+        ]
+      }
+    },
+    "tax_code": {
+      "maxLength": 255,
+      "pattern": "^(([SKC]*[0-9]{0,5}[LMNT]?(W0|M0)?)|([SC]*(BR|D0|D[01]|W0|NT|0T)))$",
+      "title": "Tax code",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "pattern": "Must have a valid format. E.g.: 1257L"
+      },
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_code_position": {
+      "enum": [
+        "This is my first job since April 6th of the current year and I have not been receiving taxable jobseekers’ allowance, employment and support allowance, taxable incapacity benefit, state, or occupational pension",
+        "This is my only job but since April 6th of the current year, I had another job or receive taxable jobseekers’ allowance, employment and support allowance, taxable incapacity benefit, state, or occupational pension",
+        "As well as my new job, I have another job or receive a state or occupational pension"
+      ],
+      "title": "Tax code position",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "description": "This is my first job since April 6th of the current year and I have not been receiving taxable jobseekers’ allowance, employment and support allowance, taxable incapacity benefit, state, or occupational pension",
+            "label": "Option 1",
+            "value": "This is my first job since April 6th of the current year and I have not been receiving taxable jobseekers’ allowance, employment and support allowance, taxable incapacity benefit, state, or occupational pension"
+          },
+          {
+            "description": "This is my only job but since April 6th of the current year, I had another job or receive taxable jobseekers’ allowance, employment and support allowance, taxable incapacity benefit, state, or occupational pension",
+            "label": "Option 2",
+            "value": "This is my only job but since April 6th of the current year, I had another job or receive taxable jobseekers’ allowance, employment and support allowance, taxable incapacity benefit, state, or occupational pension"
+          },
+          {
+            "description": "As well as my new job, I have another job or receive a state or occupational pension",
+            "label": "Option 3",
+            "value": "As well as my new job, I have another job or receive a state or occupational pension"
+          }
+        ]
+      }
+    },
+    "total_pay_to_date": {
+      "title": "P45: Total pay to date",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "GBP",
+        "inputType": "money"
+      }
+    },
+    "total_tax_to_date": {
+      "title": "P45: Total tax to date",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "GBP",
+        "inputType": "money"
+      }
+    },
+    "wm_indicator": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "title": "N/A"
+        }
+      ],
+      "title": "W1/M1 indicator",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "tax_code_position",
+    "employee_pension_pay_immediately",
+    "employee_pension_rate",
+    "has_national_insurance_number",
+    "has_student_loan",
+    "has_post_graduate_loan",
+    "id_number",
+    "is_foreign_national",
+    "marital_status"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "post_graduate_loan": {
+      "propertiesByName": [
+        "has_post_graduate_loan",
+        "post_graduate_studies_status",
+        "post_graduate_loan_repayment_direct_debit"
+      ],
+      "title": "Postgraduate loan"
+    },
+    "student_loan": {
+      "propertiesByName": [
+        "has_student_loan",
+        "student_loan_studies_progress",
+        "student_loan_repayment_direct_debit",
+        "student_loan_plan_type"
+      ],
+      "title": "Student loans"
+    }
+  },
+  "x-jsf-order": [
+    "id_number",
+    "has_national_insurance_number",
+    "nin",
+    "right_to_work_share_code",
+    "is_foreign_national",
+    "marital_status",
+    "number_of_dependents",
+    "number_of_dependents_under_ten_years",
+    "employee_contribution_type",
+    "employee_pension_rate",
+    "additional_voluntary_employee_contribution_type",
+    "additional_voluntary_employee_contribution",
+    "employee_pension_pay_immediately",
+    "has_student_loan",
+    "student_loan_studies_progress",
+    "student_loan_repayment_direct_debit",
+    "student_loan_plan_type",
+    "has_post_graduate_loan",
+    "post_graduate_studies_status",
+    "post_graduate_loan_repayment_direct_debit",
+    "tax_code_position",
+    "tax_code",
+    "wm_indicator",
+    "prior_inventions",
+    "ni_table",
+    "is_veteran",
+    "first_civil_employment_date",
+    "total_pay_to_date",
+    "total_tax_to_date"
+  ]
+}

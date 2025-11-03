@@ -1,0 +1,159 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "number_of_dependents": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_dependents": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_dependents"
+        ]
+      },
+      "then": {
+        "required": [
+          "number_of_dependents"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "has_dependents": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have any child dependents? ",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID or passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_type": {
+      "oneOf": [
+        {
+          "const": "national_id_number",
+          "title": "National Registration Number"
+        },
+        {
+          "const": "passport",
+          "title": "Passport"
+        }
+      ],
+      "title": "Identification document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "co_habiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "medical_aid_number": {
+      "description": "(Optional)",
+      "maxLength": 255,
+      "title": "Medical Aid membership number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "nssa_number": {
+      "description": "(Optional)",
+      "maxLength": 255,
+      "title": "National Social Security Authority (NSSA) number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 1,
+      "title": "Number of child dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    }
+  },
+  "required": [
+    "id_type",
+    "id_number",
+    "marital_status",
+    "has_dependents"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_type",
+    "id_number",
+    "marital_status",
+    "has_dependents",
+    "number_of_dependents",
+    "nssa_number",
+    "medical_aid_number"
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "has_unified_id_number": false,
+          "has_visa_file_number": false,
+          "unified_id_number": false,
+          "visa_file_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_uae_citizen": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "is_uae_citizen"
+        ]
+      },
+      "then": {
+        "allOf": [
+          {
+            "else": {
+              "properties": {
+                "has_unified_id_number": {
+                  "x-jsf-presentation": {
+                    "statement": null
+                  }
+                }
+              }
+            },
+            "if": {
+              "properties": {
+                "has_unified_id_number": {
+                  "const": "no"
+                }
+              },
+              "required": [
+                "has_unified_id_number"
+              ]
+            },
+            "then": {
+              "properties": {
+                "has_unified_id_number": {
+                  "x-jsf-presentation": {
+                    "statement": {
+                      "description": "You can provide this number at a later date, if applicable. Please know that if you entered the UAE on a visa, we cannot start your employment without this number.",
+                      "inputType": "statement",
+                      "severity": "info"
+                    }
+                  }
+                },
+                "unified_id_number": {
+                  "x-jsf-presentation": {
+                    "skippable": true
+                  }
+                }
+              }
+            }
+          },
+          {
+            "else": {
+              "properties": {
+                "has_visa_file_number": {
+                  "x-jsf-presentation": {
+                    "statement": null
+                  }
+                }
+              }
+            },
+            "if": {
+              "properties": {
+                "has_visa_file_number": {
+                  "const": "no"
+                }
+              },
+              "required": [
+                "has_visa_file_number"
+              ]
+            },
+            "then": {
+              "properties": {
+                "has_visa_file_number": {
+                  "x-jsf-presentation": {
+                    "statement": {
+                      "description": "You can provide this number at a later date, if applicable. Please know that if you entered the UAE on a visa, we cannot start your employment without this number.",
+                      "inputType": "statement",
+                      "severity": "info"
+                    }
+                  }
+                },
+                "visa_file_number": {
+                  "x-jsf-presentation": {
+                    "skippable": true
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "has_unified_id_number",
+          "has_visa_file_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "emirates_id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_emirates_id_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_emirates_id_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "emirates_id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_emirates_id_number": {
+            "x-jsf-presentation": {
+              "statement": null
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "has_emirates_id_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_emirates_id_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_emirates_id_number": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "You can provide this number at a later date, but please know that we cannot start your employment without it.",
+                "inputType": "statement",
+                "severity": "info"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "unified_id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_unified_id_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_unified_id_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "unified_id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "visa_file_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_visa_file_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_visa_file_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "visa_file_number"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "emirates_id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "Emirates ID number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3,
+        "skippable": true
+      }
+    },
+    "has_emirates_id_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have an Emirates ID number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_unified_id_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a Unified Identification (UID) number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_visa_file_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a visa file number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_worked_in_abu_dhabi": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Have you worked in Abu Dhabi?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "",
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_uae_citizen": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you a citizen of the UAE?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "mol_id": {
+      "description": "Ministry of Labor / TX ID number",
+      "readOnly": true,
+      "title": "MOL ID",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "unified_id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "Unified Identification (UID) number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "visa_file_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "Visa file number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "is_uae_citizen",
+    "has_emirates_id_number",
+    "has_worked_in_abu_dhabi"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "is_uae_citizen",
+    "has_unified_id_number",
+    "unified_id_number",
+    "has_visa_file_number",
+    "visa_file_number",
+    "has_emirates_id_number",
+    "emirates_id_number",
+    "marital_status",
+    "has_worked_in_abu_dhabi",
+    "mol_id"
+  ]
+}

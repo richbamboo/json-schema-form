@@ -1,0 +1,1264 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 6685200,
+            "x-jsf-errorMessage": {
+              "minimum": "In Israel, full-time employees are entitled to a minimum annual salary of ₪66,852.00."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "probation_length": {
+            "const": 0
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "work_hours_per_week": false
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "full_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "work_hours_per_week": {
+              "const": 42,
+              "default": 42,
+              "description": "All employees in Israel are required to work 42 hours in a full-time position.",
+              "x-jsf-presentation": {
+                "statement": {
+                  "title": "Total of <b>42 hours</b> per week."
+                }
+              }
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Please do not include public or bank holidays in this number."
+          },
+          "work_hours_per_week": {
+            "maximum": 35,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "work_hours_per_week"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause_apply"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_compete_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_solicitation_employees_number_of_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_solicitation_employees": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_solicitation_employees"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_solicitation_employees_number_of_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "else": {
+            "else": {
+              "properties": {
+                "overtime": false
+              }
+            },
+            "if": {
+              "properties": {
+                "experience_level": {
+                  "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives"
+                }
+              },
+              "required": [
+                "experience_level"
+              ]
+            },
+            "then": {
+              "required": [
+                "overtime"
+              ]
+            }
+          },
+          "if": {
+            "properties": {
+              "experience_level": {
+                "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them"
+              }
+            },
+            "required": [
+              "experience_level"
+            ]
+          },
+          "then": {
+            "required": [
+              "overtime"
+            ]
+          }
+        },
+        "if": {
+          "properties": {
+            "experience_level": {
+              "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions"
+            }
+          },
+          "required": [
+            "experience_level"
+          ]
+        },
+        "then": {
+          "required": [
+            "overtime"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy"
+          }
+        },
+        "required": [
+          "experience_level"
+        ]
+      },
+      "then": {
+        "required": [
+          "overtime"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "allowances": {
+      "description": "Let us know what allowances you're providing the employee, what they cover, and the monthly amounts. If you're not offering allowances, you can skip this field.",
+      "maxLength": 1000,
+      "title": "Allowances",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ILS",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "All employees are allotted 12-16 vacation days during the first year of employment, not including mandated holidays. Vacation days increase with seniority according to the law.",
+      "minimum": 0,
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "bbd758d6-f737-4bde-8001-da257c0f2e48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "ef8c89f1-9259-4d7c-9fc4-8778c9d9db12",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "bbd758d6-f737-4bde-8001-da257c0f2e48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "d8b6cb26-de9e-4e3c-a183-0b16e3175134",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "bbd758d6-f737-4bde-8001-da257c0f2e48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "30f77ed6-2f2e-4f63-b624-49e79ded3a3a",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "bbd758d6-f737-4bde-8001-da257c0f2e48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "9ad1cf59-aea7-4175-823f-eeacfc3cb5b5",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "bbd758d6-f737-4bde-8001-da257c0f2e48",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "0d1d855b-76c3-43f7-b68d-cbed31b858ba",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "59638ebb-915e-4a4f-9251-28fb15ad5d05",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "7c65b5d4-d34f-44ba-be7b-aa5bb7595041",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "59638ebb-915e-4a4f-9251-28fb15ad5d05",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "1d275083-6f8d-4cd7-a218-4df2cffd21af",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "59638ebb-915e-4a4f-9251-28fb15ad5d05",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "89ffd913-5268-4e55-9351-9056b572c3f2",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "59638ebb-915e-4a4f-9251-28fb15ad5d05",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "1b8529f3-27e5-4064-b4a8-59c928cf3fce",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "59638ebb-915e-4a4f-9251-28fb15ad5d05",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "a3d6b294-4030-49f3-9cb1-2af786bc1bfc",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In Israel the following statutory Benefits apply:\n\n- Advanced Study Fund: The Advanced Study Fund is a Selective benefit provided to all employees pending the employer's choice to give this benefit. Employers place up to 7.5% of the monthly salary into the fund, with employees contributing 2.5% of the monthly salary. Contributions are tax-free up to a gross monthly salary of 15,712 NIS.",
+        "extra": "Please note that all local payroll deductions for required coverages are included in the TCE.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ILS",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Let us know if the bonus is paid one time, monthly, or yearly. Please also indicate when it should be paid.",
+      "maxLength": 1000,
+      "title": "Bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Enter the payment amount, frequency, and any other relevant information.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Select the role's experience level based on the job description, not the employee's overall experience.",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they start work.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_apply": {
+      "description": "Non-competes carry a significant cost and we’re unable to enforce them. Because of these details, we recommend selecting No.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-compete clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "Non-competes can last between 1 and 12 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Duration of non-compete, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "non_solicitation_employees": {
+      "description": "This restricts the employee from hiring your key employees for a competing business.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-solicit of key employees clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_employees_number_of_months": {
+      "description": "Non-solicits can last between 1 and 12 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Duration of non-solicit of employees, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "notice_period": {
+      "deprecated": true,
+      "maximum": 6,
+      "minimum": 1,
+      "readOnly": true,
+      "title": "(Deprecated) How long do you want the notice period to be?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated in favor of Statutory notice period acknowledgment."
+        },
+        "inputType": "text"
+      }
+    },
+    "notice_period_confirmation": {
+      "const": "acknowledged",
+      "description": "I acknowledge that in Israel, the labor court's stance on employee termination is stringent, emphasizing the necessity for employees to be afforded a fair and ample opportunity to present their arguments before dismissal. I also recognize the provisions outlined in The Advanced Notice of Discharge or Resignation Law, 2001, which mandates that both employers and workers adhere to advanced notice requirements:<ul><li>For employment durations of 0-6 months: One day of notice is accrued for each month of employment.</li><li>For employment durations spanning 6 months to 1 year: In addition to the initial 6 days accumulated, an extra 2.5 days of notice are accrued for each month of employment from the sixth month up to the conclusion of the first year.</li><li>For employment durations exceeding 1 year: A 30-day notice period is mandated for discharge or resignation.</li></ul>",
+      "title": "Statutory notice period acknowledgment",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "overtime": {
+      "description": "Please choose the global overtime pay quota that aligns with this non-executive level role.",
+      "oneOf": [
+        {
+          "const": "40",
+          "title": "40 overtime hours at an hourly rate of 125%"
+        },
+        {
+          "const": "24",
+          "title": "24 overtime hours at an hourly rate of 150%"
+        }
+      ],
+      "title": "Global overtime pay",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "The salary will be added to the employment agreement.",
+      "title": "I confirm the annual gross salary reflects part-time hours",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length": {
+      "description": "In Israel, probation periods typically last between 3 and 6 months.",
+      "minimum": 0,
+      "title": "Probation period in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 9013034328205,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please add 3 tasks minimum (at least 100 characters in total). You can copy this from the job description.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "description": "Enter the gross amount of the bonus.",
+      "minimum": 0,
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ILS",
+        "inputType": "money"
+      }
+    },
+    "study_fund_eligibility": {
+      "description": "Provided to employees with a monthly salary of 15,712 NIS and up. Often provided to employees in senior positions due to the attractive tax benefits. Employers place up to 7.5% of the monthly salary into the fund, with employees contributing 2.5% of the monthly salary. Contributions are tax-free up to a gross monthly salary of 15,712 NIS. (Employers do not typically make contributions above the tax free ceiling.)<br>Employees may not use the fund for the first six years.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the employee eligible for a Study Fund (Keren Hishtalmut)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "available_pto",
+    "contract_duration_type",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_signing_bonus",
+    "non_compete_clause_apply",
+    "non_solicitation_employees",
+    "notice_period_confirmation",
+    "probation_length",
+    "role_description",
+    "study_fund_eligibility",
+    "work_address_is_home_address",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "probation_length",
+    "work_schedule",
+    "work_hours_per_week",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "available_pto",
+    "role_description",
+    "study_fund_eligibility",
+    "experience_level",
+    "overtime",
+    "notice_period",
+    "allowances",
+    "work_address_is_home_address",
+    "notice_period_confirmation",
+    "non_compete_clause_apply",
+    "non_compete_clause_halt_period_months",
+    "non_solicitation_employees",
+    "non_solicitation_employees_number_of_months",
+    "benefits"
+  ]
+}

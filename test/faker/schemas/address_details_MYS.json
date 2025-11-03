@@ -1,0 +1,131 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select a province",
+      "oneOf": [
+        {
+          "const": "Johor",
+          "title": "Johor"
+        },
+        {
+          "const": "Kedah",
+          "title": "Kedah"
+        },
+        {
+          "const": "Kelantan",
+          "title": "Kelantan"
+        },
+        {
+          "const": "Melaka",
+          "title": "Melaka"
+        },
+        {
+          "const": "Negeri Sembilan",
+          "title": "Negeri Sembilan"
+        },
+        {
+          "const": "Pahang",
+          "title": "Pahang"
+        },
+        {
+          "const": "Perak",
+          "title": "Perak"
+        },
+        {
+          "const": "Perlis",
+          "title": "Perlis"
+        },
+        {
+          "const": "Pulau Pinang",
+          "title": "Pulau Pinang"
+        },
+        {
+          "const": "Sabah",
+          "title": "Sabah"
+        },
+        {
+          "const": "Sarawak",
+          "title": "Sarawak"
+        },
+        {
+          "const": "Selangor",
+          "title": "Selangor"
+        },
+        {
+          "const": "Terengganu",
+          "title": "Terengganu"
+        },
+        {
+          "const": "Wilayah Persekutuan Kuala Lumpur",
+          "title": "Wilayah Persekutuan Kuala Lumpur"
+        },
+        {
+          "const": "Wilayah Persekutuan Labuan",
+          "title": "Wilayah Persekutuan Labuan"
+        },
+        {
+          "const": "Wilayah Persekutuan Putrajaya",
+          "title": "Wilayah Persekutuan Putrajaya"
+        }
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "Zürich",
+          "title": "Zürich"
+        },
+        {
+          "const": "Bern; Berne",
+          "title": "Bern; Berne"
+        },
+        {
+          "const": "Luzern",
+          "title": "Luzern"
+        },
+        {
+          "const": "Uri",
+          "title": "Uri"
+        },
+        {
+          "const": "Schwyz",
+          "title": "Schwyz"
+        },
+        {
+          "const": "Obwalden",
+          "title": "Obwalden"
+        },
+        {
+          "const": "Nidwalden",
+          "title": "Nidwalden"
+        },
+        {
+          "const": "Glarus",
+          "title": "Glarus"
+        },
+        {
+          "const": "Zug",
+          "title": "Zug"
+        },
+        {
+          "const": "Fribourg; Freiburg",
+          "title": "Fribourg; Freiburg"
+        },
+        {
+          "const": "Solothurn",
+          "title": "Solothurn"
+        },
+        {
+          "const": "Basel-Stadt",
+          "title": "Basel-Stadt"
+        },
+        {
+          "const": "Basel-Landschaft",
+          "title": "Basel-Landschaft"
+        },
+        {
+          "const": "Schaffhausen",
+          "title": "Schaffhausen"
+        },
+        {
+          "const": "Appenzell Ausserrhoden",
+          "title": "Appenzell Ausserrhoden"
+        },
+        {
+          "const": "Appenzell Innerrhoden",
+          "title": "Appenzell Innerrhoden"
+        },
+        {
+          "const": "St. Gallen",
+          "title": "St. Gallen"
+        },
+        {
+          "const": "Graubünden; Grischun; Grigioni",
+          "title": "Graubünden; Grischun; Grigioni"
+        },
+        {
+          "const": "Aargau",
+          "title": "Aargau"
+        },
+        {
+          "const": "Thurgau",
+          "title": "Thurgau"
+        },
+        {
+          "const": "Ticino",
+          "title": "Ticino"
+        },
+        {
+          "const": "Vaud",
+          "title": "Vaud"
+        },
+        {
+          "const": "Valais; Wallis",
+          "title": "Valais; Wallis"
+        },
+        {
+          "const": "Neuchâtel",
+          "title": "Neuchâtel"
+        },
+        {
+          "const": "Genève",
+          "title": "Genève"
+        },
+        {
+          "const": "Jura",
+          "title": "Jura"
+        }
+      ],
+      "title": "Canton",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

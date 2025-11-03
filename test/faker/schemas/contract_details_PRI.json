@@ -1,0 +1,2185 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "third_party_work_activities": false
+        }
+      },
+      "if": {
+        "properties": {
+          "third_party_work": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "third_party_work"
+        ]
+      },
+      "then": {
+        "properties": {
+          "third_party_work_activities": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "third_party_work_activities"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause_apply",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_clause_halt_period_months": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "non_compete_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_solicitation_employees_number_of_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_solicitation_employees": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_solicitation_employees",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_solicitation_employees_number_of_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_solicitation_customer_number_of_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_solicitation_customers": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_solicitation_customers",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_solicitation_customer_number_of_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_interference_halt_period": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_interference_apply": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_interference_apply",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_interference_halt_period"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false,
+          "signing_bonus_clawback": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": "integer"
+          },
+          "signing_bonus_clawback": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "signing_bonus_amount",
+          "signing_bonus_clawback"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_apply": false,
+          "non_interference_apply": false,
+          "non_solicitation_customers": false,
+          "non_solicitation_employees": false
+        }
+      },
+      "if": {
+        "properties": {
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "type": [
+              "string"
+            ]
+          },
+          "non_interference_apply": {
+            "type": [
+              "string"
+            ]
+          },
+          "non_solicitation_customers": {
+            "type": [
+              "string"
+            ]
+          },
+          "non_solicitation_employees": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "non_compete_clause_apply",
+          "non_interference_apply",
+          "non_solicitation_customers",
+          "non_solicitation_employees"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "description": "Employees who work 32 hours or more a week are considered full-time. Those who work under 32 hours a week are considered part-time.",
+            "maximum": 40,
+            "minimum": 32
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "description": "Employees who work 32 hours or more a week are considered full-time. Those who work under 32 hours a week are considered part-time.",
+            "maximum": 31,
+            "minimum": 1
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "title": "Number of paid time off days"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 0,
+            "default": 0,
+            "x-jsf-presentation": {
+              "inputType": "hidden"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "employee_exemption": {
+            "const": "exempt"
+          },
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "employee_exemption",
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "In Puerto Rico, the maximum probation period is 12 months.",
+            "maximum": 12
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "employee_exemption": {
+            "const": "non_exempt"
+          },
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "employee_exemption",
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "In Puerto Rico, the maximum probation period is 9 months.",
+            "maximum": 9
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "employee_exemption": {
+            "const": "non_exempt"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "employee_exemption",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "description": "Employees who work 32 hours or more a week are considered full-time. Those who work under 32 hours a week are considered part-time.",
+            "maximum": 280
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_probation_period": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "christmas_bonus_ack": {
+      "const": "acknowledged",
+      "title": "I acknowledge that per local employment law, if an employee works more than 700 hours from October 1 of one year to September 30 of the next year, the employer must pay the employee a Christmas bonus. The Christmas bonus would be 3% of the employee’s salary during this period, up to a maximum of 300 USD.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "non_compete_clause_apply": {
+      "description": "This discourages the employee from entering or starting a similar company in competition against your company.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-compete clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_customers": {
+      "description": "This would restrict the employee from seeking business from your company’s customers on behalf of a competing business.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-solicitation of customers clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "post_termination_restrictions": {
+      "description": "We crafted the post-termination restrictions with local counsel to provide the best language possible. However, they likely cannot be enforced. They can only be added as deterrents.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you want to apply any post-termination restrictions (non-compete, non-solicit)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20956976821901,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "description": "Fixed-term agreements must be less than 5 years.",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Employees who work 32 hours or more a week are considered full-time. Those who work under 32 hours a week are considered part-time.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 22559139199629,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "third_party_work_activities": {
+      "description": "Provide as many details about the approved activities as you can. We’ll include them in the employment agreement.",
+      "maxLength": 10000,
+      "title": "Approved third-party work",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_equipment_provided_by": {
+      "oneOf": [
+        {
+          "const": "provided_by_client",
+          "title": "The client provides the equipment"
+        },
+        {
+          "const": "provided_by_employee",
+          "title": "The employee provides the equipment"
+        }
+      ],
+      "title": "Who will provide the employee's work equipment?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "sick_leave_ack": {
+      "const": "acknowledged",
+      "title": "I acknowledge that the employee will accrue 1 sick leave day for every month where they work at least 130 hours.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "non_interference_halt_period": {
+      "description": "The non-interference clause can last between 1 and 12 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Non-interference clause duration, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "minimum": 2366000,
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "minimum": "In Puerto Rico, full-time employees are entitled to a minimum annual salary of $23,660.00.",
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "inputType": "money"
+      }
+    },
+    "third_party_work": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Can the employee work for third parties or do business on their own while employed by your company?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_interference_apply": {
+      "description": "This prevents the employee from interfering with your company’s business and customer relationships after they leave your company.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-interference clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "contract_duration_type": {
+      "description": "In Puerto Rico, a fixed-term contract cannot exceed 3 years in its initial term or in total including renewals.",
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto": {
+      "description": "Please do not include public holidays in the number you enter. In Puerto Rico, there is no maximum limit on paid time off days, but several factors determine minimum limits.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 22564649788941,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "probation_length": {
+      "description": "In Puerto Rico, the maximum probation period is 12 months.",
+      "minimum": 1,
+      "title": "Probation period, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "non_solicitation_employees_number_of_months": {
+      "description": "Non-solicits can last between 1 and 12 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Non-solicitation of employees clause duration, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_probation_period": {
+      "description": "We recommend selecting Yes. In the unfortunate event of a necessary termination, probation periods make the process much easier.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Include a probation period?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "description": "In United States Dollar (USD).",
+      "minimum": 1,
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "inputType": "money"
+      }
+    },
+    "signing_bonus_clawback": {
+      "description": "If you apply this clause, the employee will be able to keep their signing bonus only if they work a full year at your company and neither your company nor the employee gives notice to end their employment during the year. Otherwise, the employee will have to repay the signing bonus within 20 days of termination.",
+      "oneOf": [
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        },
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a signing bonus clawback?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_employees": {
+      "description": "This would restrict the employee from enticing or hiring your company’s employees for a competing business.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-solicitation of employees clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_customer_number_of_months": {
+      "description": "Non-solicits can last between 1 and 12 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Non-solicitation of customers clause duration, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "employee_exemption": {
+      "description": "An exempt employee:\n<ul>\n<li>Earns over 23,659.22 USD annually</li>\n<li>Performs administrative, executive, or professional functions</li>\n<li>Performs tasks that are not manual or repetitive</li>\n</ul>\nA non-exempt employee is paid hourly and usually performs manual labor.",
+      "maxLength": 255,
+      "oneOf": [
+        {
+          "const": "exempt",
+          "title": "Exempt"
+        },
+        {
+          "const": "non_exempt",
+          "title": "Non-exempt"
+        }
+      ],
+      "title": "Is this employee exempt or non-exempt?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "additional_holiday_days": {
+      "description": "This can include things like self-care days or paid time off for birthdays.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Offer additional paid time off?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "other_work_locations": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the employee required to work in or travel to other locations?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "Non-competes can last between 1 and 12 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Non-compete clause duration, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "dd90fc51-8f76-40e4-ac0e-8123b7c8190d",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "884b8b67-21f9-47e1-8530-9daa8b0a1ef5",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "dd90fc51-8f76-40e4-ac0e-8123b7c8190d",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "09e47770-5f91-403a-8e18-33aebf7a246d",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "dd90fc51-8f76-40e4-ac0e-8123b7c8190d",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "9802735e-4dc4-4da2-a6d1-62fa5af898c2",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "dd90fc51-8f76-40e4-ac0e-8123b7c8190d",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "3af02997-d938-4a64-9fe1-2c11e3d1d0ae",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "dd90fc51-8f76-40e4-ac0e-8123b7c8190d",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "33d96dfc-5cf3-4243-b86c-7a21568de949",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+              "title": "Allianz Standard (Employee Only) - $123.17 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. No dental or vision coverage. Includes basic maternity benefits up to $6K USD and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-standard",
+                  "displayCost": "$123.17 USD/mo",
+                  "id": "eead891b-3f5e-4632-965a-81b4f43f2d2f",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Employee Only)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+              "title": "Allianz Standard (Family) - $184.75 - $369.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. No dental or vision coverage. Includes basic maternity benefits up to $6K USD, pediatric care, and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-standard",
+                  "displayCost": "$184.75 - $369.50 USD/mo",
+                  "id": "907be37d-4698-4d11-9f4f-55b31e1d9391",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Employee Only) (Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only); Allianz - Premium Medical (Employee Only))",
+              "title": "Allianz Premium (Employee Only) - $157.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more outpatient mental health and therapy support.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-premium",
+                  "displayCost": "$157.08 USD/mo",
+                  "id": "75990fc2-68d2-4ed9-8eb6-f5c921502f64",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Family) (Allianz - Premium Vision (Family); Allianz - Premium Dental (Family); Allianz - Premium Medical (Family))",
+              "title": "Allianz Premium (Family) - $235.63 - $471.25 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with higher mental health limits, pediatric coverage, and prescribed therapy sessions.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-premium",
+                  "displayCost": "$235.63 - $471.25 USD/mo",
+                  "id": "aec67d1b-d8bd-465a-9f67-3c22100def58",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Employee Only) (Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only); Allianz - Gold Medical (Employee Only))",
+              "title": "Allianz Gold (Employee Only) - $186.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, plus expanded mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzgoldplan-employeeonly",
+                  "displayCost": "$186.83 USD/mo",
+                  "id": "fd3a461c-6a9b-4041-9f21-03884bed6ee1",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Family) (Allianz - Gold Vision (Family); Allianz - Gold Dental (Family); Allianz - Gold Medical (Family))",
+              "title": "Allianz Gold (Family) - $280.25 - $560.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more therapy sessions, extended pediatric care, and broader outpatient benefits.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-gold",
+                  "displayCost": "$280.25 - $560.50 USD/mo",
+                  "id": "91571f88-0885-49b2-9f42-4413b2928f67",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Employee Only) (Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only); Allianz - Platinum Medical (Employee Only))",
+              "title": "Allianz Platinum (Employee Only) - $206.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD for employee only. Includes dental coverage up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with the most extensive mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzplatinumplan-employeeonly",
+                  "displayCost": "$206.50 USD/mo",
+                  "id": "992db032-d271-403f-a9dd-b6df4c6c2187",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Family) (Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family); Allianz - Platinum Medical (Family))",
+              "title": "Allianz Platinum (Family) - $309.75 - $619.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD. Includes dental up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with comprehensive pediatric care, full mental health support, and maximum therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "4fd17db3-4e9a-4ad4-952b-0227b7c5f1d0",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-platinum",
+                  "displayCost": "$309.75 - $619.50 USD/mo",
+                  "id": "eaddde4a-fd45-481a-9355-1deedff9d77a",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health",
+                    "dental",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Allianz Platinum (Employee Only) (Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only); Allianz - Platinum Medical (Employee Only))",
+                    "Allianz Gold (Employee Only) (Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only); Allianz - Gold Medical (Employee Only))",
+                    "Allianz Premium (Employee Only) (Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only); Allianz - Premium Medical (Employee Only))",
+                    "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Allianz Platinum (Family) (Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family); Allianz - Platinum Medical (Family))",
+                    "Allianz Gold (Family) (Allianz - Gold Vision (Family); Allianz - Gold Dental (Family); Allianz - Gold Medical (Family))",
+                    "Allianz Premium (Family) (Allianz - Premium Vision (Family); Allianz - Premium Dental (Family); Allianz - Premium Medical (Family))",
+                    "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "life_insurance": {
+          "oneOf": [
+            {
+              "const": "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+              "title": "Life Insurance - $50K - 5.64 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $50,000. This means that regardless of an employee's salary, the payout will not exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-plan-50k",
+                  "displayCost": "5.64 USD/mo",
+                  "id": "1346b047-22d9-4daf-8a66-bf52399c4a45",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $50K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+              "title": "Life Insurance - $100K - 11.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $100,000. This means that regardless of an employee's salary, the payout will not exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-100k",
+                  "displayCost": "11.28 USD/mo",
+                  "id": "1100eebe-a825-46db-a517-287ff74bc689",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $100K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+              "title": "Life Insurance - $200K - 22.56 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $200,000. This means that regardless of an employee's salary, the payout will not exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-200k",
+                  "displayCost": "22.56 USD/mo",
+                  "id": "789333b1-31b5-4b9a-8a7c-84990b1ce6dc",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $200K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+              "title": "Life Insurance - $400K - 45.12 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $400,000. This means that regardless of an employee's salary, the payout will not exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-400k",
+                  "displayCost": "45.12 USD/mo",
+                  "id": "f65551ba-734e-4b6d-9b79-20cc61246e1c",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $400K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+              "title": "Life Insurance - $500K - 56.40 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $500,000. This means that regardless of an employee's salary, the payout will not exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-500k",
+                  "displayCost": "56.40 USD/mo",
+                  "id": "fd04dc74-b198-40e6-8596-1a89f1e0acdb",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $500K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+              "title": "Life Insurance - $600K - 67.68 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $600,000. This means that regardless of an employee's salary, the payout will not exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-600k",
+                  "displayCost": "67.68 USD/mo",
+                  "id": "1dc86c8d-e916-4ded-bc5d-0386496912e1",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $600K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - Life 50k; Allianz Life - Global Life - PD 50k)",
+              "title": "Life, Accidental Death & Permanent Disability - $50k - 12.04 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $50,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $50,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-50k",
+                  "displayCost": "12.04 USD/mo",
+                  "id": "6e7bdb7e-ebbe-4a75-b141-11dff3228542",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $50k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - PD 100k; Allianz Life - Global Life - AD&D 100k)",
+              "title": "Life, Accidental Death & Permanent Disability - $100k - 24.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $100,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $100,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-100k",
+                  "displayCost": "24.08 USD/mo",
+                  "id": "9df3e6b5-11eb-4db1-acd3-d358ffecf248",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $100k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - PD 200k; Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - AD&D 200k)",
+              "title": "Life, Accidental Death & Permanent Disability - $200k - 48.14 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $200,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $200,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-200k",
+                  "displayCost": "48.14 USD/mo",
+                  "id": "f3a885a1-bf4d-47e8-8e85-9ae53a6824a2",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $200k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - Life 400k; Allianz Life - Global Life - AD&D 400k; Allianz Life - Global Life - PD 400k)",
+              "title": "Life, Accidental Death & Permanent Disability - $400k - 96.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $400,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $400,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-400k",
+                  "displayCost": "96.28 USD/mo",
+                  "id": "30dd3ee6-f583-4366-91fc-dc9b70acb797",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $400k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - PD 500k; Allianz Life - Global Life - Life 500k; Allianz Life - Global Life - AD&D 500k)",
+              "title": "Life, Accidental Death & Permanent Disability - $500k - 120.36 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $500,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $500,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-500k",
+                  "displayCost": "120.36 USD/mo",
+                  "id": "1d03891c-7d59-4346-8475-5ef9a43521d8",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $500k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - Life 600k; Allianz Life - Global Life - AD&D 600k; Allianz Life - Global Life - PD 600k)",
+              "title": "Life, Accidental Death & Permanent Disability - $600k - 144.43 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $600,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $600,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "9b123cc4-a85a-470b-8de4-2903297287c7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-600k",
+                  "displayCost": "144.43 USD/mo",
+                  "id": "6bad0f59-44e8-4304-9eeb-deaf13c912b2",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $600k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "life",
+                    "ad&d",
+                    "disability"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Life Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "basic",
+                  "label": "Basic",
+                  "optionValues": [
+                    "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+                    "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+                    "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+                    "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+                    "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+                    "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "comprehensive",
+                  "label": "Comprehensive",
+                  "optionValues": [
+                    "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - Life 600k; Allianz Life - Global Life - AD&D 600k; Allianz Life - Global Life - PD 600k)",
+                    "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - PD 500k; Allianz Life - Global Life - Life 500k; Allianz Life - Global Life - AD&D 500k)",
+                    "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - Life 400k; Allianz Life - Global Life - AD&D 400k; Allianz Life - Global Life - PD 400k)",
+                    "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - PD 200k; Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - AD&D 200k)",
+                    "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - PD 100k; Allianz Life - Global Life - AD&D 100k)",
+                    "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - Life 50k; Allianz Life - Global Life - PD 50k)",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "2109915b-35e8-497a-b48c-52ac05911b01",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "806a75ba-0473-45e1-9b5b-5ad4c09ed68a",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "2109915b-35e8-497a-b48c-52ac05911b01",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "d50b4c33-7dc3-4eea-84f3-a019166ce62d",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "2109915b-35e8-497a-b48c-52ac05911b01",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "872b90ee-3d75-4416-a247-7d7df87542a4",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "2109915b-35e8-497a-b48c-52ac05911b01",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "4469aa3e-0179-40b6-8e5e-637b66c859b1",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "2109915b-35e8-497a-b48c-52ac05911b01",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "c50a6bcb-a9b8-44b1-87fe-8b7c406d21a1",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance",
+        "life_insurance",
+        "health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "life_insurance",
+        "health_insurance",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In this section, you can select benefits for your new team member. If you have existing team members in the same country, your new hire will receive the same benefits as those currently provided to other team members there, maintaining benefit equality. If this is your first hire in the country, you may select from the available options below. Your choice will become the standard benefits for any future hires in the country.",
+        "extra": "Prices are listed in U.S. Dollars (USD). However, when benefits are originally priced in local currencies, these amounts are estimates in USD. The final charge in local currency will be determined using the exchange rate at the time of invoicing. The pricing listed is subject to change based on the age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance.",
+        "inputType": "fieldset"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "description": "Works between 32 and 40 hours per week.",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "description": "Works 31 hours or less per week.",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "available_pto",
+    "available_pto_type",
+    "christmas_bonus_ack",
+    "contract_duration_type",
+    "employee_exemption",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_probation_period",
+    "has_signing_bonus",
+    "other_work_locations",
+    "post_termination_restrictions",
+    "role_description",
+    "sick_leave_ack",
+    "third_party_work",
+    "work_address_is_home_address",
+    "work_equipment_provided_by",
+    "work_hours_per_week",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "employee_exemption",
+    "work_hours_per_week",
+    "has_probation_period",
+    "probation_length",
+    "available_pto_type",
+    "available_pto",
+    "additional_holiday_days",
+    "sick_leave_ack",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "other_work_locations",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "christmas_bonus_ack",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "signing_bonus_clawback",
+    "has_bonus",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "post_termination_restrictions",
+    "non_compete_clause_apply",
+    "non_compete_clause_halt_period_months",
+    "non_solicitation_customers",
+    "non_solicitation_customer_number_of_months",
+    "non_solicitation_employees",
+    "non_solicitation_employees_number_of_months",
+    "non_interference_apply",
+    "non_interference_halt_period",
+    "work_equipment_provided_by",
+    "third_party_work",
+    "third_party_work_activities",
+    "benefits"
+  ],
+  "x-jsf-presentation": {
+    "inputType": "fieldset"
+  }
+}

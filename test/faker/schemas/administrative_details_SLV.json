@@ -1,0 +1,257 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "citizenship": {
+            "const": "non_citizen"
+          }
+        },
+        "required": [
+          "citizenship"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id_number": {
+            "title": "Passport number"
+          }
+        },
+        "required": [
+          "tax_number"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "citizenship": {
+            "const": "citizen"
+          }
+        },
+        "required": [
+          "citizenship"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id_number": {
+            "title": "Documento Único de Identidad number (DUI)"
+          },
+          "tax_number": false
+        }
+      }
+    }
+  ],
+  "properties": {
+    "citizenship": {
+      "enum": [
+        "citizen",
+        "non_citizen"
+      ],
+      "oneOf": [
+        {
+          "const": "citizen",
+          "title": "Citizen"
+        },
+        {
+          "const": "non_citizen",
+          "title": "Non-Citizen"
+        }
+      ],
+      "title": "Citizenship",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "dependent_details": {
+      "items": {
+        "properties": {
+          "full_name": {
+            "maxLength": 255,
+            "title": "Full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name"
+        ]
+      },
+      "title": "Do you have any dependents?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "id_number": {
+      "maxLength": 255,
+      "title": "ID or passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "maternal_surname": {
+      "maxLength": 255,
+      "title": "Maternal surname",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "paternal_surname": {
+      "maxLength": 255,
+      "title": "Paternal surname",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "pension_certificate_afp": {
+      "description": "This number appears on your AFP card. This is linked to your pension",
+      "maxLength": 255,
+      "title": "AFP/NUP number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "ssn": {
+      "maxLength": 255,
+      "title": "Social Security Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax identification number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "citizenship",
+    "id_number",
+    "marital_status",
+    "ssn",
+    "pension_certificate_afp",
+    "maternal_surname"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "citizenship",
+    "id_number",
+    "marital_status",
+    "tax_number",
+    "ssn",
+    "pension_certificate_afp",
+    "paternal_surname",
+    "maternal_surname",
+    "dependent_details",
+    "prior_inventions"
+  ]
+}

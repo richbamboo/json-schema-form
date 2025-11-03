@@ -26,12 +26,20 @@ Test structure for JSON Schema Faker implementation.
 ## Running Tests
 
 ```bash
-# All faker tests
-pnpm test test/faker
+# Fast tests only (default, ~2s)
+pnpm test
+
+# Slow tests only (all schemas, ~10-30s)
+pnpm test:slow
+
+# All tests (fast + slow)
+pnpm test:all
 
 # Watch mode
-pnpm test:watch test/faker
+pnpm test:watch
 
 # Specific test file
 pnpm test test/faker/rand.test.ts
 ```
+
+**Note**: Slow tests (`*.slow.test.ts`) validate all real-world schemas in `test/faker/schemas/`. They're excluded from default runs but useful before releases.

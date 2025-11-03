@@ -1,0 +1,193 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select your state",
+      "oneOf": [
+        {
+          "const": "Aguascalientes",
+          "title": "Aguascalientes"
+        },
+        {
+          "const": "Baja California",
+          "title": "Baja California"
+        },
+        {
+          "const": "Baja California Sur",
+          "title": "Baja California Sur"
+        },
+        {
+          "const": "Campeche",
+          "title": "Campeche"
+        },
+        {
+          "const": "Chiapas",
+          "title": "Chiapas"
+        },
+        {
+          "const": "Mexico City",
+          "title": "Mexico City"
+        },
+        {
+          "const": "Chihuahua",
+          "title": "Chihuahua"
+        },
+        {
+          "const": "Coahuila",
+          "title": "Coahuila"
+        },
+        {
+          "const": "Colima",
+          "title": "Colima"
+        },
+        {
+          "const": "Durango",
+          "title": "Durango"
+        },
+        {
+          "const": "Guanajuato",
+          "title": "Guanajuato"
+        },
+        {
+          "const": "Guerrero",
+          "title": "Guerrero"
+        },
+        {
+          "const": "Hidalgo",
+          "title": "Hidalgo"
+        },
+        {
+          "const": "Jalisco",
+          "title": "Jalisco"
+        },
+        {
+          "const": "México",
+          "title": "México"
+        },
+        {
+          "const": "Michoacán",
+          "title": "Michoacán"
+        },
+        {
+          "const": "Morelos",
+          "title": "Morelos"
+        },
+        {
+          "const": "Nayarit",
+          "title": "Nayarit"
+        },
+        {
+          "const": "Nuevo León",
+          "title": "Nuevo León"
+        },
+        {
+          "const": "Oaxaca",
+          "title": "Oaxaca"
+        },
+        {
+          "const": "Puebla",
+          "title": "Puebla"
+        },
+        {
+          "const": "Querétaro",
+          "title": "Querétaro"
+        },
+        {
+          "const": "Quintana Roo",
+          "title": "Quintana Roo"
+        },
+        {
+          "const": "San Luis Potosí",
+          "title": "San Luis Potosí"
+        },
+        {
+          "const": "Sinaloa",
+          "title": "Sinaloa"
+        },
+        {
+          "const": "Sonora",
+          "title": "Sonora"
+        },
+        {
+          "const": "Tabasco",
+          "title": "Tabasco"
+        },
+        {
+          "const": "Tamaulipas",
+          "title": "Tamaulipas"
+        },
+        {
+          "const": "Tlaxcala",
+          "title": "Tlaxcala"
+        },
+        {
+          "const": "Veracruz",
+          "title": "Veracruz"
+        },
+        {
+          "const": "Yucatán",
+          "title": "Yucatán"
+        },
+        {
+          "const": "Zacatecas",
+          "title": "Zacatecas"
+        }
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "Province of Punjab - Lahore",
+          "title": "Province of Punjab - Lahore"
+        },
+        {
+          "const": "Province of Sindh - Karachi",
+          "title": "Province of Sindh - Karachi"
+        },
+        {
+          "const": "Province of Balochistan - Quetta",
+          "title": "Province of Balochistan - Quetta"
+        },
+        {
+          "const": "Province of Khyber-Pakhtunkhwa - Peshawar",
+          "title": "Province of Khyber-Pakhtunkhwa - Peshawar"
+        },
+        {
+          "const": "The Islamabad Capital Territory - Islamabad",
+          "title": "The Islamabad Capital Territory - Islamabad"
+        },
+        {
+          "const": "The State of Azad Jammu & Kashmir - Muzzafarabad",
+          "title": "The State of Azad Jammu & Kashmir - Muzzafarabad"
+        },
+        {
+          "const": "The State of Gilgit-Baltistan - Gilgit",
+          "title": "The State of Gilgit-Baltistan - Gilgit"
+        }
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

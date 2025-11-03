@@ -1,0 +1,379 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "avs_oasi_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_avs_oasi_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_avs_oasi_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "avs_oasi_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "is_spouse_working": false,
+          "marriage_date": false,
+          "spouse_birthdate": false,
+          "spouse_full_name": false,
+          "spouse_nationality": false,
+          "spouse_work_place": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "const": "married"
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "else": {
+          "properties": {
+            "spouse_work_place": false
+          }
+        },
+        "if": {
+          "properties": {
+            "is_spouse_working": {
+              "const": "yes"
+            }
+          },
+          "required": [
+            "is_spouse_working"
+          ]
+        },
+        "required": [
+          "marriage_date",
+          "spouse_birthdate",
+          "spouse_full_name",
+          "spouse_nationality",
+          "is_spouse_working"
+        ],
+        "then": {
+          "required": [
+            "spouse_work_place"
+          ]
+        }
+      }
+    }
+  ],
+  "properties": {
+    "avs_oasi_number": {
+      "maxLength": 13,
+      "minLength": 13,
+      "pattern": "^[0-9]{13}$",
+      "title": "Enter your AVS, OASI, AHV number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "dependent_details": {
+      "description": "Do you want to add dependents you claim for taxes and/or benefits?",
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Child Birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Child Full Name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "sex": {
+            "description": "We know sex is non-binary but for insurance and payroll purposes, we need to ask for this information.",
+            "enum": [
+              "female",
+              "male"
+            ],
+            "title": "Child Sex",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "radio",
+              "options": [
+                {
+                  "label": "Female",
+                  "value": "female"
+                },
+                {
+                  "label": "Male",
+                  "value": "male"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "birthdate",
+          "sex"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "birthdate",
+          "sex"
+        ]
+      },
+      "title": "Child details",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "father_full_name": {
+      "maxLength": 255,
+      "title": "Father's full name",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_avs_oasi_number": {
+      "description": "In French, AVS is Assurance-vieillesse et survivants. In English, OASI is Old Age and Survivors Insurance. In German, AHV is Alters-und Hinterlassenenversicherung.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have an active AVS, AVH, or OASI number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID/Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_spouse_working": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is your spouse working?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "is_tax_at_source": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the tax at source?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "marital_status": {
+      "description": "We will use the details to calculate your taxes. Tax brackets depend also on the salary and employment status of your the partner.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marriage_date": {
+      "description": "Enter your marriage date",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Marriage date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "mother_full_name": {
+      "maxLength": 255,
+      "title": "Mother's full name",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "spouse_birthdate": {
+      "description": "Enter your spouse’s date of birth",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Spouse Birthdate",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "spouse_full_name": {
+      "description": "Enter your spouse’s full name",
+      "maxLength": 255,
+      "title": "Spouse’s full name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "spouse_nationality": {
+      "description": "Where is your spouse a legal citizen?",
+      "maxLength": 255,
+      "title": "Spouse Nationality",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "spouse_work_place": {
+      "description": "Where is your spouse working?",
+      "maxLength": 255,
+      "title": "Spouse work place",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_permit_type": {
+      "description": "Select your work permit type from the dropdown",
+      "oneOf": [
+        {
+          "const": "L",
+          "title": "L"
+        },
+        {
+          "const": "G",
+          "title": "G"
+        },
+        {
+          "const": "C",
+          "title": "C"
+        },
+        {
+          "const": "B",
+          "title": "B"
+        },
+        {
+          "const": "NA",
+          "title": "Not applicable"
+        }
+      ],
+      "title": "Work permit type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "has_avs_oasi_number",
+    "marital_status",
+    "is_tax_at_source",
+    "work_permit_type",
+    "id_number"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "has_avs_oasi_number",
+    "avs_oasi_number",
+    "id_number",
+    "is_tax_at_source",
+    "mother_full_name",
+    "father_full_name",
+    "work_permit_type",
+    "marital_status",
+    "marriage_date",
+    "spouse_full_name",
+    "spouse_birthdate",
+    "spouse_nationality",
+    "is_spouse_working",
+    "spouse_work_place",
+    "dependent_details"
+  ]
+}

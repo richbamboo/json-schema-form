@@ -1,0 +1,1320 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "family_insurance_details": {
+            "properties": {
+              "has_spouse_health_insurance": false
+            }
+          },
+          "partner_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "enum": [
+              "married",
+              "civil_partnership"
+            ]
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "family_insurance_details": {
+            "required": [
+              "has_spouse_health_insurance"
+            ]
+          }
+        },
+        "required": [
+          "partner_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "children": false,
+          "deduct_insurance_from_salary": false,
+          "has_child_health_insurance": false,
+          "has_spouse_health_insurance": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_insurance": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_insurance"
+        ]
+      },
+      "then": {
+        "required": [
+          "deduct_insurance_from_salary",
+          "has_spouse_health_insurance",
+          "has_child_health_insurance"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "children": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_child_health_insurance": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_child_health_insurance"
+        ]
+      },
+      "then": {
+        "required": [
+          "children"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "children": {
+      "description": "You can add multiple children if you have more than one linked to your health insurance.",
+      "items": {
+        "properties": {
+          "full_name": {
+            "maxLength": 255,
+            "title": "Child's full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name"
+        ]
+      },
+      "title": "Add child's full name",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add child",
+        "inputType": "group-array"
+      }
+    },
+    "deduct_insurance_from_salary": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you want to automatically deduct the amount you pay for voluntary insurance from your salary?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "degree_details": {
+      "properties": {
+        "education_type": {
+          "description": "This is the general area of the employee's expertise. For example, software engineering, finance, or product design.",
+          "maxLength": 255,
+          "title": "Field of education (Zanimanje stečeno školovanjem)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "graduation_date": {
+          "format": "date",
+          "title": "Date of graduation",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "institute_name": {
+          "maxLength": 255,
+          "title": "Name of the institute",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "title": {
+          "description": "Select your education level according to the National Qualifications Framework of Serbia (NQFS).",
+          "maxLength": 255,
+          "oneOf": [
+            {
+              "const": "Level 8",
+              "title": "Level 8"
+            },
+            {
+              "const": "Level 7.2",
+              "title": "Level 7.2"
+            },
+            {
+              "const": "Level 7.1",
+              "title": "Level 7.1"
+            },
+            {
+              "const": "Level 6.2",
+              "title": "Level 6.2"
+            },
+            {
+              "const": "Level 6.1",
+              "title": "Level 6.1"
+            },
+            {
+              "const": "Level 5",
+              "title": "Level 5"
+            },
+            {
+              "const": "Level 4",
+              "title": "Level 4"
+            },
+            {
+              "const": "Level 3",
+              "title": "Level 3"
+            },
+            {
+              "const": "Level 2",
+              "title": "Level 2"
+            },
+            {
+              "const": "Level 1",
+              "title": "Level 1"
+            }
+          ],
+          "title": "Highest level of education (Kvalifikacija)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        }
+      },
+      "required": [
+        "institute_name",
+        "title",
+        "graduation_date",
+        "education_type"
+      ],
+      "title": "Highest level of education",
+      "type": "object",
+      "x-jsf-order": [
+        "institute_name",
+        "title",
+        "graduation_date",
+        "education_type"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "has_child_health_insurance": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is your child's health insurance linked to yours?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_insurance": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have voluntary pension or health insurance?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_spouse_health_insurance": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is your spouse's health insurance linked to yours?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID number (Matični broj)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "municipality_residence_id": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "001",
+          "title": "001 Aleksandrovac"
+        },
+        {
+          "const": "002",
+          "title": "002 Aleksinac"
+        },
+        {
+          "const": "003",
+          "title": "003 Arandjelovac"
+        },
+        {
+          "const": "004",
+          "title": "004 Arilje"
+        },
+        {
+          "const": "006",
+          "title": "006 Babusnica"
+        },
+        {
+          "const": "007",
+          "title": "007 Bajina Basta"
+        },
+        {
+          "const": "008",
+          "title": "008 Batocina"
+        },
+        {
+          "const": "009",
+          "title": "009 Bela Palanka"
+        },
+        {
+          "const": "010",
+          "title": "010 Barajevo"
+        },
+        {
+          "const": "011",
+          "title": "011 Cukarica"
+        },
+        {
+          "const": "012",
+          "title": "012 Grocka"
+        },
+        {
+          "const": "013",
+          "title": "013 Novi Beograd"
+        },
+        {
+          "const": "014",
+          "title": "014 Obrenovac"
+        },
+        {
+          "const": "015",
+          "title": "015 Palilula"
+        },
+        {
+          "const": "016",
+          "title": "016 Savski venac"
+        },
+        {
+          "const": "017",
+          "title": "017 Sopot"
+        },
+        {
+          "const": "018",
+          "title": "018 Stari grad"
+        },
+        {
+          "const": "019",
+          "title": "019 Vozdovac"
+        },
+        {
+          "const": "020",
+          "title": "020 Vracar"
+        },
+        {
+          "const": "021",
+          "title": "021 Zemun"
+        },
+        {
+          "const": "022",
+          "title": "022 Zvezdara"
+        },
+        {
+          "const": "023",
+          "title": "023 Blace"
+        },
+        {
+          "const": "024",
+          "title": "024 Bogatic"
+        },
+        {
+          "const": "025",
+          "title": "025 Bojnik"
+        },
+        {
+          "const": "026",
+          "title": "026 Boljevac"
+        },
+        {
+          "const": "027",
+          "title": "027 Bor"
+        },
+        {
+          "const": "028",
+          "title": "028 Bosilegrad"
+        },
+        {
+          "const": "029",
+          "title": "029 Brus"
+        },
+        {
+          "const": "030",
+          "title": "030 Bujanovac"
+        },
+        {
+          "const": "031",
+          "title": "031 Crna Trava"
+        },
+        {
+          "const": "032",
+          "title": "032 Ćićevac"
+        },
+        {
+          "const": "033",
+          "title": "033 Cuprija"
+        },
+        {
+          "const": "034",
+          "title": "034 Cacak"
+        },
+        {
+          "const": "035",
+          "title": "035 Cajetina"
+        },
+        {
+          "const": "036",
+          "title": "036 Despotovac"
+        },
+        {
+          "const": "037",
+          "title": "037 Dimitrovgrad"
+        },
+        {
+          "const": "038",
+          "title": "038 Doljevac"
+        },
+        {
+          "const": "039",
+          "title": "039 Gadzin Han"
+        },
+        {
+          "const": "040",
+          "title": "040 Golubac"
+        },
+        {
+          "const": "041",
+          "title": "041 Gornji Milanovac"
+        },
+        {
+          "const": "042",
+          "title": "042 Ivanjica"
+        },
+        {
+          "const": "043",
+          "title": "043 Kladovo"
+        },
+        {
+          "const": "044",
+          "title": "044 Knic"
+        },
+        {
+          "const": "045",
+          "title": "045 Knjazevac"
+        },
+        {
+          "const": "046",
+          "title": "046 Koceljeva"
+        },
+        {
+          "const": "048",
+          "title": "048 Kosjeric"
+        },
+        {
+          "const": "049",
+          "title": "049 Kragujevac"
+        },
+        {
+          "const": "050",
+          "title": "050 Kraljevo"
+        },
+        {
+          "const": "051",
+          "title": "051 Krupanj"
+        },
+        {
+          "const": "052",
+          "title": "052 Krusevac"
+        },
+        {
+          "const": "053",
+          "title": "053 Kucevo"
+        },
+        {
+          "const": "054",
+          "title": "054 Kursumlija"
+        },
+        {
+          "const": "055",
+          "title": "055 Lajkovac"
+        },
+        {
+          "const": "056",
+          "title": "056 Lazarevac"
+        },
+        {
+          "const": "057",
+          "title": "057 Lebane"
+        },
+        {
+          "const": "058",
+          "title": "058 Leskovac"
+        },
+        {
+          "const": "059",
+          "title": "059 Loznica"
+        },
+        {
+          "const": "060",
+          "title": "060 Lucani"
+        },
+        {
+          "const": "061",
+          "title": "061 Ljig"
+        },
+        {
+          "const": "062",
+          "title": "062 Ljubovija"
+        },
+        {
+          "const": "063",
+          "title": "063 Majdanpek"
+        },
+        {
+          "const": "065",
+          "title": "065 Mali Zvornik"
+        },
+        {
+          "const": "066",
+          "title": "066 Malo Crnice"
+        },
+        {
+          "const": "067",
+          "title": "067 Medvedja"
+        },
+        {
+          "const": "068",
+          "title": "068 Merosina"
+        },
+        {
+          "const": "069",
+          "title": "069 Mionica"
+        },
+        {
+          "const": "070",
+          "title": "070 Mladenovac"
+        },
+        {
+          "const": "072",
+          "title": "072 Negotin"
+        },
+        {
+          "const": "073",
+          "title": "073 Nis"
+        },
+        {
+          "const": "074",
+          "title": "074 Nova Varos"
+        },
+        {
+          "const": "075",
+          "title": "075 Novi Pazar"
+        },
+        {
+          "const": "076",
+          "title": "076 Osecina"
+        },
+        {
+          "const": "077",
+          "title": "077 Paracin"
+        },
+        {
+          "const": "078",
+          "title": "078 Petrovac na Mlavi"
+        },
+        {
+          "const": "079",
+          "title": "079 Pirot"
+        },
+        {
+          "const": "080",
+          "title": "080 Pozarevac"
+        },
+        {
+          "const": "081",
+          "title": "081 Pozega"
+        },
+        {
+          "const": "082",
+          "title": "082 Presevo"
+        },
+        {
+          "const": "083",
+          "title": "083 Priboj na Limu"
+        },
+        {
+          "const": "084",
+          "title": "084 Prijepolje"
+        },
+        {
+          "const": "085",
+          "title": "085 Prokuplje"
+        },
+        {
+          "const": "086",
+          "title": "086 Raca Kragujevacka"
+        },
+        {
+          "const": "087",
+          "title": "087 Raska"
+        },
+        {
+          "const": "088",
+          "title": "088 Razanj"
+        },
+        {
+          "const": "089",
+          "title": "089 Rekovac"
+        },
+        {
+          "const": "091",
+          "title": "091 Sjenica"
+        },
+        {
+          "const": "092",
+          "title": "092 Smederevo"
+        },
+        {
+          "const": "093",
+          "title": "093 Smederevska Palanka"
+        },
+        {
+          "const": "094",
+          "title": "094 Sokobanja"
+        },
+        {
+          "const": "095",
+          "title": "095 Surdulica"
+        },
+        {
+          "const": "096",
+          "title": "096 Jagodina"
+        },
+        {
+          "const": "097",
+          "title": "097 Svilajnac"
+        },
+        {
+          "const": "098",
+          "title": "098 Svrljig"
+        },
+        {
+          "const": "099",
+          "title": "099 Sabac"
+        },
+        {
+          "const": "100",
+          "title": "100 Uzice"
+        },
+        {
+          "const": "101",
+          "title": "101 Topola"
+        },
+        {
+          "const": "102",
+          "title": "102 Trgoviste"
+        },
+        {
+          "const": "103",
+          "title": "103 Trstenik"
+        },
+        {
+          "const": "104",
+          "title": "104 Tutin"
+        },
+        {
+          "const": "105",
+          "title": "105 Ub"
+        },
+        {
+          "const": "107",
+          "title": "107 Valjevo"
+        },
+        {
+          "const": "108",
+          "title": "108 Varvarin"
+        },
+        {
+          "const": "109",
+          "title": "109 Velika Plana"
+        },
+        {
+          "const": "110",
+          "title": "110 Veliko Gradiste"
+        },
+        {
+          "const": "111",
+          "title": "111 Vladicin Han"
+        },
+        {
+          "const": "112",
+          "title": "112 Vladimirci"
+        },
+        {
+          "const": "113",
+          "title": "113 Vlasotince"
+        },
+        {
+          "const": "114",
+          "title": "114 Vranje"
+        },
+        {
+          "const": "115",
+          "title": "115 Vrnjacka Banja"
+        },
+        {
+          "const": "116",
+          "title": "116 Zajecar"
+        },
+        {
+          "const": "117",
+          "title": "117 Zabari"
+        },
+        {
+          "const": "118",
+          "title": "118 Zagubica"
+        },
+        {
+          "const": "119",
+          "title": "119 Zitoradja"
+        },
+        {
+          "const": "120",
+          "title": "120 Rakovica"
+        },
+        {
+          "const": "121",
+          "title": "121 Lapovo"
+        },
+        {
+          "const": "122",
+          "title": "122 Niska Banja"
+        },
+        {
+          "const": "123",
+          "title": "123 Stragari"
+        },
+        {
+          "const": "124",
+          "title": "124 Surčin"
+        },
+        {
+          "const": "125",
+          "title": "125 Nis Panetelej"
+        },
+        {
+          "const": "126",
+          "title": "126 Nis Crveni krst"
+        },
+        {
+          "const": "127",
+          "title": "127 Nis Palilula"
+        },
+        {
+          "const": "128",
+          "title": "128 Nis Medijana"
+        },
+        {
+          "const": "129",
+          "title": "129 Kostolac"
+        },
+        {
+          "const": "201",
+          "title": "201 Ada"
+        },
+        {
+          "const": "202",
+          "title": "202 Alibunar"
+        },
+        {
+          "const": "203",
+          "title": "203 Apatin"
+        },
+        {
+          "const": "204",
+          "title": "204 Bac"
+        },
+        {
+          "const": "205",
+          "title": "205 Backa Palanka"
+        },
+        {
+          "const": "206",
+          "title": "206 Backa Topola"
+        },
+        {
+          "const": "207",
+          "title": "207 Backi Petrovac"
+        },
+        {
+          "const": "208",
+          "title": "208 Becej"
+        },
+        {
+          "const": "209",
+          "title": "209 Bela Crkva"
+        },
+        {
+          "const": "210",
+          "title": "210 Beocin"
+        },
+        {
+          "const": "211",
+          "title": "211 Coka"
+        },
+        {
+          "const": "212",
+          "title": "212 Indjija"
+        },
+        {
+          "const": "213",
+          "title": "213 Irig"
+        },
+        {
+          "const": "214",
+          "title": "214 Kanjiza"
+        },
+        {
+          "const": "215",
+          "title": "215 Kikinda"
+        },
+        {
+          "const": "216",
+          "title": "216 Kovacica"
+        },
+        {
+          "const": "217",
+          "title": "217 Kovin"
+        },
+        {
+          "const": "218",
+          "title": "218 Kula"
+        },
+        {
+          "const": "219",
+          "title": "219 Mali Idjos"
+        },
+        {
+          "const": "220",
+          "title": "220 Nova Crnja"
+        },
+        {
+          "const": "221",
+          "title": "221 Novi Becej"
+        },
+        {
+          "const": "222",
+          "title": "222 Novi Knezevac"
+        },
+        {
+          "const": "223",
+          "title": "223 Novi Sad"
+        },
+        {
+          "const": "224",
+          "title": "224 Odzaci"
+        },
+        {
+          "const": "225",
+          "title": "225 Opovo"
+        },
+        {
+          "const": "226",
+          "title": "226 Pancevo"
+        },
+        {
+          "const": "227",
+          "title": "227 Pecinci"
+        },
+        {
+          "const": "228",
+          "title": "228 Plandiste"
+        },
+        {
+          "const": "229",
+          "title": "229 Ruma"
+        },
+        {
+          "const": "230",
+          "title": "230 Secanj"
+        },
+        {
+          "const": "231",
+          "title": "231 Senta"
+        },
+        {
+          "const": "232",
+          "title": "232 Sombor"
+        },
+        {
+          "const": "233",
+          "title": "233 Srbobran"
+        },
+        {
+          "const": "234",
+          "title": "234 Sremska Mitrovica"
+        },
+        {
+          "const": "235",
+          "title": "235 Stara Pazova"
+        },
+        {
+          "const": "236",
+          "title": "236 Subotica"
+        },
+        {
+          "const": "237",
+          "title": "237 Šid"
+        },
+        {
+          "const": "238",
+          "title": "238 Temerin"
+        },
+        {
+          "const": "239",
+          "title": "239 Titel"
+        },
+        {
+          "const": "240",
+          "title": "240 Vrbas"
+        },
+        {
+          "const": "241",
+          "title": "241 Vrsac"
+        },
+        {
+          "const": "242",
+          "title": "242 Zrenjanin"
+        },
+        {
+          "const": "243",
+          "title": "243 Zabalj"
+        },
+        {
+          "const": "244",
+          "title": "244 Zitiste"
+        },
+        {
+          "const": "247",
+          "title": "247 Petrovaradin"
+        },
+        {
+          "const": "250",
+          "title": "250 Sremski Karlovci"
+        },
+        {
+          "const": "301",
+          "title": "301 Decani"
+        },
+        {
+          "const": "303",
+          "title": "303 Djakovica"
+        },
+        {
+          "const": "304",
+          "title": "304 Glogovac"
+        },
+        {
+          "const": "305",
+          "title": "305 Gnjilane"
+        },
+        {
+          "const": "306",
+          "title": "306 Istok"
+        },
+        {
+          "const": "307",
+          "title": "307 Kacanik"
+        },
+        {
+          "const": "308",
+          "title": "308 Klina"
+        },
+        {
+          "const": "309",
+          "title": "309 Kosovska Kamenica"
+        },
+        {
+          "const": "310",
+          "title": "310 Kosovska Mitrovica"
+        },
+        {
+          "const": "311",
+          "title": "311 Leposavic"
+        },
+        {
+          "const": "312",
+          "title": "312 Lipljan"
+        },
+        {
+          "const": "313",
+          "title": "313 Orahovac"
+        },
+        {
+          "const": "314",
+          "title": "314 Pec"
+        },
+        {
+          "const": "315",
+          "title": "315 Podujevo"
+        },
+        {
+          "const": "316",
+          "title": "316 Pristina"
+        },
+        {
+          "const": "317",
+          "title": "317 Prizren"
+        },
+        {
+          "const": "318",
+          "title": "318 Srbica"
+        },
+        {
+          "const": "319",
+          "title": "319 Suva Reka"
+        },
+        {
+          "const": "320",
+          "title": "320 Urosevac"
+        },
+        {
+          "const": "321",
+          "title": "321 Vitina"
+        },
+        {
+          "const": "322",
+          "title": "322 Vucitrn"
+        },
+        {
+          "const": "324",
+          "title": "324 Zubin Potok"
+        },
+        {
+          "const": "325",
+          "title": "325 Stimlje"
+        },
+        {
+          "const": "326",
+          "title": "326 Strpce"
+        },
+        {
+          "const": "327",
+          "title": "327 Obilic"
+        },
+        {
+          "const": "328",
+          "title": "328 Kosovo Polje"
+        },
+        {
+          "const": "329",
+          "title": "329 Novo Brdo"
+        },
+        {
+          "const": "330",
+          "title": "330 Zvecan"
+        }
+      ],
+      "title": "Municipality Residence ID",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "parents_names": {
+      "properties": {
+        "father_full_name": {
+          "maxLength": 255,
+          "title": "Father's full name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "mother_full_name": {
+          "maxLength": 255,
+          "title": "Mother's full name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "father_full_name",
+        "mother_full_name"
+      ],
+      "title": "Parents' names (Ime jednog roditelja)",
+      "type": "object",
+      "x-jsf-order": [
+        "father_full_name",
+        "mother_full_name"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "partner_details": {
+      "properties": {
+        "address": {
+          "maxLength": 255,
+          "title": "Address of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "birthdate": {
+          "format": "date",
+          "title": "Date of birth of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full name of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "title": "ID/Passport number of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "full_name",
+        "birthdate",
+        "address",
+        "id_number"
+      ],
+      "title": "Partner details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name",
+        "birthdate",
+        "address",
+        "id_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "residency_status": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "residency_date": false
+            }
+          },
+          "if": {
+            "properties": {
+              "status": {
+                "const": "non_resident"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "residency_date"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "residency_date": {
+          "description": "The residency date is the date when you complete 1 year of living in Serbia. This determines how your salary gets processed with our banking partner.",
+          "format": "date",
+          "title": "Residency date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "status": {
+          "description": "Select the option that best fits your situation.",
+          "oneOf": [
+            {
+              "const": "resident",
+              "title": "Resident"
+            },
+            {
+              "const": "non_resident",
+              "title": "Non-resident living in Serbia for less than a year"
+            }
+          ],
+          "title": "Status",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "Residency status",
+      "type": "object",
+      "x-jsf-order": [
+        "status",
+        "residency_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "years_of_experience": {
+      "minimum": 0,
+      "title": "Years of work experience (Staž)",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "years_of_experience",
+    "has_insurance",
+    "municipality_residence_id"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "municipality_residence_id",
+    "id_number",
+    "marital_status",
+    "partner_details",
+    "parents_names",
+    "degree_details",
+    "residency_status",
+    "years_of_experience",
+    "has_insurance",
+    "deduct_insurance_from_salary",
+    "has_spouse_health_insurance",
+    "has_child_health_insurance",
+    "children"
+  ]
+}

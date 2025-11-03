@@ -1,0 +1,510 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "disability_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_disability": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_disability"
+        ]
+      },
+      "then": {
+        "required": [
+          "disability_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "indigenous_group": false,
+          "indigenous_languages": false
+        }
+      },
+      "if": {
+        "properties": {
+          "indigenous_group_status": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "indigenous_group_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "indigenous_group",
+          "indigenous_languages"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "tax_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_tax_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "tax_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_tax_number": {
+            "x-jsf-presentation": {
+              "statement": null
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_tax_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_tax_number": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "We cannot start your employment until you have your <b>tax identification number (NIT)</b>. You'll be asked to provide it to us before your start date.",
+                "inputType": "statement",
+                "severity": "info"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "disability_details": {
+      "oneOf": [
+        {
+          "const": "hearing_disability",
+          "title": "Hearing disability"
+        },
+        {
+          "const": "visual_disability",
+          "title": "Visual disability"
+        },
+        {
+          "const": "multiple_disabilities",
+          "title": "Multiple disabilities"
+        },
+        {
+          "const": "physical_or_motor_disability",
+          "title": "Physical or motor disability"
+        },
+        {
+          "const": "intellectual_disability",
+          "title": "Intellectual disability"
+        },
+        {
+          "const": "other",
+          "title": "Other"
+        },
+        {
+          "const": "prefer_not_to_say",
+          "title": "I prefer not to say"
+        }
+      ],
+      "title": "Disability type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "education": {
+      "oneOf": [
+        {
+          "const": "none",
+          "title": "None"
+        },
+        {
+          "const": "incomplete_primary",
+          "title": "Incomplete primary"
+        },
+        {
+          "const": "complete_primary",
+          "title": "Complete primary"
+        },
+        {
+          "const": "incomplete_basic",
+          "title": "Incomplete basic"
+        },
+        {
+          "const": "complete_basic",
+          "title": "Complete basic"
+        },
+        {
+          "const": "incomplete_diversified",
+          "title": "Incomplete diversified"
+        },
+        {
+          "const": "complete_diversified",
+          "title": "Complete diversified"
+        },
+        {
+          "const": "college_student",
+          "title": "College student"
+        },
+        {
+          "const": "university_technician",
+          "title": "University technician"
+        },
+        {
+          "const": "degree",
+          "title": "Degree"
+        },
+        {
+          "const": "postgraduate",
+          "title": "Postgraduate"
+        },
+        {
+          "const": "master's_degree",
+          "title": "Master's degree"
+        },
+        {
+          "const": "doctorate",
+          "title": "Doctorate"
+        }
+      ],
+      "title": "Select your highest level of education.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "has_disability": {
+      "description": "We’re asking this because we’ve been asked by your country of residence to report the number of employees who have declared a disability. We will not share this information with the company you provide services to without your explicit consent.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": "prefer_not_to_say",
+          "title": "I prefer not to say"
+        }
+      ],
+      "title": "Do you have a disability?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "<h1 data-component=\"HeadingIcon\">Why does Remote need to know my disability status?</h1><p>Your country of residence asks Remote to report the number of employees we have who have declared a disability. We’ll only report the number to relevant authorities, and will not share any employee names or identifying information.<br><br>We’ll also use your disability status information to make sure we fulfill our legal obligations to you, as disabled employees are entitled to additional rights and protections in many countries.<br><br>We’ll always keep your information encrypted, and it will be accessible only on a need-to-know basis. We will not share your disability status with the company you provide services to without your explicit consent.</p><h1  data-component=\"HeadingIcon\">What’s considered a disability?</h1><p>Chronic health conditions, mental health conditions, mobility impairments, sensory impairments, cognitive impairments, and any other condition that significantly impacts daily living are all considered disabilities.</p><h1  data-component=\"HeadingIcon\">Will the company that I provide services to know that I disclosed a disability?</h1><p>No, only Remote will know that you disclosed a disability. We’ll treat your disclosure with the utmost confidentiality and we’ll never let them know your disability status without your explicit consent.</p><h1 data-component=\"HeadingIcon\">Will my disclosure affect my job security or my chances of promotion?</h1><p>Your disclosure of your disability status will have no impact on your working life, including job security and chances of promotion. This information will not be shared with the company you provide services to unless we have your explicit consent to do so.</p><h1 data-component=\"HeadingIcon\">Can I choose not to disclose my disability status?</h1><p>Yes, absolutely. You are not obligated to disclose your disability status to Remote, so please don’t feel pressured to disclose.</p><h1 data-component=\"HeadingIcon\">What happens if I choose to disclose my disability status at a later date?</h1><p>You can choose to disclose your disability status at any time. You can do this in the Personal details section of your Remote profile.</p><h1  data-component=\"HeadingIcon\">How is my disability status information going to be used and stored?</h1><p>Remote values your privacy and is committed to ensuring the confidentiality and security of your personal data. As part of our legal obligations in your country of residence, we are required to collect and process employment disability data and to report the number of persons with disabilities we employ to relevant authorities.<br><br>Voluntary provision: The provision of employment disability data is voluntary. However, please note that failure to provide this information may limit our ability to provide necessary adjustments and support in accordance with legal requirements.<br><br>Purpose: The data is collected to comply with our legal obligations and to provide appropriate adjustments and support.<br><br>Categories of data: Your disclosure and the supporting document you upload (if any).<br><br>Legal basis: Processing this data is necessary to fulfill our legal obligations as an employer.<br><br>Data storage and retention: Your employment disability data will be securely stored on our platform and accessed only by authorized personnel for the duration of your employment and for up to 3 years thereafter.<br><br>Data sharing: We will share this information only with relevant internal departments, and we will report having hired a person with disability to the competent authority in your jurisdiction of residence, without revealing your identity. Your information will not be shared with our client hiring you without your permission.<br><br>Your rights: You have the right to access, rectify, and delete your employment disability data. You can remove the document you upload by simply deleting it from the platform.<br><br>If you have any questions, concerns, or require further clarification about the collection and processing of your information, please do not hesitate to contact our CX team via the Help button on your dashboard or our data protection officer at <a href=\"mailto:dpo@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">dpo@remote.com</a></p><h1 data-component=\"HeadingIcon\">Why do I have to submit a medical document verifying my disability?</h1><p>We need to work with the relevant authorities in your country of residence to make sure you get access to all the employee benefits you’re entitled to. As part of this process, we need to share documented verification of your disability with your country of residence.</p><h1 data-component=\"HeadingIcon\">Who can I contact if I have questions or concerns about this process?</h1><p>If you have any questions or concerns about disability disclosure, please do not hesitate to contact us at <a href=\"mailto:help@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">help@remote.com</a>.</p>",
+            "title": "Medical disability"
+          }
+        }
+      }
+    },
+    "has_tax_number": {
+      "description": "The NIT is required for employment in Guatemala. If you don’t have one, you can request one from SAT, your local superintendent of tax.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a tax identification number (NIT)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "Guatemalan nationals and foreign residents, please enter your DPI (Guatemalan national ID) number. If you’re a foreign resident without a DPI, please enter your passport number. If you’re a Guatemalan national without a DPI, please apply for one in person at RENAP, then upload a copy of the application confirmation onto Remote.",
+      "title": "ID or passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "Guatemalan nationals and foreign residents, please enter your DPI (Guatemalan national ID) number. If you’re a foreign resident without a DPI, please enter your passport number.<br /><br />If you’re a Guatemalan national without a DPI, please apply for one in person at RENAP, then upload a copy of the application confirmation onto Remote.",
+        "inputType": "text"
+      }
+    },
+    "id_type": {
+      "description": "",
+      "oneOf": [
+        {
+          "const": "national_id_number",
+          "title": "Guatemalan National ID (DPI)"
+        },
+        {
+          "const": "passport",
+          "title": "Passport"
+        }
+      ],
+      "title": "Identification document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "indigenous_group": {
+      "oneOf": [
+        {
+          "const": "maya",
+          "title": "Maya"
+        },
+        {
+          "const": "garifuna",
+          "title": "Garífuna"
+        },
+        {
+          "const": "xinka",
+          "title": "Xinka"
+        },
+        {
+          "const": "afrodescendiente",
+          "title": "Afrodescendiente / creole / afromestizo"
+        },
+        {
+          "const": "ladino",
+          "title": "Ladino"
+        }
+      ],
+      "title": "Please select the indigenous group you are part of",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "indigenous_group_status": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you part of any indigenous groups?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "indigenous_languages": {
+      "items": {
+        "anyOf": [
+          {
+            "const": "achi",
+            "title": "Achi´"
+          },
+          {
+            "const": "akateka",
+            "title": "Akateka"
+          },
+          {
+            "const": "awakateka",
+            "title": "Awakateka"
+          },
+          {
+            "const": "chorti",
+            "title": "Ch´orti´"
+          },
+          {
+            "const": "chalchiteka",
+            "title": "Chalchiteka"
+          },
+          {
+            "const": "chuj",
+            "title": "Chuj"
+          },
+          {
+            "const": "itza",
+            "title": "Itza´"
+          },
+          {
+            "const": "ixil",
+            "title": "Ixil"
+          },
+          {
+            "const": "jakalteka",
+            "title": "Jakalteka"
+          },
+          {
+            "const": "kiche",
+            "title": "K´iche´"
+          },
+          {
+            "const": "kaqchikel",
+            "title": "Kaqchikel"
+          },
+          {
+            "const": "mam",
+            "title": "Mam"
+          },
+          {
+            "const": "mopan",
+            "title": "Mopan"
+          },
+          {
+            "const": "poqomam",
+            "title": "Poqomam"
+          },
+          {
+            "const": "poqomchi",
+            "title": "Poqomchi´"
+          },
+          {
+            "const": "qanjobal",
+            "title": "Q´anjob´al"
+          },
+          {
+            "const": "qeqchi",
+            "title": "Q´eqchi´"
+          },
+          {
+            "const": "sakapulteka",
+            "title": "Sakapulteka"
+          },
+          {
+            "const": "sipakapense",
+            "title": "Sipakapense"
+          },
+          {
+            "const": "tektiteka",
+            "title": "Tektiteka"
+          },
+          {
+            "const": "tzutujil",
+            "title": "Tz´utujil"
+          },
+          {
+            "const": "uspanteka",
+            "title": "Uspanteka"
+          },
+          {
+            "const": "other",
+            "title": "Other"
+          },
+          {
+            "const": "none",
+            "title": "None"
+          }
+        ]
+      },
+      "title": "Please select the indigenous languages that you speak.",
+      "type": "array",
+      "uniqueItems": true,
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best matches your marital status as shown on your DPI (national ID).",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "description": "This can include your spouse, children, and parents.",
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "ssn": {
+      "title": "Social security number (issued by IGSS)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_number": {
+      "title": "Tax identification number (NIT)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "skippable": true
+      }
+    }
+  },
+  "required": [
+    "id_type",
+    "id_number",
+    "has_tax_number",
+    "ssn",
+    "marital_status",
+    "number_of_dependents",
+    "has_disability",
+    "indigenous_group_status",
+    "education"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_type",
+    "id_number",
+    "has_tax_number",
+    "tax_number",
+    "ssn",
+    "marital_status",
+    "number_of_dependents",
+    "has_disability",
+    "disability_details",
+    "indigenous_group_status",
+    "indigenous_group",
+    "indigenous_languages",
+    "education"
+  ]
+}

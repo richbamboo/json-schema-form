@@ -1,0 +1,93 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "employee_national_id_number": {
+      "description": "Please provide your national ID number.",
+      "maxLength": 255,
+      "title": "National identification number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": [
+        "null",
+        "string"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "nssf_number": {
+      "maxLength": 255,
+      "title": "National social security fund (NSSF) number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_identification_number": {
+      "maxLength": 255,
+      "title": "Tax identification number (TIN)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "marital_status",
+    "tax_identification_number",
+    "nssf_number",
+    "employee_national_id_number"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "tax_identification_number",
+    "nssf_number",
+    "employee_national_id_number"
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "30_percent_facility": {
+            "x-jsf-presentation": {
+              "statement": false
+            }
+          },
+          "is_first_30_percent_facility": false
+        }
+      },
+      "if": {
+        "properties": {
+          "30_percent_facility": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "30_percent_facility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "30_percent_facility": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "When you finish self-enrollment, we’ll ask you for the documents we need to submit your application.",
+                "inputType": "statement"
+              }
+            }
+          }
+        },
+        "required": [
+          "is_first_30_percent_facility"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "30_percent_facility": {
+      "description": "If you’re coming to work in the Netherlands from another country, you may be eligible for tax-free compensation to help with higher costs of living",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you interested and eligible to apply for the 30% facility?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "If you’re coming to work in the Netherlands from another country, you may be eligible for tax-free compensation to help with higher costs of living.<br /><a href='https://www.belastingdienst.nl/wps/wcm/connect/en/individuals/content/coming-to-work-in-the-netherlands-30-percent-facility' target='_blank'>Learn more about the 30% facility</a>",
+        "inputType": "radio"
+      }
+    },
+    "bsn": {
+      "description": "Enter your BSN (Citizen Service Number) without spaces or dots",
+      "pattern": "(^$|^(\\d{8}|\\d{9})$)",
+      "title": "BSN (Citizen Service Number)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_first_30_percent_facility": {
+      "description": "This tells us which documents you'll need to submit the application.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is this your first time applying for the 30% facility?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "description": "The total number of dependents you claim.",
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "wage_tax_credit": {
+      "description": "The wage tax credit is a discount on the statutory wage deductions. Your employer will apply for the wage tax credit automatically. The wage tax credit may be used with only one employer at the same time.  <a href=' http://www.belastingdienst.nl/loonheffingen' target='_blank' rel='noopener noreferrer'>Learn more</a>",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Ask employer to apply for the wage tax credit for you as of your start date?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "bsn",
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "wage_tax_credit",
+    "30_percent_facility"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "bsn",
+    "wage_tax_credit",
+    "30_percent_facility",
+    "is_first_30_percent_facility",
+    "prior_inventions"
+  ]
+}

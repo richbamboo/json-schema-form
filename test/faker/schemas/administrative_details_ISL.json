@@ -1,0 +1,259 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "tax_credit_percentage": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_credit": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_tax_credit"
+        ]
+      },
+      "then": {
+        "required": [
+          "tax_credit_percentage"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "unused_tax_credit_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_unused_tax_credit": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_unused_tax_credit"
+        ]
+      },
+      "then": {
+        "required": [
+          "unused_tax_credit_amount"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "additional_pension_fund": {
+      "description": "Enter your additional pension fund name (if applicable)",
+      "maxLength": 255,
+      "title": "Additional pension fund name",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "additional_pension_fund_percentage": {
+      "description": "Indicate the % of contribution of the Additional Pension Fund (if applicable)",
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Additional pension contribution amount",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "has_tax_credit": {
+      "description": "Are you going to use it?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Tax credit",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_unused_tax_credit": {
+      "description": "Do you have unused tax credit?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Unused tax credit",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "Icelandic ID number (kennitala)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "mandatory_pension_fund": {
+      "maxLength": 255,
+      "title": "Mandatory pension fund name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "salary_from_other_employers": {
+      "description": "What's the estimated amount of total salaries you receive from other employers? Type 0 (zero), if not applicable.",
+      "title": "Salary from other employers",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ISK",
+        "inputType": "money"
+      }
+    },
+    "tax_credit_percentage": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Tax credit percentage",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "union_name": {
+      "description": "Enter the name of the union you're part of (if applicable)",
+      "maxLength": 255,
+      "title": "Union name",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "unused_tax_credit_amount": {
+      "description": "Indicate the information of the amount unused",
+      "title": "Unused tax credit amount",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "ISK",
+        "inputType": "money"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "mandatory_pension_fund",
+    "has_tax_credit",
+    "has_unused_tax_credit",
+    "salary_from_other_employers"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "mandatory_pension_fund",
+    "additional_pension_fund",
+    "additional_pension_fund_percentage",
+    "union_name",
+    "has_tax_credit",
+    "tax_credit_percentage",
+    "has_unused_tax_credit",
+    "unused_tax_credit_amount",
+    "salary_from_other_employers",
+    "work_permit_number"
+  ]
+}

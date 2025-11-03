@@ -1,0 +1,502 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "marital_details": false
+          }
+        },
+        "if": {
+          "properties": {
+            "marital_status": {
+              "const": "civil_partnership"
+            }
+          },
+          "required": [
+            "marital_status"
+          ]
+        },
+        "then": {
+          "required": [
+            "marital_details"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "const": "married"
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "marital_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "health_insurance_provider": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_health_insurance": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_health_insurance"
+        ]
+      },
+      "then": {
+        "required": [
+          "health_insurance_provider"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "dependent_details": {
+      "items": {
+        "properties": {
+          "address": {
+            "maxLength": 1000,
+            "title": "Address",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "textarea"
+            }
+          },
+          "age": {
+            "minimum": 0,
+            "title": "Age",
+            "type": "number",
+            "x-jsf-presentation": {
+              "inputType": "number"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "relationship": {
+            "maxLength": 255,
+            "title": "Relationship",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "relationship",
+          "age",
+          "address"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "relationship",
+          "age",
+          "address"
+        ],
+        "x-jsf-presentation": {
+          "inputType": "fieldset"
+        }
+      },
+      "title": "Dependents",
+      "type": [
+        "array",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "has_health_insurance": {
+      "description": "Do you have health insurance?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Health insurance",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "health_insurance_provider": {
+      "description": "Who is your health insurance provider?",
+      "maxLength": 255,
+      "title": "Insurance company name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "highest_education": {
+      "description": "(if applicable)",
+      "properties": {
+        "graduation_date": {
+          "format": "date",
+          "title": "Graduation date",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "institute_name": {
+          "maxLength": 255,
+          "title": "Institute name",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "title_achieved": {
+          "oneOf": [
+            {
+              "const": null,
+              "title": "N/A"
+            },
+            {
+              "const": "high_school",
+              "title": "High School/equivalent"
+            },
+            {
+              "const": "bachelor",
+              "title": "Bachelor's Degree"
+            },
+            {
+              "const": "master",
+              "title": "Master's Degree"
+            },
+            {
+              "const": "doctorate_postdoctorate",
+              "title": "Doctorate or Post-doctorate"
+            }
+          ],
+          "title": "Title achieved",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        }
+      },
+      "required": [],
+      "title": "Highest level of education",
+      "type": "object",
+      "x-jsf-order": [
+        "institute_name",
+        "title_achieved",
+        "graduation_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "id_number": {
+      "description": "Tarjeta de Identidad",
+      "maxLength": 255,
+      "pattern": "^[0-9]{13}$",
+      "title": "ID number",
+      "type": "string",
+      "x-jsf-errorMessage": {
+        "pattern": "Must be exactly 13 digits"
+      },
+      "x-jsf-presentation": {
+        "description": "<span lang=\"es-HN\">Tarjeta de Identidad</span>",
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_details": {
+      "properties": {
+        "address": {
+          "maxLength": 1000,
+          "title": "Address",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "textarea"
+          }
+        },
+        "date_of_birth": {
+          "format": "date",
+          "title": "Date of birth",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "title": "ID number",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "full_name",
+        "date_of_birth",
+        "address",
+        "id_number"
+      ],
+      "title": "Spouse/Partner details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name",
+        "date_of_birth",
+        "address",
+        "id_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "previous_job_fields": {
+      "description": "(if applicable)",
+      "properties": {
+        "company_name": {
+          "maxLength": 255,
+          "title": "Company name",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "end_date": {
+          "format": "date",
+          "title": "End date",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "job_title": {
+          "maxLength": 255,
+          "title": "Job title/activity name",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "start_date": {
+          "format": "date",
+          "title": "Start date",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        }
+      },
+      "required": [],
+      "title": "Employment experience from your latest job",
+      "type": "object",
+      "x-jsf-order": [
+        "job_title",
+        "company_name",
+        "start_date",
+        "end_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "second_job_fields": {
+      "description": "Do you have another job or perform any other paid activity (for income tax purposes)?",
+      "items": {
+        "properties": {
+          "company_name": {
+            "maxLength": 255,
+            "title": "Company name",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "job_title": {
+            "maxLength": 255,
+            "title": "Job title/activity name",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "job_title",
+          "company_name"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "job_title",
+          "company_name"
+        ],
+        "x-jsf-presentation": {
+          "inputType": "fieldset"
+        }
+      },
+      "title": "Other jobs",
+      "type": [
+        "array",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "tax_number": {
+      "description": "Registro Tributario Nacional (RTN)",
+      "maxLength": 255,
+      "pattern": "^[0-9]{14}$",
+      "title": "Tax ID number",
+      "type": "string",
+      "x-jsf-errorMessage": {
+        "pattern": "Must be exactly 14 digits"
+      },
+      "x-jsf-presentation": {
+        "description": "<span lang=\"es-HN\">Registro Tributario Nacional (RTN)</span>",
+        "inputType": "text"
+      }
+    },
+    "work_permit": {
+      "properties": {
+        "work_permit_number": {
+          "description": "(if applicable)",
+          "maxLength": 255,
+          "title": "Work permit number",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [],
+      "title": "Work permit",
+      "type": "object",
+      "x-jsf-order": [
+        "work_permit_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "tax_number",
+    "marital_status",
+    "has_health_insurance"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "tax_number",
+    "marital_status",
+    "marital_details",
+    "dependent_details",
+    "highest_education",
+    "has_health_insurance",
+    "health_insurance_provider",
+    "second_job_fields",
+    "previous_job_fields",
+    "work_permit"
+  ]
+}

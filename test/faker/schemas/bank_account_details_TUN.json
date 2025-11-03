@@ -1,0 +1,92 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "account_holder": {
+      "maxLength": 255,
+      "title": "Account holder name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "account_number": {
+      "description": "Enter your 20-digit RIB number",
+      "maxLength": 20,
+      "minLength": 20,
+      "pattern": "^\\d+$",
+      "title": "Account number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "bic_swift": {
+      "description": "Enter your BIC/SWIFT code. You can usually find this with your IBAN number",
+      "maxLength": 11,
+      "minLength": 8,
+      "title": "BIC/SWIFT",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "label_name": {
+      "description": "So you can easily recognize the account.",
+      "maxLength": 255,
+      "title": "Account nickname",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "name": {
+      "description": "The bank name",
+      "maxLength": 255,
+      "title": "Bank name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "ownership_type": {
+      "enum": [
+        "PRIVATE",
+        "BUSINESS"
+      ],
+      "title": "Account ownership type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Personal",
+            "value": "PRIVATE"
+          },
+          {
+            "label": "Business",
+            "value": "BUSINESS"
+          }
+        ],
+        "placeholder": "Select account ownership type"
+      }
+    }
+  },
+  "required": [
+    "label_name",
+    "ownership_type",
+    "account_holder",
+    "name",
+    "account_number",
+    "bic_swift"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "label_name",
+    "ownership_type",
+    "account_holder",
+    "name",
+    "account_number",
+    "bic_swift"
+  ]
+}

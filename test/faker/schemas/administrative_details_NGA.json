@@ -1,0 +1,588 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "partner_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "enum": [
+              "married",
+              "civil_partnership"
+            ]
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "partner_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "dependent_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_dependents": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_dependents"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependent_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "degree_details": {
+      "properties": {
+        "graduation_date": {
+          "format": "date",
+          "maxLength": 255,
+          "title": "Date of graduation",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "institute_name": {
+          "maxLength": 255,
+          "title": "Name of the institute",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "title": {
+          "maxLength": 255,
+          "title": "Title achieved",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [],
+      "title": "Highest level of education details (optional)",
+      "type": "object",
+      "x-jsf-order": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "dependent_details": {
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Date of birth of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Full name of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "id_number": {
+            "maxLength": 255,
+            "title": "ID number of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "birthdate",
+          "id_number"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "birthdate",
+          "id_number"
+        ]
+      },
+      "title": "Dependent Information for PIT purposes",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "has_dependents": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have dependents?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "health_insurance": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "health_insurance_name": false
+            }
+          },
+          "if": {
+            "properties": {
+              "has_health_insurance": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "has_health_insurance"
+            ]
+          },
+          "then": {
+            "required": [
+              "health_insurance_name"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "has_health_insurance": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Do you have health insurance?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "health_insurance_name": {
+          "maxLength": 255,
+          "title": "Insurance company name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "has_health_insurance"
+      ],
+      "title": "Health Insurance Details",
+      "type": "object",
+      "x-jsf-order": [
+        "has_health_insurance",
+        "health_insurance_name"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "id_number": {
+      "description": "Please provide the number from your National ID number (NIN), Passport, or Voters Card.",
+      "maxLength": 255,
+      "title": "ID number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number_type": {
+      "enum": [
+        "passport",
+        "national_id_number",
+        "voters_card"
+      ],
+      "oneOf": [
+        {
+          "const": "passport",
+          "title": "Passport"
+        },
+        {
+          "const": "national_id_number",
+          "title": "National ID number (NIN)"
+        },
+        {
+          "const": "voters_card",
+          "title": "Voters Card"
+        }
+      ],
+      "title": "ID Number Type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "other_job": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "company_name": false,
+              "job_title": false
+            }
+          },
+          "if": {
+            "properties": {
+              "has_other_job": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "has_other_job"
+            ]
+          },
+          "then": {
+            "required": [
+              "company_name",
+              "job_title"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "company_name": {
+          "maxLength": 255,
+          "title": "Name of the company",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "has_other_job": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Do you have another job or perform any other paid activity (for income tax purposes)?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "job_title": {
+          "maxLength": 255,
+          "title": "Job title",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "has_other_job"
+      ],
+      "title": "Other employment",
+      "type": "object",
+      "x-jsf-order": [
+        "has_other_job",
+        "company_name",
+        "job_title"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "partner_details": {
+      "properties": {
+        "address": {
+          "maxLength": 255,
+          "title": "Address of Spouse or Civil Partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "birthdate": {
+          "format": "date",
+          "maxLength": 255,
+          "title": "Date of birth of Spouse or Civil Partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full Name of Spouse or Civil Partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "title": "ID Number of Spouse or Civil Partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "full_name",
+        "birthdate",
+        "address",
+        "id_number"
+      ],
+      "title": "Partner details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name",
+        "birthdate",
+        "address",
+        "id_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "pension_details": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "pension_fund_administrator": false,
+              "rsa_pin": false
+            }
+          },
+          "if": {
+            "properties": {
+              "has_pension": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "has_pension"
+            ]
+          },
+          "then": {
+            "required": [
+              "pension_fund_administrator",
+              "rsa_pin"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "has_pension": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Do you belong to a pension fund?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "pension_fund_administrator": {
+          "description": "Please provide the name of your pension fund administrator",
+          "maxLength": 255,
+          "title": "Name of pension fund administrator",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "rsa_pin": {
+          "maxLength": 255,
+          "title": "RSA (Retirement Savings Account) PIN number ",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "has_pension"
+      ],
+      "title": "Pension Details",
+      "type": "object",
+      "x-jsf-order": [
+        "has_pension",
+        "pension_fund_administrator",
+        "rsa_pin"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "state_of_origin": {
+      "description": "What is your state of origin?",
+      "maxLength": 255,
+      "title": "State of origin",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_payer_id": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Tax payer ID",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_permit_expiration_date": {
+      "description": "(if applicable)",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Work Permit Expiry Date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number_type",
+    "id_number",
+    "marital_status",
+    "has_dependents",
+    "degree_details",
+    "health_insurance",
+    "other_job",
+    "state_of_origin"
+  ],
+  "x-jsf-order": [
+    "id_number_type",
+    "id_number",
+    "marital_status",
+    "partner_details",
+    "has_dependents",
+    "dependent_details",
+    "degree_details",
+    "health_insurance",
+    "other_job",
+    "pension_details",
+    "tax_payer_id",
+    "work_permit_number",
+    "work_permit_expiration_date",
+    "state_of_origin"
+  ]
+}

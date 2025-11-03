@@ -1,0 +1,252 @@
+{
+  "properties": {
+    "cpf_account_number": {
+      "description": "Enter your CPF Account Number",
+      "maxLength": 255,
+      "title": "CPF Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "employment_pass_expiry_date": {
+      "description": "Enter your employment pass expiry date",
+      "format": "date",
+      "title": "Employment pass expiry date (if applicable)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "employment_pass_issued_date": {
+      "description": "Enter your work pass or identity card issue date",
+      "format": "date",
+      "title": "Identification date of issue",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "fiscal_number": {
+      "description": "Enter your official tax identification number",
+      "maxLength": 255,
+      "title": "Tax ID",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "nric_number": {
+      "description": "Enter your National Registration Identity Card Number or Foreign Identification Number. NRIC is applicable to Singaporeans & permanent residents only. FIN is applicable to work permit holders only.",
+      "maxLength": 255,
+      "title": "NRIC Number or FIN Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "passport_name": {
+      "description": "Enter the name on your passport",
+      "maxLength": 255,
+      "title": "Name on passport",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "race": {
+      "description": "Select your race",
+      "oneOf": [
+        {
+          "const": null,
+          "title": "N/A"
+        },
+        {
+          "const": "chinese",
+          "title": "Chinese"
+        },
+        {
+          "const": "eurasian",
+          "title": "Eurasian"
+        },
+        {
+          "const": "malay",
+          "title": "Malay"
+        },
+        {
+          "const": "indian",
+          "title": "Indian"
+        },
+        {
+          "const": "other",
+          "title": "Or, please indicate where relevant"
+        }
+      ],
+      "title": "Race",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "self_help_groups": {
+      "description": "Select your self-help group",
+      "oneOf": [
+        {
+          "const": null,
+          "title": "N/A"
+        },
+        {
+          "const": "CDAC",
+          "title": "Chinese Development Assistance Council (CDAC)"
+        },
+        {
+          "const": "ECF",
+          "title": "Eurasian Community Fund (ECF)"
+        },
+        {
+          "const": "SINDA",
+          "title": "Singapore Indian Development Association (SINDA)"
+        },
+        {
+          "const": "MBMF",
+          "title": "Mosque Building and Mendaki Fund (MBMF)"
+        },
+        {
+          "const": "notApplicable",
+          "title": "Not Applicable"
+        }
+      ],
+      "title": "Self-help groups",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "spr_approval_date": {
+      "description": "Enter your SPR approval date - according to Entry Permit",
+      "format": "date",
+      "title": "SPR approval date (if applicable)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_pass_type": {
+      "description": "Select your work pass type",
+      "oneOf": [
+        {
+          "const": null,
+          "title": "N/A"
+        },
+        {
+          "const": "employmentPass",
+          "title": "Employment pass"
+        },
+        {
+          "const": "workPermit",
+          "title": "Work permit"
+        },
+        {
+          "const": "sPass",
+          "title": "S pass"
+        },
+        {
+          "const": "notApplicable",
+          "title": "Not applicable"
+        }
+      ],
+      "title": "Work pass type",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "fiscal_number",
+    "marital_status",
+    "passport_name",
+    "passport_number",
+    "nric_number",
+    "employment_pass_issued_date"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "fiscal_number",
+    "race",
+    "marital_status",
+    "passport_name",
+    "passport_number",
+    "cpf_account_number",
+    "nric_number",
+    "self_help_groups",
+    "work_pass_type",
+    "employment_pass_issued_date",
+    "employment_pass_expiry_date",
+    "spr_approval_date"
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "marriage_date": false,
+          "spouse_birthdate": false,
+          "spouse_full_name": false,
+          "spouse_id_number": false,
+          "spouse_nationality": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "const": "married"
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "marriage_date",
+          "spouse_full_name",
+          "spouse_birthdate",
+          "spouse_nationality",
+          "spouse_id_number"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "dependent_details": {
+      "description": "Do you have any children you would like to add as dependents to your benefits?",
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "title": "Child birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Child full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "id_number": {
+            "maxLength": 255,
+            "title": "Child National ID",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "sex": {
+            "description": "We know sex is non-binary but for insurance and payroll purposes, we need to ask for this information.",
+            "enum": [
+              "female",
+              "male"
+            ],
+            "title": "Child sex",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "radio",
+              "options": [
+                {
+                  "label": "Female",
+                  "value": "female"
+                },
+                {
+                  "label": "Male",
+                  "value": "male"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "birthdate",
+          "sex",
+          "id_number"
+        ],
+        "x-jsf-order": [
+          "full_name",
+          "birthdate",
+          "sex",
+          "id_number"
+        ]
+      },
+      "title": "Child details",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "insurance_details": {
+      "description": "Do you want to add the number of insurances you claim?",
+      "items": {
+        "properties": {
+          "name": {
+            "maxLength": 255,
+            "title": "Name of fund",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "type": {
+            "maxLength": 255,
+            "title": "Type of fund",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ],
+        "x-jsf-order": [
+          "name",
+          "type"
+        ]
+      },
+      "title": "Insurance fund details",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marriage_date": {
+      "description": "Enter your marriage date",
+      "format": "date",
+      "title": "Marriage date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "spouse_birthdate": {
+      "description": "Enter your spouse’s date of birth",
+      "format": "date",
+      "title": "Spouse Birthdate",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "spouse_full_name": {
+      "maxLength": 255,
+      "title": "Spouse’s full name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "spouse_id_number": {
+      "description": "Enter your spouse’s ID number",
+      "maxLength": 255,
+      "title": "Spouse ID Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "spouse_nationality": {
+      "description": "Where is your spouse a legal citizen?",
+      "maxLength": 255,
+      "title": "Spouse Nationality",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_number": {
+      "description": "Enter your tax number to help us process your payroll correctly",
+      "maxLength": 255,
+      "title": "Tax number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "tax_number",
+    "marital_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "tax_number",
+    "marital_status",
+    "marriage_date",
+    "spouse_full_name",
+    "spouse_birthdate",
+    "spouse_nationality",
+    "spouse_id_number",
+    "dependent_details",
+    "insurance_details"
+  ]
+}

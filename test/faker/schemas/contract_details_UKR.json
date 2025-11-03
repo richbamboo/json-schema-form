@@ -1,0 +1,1322 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 9600000,
+            "x-jsf-errorMessage": {
+              "minimum": "In Ukraine, full-time employees are entitled to a minimum annual salary of UAH 96,000.00."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 35,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "work_hours_per_week"
+        ]
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "const": 40,
+            "default": 40,
+            "description": "All employees in Ukraine are required to work 40 hours in a full-time position.",
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Total of <b>40 hours</b> per week."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "minimum": 24,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 24 days per year"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Full-time employees are entitled to a minimum of 24 paid time off days per year. Please pro-rate for part-time employees. Do not include public or bank holidays in this number."
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "UAH",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "The employee is entitled to 24 days minimum by-law. Please note that Statutory, Bank Holidays and Public Holidays, based on employee's country of residence are excluded from the above",
+      "minimum": 0,
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "22aaa24b-16c7-47c7-adb3-bac2c274a6da",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "f6ddff27-7615-4788-8ebd-7735d03e85d5",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "22aaa24b-16c7-47c7-adb3-bac2c274a6da",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "30cf6e28-d0d7-4ad2-bf74-fa528b28f9a5",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "22aaa24b-16c7-47c7-adb3-bac2c274a6da",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "77ecc338-ed2a-4594-af01-7c6540e448f3",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "22aaa24b-16c7-47c7-adb3-bac2c274a6da",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "3582cfe0-b44e-4b07-95c4-400a9f6b7505",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "22aaa24b-16c7-47c7-adb3-bac2c274a6da",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "31530dda-59fb-4102-9991-abf90496e479",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+              "title": "Allianz Standard (Employee Only) - $123.17 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. No dental or vision coverage. Includes basic maternity benefits up to $6K USD and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-standard",
+                  "displayCost": "$123.17 USD/mo",
+                  "id": "7440a38f-42f3-4f92-a885-a32bbaa4d6fb",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Employee Only)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+              "title": "Allianz Standard (Family) - $184.75 - $369.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. No dental or vision coverage. Includes basic maternity benefits up to $6K USD, pediatric care, and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-standard",
+                  "displayCost": "$184.75 - $369.50 USD/mo",
+                  "id": "a510557f-2a43-4a1a-b66b-ed0cc7abe5be",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Employee Only) (Allianz - Premium Medical (Employee Only); Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only))",
+              "title": "Allianz Premium (Employee Only) - $157.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more outpatient mental health and therapy support.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-premium",
+                  "displayCost": "$157.08 USD/mo",
+                  "id": "ba331f6a-233d-4f58-8276-d6a24bfe10bd",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Family) (Allianz - Premium Medical (Family); Allianz - Premium Dental (Family); Allianz - Premium Vision (Family))",
+              "title": "Allianz Premium (Family) - $235.63 - $471.25 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with higher mental health limits, pediatric coverage, and prescribed therapy sessions.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-premium",
+                  "displayCost": "$235.63 - $471.25 USD/mo",
+                  "id": "10eaa01a-c4f5-40c3-9235-74f692ea03cd",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Employee Only) (Allianz - Gold Medical (Employee Only); Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only))",
+              "title": "Allianz Gold (Employee Only) - $186.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, plus expanded mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzgoldplan-employeeonly",
+                  "displayCost": "$186.83 USD/mo",
+                  "id": "b9e943f6-881b-48d5-8e4e-e30661b7a7de",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Family) (Allianz - Gold Medical (Family); Allianz - Gold Vision (Family); Allianz - Gold Dental (Family))",
+              "title": "Allianz Gold (Family) - $280.25 - $560.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more therapy sessions, extended pediatric care, and broader outpatient benefits.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-gold",
+                  "displayCost": "$280.25 - $560.50 USD/mo",
+                  "id": "716d4544-4b90-4bca-88da-ef1e06f83925",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Employee Only) (Allianz - Platinum Medical (Employee Only); Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only))",
+              "title": "Allianz Platinum (Employee Only) - $206.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD for employee only. Includes dental coverage up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with the most extensive mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzplatinumplan-employeeonly",
+                  "displayCost": "$206.50 USD/mo",
+                  "id": "07090672-9195-4ae7-8b27-1b6e775505dd",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Family) (Allianz - Platinum Medical (Family); Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family))",
+              "title": "Allianz Platinum (Family) - $309.75 - $619.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD. Includes dental up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with comprehensive pediatric care, full mental health support, and maximum therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "3851e5ff-579e-45f7-877e-22c5dbda2c30",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-platinum",
+                  "displayCost": "$309.75 - $619.50 USD/mo",
+                  "id": "e24a53e2-844d-4c2f-bb1e-4f46fbc50e3d",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health",
+                    "dental",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Allianz Platinum (Employee Only) (Allianz - Platinum Medical (Employee Only); Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only))",
+                    "Allianz Gold (Employee Only) (Allianz - Gold Medical (Employee Only); Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only))",
+                    "Allianz Premium (Employee Only) (Allianz - Premium Medical (Employee Only); Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only))",
+                    "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Allianz Platinum (Family) (Allianz - Platinum Medical (Family); Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family))",
+                    "Allianz Gold (Family) (Allianz - Gold Medical (Family); Allianz - Gold Vision (Family); Allianz - Gold Dental (Family))",
+                    "Allianz Premium (Family) (Allianz - Premium Medical (Family); Allianz - Premium Dental (Family); Allianz - Premium Vision (Family))",
+                    "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "9fcefebd-d45e-4eae-b551-a2193c5b7f12",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "3c7ba0fa-c2c4-4d92-a6cf-eb9abb668135",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "9fcefebd-d45e-4eae-b551-a2193c5b7f12",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "39c3f19b-6fe7-4724-bc0e-65ecdbe5747c",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "9fcefebd-d45e-4eae-b551-a2193c5b7f12",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "52dc1f18-c780-4717-ba60-5845b4567e6f",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "9fcefebd-d45e-4eae-b551-a2193c5b7f12",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "af84c4bc-a650-4b77-a347-805e8eece2e2",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "9fcefebd-d45e-4eae-b551-a2193c5b7f12",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "c8a94b06-0392-4597-8943-412eb4a5f257",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance",
+        "health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In this section, you can select benefits for your new team member. If you have existing team members in the same country, your new hire will receive the same benefits as those currently provided to other team members there, maintaining benefit equality. If this is your first hire in the country, you may select from the available options below. Your choice will become the standard benefits for any future hires in the country.",
+        "extra": "Prices are listed in U.S. Dollars (USD). However, when benefits are originally priced in local currencies, these amounts are estimates in USD. The final charge in local currency will be determined using the exchange rate at the time of invoicing. The pricing listed is subject to change based on the age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "UAH",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here.",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "currency_instability": {
+      "const": "acknowledged",
+      "description": "The exchange rate of foreign currency to UAH has become unstable due to recent changes in the National Bank of Ukraine's policies. This means that salaries in UAH can become inappropriate to the agreed range, especially if you and the employee discussed their salary in a foreign currency like USD or EUR. Additionally, we expect annual inflation to reach 20% in Ukraine. We're working with local partners to resolve any issues employees have. But this may require salary adjustments or other incentives to reduce impact on employees. If you would like to discuss this further, don't hesitate to reach out to us.",
+      "title": "UAH currency instability",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "The exchange rate of foreign currency to UAH has become unstable due to recent changes in the National Bank of Ukraine's policies. This means that salaries in UAH can become inappropriate to the agreed range, especially if you and the employee discussed their salary in a foreign currency like USD or EUR.<br/><br/>Additionally, we expect annual inflation to reach 20% in Ukraine. We're working with local partners to resolve any issues employees have. But this may require salary adjustments or other incentives to reduce impact on employees. If you would like to discuss this further, don't hesitate to reach out to us.",
+        "inputType": "checkbox"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length": {
+      "description": "In Ukraine, probation periods can last between 1 and 3 months.",
+      "maximum": 3,
+      "minimum": 1,
+      "title": "Probation period, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 9013034328205,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Why do I need to do this?",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "minimum": 0,
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "UAH",
+        "inputType": "money"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "Cherkasy",
+          "title": "Cherkasy"
+        },
+        {
+          "const": "Chernihiv",
+          "title": "Chernihiv"
+        },
+        {
+          "const": "Chernivtsi",
+          "title": "Chernivtsi"
+        },
+        {
+          "const": "Dnipropetrovsk",
+          "title": "Dnipropetrovsk"
+        },
+        {
+          "const": "Donetsk",
+          "title": "Donetsk"
+        },
+        {
+          "const": "Ivano - Frankivsk",
+          "title": "Ivano - Frankivsk"
+        },
+        {
+          "const": "Kharkiv",
+          "title": "Kharkiv"
+        },
+        {
+          "const": "Kherson",
+          "title": "Kherson"
+        },
+        {
+          "const": "Khmelnytskyi",
+          "title": "Khmelnytskyi"
+        },
+        {
+          "const": "Kyiv",
+          "title": "Kyiv"
+        },
+        {
+          "const": "Kirovohrad",
+          "title": "Kirovohrad"
+        },
+        {
+          "const": "Luhansk",
+          "title": "Luhansk"
+        },
+        {
+          "const": "Lviv",
+          "title": "Lviv"
+        },
+        {
+          "const": "Mykolaiv",
+          "title": "Mykolaiv"
+        },
+        {
+          "const": "Odessa",
+          "title": "Odessa"
+        },
+        {
+          "const": "Poltava",
+          "title": "Poltava"
+        },
+        {
+          "const": "Rivne",
+          "title": "Rivne"
+        },
+        {
+          "const": "Sumy",
+          "title": "Sumy"
+        },
+        {
+          "const": "Ternopil",
+          "title": "Ternopil"
+        },
+        {
+          "const": "Vinnytsia",
+          "title": "Vinnytsia"
+        },
+        {
+          "const": "Volyn",
+          "title": "Volyn"
+        },
+        {
+          "const": "Zakarpattia",
+          "title": "Zakarpattia"
+        },
+        {
+          "const": "Zaporizhia",
+          "title": "Zaporizhia"
+        },
+        {
+          "const": "Zhytomyr",
+          "title": "Zhytomyr"
+        }
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_equipment": {
+      "description": "In case the employee will utilize personal equipment for the performance of work provided, please provide the type of equipment and the amount of expenses you will cover for the employee. (Indicate the amount in Ukrainian hryvnia).",
+      "maxLength": 1000,
+      "title": "Equipment and technical allowance",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "available_pto",
+    "contract_duration_type",
+    "currency_instability",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_signing_bonus",
+    "probation_length",
+    "role_description",
+    "state",
+    "work_address_is_home_address",
+    "work_equipment",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "state",
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "probation_length",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "currency_instability",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "work_equipment",
+    "benefits"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "description": "住所（日本語）",
+      "maxLength": 255,
+      "title": "Address (Japanese character)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "hidden"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "katakana_address": {
+      "description": "住所（フリガナ）",
+      "maxLength": 255,
+      "title": "Address (Japanese katakana character)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "郵便番号ハイフン不要",
+      "maxLength": 255,
+      "title": "Postal code (no hyphens)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "katakana_address",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "katakana_address",
+    "postal_code"
+  ]
+}

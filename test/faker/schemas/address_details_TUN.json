@@ -1,0 +1,108 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "apartment_number": {
+      "description": "(Optional)",
+      "maxLength": 255,
+      "title": "Apartment number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "building_number": {
+      "maxLength": 255,
+      "title": "Building number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "district": {
+      "maxLength": 255,
+      "title": "District",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "governorate": {
+      "maxLength": 255,
+      "title": "Governorate - State/Town",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "municipality": {
+      "maxLength": 255,
+      "title": "Municipality",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "building_number",
+    "city",
+    "governorate",
+    "municipality",
+    "district",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "apartment_number",
+    "building_number",
+    "governorate",
+    "municipality",
+    "district",
+    "postal_code"
+  ]
+}

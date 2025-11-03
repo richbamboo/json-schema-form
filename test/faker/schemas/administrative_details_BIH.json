@@ -1,0 +1,266 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_id_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_id_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_id_number": {
+            "x-jsf-presentation": {
+              "statement": null
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "has_id_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_id_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_id_number": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Please submit it through the platform at least 5 days before you start work. If you want help obtaining a Certificate of Residence or non-resident ID number, reach out to us at <a href=\"mailto:help@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">help@remote.com</a>.",
+                "inputType": "statement",
+                "severity": "info",
+                "title": "We need your ID number before your start date"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "tax_coefficient": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_card": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_tax_card"
+        ]
+      },
+      "then": {
+        "required": [
+          "tax_coefficient"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_tax_card": {
+            "x-jsf-presentation": {
+              "statement": null
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_card": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_tax_card"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_tax_card": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "If you’re a non-resident, you’ll need to submit a tax card and tax coefficient before you reach 6 months of working in Bosnia and Herzegovina. You’ll be able to do this right from your account.",
+                "inputType": "statement",
+                "severity": "info"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "education": {
+      "oneOf": [
+        {
+          "const": "primary",
+          "title": "Primary education"
+        },
+        {
+          "const": "secondary",
+          "title": "Secondary education"
+        },
+        {
+          "const": "university",
+          "title": "University studies"
+        },
+        {
+          "const": "master",
+          "title": "Master studies"
+        },
+        {
+          "const": "doctorate",
+          "title": "Doctoral studies"
+        }
+      ],
+      "title": "Highest level of education",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "has_id_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a Certificate of Residence (CIPS) or non-resident ID number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_tax_card": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a tax card (porezna kartica)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "Enter the ID number on your CIPS. If you’re a non-resident, use your non-resident ID number.",
+      "maxLength": 255,
+      "title": "ID number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3,
+        "skippable": true
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "tax_coefficient": {
+      "description": "This is usually labeled as Osnovni lični odbitak or Faktor osnovnog ličnog odbitka. If there is a number in more than 1 row, use the number in the lowest row.",
+      "maxLength": 255,
+      "title": "Tax card coefficient (koeficijent)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "This is usually labeled as <strong lang=\"bs\">Osnovni lični odbitak</strong> or <strong lang=\"bs\">Faktor osnovnog ličnog odbitka</strong>. If there is a number in more than 1 row, use the number in the lowest row.",
+        "inputType": "text",
+        "skippable": true
+      }
+    }
+  },
+  "required": [
+    "has_id_number",
+    "has_tax_card",
+    "education"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "has_id_number",
+    "id_number",
+    "has_tax_card",
+    "tax_coefficient",
+    "education",
+    "prior_inventions"
+  ]
+}

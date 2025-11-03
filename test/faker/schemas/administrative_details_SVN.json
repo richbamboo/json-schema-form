@@ -1,0 +1,216 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "tax_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_tax_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "tax_number"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "degree_details": {
+      "properties": {
+        "level_of_education": {
+          "description": "Please select your level of education.",
+          "enum": [
+            "high_school",
+            "bachelor",
+            "master",
+            "doctorate_postdoctorate"
+          ],
+          "oneOf": [
+            {
+              "const": "high_school",
+              "title": "High School/equivalent"
+            },
+            {
+              "const": "bachelor",
+              "title": "Bachelor's Degree"
+            },
+            {
+              "const": "master",
+              "title": "Master's Degree"
+            },
+            {
+              "const": "doctorate_postdoctorate",
+              "title": "Doctorate or Post-doctorate"
+            }
+          ],
+          "title": "Level of Education",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        },
+        "title": {
+          "description": "Please insert the title achieved. You can find a list of the fields of education in Slovenia <a href='https://docs.google.com/spreadsheets/d/1Qh9IhwCsSmEB0jAMSCOVzrFX7htBGxa9' target='_blank' rel='noopener noreferrer'>here</a>.",
+          "maxLength": 255,
+          "title": "Title achieved (Naziv izobrazbe)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "level_of_education",
+        "title"
+      ],
+      "title": "Education",
+      "type": "object",
+      "x-jsf-order": [
+        "level_of_education",
+        "title"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "has_tax_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a Slovenian Tax Number (Davčna številka)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "Please provide the number from your Passport or ID (EMŠO)",
+      "maxLength": 255,
+      "title": "ID/Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "id_number_type": {
+      "oneOf": [
+        {
+          "const": "national_id_number",
+          "title": "ID number (EMŠO)"
+        },
+        {
+          "const": "passport",
+          "title": "Passport number"
+        }
+      ],
+      "title": "ID number type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "previous_years_of_experience": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Have you been employed before?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax Number (Davčna številka)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_relief_family_members": {
+      "description": "If yes, we will need you to submit a form declaring who are your dependent family members.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Will you apply for a Tax Relief for Dependent Family Members? (Uveljavlja olajšavo za družinske člane)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "tax_relief_general_claims": {
+      "description": "This applies to employees whose annual tax base is lower than 16000 EUR.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you eligible for an additional tax relief?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "id_number_type",
+    "id_number",
+    "has_tax_number",
+    "degree_details",
+    "previous_years_of_experience",
+    "tax_relief_family_members",
+    "tax_relief_general_claims"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number_type",
+    "id_number",
+    "has_tax_number",
+    "tax_number",
+    "degree_details",
+    "previous_years_of_experience",
+    "tax_relief_family_members",
+    "tax_relief_general_claims"
+  ]
+}

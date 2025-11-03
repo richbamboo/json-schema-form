@@ -1,0 +1,4119 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "local_government_area": {
+      "description": "Enter your local government area",
+      "enum": [
+        "Aba North",
+        "Aba South",
+        "Arochukwu",
+        "Bende",
+        "Ikwuano",
+        "Isiala Ngwa North",
+        "Isiala Ngwa South",
+        "Isuikwuato",
+        "Obi Ngwa",
+        "Ohafia",
+        "Osisioma Ngwa",
+        "Ugwunagbo",
+        "Ukwa East",
+        "Ukwa West",
+        "Umuahia North",
+        "Umuahia South",
+        "Umu Nneochi",
+        "Demsa",
+        "Fufore",
+        "Ganye",
+        "Girei",
+        "Gombi",
+        "Guyuk",
+        "Hong",
+        "Jada",
+        "Lamurde",
+        "Madagali",
+        "Maiha",
+        "Mayo-Belwa",
+        "Michika",
+        "Mubi North",
+        "Mubi South",
+        "Numan",
+        "Shelleng",
+        "Song",
+        "Toungo",
+        "Yola North",
+        "Yola South",
+        "Abak",
+        "Eastern Obolo",
+        "Eket",
+        "Esit-Eket",
+        "Essien Udim",
+        "Etim-Ekpo",
+        "Etinan",
+        "Ibeno",
+        "Ibesikpo-Asutan",
+        "Ibiono-Ibom",
+        "Ika",
+        "Ikono",
+        "Ikot Abasi",
+        "Ikot Ekpene",
+        "Ini",
+        "Itu",
+        "Mbo",
+        "Mkpat-Enin",
+        "Nsit-Atai",
+        "Nsit-Ibom",
+        "Nsit-Ubium",
+        "Obot-Akara",
+        "Okobo",
+        "Onna",
+        "Oron",
+        "Oruk Anam",
+        "Ukanafun",
+        "Udung-Uko",
+        "Uruan",
+        "Urue-Offong/Oruko",
+        "Uyo",
+        "Aguata",
+        "Awka North",
+        "Awka South",
+        "Anambra East",
+        "Anambra West",
+        "Anaocha",
+        "Ayamelum",
+        "Dunukofia",
+        "Ekwusigo",
+        "Idemili North",
+        "Idemili South",
+        "Ihiala",
+        "Njikoka",
+        "Nnewi North",
+        "Nnewi South",
+        "Ogbaru",
+        "Onitsha North",
+        "Onitsha South",
+        "Orumba North",
+        "Orumba South",
+        "Oyi",
+        "Bauchi",
+        "Tafawa Balewa",
+        "Dass",
+        "Toro",
+        "Bogoro",
+        "Ningi",
+        "Warji",
+        "Ganjuwa",
+        "Kirfi",
+        "Alkaleri",
+        "Darazo",
+        "Misau",
+        "Giade",
+        "Shira",
+        "Jama’are",
+        "Katangum",
+        "Itas/Gadau",
+        "Zaki",
+        "Gamawa",
+        "Damban",
+        "Brass",
+        "Ekeremor",
+        "Kolokuma/Opokuma",
+        "Nembe",
+        "Ogbia",
+        "Sagbama",
+        "Southern Ijaw",
+        "Yenagoa",
+        "Ado",
+        "Agatu",
+        "Apa",
+        "Buruku",
+        "Gboko",
+        "Guma",
+        "Gwer East",
+        "Gwer West",
+        "Katsina-Ala",
+        "Konshisha",
+        "Kwande",
+        "Logo",
+        "Makurdi",
+        "Obi",
+        "Ogbadibo",
+        "Ohimini",
+        "Oju",
+        "Okpokwu",
+        "Otukpo",
+        "Tarka",
+        "Ukum",
+        "Ushongo",
+        "Vandeikya",
+        "Hawul",
+        "Jere",
+        "Kaga",
+        "Kala/Balge",
+        "Konduga",
+        "Kukawa",
+        "Kwaya Kusar",
+        "Mafa",
+        "Magumeri",
+        "Maiduguri",
+        "Marte",
+        "Mobbar",
+        "Monguno",
+        "Ngala",
+        "Nganzai",
+        "Shani",
+        "Abadam",
+        "Askira/Uba",
+        "Bama",
+        "Bayo",
+        "Biu",
+        "Chibok",
+        "Damboa",
+        "Dikwa",
+        "Gubio",
+        "Guzamala",
+        "Gwoza",
+        "Abi",
+        "Akamkpa",
+        "Akpabuyo",
+        "Bekwarra",
+        "Bakassi",
+        "Biase",
+        "Boki",
+        "Calabar Municipal",
+        "Calabar South",
+        "Etung",
+        "Ikom",
+        "Obanliku",
+        "Obubra",
+        "Obudu",
+        "Odukpani",
+        "Ogoja",
+        "Yakuur",
+        "Yala",
+        "Aniocha North",
+        "Aniocha South",
+        "Bomadi",
+        "Burutu",
+        "Ethiope East",
+        "Ethiope West",
+        "Ika North East",
+        "Ika South",
+        "Isoko North",
+        "Isoko South",
+        "Ndokwa East",
+        "Ndokwa West",
+        "Okpe",
+        "Oshimili North",
+        "Oshimili South",
+        "Sapele",
+        "Udu",
+        "Ughelli North",
+        "Ughelli South",
+        "Ukwuani",
+        "Uvwie",
+        "Warri South-West",
+        "Patani",
+        "Warri North",
+        "Warri South",
+        "Abakaliki",
+        "Afikpo North",
+        "Afikpo South (Edda)",
+        "Ebonyi",
+        "Ezza North",
+        "Ezza South",
+        "Ikwo",
+        "Ishielu",
+        "Ivo",
+        "Izzi",
+        "Ohaozara",
+        "Ohaukwu",
+        "Onicha",
+        "Akoko-Edo",
+        "Egor",
+        "Esan Central",
+        "Esan North-East",
+        "Esan South-East",
+        "Esan West",
+        "Etsako Central",
+        "Etsako East",
+        "Etsako West",
+        "Igueben",
+        "Ikpoba-Okha",
+        "Oredo",
+        "Orhionmwon",
+        "Ovia North-East",
+        "Ovia South-West",
+        "Owan East",
+        "Owan West",
+        "Uhunmwonde",
+        "Ado-Ekiti",
+        "Ikere",
+        "Oye",
+        "Aiyekire (Gbonyin)",
+        "Efon",
+        "Ekiti East",
+        "Ekiti South-West",
+        "Ekiti West",
+        "Emure",
+        "Ido-Osi",
+        "Ijero",
+        "Ikole",
+        "Ilejemeje",
+        "Irepodun/Ifelodun",
+        "Ise/Orun",
+        "Moba",
+        "Aninri",
+        "Awgu",
+        "Enugu East",
+        "Enugu North",
+        "Enugu South",
+        "Ezeagu",
+        "Igbo Etiti",
+        "Igbo Eze North",
+        "Igbo Eze South",
+        "Isi Uzo",
+        "Nkanu East",
+        "Nkanu West",
+        "Nsukka",
+        "Oji River",
+        "Udenu",
+        "Udi",
+        "Uzo-UwanI",
+        "Akko",
+        "Balanga",
+        "Billiri",
+        "Dukku",
+        "Funakaye",
+        "Gombe",
+        "Kaltungo",
+        "Kwami",
+        "Nafada",
+        "Shongom",
+        "Yamaltu/Deba",
+        "Aboh Mbaise",
+        "Ahiazu Mbaise",
+        "Ehime Mbano",
+        "Ezinihitte Mbaise",
+        "Ideato North",
+        "Ideato South",
+        "Ihitte/Uboma",
+        "Ikeduru",
+        "Isiala Mbano",
+        "Isu",
+        "Mbaitoli",
+        "Ngor Okpala",
+        "Njaba",
+        "Nkwerre",
+        "Nwangele",
+        "Obowo",
+        "Oguta",
+        "Ohaji/Egbema",
+        "Okigwe",
+        "Onuimo",
+        "Orlu",
+        "Orsu",
+        "Oru East",
+        "Oru West",
+        "Owerri Municipal",
+        "Owerri North",
+        "Owerri West",
+        "Njaba South",
+        "Auyo",
+        "Babura",
+        "Biriniwa",
+        "Birnin Kudu",
+        "Buji",
+        "Dutse",
+        "Gagarawa",
+        "Garki",
+        "Gumel",
+        "Guri",
+        "Gwaram",
+        "Gwiwa",
+        "Hadejia",
+        "Jahun",
+        "Kafin Hausa",
+        "Kaugama",
+        "Kazaure",
+        "Kiri Kasama",
+        "Kiyawa",
+        "Maigatari",
+        "Malam Madori",
+        "Miga",
+        "Ringim",
+        "Roni",
+        "Sule Tankarkar",
+        "Taura",
+        "Yankwashi",
+        "Birnin Gwari",
+        "Chikun",
+        "Giwa",
+        "Igabi",
+        "Ikara",
+        "Jaba",
+        "Jema’a",
+        "Kachia",
+        "Kaduna North",
+        "Kaduna South",
+        "Kagarko",
+        "Kajuru",
+        "Kaura",
+        "Kauru",
+        "Kubau",
+        "Kudan",
+        "Lere",
+        "Makarfi",
+        "Sabon Gari",
+        "Sanga",
+        "Soba",
+        "Zangon Kataf",
+        "Zaria",
+        "Ajingi",
+        "Albasu",
+        "Bagwai",
+        "Bebeji",
+        "Bichi",
+        "Bunkure",
+        "Dala",
+        "Dambatta",
+        "Dawakin Kudu",
+        "Dawakin Tofa",
+        "Doguwa",
+        "Fagge",
+        "Gabasawa",
+        "Garko",
+        "Garum Mallam",
+        "Gaya",
+        "Gezawa",
+        "Gwale",
+        "Gwarzo",
+        "Kabo",
+        "Kano Municipal",
+        "Karaye",
+        "Kibiya",
+        "Kiru",
+        "kumbotso",
+        "Kunchi",
+        "Kura",
+        "Madobi",
+        "Makoda",
+        "Minjibir",
+        "Nasarawa",
+        "Rano",
+        "Rimin Gado",
+        "Rogo",
+        "Shanono",
+        "Sumaila",
+        "Takai",
+        "Tarauni",
+        "Tofa",
+        "Tsanyawa",
+        "Tudun Wada",
+        "Ungogo",
+        "Warawa",
+        "Wudil",
+        "Bakori",
+        "Batagarawa",
+        "Batsari",
+        "Baure",
+        "Bindawa",
+        "Charanchi",
+        "Dan Musa",
+        "Dandume",
+        "Danja",
+        "Daura",
+        "Dutsi",
+        "Dutsin-Ma",
+        "Faskari",
+        "Funtua",
+        "Ingawa",
+        "Jibia",
+        "Kafur",
+        "Kaita",
+        "Kankara",
+        "Kankia",
+        "Katsina",
+        "Kurfi",
+        "Kusada",
+        "Mai'Adua",
+        "Malumfashi",
+        "Mani",
+        "Mashi",
+        "Matazu",
+        "Musawa",
+        "Rimi",
+        "Sabuwa",
+        "Safana",
+        "Sandamu",
+        "Zango",
+        "Aleiro",
+        "Arewa Dandi",
+        "Argungu",
+        "Augie",
+        "Bagudo",
+        "Birnin Kebbi",
+        "Bunza",
+        "Dandi",
+        "Fakai",
+        "Gwandu",
+        "Jega",
+        "Kalgo",
+        "Koko/Besse",
+        "Maiyama",
+        "Ngaski",
+        "Sakaba",
+        "Shanga",
+        "Suru",
+        "Wasagu",
+        "Yauri",
+        "Zuru",
+        "Adavi",
+        "Ajaokuta",
+        "Ankpa",
+        "Bassa",
+        "Dekina",
+        "Ibaji",
+        "Idah",
+        "Igalamela-Odolu",
+        "Ijumu",
+        "Kabba/Bunu",
+        "Koton Karfe",
+        "Lokoja",
+        "Mopa-Muro",
+        "Ofu",
+        "Ogori/Magongo",
+        "Okehi",
+        "Okene",
+        "Olamaboro",
+        "Omala",
+        "Yagba East",
+        "Yagba West",
+        "Asa",
+        "Baruten",
+        "Edu",
+        "Ekiti",
+        "Ifelodun",
+        "Ilorin East",
+        "Ilorin South",
+        "Ilorin West",
+        "Irepodun",
+        "Isin",
+        "Kaiama",
+        "Moro",
+        "Offa",
+        "Oke Ero",
+        "Oyun",
+        "Pategi",
+        "Agege",
+        "Alimosho",
+        "Apapa",
+        "Ifako-Ijaye",
+        "Ikeja",
+        "Kosofe",
+        "Mushin",
+        "Oshodi-Isolo",
+        "Shomolu",
+        "Eti-Osa",
+        "Lagos Island",
+        "Lagos Mainland",
+        "Surulere",
+        "Ojo",
+        "Ajeromi-Ifelodun",
+        "Amuwo-Odofin",
+        "Badagry",
+        "Ikorodu",
+        "Ibeju-Lekki",
+        "Epe",
+        "Karu",
+        "Keffi",
+        "Kokona",
+        "Toto",
+        "Akwanga",
+        "Eggon",
+        "Wamba",
+        "Awe",
+        "Doma",
+        "Keana",
+        "Lafia",
+        "Agaie",
+        "Agwara",
+        "Bida",
+        "Borgu",
+        "Bosso",
+        "Chanchaga",
+        "Edati",
+        "Gbako",
+        "Gurara",
+        "Katcha",
+        "Kontagora",
+        "Lapai",
+        "Lavun",
+        "Magama",
+        "Mariga",
+        "Mashegu",
+        "Mokwa",
+        "Munya",
+        "Paikoro",
+        "Rafi",
+        "Rijau",
+        "Shiroro",
+        "Suleja",
+        "Tafa",
+        "Wushishi",
+        "Abeokuta North",
+        "Abeokuta South",
+        "Ado-Odo/Ota",
+        "Ewekoro",
+        "Ifo",
+        "Ijebu East",
+        "Ijebu North",
+        "Ijebu North-East",
+        "Ijebu Ode",
+        "Ikenne",
+        "Imeko Afon",
+        "Ipokia",
+        "Obafemi Owode",
+        "Odogbolu",
+        "Odeda",
+        "Ogun Waterside",
+        "Remo North",
+        "Sagamu",
+        "Yewa North (formerly Egbado North)",
+        "Yewa South (formerly Egbado South)",
+        "Akoko North-East",
+        "Akoko North-West",
+        "Akoko South-East",
+        "Akoko South-West",
+        "Akure North",
+        "Akure South",
+        "Ese Odo",
+        "Idanre",
+        "Ifedore",
+        "Ilaje",
+        "Ile Oluji/Okeigbo",
+        "Irele",
+        "Odigbo",
+        "Okitipupa",
+        "Ondo East",
+        "Ondo West",
+        "Ose",
+        "Owo",
+        "Aiyedaade",
+        "Aiyedire",
+        "Atakunmosa East",
+        "Atakunmosa West",
+        "Boluwaduro",
+        "Boripe",
+        "Ede North",
+        "Ede South",
+        "Egbedore",
+        "Ejigbo",
+        "Ife Central",
+        "Ife East",
+        "Ife North",
+        "Ife South",
+        "Ifedayo",
+        "Ila",
+        "Ilesa East",
+        "Ilesa West",
+        "Irewole",
+        "Isokan",
+        "Iwo",
+        "Obokun",
+        "Odo Otin",
+        "Ola Oluwa",
+        "Olorunda",
+        "Oriade",
+        "Orolu",
+        "Osogbo",
+        "Afijio Jobele",
+        "Akinyele Moniya",
+        "Atiba Ofa Meta",
+        "Atisbo Tede-Okeogun",
+        "Egbeda Egbeda",
+        "Ibadan North Agodi Gate",
+        "Ibadan North-East Iwo Road",
+        "Ibadan North-West Dugbe/Onireke",
+        "Ibadan South-East Mapo",
+        "Ibadan South-West Ring Road",
+        "Ibarapa Central Igbo Ora",
+        "Ibarapa East Eruwa",
+        "Ibarapa North Ayete",
+        "Ido Ido",
+        "Irepo Kisi-Okeogun",
+        "Iseyin Iseyin-Okeogun",
+        "Itesiwaju Otu-Okeogun",
+        "Iwajowa Iwereile-Okeogun",
+        "Kajola Okeho-Okeogun",
+        "Lagelu Iyanaofa",
+        "Ogbomosho North Ogbomoso",
+        "Ogbomosho South Arowomole",
+        "Ogo Oluwa Ajawa",
+        "Olorunsogo Igbeti-Okeogun",
+        "Oluyole Idi Ayunre",
+        "Ona Ara Akanran",
+        "Orelope Igboho-Okeogun",
+        "Ori Ire Ikoyi",
+        "Oyo East Kosobo",
+        "Oyo West Ojongbodu",
+        "Saki East Agoamodu-Okeogun",
+        "Saki West Shaki-Okeogun",
+        "Surulere Iresa Adu",
+        "Barkin Ladi",
+        "Bokkos",
+        "Jos East",
+        "Jos North",
+        "Jos South",
+        "Kanam",
+        "Kanke",
+        "Langtang North",
+        "Langtang South",
+        "Mangu",
+        "Mikang",
+        "Pankshin",
+        "Qua'an Pan",
+        "Riyom",
+        "Shendam",
+        "Wase",
+        "Port Harcourt",
+        "Obio-Akpor",
+        "Okrika",
+        "Ogu–Bolo",
+        "Eleme",
+        "Tai",
+        "Gokana",
+        "Khana",
+        "Oyigbo",
+        "Opobo–Nkoro",
+        "Andoni",
+        "Bonny",
+        "Degema",
+        "Asari-Toru",
+        "Akuku-Toru",
+        "Abua–Odual",
+        "Ahoada West",
+        "Ahoada East",
+        "Ogba–Egbema–Ndoni",
+        "Emohua",
+        "Ikwerre",
+        "Etche",
+        "Omuma",
+        "Binji",
+        "Bodinga",
+        "Dange Shuni",
+        "Gada",
+        "Goronyo",
+        "Gudu",
+        "Gwadabawa",
+        "Illela",
+        "Isa",
+        "Kebbe",
+        "Kware",
+        "Rabah",
+        "Sabon Birni",
+        "Shagari",
+        "Silame",
+        "Sokoto North",
+        "Sokoto South",
+        "Tambuwal",
+        "Tangaza",
+        "Tureta",
+        "Wamako",
+        "Wurno",
+        "Yabo",
+        "Ardo Kola",
+        "Bali",
+        "Donga",
+        "Gashaka",
+        "Gassol",
+        "Ibi",
+        "Jalingo",
+        "Karim Lamido",
+        "Kurmi",
+        "Lau",
+        "Sardauna",
+        "Takum",
+        "Ussa",
+        "Wukari",
+        "Yorro",
+        "Zing",
+        "Bade",
+        "Bursari",
+        "Damaturu",
+        "Geidam",
+        "Gujba",
+        "Gulani",
+        "Fika",
+        "Fune",
+        "Jakusko",
+        "Karasuwa",
+        "Machina",
+        "Nangere",
+        "Nguru",
+        "Potiskum",
+        "Tarmuwa",
+        "Yunusari",
+        "Yusufari",
+        "Anka",
+        "Bakura",
+        "Birnin Magaji/Kiyaw",
+        "Bukkuyum",
+        "Bungudu",
+        "Chafe (Tsafe)",
+        "Gummi",
+        "Gusau",
+        "Kaura Namoda",
+        "Maradun",
+        "Maru",
+        "Shinkafi",
+        "Talata Mafara",
+        "Zurmi",
+        "Abaji",
+        "Abuja",
+        "Bwari",
+        "Gwagwalada",
+        "Kuje",
+        "Kwali"
+      ],
+      "title": "Local Government Area",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Aba North",
+            "value": "Aba North"
+          },
+          {
+            "label": "Aba South",
+            "value": "Aba South"
+          },
+          {
+            "label": "Arochukwu",
+            "value": "Arochukwu"
+          },
+          {
+            "label": "Bende",
+            "value": "Bende"
+          },
+          {
+            "label": "Ikwuano",
+            "value": "Ikwuano"
+          },
+          {
+            "label": "Isiala Ngwa North",
+            "value": "Isiala Ngwa North"
+          },
+          {
+            "label": "Isiala Ngwa South",
+            "value": "Isiala Ngwa South"
+          },
+          {
+            "label": "Isuikwuato",
+            "value": "Isuikwuato"
+          },
+          {
+            "label": "Obi Ngwa",
+            "value": "Obi Ngwa"
+          },
+          {
+            "label": "Ohafia",
+            "value": "Ohafia"
+          },
+          {
+            "label": "Osisioma Ngwa",
+            "value": "Osisioma Ngwa"
+          },
+          {
+            "label": "Ugwunagbo",
+            "value": "Ugwunagbo"
+          },
+          {
+            "label": "Ukwa East",
+            "value": "Ukwa East"
+          },
+          {
+            "label": "Ukwa West",
+            "value": "Ukwa West"
+          },
+          {
+            "label": "Umuahia North",
+            "value": "Umuahia North"
+          },
+          {
+            "label": "Umuahia South",
+            "value": "Umuahia South"
+          },
+          {
+            "label": "Umu Nneochi",
+            "value": "Umu Nneochi"
+          },
+          {
+            "label": "Demsa",
+            "value": "Demsa"
+          },
+          {
+            "label": "Fufore",
+            "value": "Fufore"
+          },
+          {
+            "label": "Ganye",
+            "value": "Ganye"
+          },
+          {
+            "label": "Girei",
+            "value": "Girei"
+          },
+          {
+            "label": "Gombi",
+            "value": "Gombi"
+          },
+          {
+            "label": "Guyuk",
+            "value": "Guyuk"
+          },
+          {
+            "label": "Hong",
+            "value": "Hong"
+          },
+          {
+            "label": "Jada",
+            "value": "Jada"
+          },
+          {
+            "label": "Lamurde",
+            "value": "Lamurde"
+          },
+          {
+            "label": "Madagali",
+            "value": "Madagali"
+          },
+          {
+            "label": "Maiha",
+            "value": "Maiha"
+          },
+          {
+            "label": "Mayo-Belwa",
+            "value": "Mayo-Belwa"
+          },
+          {
+            "label": "Michika",
+            "value": "Michika"
+          },
+          {
+            "label": "Mubi North",
+            "value": "Mubi North"
+          },
+          {
+            "label": "Mubi South",
+            "value": "Mubi South"
+          },
+          {
+            "label": "Numan",
+            "value": "Numan"
+          },
+          {
+            "label": "Shelleng",
+            "value": "Shelleng"
+          },
+          {
+            "label": "Song",
+            "value": "Song"
+          },
+          {
+            "label": "Toungo",
+            "value": "Toungo"
+          },
+          {
+            "label": "Yola North",
+            "value": "Yola North"
+          },
+          {
+            "label": "Yola South",
+            "value": "Yola South"
+          },
+          {
+            "label": "Abak",
+            "value": "Abak"
+          },
+          {
+            "label": "Eastern Obolo",
+            "value": "Eastern Obolo"
+          },
+          {
+            "label": "Eket",
+            "value": "Eket"
+          },
+          {
+            "label": "Esit-Eket",
+            "value": "Esit-Eket"
+          },
+          {
+            "label": "Essien Udim",
+            "value": "Essien Udim"
+          },
+          {
+            "label": "Etim-Ekpo",
+            "value": "Etim-Ekpo"
+          },
+          {
+            "label": "Etinan",
+            "value": "Etinan"
+          },
+          {
+            "label": "Ibeno",
+            "value": "Ibeno"
+          },
+          {
+            "label": "Ibesikpo-Asutan",
+            "value": "Ibesikpo-Asutan"
+          },
+          {
+            "label": "Ibiono-Ibom",
+            "value": "Ibiono-Ibom"
+          },
+          {
+            "label": "Ika",
+            "value": "Ika"
+          },
+          {
+            "label": "Ikono",
+            "value": "Ikono"
+          },
+          {
+            "label": "Ikot Abasi",
+            "value": "Ikot Abasi"
+          },
+          {
+            "label": "Ikot Ekpene",
+            "value": "Ikot Ekpene"
+          },
+          {
+            "label": "Ini",
+            "value": "Ini"
+          },
+          {
+            "label": "Itu",
+            "value": "Itu"
+          },
+          {
+            "label": "Mbo",
+            "value": "Mbo"
+          },
+          {
+            "label": "Mkpat-Enin",
+            "value": "Mkpat-Enin"
+          },
+          {
+            "label": "Nsit-Atai",
+            "value": "Nsit-Atai"
+          },
+          {
+            "label": "Nsit-Ibom",
+            "value": "Nsit-Ibom"
+          },
+          {
+            "label": "Nsit-Ubium",
+            "value": "Nsit-Ubium"
+          },
+          {
+            "label": "Obot-Akara",
+            "value": "Obot-Akara"
+          },
+          {
+            "label": "Okobo",
+            "value": "Okobo"
+          },
+          {
+            "label": "Onna",
+            "value": "Onna"
+          },
+          {
+            "label": "Oron",
+            "value": "Oron"
+          },
+          {
+            "label": "Oruk Anam",
+            "value": "Oruk Anam"
+          },
+          {
+            "label": "Ukanafun",
+            "value": "Ukanafun"
+          },
+          {
+            "label": "Udung-Uko",
+            "value": "Udung-Uko"
+          },
+          {
+            "label": "Uruan",
+            "value": "Uruan"
+          },
+          {
+            "label": "Urue-Offong/Oruko",
+            "value": "Urue-Offong/Oruko"
+          },
+          {
+            "label": "Uyo",
+            "value": "Uyo"
+          },
+          {
+            "label": "Aguata",
+            "value": "Aguata"
+          },
+          {
+            "label": "Awka North",
+            "value": "Awka North"
+          },
+          {
+            "label": "Awka South",
+            "value": "Awka South"
+          },
+          {
+            "label": "Anambra East",
+            "value": "Anambra East"
+          },
+          {
+            "label": "Anambra West",
+            "value": "Anambra West"
+          },
+          {
+            "label": "Anaocha",
+            "value": "Anaocha"
+          },
+          {
+            "label": "Ayamelum",
+            "value": "Ayamelum"
+          },
+          {
+            "label": "Dunukofia",
+            "value": "Dunukofia"
+          },
+          {
+            "label": "Ekwusigo",
+            "value": "Ekwusigo"
+          },
+          {
+            "label": "Idemili North",
+            "value": "Idemili North"
+          },
+          {
+            "label": "Idemili South",
+            "value": "Idemili South"
+          },
+          {
+            "label": "Ihiala",
+            "value": "Ihiala"
+          },
+          {
+            "label": "Njikoka",
+            "value": "Njikoka"
+          },
+          {
+            "label": "Nnewi North",
+            "value": "Nnewi North"
+          },
+          {
+            "label": "Nnewi South",
+            "value": "Nnewi South"
+          },
+          {
+            "label": "Ogbaru",
+            "value": "Ogbaru"
+          },
+          {
+            "label": "Onitsha North",
+            "value": "Onitsha North"
+          },
+          {
+            "label": "Onitsha South",
+            "value": "Onitsha South"
+          },
+          {
+            "label": "Orumba North",
+            "value": "Orumba North"
+          },
+          {
+            "label": "Orumba South",
+            "value": "Orumba South"
+          },
+          {
+            "label": "Oyi",
+            "value": "Oyi"
+          },
+          {
+            "label": "Bauchi",
+            "value": "Bauchi"
+          },
+          {
+            "label": "Tafawa Balewa",
+            "value": "Tafawa Balewa"
+          },
+          {
+            "label": "Dass",
+            "value": "Dass"
+          },
+          {
+            "label": "Toro",
+            "value": "Toro"
+          },
+          {
+            "label": "Bogoro",
+            "value": "Bogoro"
+          },
+          {
+            "label": "Ningi",
+            "value": "Ningi"
+          },
+          {
+            "label": "Warji",
+            "value": "Warji"
+          },
+          {
+            "label": "Ganjuwa",
+            "value": "Ganjuwa"
+          },
+          {
+            "label": "Kirfi",
+            "value": "Kirfi"
+          },
+          {
+            "label": "Alkaleri",
+            "value": "Alkaleri"
+          },
+          {
+            "label": "Darazo",
+            "value": "Darazo"
+          },
+          {
+            "label": "Misau",
+            "value": "Misau"
+          },
+          {
+            "label": "Giade",
+            "value": "Giade"
+          },
+          {
+            "label": "Shira",
+            "value": "Shira"
+          },
+          {
+            "label": "Jama’are",
+            "value": "Jama’are"
+          },
+          {
+            "label": "Katangum",
+            "value": "Katangum"
+          },
+          {
+            "label": "Itas/Gadau",
+            "value": "Itas/Gadau"
+          },
+          {
+            "label": "Zaki",
+            "value": "Zaki"
+          },
+          {
+            "label": "Gamawa",
+            "value": "Gamawa"
+          },
+          {
+            "label": "Damban",
+            "value": "Damban"
+          },
+          {
+            "label": "Brass",
+            "value": "Brass"
+          },
+          {
+            "label": "Ekeremor",
+            "value": "Ekeremor"
+          },
+          {
+            "label": "Kolokuma/Opokuma",
+            "value": "Kolokuma/Opokuma"
+          },
+          {
+            "label": "Nembe",
+            "value": "Nembe"
+          },
+          {
+            "label": "Ogbia",
+            "value": "Ogbia"
+          },
+          {
+            "label": "Sagbama",
+            "value": "Sagbama"
+          },
+          {
+            "label": "Southern Ijaw",
+            "value": "Southern Ijaw"
+          },
+          {
+            "label": "Yenagoa",
+            "value": "Yenagoa"
+          },
+          {
+            "label": "Ado",
+            "value": "Ado"
+          },
+          {
+            "label": "Agatu",
+            "value": "Agatu"
+          },
+          {
+            "label": "Apa",
+            "value": "Apa"
+          },
+          {
+            "label": "Buruku",
+            "value": "Buruku"
+          },
+          {
+            "label": "Gboko",
+            "value": "Gboko"
+          },
+          {
+            "label": "Guma",
+            "value": "Guma"
+          },
+          {
+            "label": "Gwer East",
+            "value": "Gwer East"
+          },
+          {
+            "label": "Gwer West",
+            "value": "Gwer West"
+          },
+          {
+            "label": "Katsina-Ala",
+            "value": "Katsina-Ala"
+          },
+          {
+            "label": "Konshisha",
+            "value": "Konshisha"
+          },
+          {
+            "label": "Kwande",
+            "value": "Kwande"
+          },
+          {
+            "label": "Logo",
+            "value": "Logo"
+          },
+          {
+            "label": "Makurdi",
+            "value": "Makurdi"
+          },
+          {
+            "label": "Obi",
+            "value": "Obi"
+          },
+          {
+            "label": "Ogbadibo",
+            "value": "Ogbadibo"
+          },
+          {
+            "label": "Ohimini",
+            "value": "Ohimini"
+          },
+          {
+            "label": "Oju",
+            "value": "Oju"
+          },
+          {
+            "label": "Okpokwu",
+            "value": "Okpokwu"
+          },
+          {
+            "label": "Otukpo",
+            "value": "Otukpo"
+          },
+          {
+            "label": "Tarka",
+            "value": "Tarka"
+          },
+          {
+            "label": "Ukum",
+            "value": "Ukum"
+          },
+          {
+            "label": "Ushongo",
+            "value": "Ushongo"
+          },
+          {
+            "label": "Vandeikya",
+            "value": "Vandeikya"
+          },
+          {
+            "label": "Hawul",
+            "value": "Hawul"
+          },
+          {
+            "label": "Jere",
+            "value": "Jere"
+          },
+          {
+            "label": "Kaga",
+            "value": "Kaga"
+          },
+          {
+            "label": "Kala/Balge",
+            "value": "Kala/Balge"
+          },
+          {
+            "label": "Konduga",
+            "value": "Konduga"
+          },
+          {
+            "label": "Kukawa",
+            "value": "Kukawa"
+          },
+          {
+            "label": "Kwaya Kusar",
+            "value": "Kwaya Kusar"
+          },
+          {
+            "label": "Mafa",
+            "value": "Mafa"
+          },
+          {
+            "label": "Magumeri",
+            "value": "Magumeri"
+          },
+          {
+            "label": "Maiduguri",
+            "value": "Maiduguri"
+          },
+          {
+            "label": "Marte",
+            "value": "Marte"
+          },
+          {
+            "label": "Mobbar",
+            "value": "Mobbar"
+          },
+          {
+            "label": "Monguno",
+            "value": "Monguno"
+          },
+          {
+            "label": "Ngala",
+            "value": "Ngala"
+          },
+          {
+            "label": "Nganzai",
+            "value": "Nganzai"
+          },
+          {
+            "label": "Shani",
+            "value": "Shani"
+          },
+          {
+            "label": "Abadam",
+            "value": "Abadam"
+          },
+          {
+            "label": "Askira/Uba",
+            "value": "Askira/Uba"
+          },
+          {
+            "label": "Bama",
+            "value": "Bama"
+          },
+          {
+            "label": "Bayo",
+            "value": "Bayo"
+          },
+          {
+            "label": "Biu",
+            "value": "Biu"
+          },
+          {
+            "label": "Chibok",
+            "value": "Chibok"
+          },
+          {
+            "label": "Damboa",
+            "value": "Damboa"
+          },
+          {
+            "label": "Dikwa",
+            "value": "Dikwa"
+          },
+          {
+            "label": "Gubio",
+            "value": "Gubio"
+          },
+          {
+            "label": "Guzamala",
+            "value": "Guzamala"
+          },
+          {
+            "label": "Gwoza",
+            "value": "Gwoza"
+          },
+          {
+            "label": "Abi",
+            "value": "Abi"
+          },
+          {
+            "label": "Akamkpa",
+            "value": "Akamkpa"
+          },
+          {
+            "label": "Akpabuyo",
+            "value": "Akpabuyo"
+          },
+          {
+            "label": "Bekwarra",
+            "value": "Bekwarra"
+          },
+          {
+            "label": "Bakassi",
+            "value": "Bakassi"
+          },
+          {
+            "label": "Biase",
+            "value": "Biase"
+          },
+          {
+            "label": "Boki",
+            "value": "Boki"
+          },
+          {
+            "label": "Calabar Municipal",
+            "value": "Calabar Municipal"
+          },
+          {
+            "label": "Calabar South",
+            "value": "Calabar South"
+          },
+          {
+            "label": "Etung",
+            "value": "Etung"
+          },
+          {
+            "label": "Ikom",
+            "value": "Ikom"
+          },
+          {
+            "label": "Obanliku",
+            "value": "Obanliku"
+          },
+          {
+            "label": "Obubra",
+            "value": "Obubra"
+          },
+          {
+            "label": "Obudu",
+            "value": "Obudu"
+          },
+          {
+            "label": "Odukpani",
+            "value": "Odukpani"
+          },
+          {
+            "label": "Ogoja",
+            "value": "Ogoja"
+          },
+          {
+            "label": "Yakuur",
+            "value": "Yakuur"
+          },
+          {
+            "label": "Yala",
+            "value": "Yala"
+          },
+          {
+            "label": "Aniocha North",
+            "value": "Aniocha North"
+          },
+          {
+            "label": "Aniocha South",
+            "value": "Aniocha South"
+          },
+          {
+            "label": "Bomadi",
+            "value": "Bomadi"
+          },
+          {
+            "label": "Burutu",
+            "value": "Burutu"
+          },
+          {
+            "label": "Ethiope East",
+            "value": "Ethiope East"
+          },
+          {
+            "label": "Ethiope West",
+            "value": "Ethiope West"
+          },
+          {
+            "label": "Ika North East",
+            "value": "Ika North East"
+          },
+          {
+            "label": "Ika South",
+            "value": "Ika South"
+          },
+          {
+            "label": "Isoko North",
+            "value": "Isoko North"
+          },
+          {
+            "label": "Isoko South",
+            "value": "Isoko South"
+          },
+          {
+            "label": "Ndokwa East",
+            "value": "Ndokwa East"
+          },
+          {
+            "label": "Ndokwa West",
+            "value": "Ndokwa West"
+          },
+          {
+            "label": "Okpe",
+            "value": "Okpe"
+          },
+          {
+            "label": "Oshimili North",
+            "value": "Oshimili North"
+          },
+          {
+            "label": "Oshimili South",
+            "value": "Oshimili South"
+          },
+          {
+            "label": "Sapele",
+            "value": "Sapele"
+          },
+          {
+            "label": "Udu",
+            "value": "Udu"
+          },
+          {
+            "label": "Ughelli North",
+            "value": "Ughelli North"
+          },
+          {
+            "label": "Ughelli South",
+            "value": "Ughelli South"
+          },
+          {
+            "label": "Ukwuani",
+            "value": "Ukwuani"
+          },
+          {
+            "label": "Uvwie",
+            "value": "Uvwie"
+          },
+          {
+            "label": "Warri South-West",
+            "value": "Warri South-West"
+          },
+          {
+            "label": "Patani",
+            "value": "Patani"
+          },
+          {
+            "label": "Warri North",
+            "value": "Warri North"
+          },
+          {
+            "label": "Warri South",
+            "value": "Warri South"
+          },
+          {
+            "label": "Abakaliki",
+            "value": "Abakaliki"
+          },
+          {
+            "label": "Afikpo North",
+            "value": "Afikpo North"
+          },
+          {
+            "label": "Afikpo South (Edda)",
+            "value": "Afikpo South (Edda)"
+          },
+          {
+            "label": "Ebonyi",
+            "value": "Ebonyi"
+          },
+          {
+            "label": "Ezza North",
+            "value": "Ezza North"
+          },
+          {
+            "label": "Ezza South",
+            "value": "Ezza South"
+          },
+          {
+            "label": "Ikwo",
+            "value": "Ikwo"
+          },
+          {
+            "label": "Ishielu",
+            "value": "Ishielu"
+          },
+          {
+            "label": "Ivo",
+            "value": "Ivo"
+          },
+          {
+            "label": "Izzi",
+            "value": "Izzi"
+          },
+          {
+            "label": "Ohaozara",
+            "value": "Ohaozara"
+          },
+          {
+            "label": "Ohaukwu",
+            "value": "Ohaukwu"
+          },
+          {
+            "label": "Onicha",
+            "value": "Onicha"
+          },
+          {
+            "label": "Akoko-Edo",
+            "value": "Akoko-Edo"
+          },
+          {
+            "label": "Egor",
+            "value": "Egor"
+          },
+          {
+            "label": "Esan Central",
+            "value": "Esan Central"
+          },
+          {
+            "label": "Esan North-East",
+            "value": "Esan North-East"
+          },
+          {
+            "label": "Esan South-East",
+            "value": "Esan South-East"
+          },
+          {
+            "label": "Esan West",
+            "value": "Esan West"
+          },
+          {
+            "label": "Etsako Central",
+            "value": "Etsako Central"
+          },
+          {
+            "label": "Etsako East",
+            "value": "Etsako East"
+          },
+          {
+            "label": "Etsako West",
+            "value": "Etsako West"
+          },
+          {
+            "label": "Igueben",
+            "value": "Igueben"
+          },
+          {
+            "label": "Ikpoba-Okha",
+            "value": "Ikpoba-Okha"
+          },
+          {
+            "label": "Oredo",
+            "value": "Oredo"
+          },
+          {
+            "label": "Orhionmwon",
+            "value": "Orhionmwon"
+          },
+          {
+            "label": "Ovia North-East",
+            "value": "Ovia North-East"
+          },
+          {
+            "label": "Ovia South-West",
+            "value": "Ovia South-West"
+          },
+          {
+            "label": "Owan East",
+            "value": "Owan East"
+          },
+          {
+            "label": "Owan West",
+            "value": "Owan West"
+          },
+          {
+            "label": "Uhunmwonde",
+            "value": "Uhunmwonde"
+          },
+          {
+            "label": "Ado-Ekiti",
+            "value": "Ado-Ekiti"
+          },
+          {
+            "label": "Ikere",
+            "value": "Ikere"
+          },
+          {
+            "label": "Oye",
+            "value": "Oye"
+          },
+          {
+            "label": "Aiyekire (Gbonyin)",
+            "value": "Aiyekire (Gbonyin)"
+          },
+          {
+            "label": "Efon",
+            "value": "Efon"
+          },
+          {
+            "label": "Ekiti East",
+            "value": "Ekiti East"
+          },
+          {
+            "label": "Ekiti South-West",
+            "value": "Ekiti South-West"
+          },
+          {
+            "label": "Ekiti West",
+            "value": "Ekiti West"
+          },
+          {
+            "label": "Emure",
+            "value": "Emure"
+          },
+          {
+            "label": "Ido-Osi",
+            "value": "Ido-Osi"
+          },
+          {
+            "label": "Ijero",
+            "value": "Ijero"
+          },
+          {
+            "label": "Ikole",
+            "value": "Ikole"
+          },
+          {
+            "label": "Ilejemeje",
+            "value": "Ilejemeje"
+          },
+          {
+            "label": "Irepodun/Ifelodun",
+            "value": "Irepodun/Ifelodun"
+          },
+          {
+            "label": "Ise/Orun",
+            "value": "Ise/Orun"
+          },
+          {
+            "label": "Moba",
+            "value": "Moba"
+          },
+          {
+            "label": "Aninri",
+            "value": "Aninri"
+          },
+          {
+            "label": "Awgu",
+            "value": "Awgu"
+          },
+          {
+            "label": "Enugu East",
+            "value": "Enugu East"
+          },
+          {
+            "label": "Enugu North",
+            "value": "Enugu North"
+          },
+          {
+            "label": "Enugu South",
+            "value": "Enugu South"
+          },
+          {
+            "label": "Ezeagu",
+            "value": "Ezeagu"
+          },
+          {
+            "label": "Igbo Etiti",
+            "value": "Igbo Etiti"
+          },
+          {
+            "label": "Igbo Eze North",
+            "value": "Igbo Eze North"
+          },
+          {
+            "label": "Igbo Eze South",
+            "value": "Igbo Eze South"
+          },
+          {
+            "label": "Isi Uzo",
+            "value": "Isi Uzo"
+          },
+          {
+            "label": "Nkanu East",
+            "value": "Nkanu East"
+          },
+          {
+            "label": "Nkanu West",
+            "value": "Nkanu West"
+          },
+          {
+            "label": "Nsukka",
+            "value": "Nsukka"
+          },
+          {
+            "label": "Oji River",
+            "value": "Oji River"
+          },
+          {
+            "label": "Udenu",
+            "value": "Udenu"
+          },
+          {
+            "label": "Udi",
+            "value": "Udi"
+          },
+          {
+            "label": "Uzo-UwanI",
+            "value": "Uzo-UwanI"
+          },
+          {
+            "label": "Akko",
+            "value": "Akko"
+          },
+          {
+            "label": "Balanga",
+            "value": "Balanga"
+          },
+          {
+            "label": "Billiri",
+            "value": "Billiri"
+          },
+          {
+            "label": "Dukku",
+            "value": "Dukku"
+          },
+          {
+            "label": "Funakaye",
+            "value": "Funakaye"
+          },
+          {
+            "label": "Gombe",
+            "value": "Gombe"
+          },
+          {
+            "label": "Kaltungo",
+            "value": "Kaltungo"
+          },
+          {
+            "label": "Kwami",
+            "value": "Kwami"
+          },
+          {
+            "label": "Nafada",
+            "value": "Nafada"
+          },
+          {
+            "label": "Shongom",
+            "value": "Shongom"
+          },
+          {
+            "label": "Yamaltu/Deba",
+            "value": "Yamaltu/Deba"
+          },
+          {
+            "label": "Aboh Mbaise",
+            "value": "Aboh Mbaise"
+          },
+          {
+            "label": "Ahiazu Mbaise",
+            "value": "Ahiazu Mbaise"
+          },
+          {
+            "label": "Ehime Mbano",
+            "value": "Ehime Mbano"
+          },
+          {
+            "label": "Ezinihitte Mbaise",
+            "value": "Ezinihitte Mbaise"
+          },
+          {
+            "label": "Ideato North",
+            "value": "Ideato North"
+          },
+          {
+            "label": "Ideato South",
+            "value": "Ideato South"
+          },
+          {
+            "label": "Ihitte/Uboma",
+            "value": "Ihitte/Uboma"
+          },
+          {
+            "label": "Ikeduru",
+            "value": "Ikeduru"
+          },
+          {
+            "label": "Isiala Mbano",
+            "value": "Isiala Mbano"
+          },
+          {
+            "label": "Isu",
+            "value": "Isu"
+          },
+          {
+            "label": "Mbaitoli",
+            "value": "Mbaitoli"
+          },
+          {
+            "label": "Ngor Okpala",
+            "value": "Ngor Okpala"
+          },
+          {
+            "label": "Njaba",
+            "value": "Njaba"
+          },
+          {
+            "label": "Nkwerre",
+            "value": "Nkwerre"
+          },
+          {
+            "label": "Nwangele",
+            "value": "Nwangele"
+          },
+          {
+            "label": "Obowo",
+            "value": "Obowo"
+          },
+          {
+            "label": "Oguta",
+            "value": "Oguta"
+          },
+          {
+            "label": "Ohaji/Egbema",
+            "value": "Ohaji/Egbema"
+          },
+          {
+            "label": "Okigwe",
+            "value": "Okigwe"
+          },
+          {
+            "label": "Onuimo",
+            "value": "Onuimo"
+          },
+          {
+            "label": "Orlu",
+            "value": "Orlu"
+          },
+          {
+            "label": "Orsu",
+            "value": "Orsu"
+          },
+          {
+            "label": "Oru East",
+            "value": "Oru East"
+          },
+          {
+            "label": "Oru West",
+            "value": "Oru West"
+          },
+          {
+            "label": "Owerri Municipal",
+            "value": "Owerri Municipal"
+          },
+          {
+            "label": "Owerri North",
+            "value": "Owerri North"
+          },
+          {
+            "label": "Owerri West",
+            "value": "Owerri West"
+          },
+          {
+            "label": "Njaba South",
+            "value": "Njaba South"
+          },
+          {
+            "label": "Auyo",
+            "value": "Auyo"
+          },
+          {
+            "label": "Babura",
+            "value": "Babura"
+          },
+          {
+            "label": "Biriniwa",
+            "value": "Biriniwa"
+          },
+          {
+            "label": "Birnin Kudu",
+            "value": "Birnin Kudu"
+          },
+          {
+            "label": "Buji",
+            "value": "Buji"
+          },
+          {
+            "label": "Dutse",
+            "value": "Dutse"
+          },
+          {
+            "label": "Gagarawa",
+            "value": "Gagarawa"
+          },
+          {
+            "label": "Garki",
+            "value": "Garki"
+          },
+          {
+            "label": "Gumel",
+            "value": "Gumel"
+          },
+          {
+            "label": "Guri",
+            "value": "Guri"
+          },
+          {
+            "label": "Gwaram",
+            "value": "Gwaram"
+          },
+          {
+            "label": "Gwiwa",
+            "value": "Gwiwa"
+          },
+          {
+            "label": "Hadejia",
+            "value": "Hadejia"
+          },
+          {
+            "label": "Jahun",
+            "value": "Jahun"
+          },
+          {
+            "label": "Kafin Hausa",
+            "value": "Kafin Hausa"
+          },
+          {
+            "label": "Kaugama",
+            "value": "Kaugama"
+          },
+          {
+            "label": "Kazaure",
+            "value": "Kazaure"
+          },
+          {
+            "label": "Kiri Kasama",
+            "value": "Kiri Kasama"
+          },
+          {
+            "label": "Kiyawa",
+            "value": "Kiyawa"
+          },
+          {
+            "label": "Maigatari",
+            "value": "Maigatari"
+          },
+          {
+            "label": "Malam Madori",
+            "value": "Malam Madori"
+          },
+          {
+            "label": "Miga",
+            "value": "Miga"
+          },
+          {
+            "label": "Ringim",
+            "value": "Ringim"
+          },
+          {
+            "label": "Roni",
+            "value": "Roni"
+          },
+          {
+            "label": "Sule Tankarkar",
+            "value": "Sule Tankarkar"
+          },
+          {
+            "label": "Taura",
+            "value": "Taura"
+          },
+          {
+            "label": "Yankwashi",
+            "value": "Yankwashi"
+          },
+          {
+            "label": "Birnin Gwari",
+            "value": "Birnin Gwari"
+          },
+          {
+            "label": "Chikun",
+            "value": "Chikun"
+          },
+          {
+            "label": "Giwa",
+            "value": "Giwa"
+          },
+          {
+            "label": "Igabi",
+            "value": "Igabi"
+          },
+          {
+            "label": "Ikara",
+            "value": "Ikara"
+          },
+          {
+            "label": "Jaba",
+            "value": "Jaba"
+          },
+          {
+            "label": "Jema’a",
+            "value": "Jema’a"
+          },
+          {
+            "label": "Kachia",
+            "value": "Kachia"
+          },
+          {
+            "label": "Kaduna North",
+            "value": "Kaduna North"
+          },
+          {
+            "label": "Kaduna South",
+            "value": "Kaduna South"
+          },
+          {
+            "label": "Kagarko",
+            "value": "Kagarko"
+          },
+          {
+            "label": "Kajuru",
+            "value": "Kajuru"
+          },
+          {
+            "label": "Kaura",
+            "value": "Kaura"
+          },
+          {
+            "label": "Kauru",
+            "value": "Kauru"
+          },
+          {
+            "label": "Kubau",
+            "value": "Kubau"
+          },
+          {
+            "label": "Kudan",
+            "value": "Kudan"
+          },
+          {
+            "label": "Lere",
+            "value": "Lere"
+          },
+          {
+            "label": "Makarfi",
+            "value": "Makarfi"
+          },
+          {
+            "label": "Sabon Gari",
+            "value": "Sabon Gari"
+          },
+          {
+            "label": "Sanga",
+            "value": "Sanga"
+          },
+          {
+            "label": "Soba",
+            "value": "Soba"
+          },
+          {
+            "label": "Zangon Kataf",
+            "value": "Zangon Kataf"
+          },
+          {
+            "label": "Zaria",
+            "value": "Zaria"
+          },
+          {
+            "label": "Ajingi",
+            "value": "Ajingi"
+          },
+          {
+            "label": "Albasu",
+            "value": "Albasu"
+          },
+          {
+            "label": "Bagwai",
+            "value": "Bagwai"
+          },
+          {
+            "label": "Bebeji",
+            "value": "Bebeji"
+          },
+          {
+            "label": "Bichi",
+            "value": "Bichi"
+          },
+          {
+            "label": "Bunkure",
+            "value": "Bunkure"
+          },
+          {
+            "label": "Dala",
+            "value": "Dala"
+          },
+          {
+            "label": "Dambatta",
+            "value": "Dambatta"
+          },
+          {
+            "label": "Dawakin Kudu",
+            "value": "Dawakin Kudu"
+          },
+          {
+            "label": "Dawakin Tofa",
+            "value": "Dawakin Tofa"
+          },
+          {
+            "label": "Doguwa",
+            "value": "Doguwa"
+          },
+          {
+            "label": "Fagge",
+            "value": "Fagge"
+          },
+          {
+            "label": "Gabasawa",
+            "value": "Gabasawa"
+          },
+          {
+            "label": "Garko",
+            "value": "Garko"
+          },
+          {
+            "label": "Garum Mallam",
+            "value": "Garum Mallam"
+          },
+          {
+            "label": "Gaya",
+            "value": "Gaya"
+          },
+          {
+            "label": "Gezawa",
+            "value": "Gezawa"
+          },
+          {
+            "label": "Gwale",
+            "value": "Gwale"
+          },
+          {
+            "label": "Gwarzo",
+            "value": "Gwarzo"
+          },
+          {
+            "label": "Kabo",
+            "value": "Kabo"
+          },
+          {
+            "label": "Kano Municipal",
+            "value": "Kano Municipal"
+          },
+          {
+            "label": "Karaye",
+            "value": "Karaye"
+          },
+          {
+            "label": "Kibiya",
+            "value": "Kibiya"
+          },
+          {
+            "label": "Kiru",
+            "value": "Kiru"
+          },
+          {
+            "label": "kumbotso",
+            "value": "kumbotso"
+          },
+          {
+            "label": "Kunchi",
+            "value": "Kunchi"
+          },
+          {
+            "label": "Kura",
+            "value": "Kura"
+          },
+          {
+            "label": "Madobi",
+            "value": "Madobi"
+          },
+          {
+            "label": "Makoda",
+            "value": "Makoda"
+          },
+          {
+            "label": "Minjibir",
+            "value": "Minjibir"
+          },
+          {
+            "label": "Nasarawa",
+            "value": "Nasarawa"
+          },
+          {
+            "label": "Rano",
+            "value": "Rano"
+          },
+          {
+            "label": "Rimin Gado",
+            "value": "Rimin Gado"
+          },
+          {
+            "label": "Rogo",
+            "value": "Rogo"
+          },
+          {
+            "label": "Shanono",
+            "value": "Shanono"
+          },
+          {
+            "label": "Sumaila",
+            "value": "Sumaila"
+          },
+          {
+            "label": "Takai",
+            "value": "Takai"
+          },
+          {
+            "label": "Tarauni",
+            "value": "Tarauni"
+          },
+          {
+            "label": "Tofa",
+            "value": "Tofa"
+          },
+          {
+            "label": "Tsanyawa",
+            "value": "Tsanyawa"
+          },
+          {
+            "label": "Tudun Wada",
+            "value": "Tudun Wada"
+          },
+          {
+            "label": "Ungogo",
+            "value": "Ungogo"
+          },
+          {
+            "label": "Warawa",
+            "value": "Warawa"
+          },
+          {
+            "label": "Wudil",
+            "value": "Wudil"
+          },
+          {
+            "label": "Bakori",
+            "value": "Bakori"
+          },
+          {
+            "label": "Batagarawa",
+            "value": "Batagarawa"
+          },
+          {
+            "label": "Batsari",
+            "value": "Batsari"
+          },
+          {
+            "label": "Baure",
+            "value": "Baure"
+          },
+          {
+            "label": "Bindawa",
+            "value": "Bindawa"
+          },
+          {
+            "label": "Charanchi",
+            "value": "Charanchi"
+          },
+          {
+            "label": "Dan Musa",
+            "value": "Dan Musa"
+          },
+          {
+            "label": "Dandume",
+            "value": "Dandume"
+          },
+          {
+            "label": "Danja",
+            "value": "Danja"
+          },
+          {
+            "label": "Daura",
+            "value": "Daura"
+          },
+          {
+            "label": "Dutsi",
+            "value": "Dutsi"
+          },
+          {
+            "label": "Dutsin-Ma",
+            "value": "Dutsin-Ma"
+          },
+          {
+            "label": "Faskari",
+            "value": "Faskari"
+          },
+          {
+            "label": "Funtua",
+            "value": "Funtua"
+          },
+          {
+            "label": "Ingawa",
+            "value": "Ingawa"
+          },
+          {
+            "label": "Jibia",
+            "value": "Jibia"
+          },
+          {
+            "label": "Kafur",
+            "value": "Kafur"
+          },
+          {
+            "label": "Kaita",
+            "value": "Kaita"
+          },
+          {
+            "label": "Kankara",
+            "value": "Kankara"
+          },
+          {
+            "label": "Kankia",
+            "value": "Kankia"
+          },
+          {
+            "label": "Katsina",
+            "value": "Katsina"
+          },
+          {
+            "label": "Kurfi",
+            "value": "Kurfi"
+          },
+          {
+            "label": "Kusada",
+            "value": "Kusada"
+          },
+          {
+            "label": "Mai'Adua",
+            "value": "Mai'Adua"
+          },
+          {
+            "label": "Malumfashi",
+            "value": "Malumfashi"
+          },
+          {
+            "label": "Mani",
+            "value": "Mani"
+          },
+          {
+            "label": "Mashi",
+            "value": "Mashi"
+          },
+          {
+            "label": "Matazu",
+            "value": "Matazu"
+          },
+          {
+            "label": "Musawa",
+            "value": "Musawa"
+          },
+          {
+            "label": "Rimi",
+            "value": "Rimi"
+          },
+          {
+            "label": "Sabuwa",
+            "value": "Sabuwa"
+          },
+          {
+            "label": "Safana",
+            "value": "Safana"
+          },
+          {
+            "label": "Sandamu",
+            "value": "Sandamu"
+          },
+          {
+            "label": "Zango",
+            "value": "Zango"
+          },
+          {
+            "label": "Aleiro",
+            "value": "Aleiro"
+          },
+          {
+            "label": "Arewa Dandi",
+            "value": "Arewa Dandi"
+          },
+          {
+            "label": "Argungu",
+            "value": "Argungu"
+          },
+          {
+            "label": "Augie",
+            "value": "Augie"
+          },
+          {
+            "label": "Bagudo",
+            "value": "Bagudo"
+          },
+          {
+            "label": "Birnin Kebbi",
+            "value": "Birnin Kebbi"
+          },
+          {
+            "label": "Bunza",
+            "value": "Bunza"
+          },
+          {
+            "label": "Dandi",
+            "value": "Dandi"
+          },
+          {
+            "label": "Fakai",
+            "value": "Fakai"
+          },
+          {
+            "label": "Gwandu",
+            "value": "Gwandu"
+          },
+          {
+            "label": "Jega",
+            "value": "Jega"
+          },
+          {
+            "label": "Kalgo",
+            "value": "Kalgo"
+          },
+          {
+            "label": "Koko/Besse",
+            "value": "Koko/Besse"
+          },
+          {
+            "label": "Maiyama",
+            "value": "Maiyama"
+          },
+          {
+            "label": "Ngaski",
+            "value": "Ngaski"
+          },
+          {
+            "label": "Sakaba",
+            "value": "Sakaba"
+          },
+          {
+            "label": "Shanga",
+            "value": "Shanga"
+          },
+          {
+            "label": "Suru",
+            "value": "Suru"
+          },
+          {
+            "label": "Wasagu",
+            "value": "Wasagu"
+          },
+          {
+            "label": "Yauri",
+            "value": "Yauri"
+          },
+          {
+            "label": "Zuru",
+            "value": "Zuru"
+          },
+          {
+            "label": "Adavi",
+            "value": "Adavi"
+          },
+          {
+            "label": "Ajaokuta",
+            "value": "Ajaokuta"
+          },
+          {
+            "label": "Ankpa",
+            "value": "Ankpa"
+          },
+          {
+            "label": "Bassa",
+            "value": "Bassa"
+          },
+          {
+            "label": "Dekina",
+            "value": "Dekina"
+          },
+          {
+            "label": "Ibaji",
+            "value": "Ibaji"
+          },
+          {
+            "label": "Idah",
+            "value": "Idah"
+          },
+          {
+            "label": "Igalamela-Odolu",
+            "value": "Igalamela-Odolu"
+          },
+          {
+            "label": "Ijumu",
+            "value": "Ijumu"
+          },
+          {
+            "label": "Kabba/Bunu",
+            "value": "Kabba/Bunu"
+          },
+          {
+            "label": "Koton Karfe",
+            "value": "Koton Karfe"
+          },
+          {
+            "label": "Lokoja",
+            "value": "Lokoja"
+          },
+          {
+            "label": "Mopa-Muro",
+            "value": "Mopa-Muro"
+          },
+          {
+            "label": "Ofu",
+            "value": "Ofu"
+          },
+          {
+            "label": "Ogori/Magongo",
+            "value": "Ogori/Magongo"
+          },
+          {
+            "label": "Okehi",
+            "value": "Okehi"
+          },
+          {
+            "label": "Okene",
+            "value": "Okene"
+          },
+          {
+            "label": "Olamaboro",
+            "value": "Olamaboro"
+          },
+          {
+            "label": "Omala",
+            "value": "Omala"
+          },
+          {
+            "label": "Yagba East",
+            "value": "Yagba East"
+          },
+          {
+            "label": "Yagba West",
+            "value": "Yagba West"
+          },
+          {
+            "label": "Asa",
+            "value": "Asa"
+          },
+          {
+            "label": "Baruten",
+            "value": "Baruten"
+          },
+          {
+            "label": "Edu",
+            "value": "Edu"
+          },
+          {
+            "label": "Ekiti",
+            "value": "Ekiti"
+          },
+          {
+            "label": "Ifelodun",
+            "value": "Ifelodun"
+          },
+          {
+            "label": "Ilorin East",
+            "value": "Ilorin East"
+          },
+          {
+            "label": "Ilorin South",
+            "value": "Ilorin South"
+          },
+          {
+            "label": "Ilorin West",
+            "value": "Ilorin West"
+          },
+          {
+            "label": "Irepodun",
+            "value": "Irepodun"
+          },
+          {
+            "label": "Isin",
+            "value": "Isin"
+          },
+          {
+            "label": "Kaiama",
+            "value": "Kaiama"
+          },
+          {
+            "label": "Moro",
+            "value": "Moro"
+          },
+          {
+            "label": "Offa",
+            "value": "Offa"
+          },
+          {
+            "label": "Oke Ero",
+            "value": "Oke Ero"
+          },
+          {
+            "label": "Oyun",
+            "value": "Oyun"
+          },
+          {
+            "label": "Pategi",
+            "value": "Pategi"
+          },
+          {
+            "label": "Agege",
+            "value": "Agege"
+          },
+          {
+            "label": "Alimosho",
+            "value": "Alimosho"
+          },
+          {
+            "label": "Apapa",
+            "value": "Apapa"
+          },
+          {
+            "label": "Ifako-Ijaye",
+            "value": "Ifako-Ijaye"
+          },
+          {
+            "label": "Ikeja",
+            "value": "Ikeja"
+          },
+          {
+            "label": "Kosofe",
+            "value": "Kosofe"
+          },
+          {
+            "label": "Mushin",
+            "value": "Mushin"
+          },
+          {
+            "label": "Oshodi-Isolo",
+            "value": "Oshodi-Isolo"
+          },
+          {
+            "label": "Shomolu",
+            "value": "Shomolu"
+          },
+          {
+            "label": "Eti-Osa",
+            "value": "Eti-Osa"
+          },
+          {
+            "label": "Lagos Island",
+            "value": "Lagos Island"
+          },
+          {
+            "label": "Lagos Mainland",
+            "value": "Lagos Mainland"
+          },
+          {
+            "label": "Surulere",
+            "value": "Surulere"
+          },
+          {
+            "label": "Ojo",
+            "value": "Ojo"
+          },
+          {
+            "label": "Ajeromi-Ifelodun",
+            "value": "Ajeromi-Ifelodun"
+          },
+          {
+            "label": "Amuwo-Odofin",
+            "value": "Amuwo-Odofin"
+          },
+          {
+            "label": "Badagry",
+            "value": "Badagry"
+          },
+          {
+            "label": "Ikorodu",
+            "value": "Ikorodu"
+          },
+          {
+            "label": "Ibeju-Lekki",
+            "value": "Ibeju-Lekki"
+          },
+          {
+            "label": "Epe",
+            "value": "Epe"
+          },
+          {
+            "label": "Karu",
+            "value": "Karu"
+          },
+          {
+            "label": "Keffi",
+            "value": "Keffi"
+          },
+          {
+            "label": "Kokona",
+            "value": "Kokona"
+          },
+          {
+            "label": "Toto",
+            "value": "Toto"
+          },
+          {
+            "label": "Akwanga",
+            "value": "Akwanga"
+          },
+          {
+            "label": "Eggon",
+            "value": "Eggon"
+          },
+          {
+            "label": "Wamba",
+            "value": "Wamba"
+          },
+          {
+            "label": "Awe",
+            "value": "Awe"
+          },
+          {
+            "label": "Doma",
+            "value": "Doma"
+          },
+          {
+            "label": "Keana",
+            "value": "Keana"
+          },
+          {
+            "label": "Lafia",
+            "value": "Lafia"
+          },
+          {
+            "label": "Agaie",
+            "value": "Agaie"
+          },
+          {
+            "label": "Agwara",
+            "value": "Agwara"
+          },
+          {
+            "label": "Bida",
+            "value": "Bida"
+          },
+          {
+            "label": "Borgu",
+            "value": "Borgu"
+          },
+          {
+            "label": "Bosso",
+            "value": "Bosso"
+          },
+          {
+            "label": "Chanchaga",
+            "value": "Chanchaga"
+          },
+          {
+            "label": "Edati",
+            "value": "Edati"
+          },
+          {
+            "label": "Gbako",
+            "value": "Gbako"
+          },
+          {
+            "label": "Gurara",
+            "value": "Gurara"
+          },
+          {
+            "label": "Katcha",
+            "value": "Katcha"
+          },
+          {
+            "label": "Kontagora",
+            "value": "Kontagora"
+          },
+          {
+            "label": "Lapai",
+            "value": "Lapai"
+          },
+          {
+            "label": "Lavun",
+            "value": "Lavun"
+          },
+          {
+            "label": "Magama",
+            "value": "Magama"
+          },
+          {
+            "label": "Mariga",
+            "value": "Mariga"
+          },
+          {
+            "label": "Mashegu",
+            "value": "Mashegu"
+          },
+          {
+            "label": "Mokwa",
+            "value": "Mokwa"
+          },
+          {
+            "label": "Munya",
+            "value": "Munya"
+          },
+          {
+            "label": "Paikoro",
+            "value": "Paikoro"
+          },
+          {
+            "label": "Rafi",
+            "value": "Rafi"
+          },
+          {
+            "label": "Rijau",
+            "value": "Rijau"
+          },
+          {
+            "label": "Shiroro",
+            "value": "Shiroro"
+          },
+          {
+            "label": "Suleja",
+            "value": "Suleja"
+          },
+          {
+            "label": "Tafa",
+            "value": "Tafa"
+          },
+          {
+            "label": "Wushishi",
+            "value": "Wushishi"
+          },
+          {
+            "label": "Abeokuta North",
+            "value": "Abeokuta North"
+          },
+          {
+            "label": "Abeokuta South",
+            "value": "Abeokuta South"
+          },
+          {
+            "label": "Ado-Odo/Ota",
+            "value": "Ado-Odo/Ota"
+          },
+          {
+            "label": "Ewekoro",
+            "value": "Ewekoro"
+          },
+          {
+            "label": "Ifo",
+            "value": "Ifo"
+          },
+          {
+            "label": "Ijebu East",
+            "value": "Ijebu East"
+          },
+          {
+            "label": "Ijebu North",
+            "value": "Ijebu North"
+          },
+          {
+            "label": "Ijebu North-East",
+            "value": "Ijebu North-East"
+          },
+          {
+            "label": "Ijebu Ode",
+            "value": "Ijebu Ode"
+          },
+          {
+            "label": "Ikenne",
+            "value": "Ikenne"
+          },
+          {
+            "label": "Imeko Afon",
+            "value": "Imeko Afon"
+          },
+          {
+            "label": "Ipokia",
+            "value": "Ipokia"
+          },
+          {
+            "label": "Obafemi Owode",
+            "value": "Obafemi Owode"
+          },
+          {
+            "label": "Odogbolu",
+            "value": "Odogbolu"
+          },
+          {
+            "label": "Odeda",
+            "value": "Odeda"
+          },
+          {
+            "label": "Ogun Waterside",
+            "value": "Ogun Waterside"
+          },
+          {
+            "label": "Remo North",
+            "value": "Remo North"
+          },
+          {
+            "label": "Sagamu",
+            "value": "Sagamu"
+          },
+          {
+            "label": "Yewa North (formerly Egbado North)",
+            "value": "Yewa North (formerly Egbado North)"
+          },
+          {
+            "label": "Yewa South (formerly Egbado South)",
+            "value": "Yewa South (formerly Egbado South)"
+          },
+          {
+            "label": "Akoko North-East",
+            "value": "Akoko North-East"
+          },
+          {
+            "label": "Akoko North-West",
+            "value": "Akoko North-West"
+          },
+          {
+            "label": "Akoko South-East",
+            "value": "Akoko South-East"
+          },
+          {
+            "label": "Akoko South-West",
+            "value": "Akoko South-West"
+          },
+          {
+            "label": "Akure North",
+            "value": "Akure North"
+          },
+          {
+            "label": "Akure South",
+            "value": "Akure South"
+          },
+          {
+            "label": "Ese Odo",
+            "value": "Ese Odo"
+          },
+          {
+            "label": "Idanre",
+            "value": "Idanre"
+          },
+          {
+            "label": "Ifedore",
+            "value": "Ifedore"
+          },
+          {
+            "label": "Ilaje",
+            "value": "Ilaje"
+          },
+          {
+            "label": "Ile Oluji/Okeigbo",
+            "value": "Ile Oluji/Okeigbo"
+          },
+          {
+            "label": "Irele",
+            "value": "Irele"
+          },
+          {
+            "label": "Odigbo",
+            "value": "Odigbo"
+          },
+          {
+            "label": "Okitipupa",
+            "value": "Okitipupa"
+          },
+          {
+            "label": "Ondo East",
+            "value": "Ondo East"
+          },
+          {
+            "label": "Ondo West",
+            "value": "Ondo West"
+          },
+          {
+            "label": "Ose",
+            "value": "Ose"
+          },
+          {
+            "label": "Owo",
+            "value": "Owo"
+          },
+          {
+            "label": "Aiyedaade",
+            "value": "Aiyedaade"
+          },
+          {
+            "label": "Aiyedire",
+            "value": "Aiyedire"
+          },
+          {
+            "label": "Atakunmosa East",
+            "value": "Atakunmosa East"
+          },
+          {
+            "label": "Atakunmosa West",
+            "value": "Atakunmosa West"
+          },
+          {
+            "label": "Boluwaduro",
+            "value": "Boluwaduro"
+          },
+          {
+            "label": "Boripe",
+            "value": "Boripe"
+          },
+          {
+            "label": "Ede North",
+            "value": "Ede North"
+          },
+          {
+            "label": "Ede South",
+            "value": "Ede South"
+          },
+          {
+            "label": "Egbedore",
+            "value": "Egbedore"
+          },
+          {
+            "label": "Ejigbo",
+            "value": "Ejigbo"
+          },
+          {
+            "label": "Ife Central",
+            "value": "Ife Central"
+          },
+          {
+            "label": "Ife East",
+            "value": "Ife East"
+          },
+          {
+            "label": "Ife North",
+            "value": "Ife North"
+          },
+          {
+            "label": "Ife South",
+            "value": "Ife South"
+          },
+          {
+            "label": "Ifedayo",
+            "value": "Ifedayo"
+          },
+          {
+            "label": "Ila",
+            "value": "Ila"
+          },
+          {
+            "label": "Ilesa East",
+            "value": "Ilesa East"
+          },
+          {
+            "label": "Ilesa West",
+            "value": "Ilesa West"
+          },
+          {
+            "label": "Irewole",
+            "value": "Irewole"
+          },
+          {
+            "label": "Isokan",
+            "value": "Isokan"
+          },
+          {
+            "label": "Iwo",
+            "value": "Iwo"
+          },
+          {
+            "label": "Obokun",
+            "value": "Obokun"
+          },
+          {
+            "label": "Odo Otin",
+            "value": "Odo Otin"
+          },
+          {
+            "label": "Ola Oluwa",
+            "value": "Ola Oluwa"
+          },
+          {
+            "label": "Olorunda",
+            "value": "Olorunda"
+          },
+          {
+            "label": "Oriade",
+            "value": "Oriade"
+          },
+          {
+            "label": "Orolu",
+            "value": "Orolu"
+          },
+          {
+            "label": "Osogbo",
+            "value": "Osogbo"
+          },
+          {
+            "label": "Afijio Jobele",
+            "value": "Afijio Jobele"
+          },
+          {
+            "label": "Akinyele Moniya",
+            "value": "Akinyele Moniya"
+          },
+          {
+            "label": "Atiba Ofa Meta",
+            "value": "Atiba Ofa Meta"
+          },
+          {
+            "label": "Atisbo Tede-Okeogun",
+            "value": "Atisbo Tede-Okeogun"
+          },
+          {
+            "label": "Egbeda Egbeda",
+            "value": "Egbeda Egbeda"
+          },
+          {
+            "label": "Ibadan North Agodi Gate",
+            "value": "Ibadan North Agodi Gate"
+          },
+          {
+            "label": "Ibadan North-East Iwo Road",
+            "value": "Ibadan North-East Iwo Road"
+          },
+          {
+            "label": "Ibadan North-West Dugbe/Onireke",
+            "value": "Ibadan North-West Dugbe/Onireke"
+          },
+          {
+            "label": "Ibadan South-East Mapo",
+            "value": "Ibadan South-East Mapo"
+          },
+          {
+            "label": "Ibadan South-West Ring Road",
+            "value": "Ibadan South-West Ring Road"
+          },
+          {
+            "label": "Ibarapa Central Igbo Ora",
+            "value": "Ibarapa Central Igbo Ora"
+          },
+          {
+            "label": "Ibarapa East Eruwa",
+            "value": "Ibarapa East Eruwa"
+          },
+          {
+            "label": "Ibarapa North Ayete",
+            "value": "Ibarapa North Ayete"
+          },
+          {
+            "label": "Ido Ido",
+            "value": "Ido Ido"
+          },
+          {
+            "label": "Irepo Kisi-Okeogun",
+            "value": "Irepo Kisi-Okeogun"
+          },
+          {
+            "label": "Iseyin Iseyin-Okeogun",
+            "value": "Iseyin Iseyin-Okeogun"
+          },
+          {
+            "label": "Itesiwaju Otu-Okeogun",
+            "value": "Itesiwaju Otu-Okeogun"
+          },
+          {
+            "label": "Iwajowa Iwereile-Okeogun",
+            "value": "Iwajowa Iwereile-Okeogun"
+          },
+          {
+            "label": "Kajola Okeho-Okeogun",
+            "value": "Kajola Okeho-Okeogun"
+          },
+          {
+            "label": "Lagelu Iyanaofa",
+            "value": "Lagelu Iyanaofa"
+          },
+          {
+            "label": "Ogbomosho North Ogbomoso",
+            "value": "Ogbomosho North Ogbomoso"
+          },
+          {
+            "label": "Ogbomosho South Arowomole",
+            "value": "Ogbomosho South Arowomole"
+          },
+          {
+            "label": "Ogo Oluwa Ajawa",
+            "value": "Ogo Oluwa Ajawa"
+          },
+          {
+            "label": "Olorunsogo Igbeti-Okeogun",
+            "value": "Olorunsogo Igbeti-Okeogun"
+          },
+          {
+            "label": "Oluyole Idi Ayunre",
+            "value": "Oluyole Idi Ayunre"
+          },
+          {
+            "label": "Ona Ara Akanran",
+            "value": "Ona Ara Akanran"
+          },
+          {
+            "label": "Orelope Igboho-Okeogun",
+            "value": "Orelope Igboho-Okeogun"
+          },
+          {
+            "label": "Ori Ire Ikoyi",
+            "value": "Ori Ire Ikoyi"
+          },
+          {
+            "label": "Oyo East Kosobo",
+            "value": "Oyo East Kosobo"
+          },
+          {
+            "label": "Oyo West Ojongbodu",
+            "value": "Oyo West Ojongbodu"
+          },
+          {
+            "label": "Saki East Agoamodu-Okeogun",
+            "value": "Saki East Agoamodu-Okeogun"
+          },
+          {
+            "label": "Saki West Shaki-Okeogun",
+            "value": "Saki West Shaki-Okeogun"
+          },
+          {
+            "label": "Surulere Iresa Adu",
+            "value": "Surulere Iresa Adu"
+          },
+          {
+            "label": "Barkin Ladi",
+            "value": "Barkin Ladi"
+          },
+          {
+            "label": "Bokkos",
+            "value": "Bokkos"
+          },
+          {
+            "label": "Jos East",
+            "value": "Jos East"
+          },
+          {
+            "label": "Jos North",
+            "value": "Jos North"
+          },
+          {
+            "label": "Jos South",
+            "value": "Jos South"
+          },
+          {
+            "label": "Kanam",
+            "value": "Kanam"
+          },
+          {
+            "label": "Kanke",
+            "value": "Kanke"
+          },
+          {
+            "label": "Langtang North",
+            "value": "Langtang North"
+          },
+          {
+            "label": "Langtang South",
+            "value": "Langtang South"
+          },
+          {
+            "label": "Mangu",
+            "value": "Mangu"
+          },
+          {
+            "label": "Mikang",
+            "value": "Mikang"
+          },
+          {
+            "label": "Pankshin",
+            "value": "Pankshin"
+          },
+          {
+            "label": "Qua'an Pan",
+            "value": "Qua'an Pan"
+          },
+          {
+            "label": "Riyom",
+            "value": "Riyom"
+          },
+          {
+            "label": "Shendam",
+            "value": "Shendam"
+          },
+          {
+            "label": "Wase",
+            "value": "Wase"
+          },
+          {
+            "label": "Port Harcourt",
+            "value": "Port Harcourt"
+          },
+          {
+            "label": "Obio-Akpor",
+            "value": "Obio-Akpor"
+          },
+          {
+            "label": "Okrika",
+            "value": "Okrika"
+          },
+          {
+            "label": "Ogu–Bolo",
+            "value": "Ogu–Bolo"
+          },
+          {
+            "label": "Eleme",
+            "value": "Eleme"
+          },
+          {
+            "label": "Tai",
+            "value": "Tai"
+          },
+          {
+            "label": "Gokana",
+            "value": "Gokana"
+          },
+          {
+            "label": "Khana",
+            "value": "Khana"
+          },
+          {
+            "label": "Oyigbo",
+            "value": "Oyigbo"
+          },
+          {
+            "label": "Opobo–Nkoro",
+            "value": "Opobo–Nkoro"
+          },
+          {
+            "label": "Andoni",
+            "value": "Andoni"
+          },
+          {
+            "label": "Bonny",
+            "value": "Bonny"
+          },
+          {
+            "label": "Degema",
+            "value": "Degema"
+          },
+          {
+            "label": "Asari-Toru",
+            "value": "Asari-Toru"
+          },
+          {
+            "label": "Akuku-Toru",
+            "value": "Akuku-Toru"
+          },
+          {
+            "label": "Abua–Odual",
+            "value": "Abua–Odual"
+          },
+          {
+            "label": "Ahoada West",
+            "value": "Ahoada West"
+          },
+          {
+            "label": "Ahoada East",
+            "value": "Ahoada East"
+          },
+          {
+            "label": "Ogba–Egbema–Ndoni",
+            "value": "Ogba–Egbema–Ndoni"
+          },
+          {
+            "label": "Emohua",
+            "value": "Emohua"
+          },
+          {
+            "label": "Ikwerre",
+            "value": "Ikwerre"
+          },
+          {
+            "label": "Etche",
+            "value": "Etche"
+          },
+          {
+            "label": "Omuma",
+            "value": "Omuma"
+          },
+          {
+            "label": "Binji",
+            "value": "Binji"
+          },
+          {
+            "label": "Bodinga",
+            "value": "Bodinga"
+          },
+          {
+            "label": "Dange Shuni",
+            "value": "Dange Shuni"
+          },
+          {
+            "label": "Gada",
+            "value": "Gada"
+          },
+          {
+            "label": "Goronyo",
+            "value": "Goronyo"
+          },
+          {
+            "label": "Gudu",
+            "value": "Gudu"
+          },
+          {
+            "label": "Gwadabawa",
+            "value": "Gwadabawa"
+          },
+          {
+            "label": "Illela",
+            "value": "Illela"
+          },
+          {
+            "label": "Isa",
+            "value": "Isa"
+          },
+          {
+            "label": "Kebbe",
+            "value": "Kebbe"
+          },
+          {
+            "label": "Kware",
+            "value": "Kware"
+          },
+          {
+            "label": "Rabah",
+            "value": "Rabah"
+          },
+          {
+            "label": "Sabon Birni",
+            "value": "Sabon Birni"
+          },
+          {
+            "label": "Shagari",
+            "value": "Shagari"
+          },
+          {
+            "label": "Silame",
+            "value": "Silame"
+          },
+          {
+            "label": "Sokoto North",
+            "value": "Sokoto North"
+          },
+          {
+            "label": "Sokoto South",
+            "value": "Sokoto South"
+          },
+          {
+            "label": "Tambuwal",
+            "value": "Tambuwal"
+          },
+          {
+            "label": "Tangaza",
+            "value": "Tangaza"
+          },
+          {
+            "label": "Tureta",
+            "value": "Tureta"
+          },
+          {
+            "label": "Wamako",
+            "value": "Wamako"
+          },
+          {
+            "label": "Wurno",
+            "value": "Wurno"
+          },
+          {
+            "label": "Yabo",
+            "value": "Yabo"
+          },
+          {
+            "label": "Ardo Kola",
+            "value": "Ardo Kola"
+          },
+          {
+            "label": "Bali",
+            "value": "Bali"
+          },
+          {
+            "label": "Donga",
+            "value": "Donga"
+          },
+          {
+            "label": "Gashaka",
+            "value": "Gashaka"
+          },
+          {
+            "label": "Gassol",
+            "value": "Gassol"
+          },
+          {
+            "label": "Ibi",
+            "value": "Ibi"
+          },
+          {
+            "label": "Jalingo",
+            "value": "Jalingo"
+          },
+          {
+            "label": "Karim Lamido",
+            "value": "Karim Lamido"
+          },
+          {
+            "label": "Kurmi",
+            "value": "Kurmi"
+          },
+          {
+            "label": "Lau",
+            "value": "Lau"
+          },
+          {
+            "label": "Sardauna",
+            "value": "Sardauna"
+          },
+          {
+            "label": "Takum",
+            "value": "Takum"
+          },
+          {
+            "label": "Ussa",
+            "value": "Ussa"
+          },
+          {
+            "label": "Wukari",
+            "value": "Wukari"
+          },
+          {
+            "label": "Yorro",
+            "value": "Yorro"
+          },
+          {
+            "label": "Zing",
+            "value": "Zing"
+          },
+          {
+            "label": "Bade",
+            "value": "Bade"
+          },
+          {
+            "label": "Bursari",
+            "value": "Bursari"
+          },
+          {
+            "label": "Damaturu",
+            "value": "Damaturu"
+          },
+          {
+            "label": "Geidam",
+            "value": "Geidam"
+          },
+          {
+            "label": "Gujba",
+            "value": "Gujba"
+          },
+          {
+            "label": "Gulani",
+            "value": "Gulani"
+          },
+          {
+            "label": "Fika",
+            "value": "Fika"
+          },
+          {
+            "label": "Fune",
+            "value": "Fune"
+          },
+          {
+            "label": "Jakusko",
+            "value": "Jakusko"
+          },
+          {
+            "label": "Karasuwa",
+            "value": "Karasuwa"
+          },
+          {
+            "label": "Machina",
+            "value": "Machina"
+          },
+          {
+            "label": "Nangere",
+            "value": "Nangere"
+          },
+          {
+            "label": "Nguru",
+            "value": "Nguru"
+          },
+          {
+            "label": "Potiskum",
+            "value": "Potiskum"
+          },
+          {
+            "label": "Tarmuwa",
+            "value": "Tarmuwa"
+          },
+          {
+            "label": "Yunusari",
+            "value": "Yunusari"
+          },
+          {
+            "label": "Yusufari",
+            "value": "Yusufari"
+          },
+          {
+            "label": "Anka",
+            "value": "Anka"
+          },
+          {
+            "label": "Bakura",
+            "value": "Bakura"
+          },
+          {
+            "label": "Birnin Magaji/Kiyaw",
+            "value": "Birnin Magaji/Kiyaw"
+          },
+          {
+            "label": "Bukkuyum",
+            "value": "Bukkuyum"
+          },
+          {
+            "label": "Bungudu",
+            "value": "Bungudu"
+          },
+          {
+            "label": "Chafe (Tsafe)",
+            "value": "Chafe (Tsafe)"
+          },
+          {
+            "label": "Gummi",
+            "value": "Gummi"
+          },
+          {
+            "label": "Gusau",
+            "value": "Gusau"
+          },
+          {
+            "label": "Kaura Namoda",
+            "value": "Kaura Namoda"
+          },
+          {
+            "label": "Maradun",
+            "value": "Maradun"
+          },
+          {
+            "label": "Maru",
+            "value": "Maru"
+          },
+          {
+            "label": "Shinkafi",
+            "value": "Shinkafi"
+          },
+          {
+            "label": "Talata Mafara",
+            "value": "Talata Mafara"
+          },
+          {
+            "label": "Zurmi",
+            "value": "Zurmi"
+          },
+          {
+            "label": "Abaji",
+            "value": "Abaji"
+          },
+          {
+            "label": "Abuja",
+            "value": "Abuja"
+          },
+          {
+            "label": "Bwari",
+            "value": "Bwari"
+          },
+          {
+            "label": "Gwagwalada",
+            "value": "Gwagwalada"
+          },
+          {
+            "label": "Kuje",
+            "value": "Kuje"
+          },
+          {
+            "label": "Kwali",
+            "value": "Kwali"
+          }
+        ],
+        "placeholder": "Enter your local government area"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select your state",
+      "enum": [
+        "Abia",
+        "Adamawa",
+        "Akwa Ibom",
+        "Anambra",
+        "Bauchi",
+        "Bayelsa",
+        "Benue",
+        "Borno",
+        "Cross River",
+        "Delta",
+        "Ebonyi",
+        "Edo",
+        "Ekiti",
+        "Enugu",
+        "Gombe",
+        "Imo",
+        "Jigawa",
+        "Kaduna",
+        "Kano",
+        "Katsina",
+        "Kebbi",
+        "Kogi",
+        "Kwara",
+        "Lagos",
+        "Nasarawa",
+        "Niger",
+        "Ogun",
+        "Ondo",
+        "Osun",
+        "Oyo",
+        "Plateau",
+        "Rivers",
+        "Sokoto",
+        "Taraba",
+        "Yobe",
+        "Zamfara",
+        "Federal Capital Territory"
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Abia",
+            "value": "Abia"
+          },
+          {
+            "label": "Adamawa",
+            "value": "Adamawa"
+          },
+          {
+            "label": "Akwa Ibom",
+            "value": "Akwa Ibom"
+          },
+          {
+            "label": "Anambra",
+            "value": "Anambra"
+          },
+          {
+            "label": "Bauchi",
+            "value": "Bauchi"
+          },
+          {
+            "label": "Bayelsa",
+            "value": "Bayelsa"
+          },
+          {
+            "label": "Benue",
+            "value": "Benue"
+          },
+          {
+            "label": "Borno",
+            "value": "Borno"
+          },
+          {
+            "label": "Cross River",
+            "value": "Cross River"
+          },
+          {
+            "label": "Delta",
+            "value": "Delta"
+          },
+          {
+            "label": "Ebonyi",
+            "value": "Ebonyi"
+          },
+          {
+            "label": "Edo",
+            "value": "Edo"
+          },
+          {
+            "label": "Ekiti",
+            "value": "Ekiti"
+          },
+          {
+            "label": "Enugu",
+            "value": "Enugu"
+          },
+          {
+            "label": "Gombe",
+            "value": "Gombe"
+          },
+          {
+            "label": "Imo",
+            "value": "Imo"
+          },
+          {
+            "label": "Jigawa",
+            "value": "Jigawa"
+          },
+          {
+            "label": "Kaduna",
+            "value": "Kaduna"
+          },
+          {
+            "label": "Kano",
+            "value": "Kano"
+          },
+          {
+            "label": "Katsina",
+            "value": "Katsina"
+          },
+          {
+            "label": "Kebbi",
+            "value": "Kebbi"
+          },
+          {
+            "label": "Kogi",
+            "value": "Kogi"
+          },
+          {
+            "label": "Kwara",
+            "value": "Kwara"
+          },
+          {
+            "label": "Lagos",
+            "value": "Lagos"
+          },
+          {
+            "label": "Nasarawa",
+            "value": "Nasarawa"
+          },
+          {
+            "label": "Niger",
+            "value": "Niger"
+          },
+          {
+            "label": "Ogun",
+            "value": "Ogun"
+          },
+          {
+            "label": "Ondo",
+            "value": "Ondo"
+          },
+          {
+            "label": "Osun",
+            "value": "Osun"
+          },
+          {
+            "label": "Oyo",
+            "value": "Oyo"
+          },
+          {
+            "label": "Plateau",
+            "value": "Plateau"
+          },
+          {
+            "label": "Rivers",
+            "value": "Rivers"
+          },
+          {
+            "label": "Sokoto",
+            "value": "Sokoto"
+          },
+          {
+            "label": "Taraba",
+            "value": "Taraba"
+          },
+          {
+            "label": "Yobe",
+            "value": "Yobe"
+          },
+          {
+            "label": "Zamfara",
+            "value": "Zamfara"
+          },
+          {
+            "label": "Federal Capital Territory",
+            "value": "Federal Capital Territory"
+          }
+        ],
+        "placeholder": "Select your state"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "local_government_area",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "local_government_area",
+    "postal_code"
+  ]
+}

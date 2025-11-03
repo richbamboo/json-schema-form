@@ -1,0 +1,1830 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "compensation_currency_code": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Before you complete the employee's contract details, please confirm with them that they have a bank account in this currency.",
+                "severity": "info",
+                "title": "The employee will be paid in United States Dollar (USD)"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 35,
+            "minimum": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "description": "In Colombia, the standard weekly working hours are being progressively reduced: from 46 hours in 2024, to 45 hours in 2025, and down to 42 hours by 2026. Nevertheless, a 40-hour week remains the norm across most office-based professions. For full-time workers, please enter a number between 46 and 40 in this field to reflect the applicable standard.",
+            "maximum": 46,
+            "minimum": 40
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 376740,
+            "x-jsf-errorMessage": {
+              "minimum": "In Colombia, full-time employees are entitled to a minimum annual salary of $3,767.40."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "COP"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 1560000000,
+            "x-jsf-errorMessage": {
+              "minimum": "In Colombia, full-time employees are entitled to a minimum annual salary of COP 15,600,000.00."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "annual_gross_salary": {
+            "maximum": 5362893
+          },
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "annual_gross_salary"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_bonus_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "statement": false
+            }
+          }
+        },
+        "required": [
+          "annual_bonus_ack"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 5362894
+          },
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "annual_gross_salary"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_bonus_ack": false,
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "As this employee’s monthly gross salary is over $4,469.08, they are not entitled to receive a 13th month salary (usually called prima or Christmas bonus).",
+                "severity": "info",
+                "title": "Employee not entitled to receive a 13th month salary"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "annual_gross_salary": {
+            "maximum": 22206599999
+          },
+          "compensation_currency_code": {
+            "const": "COP"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "annual_gross_salary"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_bonus_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "statement": false
+            }
+          }
+        },
+        "required": [
+          "annual_bonus_ack"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 22206600000
+          },
+          "compensation_currency_code": {
+            "const": "COP"
+          }
+        },
+        "required": [
+          "compensation_currency_code",
+          "annual_gross_salary"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_bonus_ack": false,
+          "annual_gross_salary": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "As this employee’s monthly gross salary is over COP 18,505,500.00, they are not entitled to receive a 13th month salary (usually called prima or Christmas bonus).",
+                "severity": "info",
+                "title": "Employee not entitled to receive a 13th month salary"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "minimum": 15
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "minimum": 0
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "compensation_currency_code": {
+            "x-jsf-presentation": {
+              "statement": false
+            }
+          },
+          "employee_internet_costs": {
+            "description": "This cost is mandatory for each employee and the minimum internet and utility contribution cost is 100,000 COP per month.",
+            "minimum": 10000000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 100,000 COP"
+            },
+            "x-jsf-presentation": {
+              "currency": "COP"
+            }
+          },
+          "employee_utility_costs": {
+            "description": "This cost is mandatory for each employee and the minimum internet and utility contribution cost is 100,000 COP per month.",
+            "minimum": 10000000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 100,000 COP"
+            },
+            "x-jsf-presentation": {
+              "currency": "COP"
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "compensation_currency_code": {
+            "const": "USD"
+          }
+        },
+        "required": [
+          "compensation_currency_code"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_amount": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          },
+          "employee_internet_costs": {
+            "description": "This cost is mandatory for each employee and the minimum internet and utility contribution cost is 25 USD per month.",
+            "minimum": 2500,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 25.00 USD"
+            },
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          },
+          "employee_utility_costs": {
+            "description": "This cost is mandatory for each employee and the minimum internet and utility contribution cost is 25 USD per month.",
+            "minimum": 2500,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be at least 25.00 USD"
+            },
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          },
+          "signing_bonus_amount": {
+            "x-jsf-presentation": {
+              "currency": "USD"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "probation_length": {
+            "const": 0
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {},
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 15,
+            "default": 15,
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In Colombia, employees are entitled to a minimum of 15 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+                "title": "Minimum of <strong>15 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_bonus_ack": {
+      "const": "acknowledged",
+      "description": "In Colombia, employees receive a 13th month salary (usually called prima or Christmas bonus). This salary is not part of their annual gross salary.",
+      "title": "I understand I must pay this employee a 13th month salary in addition to their annual gross salary",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 24762859666317,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "COP",
+        "inputType": "money",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about bonus salaries",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 24762859666317,
+            "location": "statement",
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto": {
+      "description": "In Colombia, employees are entitled to a minimum of 15 paid time off days per year. Please pro-rate for part-time employment. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "23e77fc8-a234-42e0-8e20-758e731856e4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "57d900d2-1ece-4c19-885d-7c338ec26365",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "23e77fc8-a234-42e0-8e20-758e731856e4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "a0b88565-3c0a-4a83-9fcf-cfd00f94c07c",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "23e77fc8-a234-42e0-8e20-758e731856e4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "136f619c-10bd-4e6c-9ed8-ee3610aa586b",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "23e77fc8-a234-42e0-8e20-758e731856e4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "11a5eb58-7cb9-47e4-abc1-76169f94e539",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "23e77fc8-a234-42e0-8e20-758e731856e4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "b1232e62-5e47-47fd-8ebc-0d4da7e207e7",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Integral - Single (Colsanitas - Integral Medical (Single))",
+              "title": "Integral - Single - 267,960 COP/mo",
+              "x-jsf-presentation": {
+                "description": "Provides unlimited access to specialists, psychological services, hospitalization, maternity care, diagnostic aids, funeral expenses, and up to USD 35,000 for emergency medical services abroad.",
+                "meta": {
+                  "benefitGroupId": "cdfe928c-f5b6-4f18-ad23-64506fbe6192",
+                  "detailsUrl": "https://remote.com/benefits-guide/integral-single",
+                  "displayCost": "267,960 COP/mo",
+                  "id": "3751ff41-cb57-4fb6-811f-a42da08d00d8",
+                  "providerName": "Colsanitas",
+                  "tierName": "Integral - Single",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Integral - Family (Colsanitas - Integral Medical (Family))",
+              "title": "Integral - Family - 267,960 COP/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee and their dependents, providing unlimited access to specialists, psychological services, hospitalization, maternity care, diagnostic aids, funeral expenses, and up to USD 35,000 for emergency medical services abroad. \n<br>\n<br>\n<strong>The same monthly cost applies for each additional dependent.</strong>",
+                "meta": {
+                  "benefitGroupId": "cdfe928c-f5b6-4f18-ad23-64506fbe6192",
+                  "detailsUrl": "https://remote.com/benefits-guide/integral-family",
+                  "displayCost": "267,960 COP/mo",
+                  "id": "bf34cb8c-020e-426d-9c75-2b7b1994da89",
+                  "providerName": "Colsanitas",
+                  "tierName": "Integral",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Integral Plus - Single (Colsanitas - Integral Plus Medical (Single); Colsanitas - Integral Plus Dental (Single))",
+              "title": "Integral Plus - Single - 307,860 COP/mo",
+              "x-jsf-presentation": {
+                "description": "Provides unlimited access to specialists, psychological services, hospitalization, maternity care, diagnostic aids, funeral expenses, and up to USD 35,000 for emergency medical services abroad.<strong> Includes Dental coverage</strong>",
+                "meta": {
+                  "benefitGroupId": "cdfe928c-f5b6-4f18-ad23-64506fbe6192",
+                  "detailsUrl": "https://remote.com/benefits-guide/integral-plus-single",
+                  "displayCost": "307,860 COP/mo",
+                  "id": "a91fb086-880d-4b9a-b183-fbb41f96a0c9",
+                  "providerName": "Colsanitas",
+                  "tierName": "Integral Plus - Single",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Integral Plus - Family (Colsanitas - Integral Plus Medical (Family); Colsanitas - Integral Plus Dental (Family))",
+              "title": "Integral Plus - Family - 307,860 COP/mo",
+              "x-jsf-presentation": {
+                "description": "Covers the employee and their dependents, providing unlimited access to specialists, psychological services, hospitalization, maternity care, diagnostic aids, funeral expenses, and up to USD 35,000 for emergency medical services abroad.<strong>Includes Dental coverage.</strong>\n<br>\n<br>\n<strong>The same monthly cost applies for each additional dependent.</strong>",
+                "meta": {
+                  "benefitGroupId": "cdfe928c-f5b6-4f18-ad23-64506fbe6192",
+                  "detailsUrl": "https://remote.com/benefits-guide/integral-plus-family",
+                  "displayCost": "307,860 COP/mo",
+                  "id": "e1c58af8-9bad-421f-b004-72ba1bfb304d",
+                  "providerName": "Colsanitas",
+                  "tierName": "Integral Plus",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health",
+                    "dental"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Integral Plus - Single (Colsanitas - Integral Plus Medical (Single); Colsanitas - Integral Plus Dental (Single))",
+                    "Integral - Single (Colsanitas - Integral Medical (Single))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Integral Plus - Family (Colsanitas - Integral Plus Medical (Family); Colsanitas - Integral Plus Dental (Family))",
+                    "Integral - Family (Colsanitas - Integral Medical (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "life_insurance": {
+          "oneOf": [
+            {
+              "const": "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+              "title": "Life Insurance - $50K - 5.64 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $50,000. This means that regardless of an employee's salary, the payout will not exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-plan-50k",
+                  "displayCost": "5.64 USD/mo",
+                  "id": "05fc2f3f-5196-4027-9069-1b13dac40006",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $50K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+              "title": "Life Insurance - $100K - 11.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $100,000. This means that regardless of an employee's salary, the payout will not exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-100k",
+                  "displayCost": "11.28 USD/mo",
+                  "id": "b49e2622-7b34-4b12-b655-091d6eda1647",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $100K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+              "title": "Life Insurance - $200K - 22.56 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $200,000. This means that regardless of an employee's salary, the payout will not exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-200k",
+                  "displayCost": "22.56 USD/mo",
+                  "id": "b7b4091b-f071-462f-b208-34eebe703000",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $200K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+              "title": "Life Insurance - $400K - 45.12 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $400,000. This means that regardless of an employee's salary, the payout will not exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-400k",
+                  "displayCost": "45.12 USD/mo",
+                  "id": "5027927d-c245-41c9-9bf5-699fb8161e57",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $400K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+              "title": "Life Insurance - $500K - 56.40 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $500,000. This means that regardless of an employee's salary, the payout will not exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-500k",
+                  "displayCost": "56.40 USD/mo",
+                  "id": "75a1f399-f7df-4e81-ace3-881b9918c120",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $500K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+              "title": "Life Insurance - $600K - 67.68 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $600,000. This means that regardless of an employee's salary, the payout will not exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-600k",
+                  "displayCost": "67.68 USD/mo",
+                  "id": "3f88b480-8d5f-4461-bb5f-6bf52b77cec3",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $600K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - Life 50k; Allianz Life - Global Life - PD 50k)",
+              "title": "Life, Accidental Death & Permanent Disability - $50k - 12.04 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $50,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $50,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-50k",
+                  "displayCost": "12.04 USD/mo",
+                  "id": "e5ac7bec-115c-47b4-8122-dcf1c2852e43",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $50k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - AD&D 100k; Allianz Life - Global Life - PD 100k)",
+              "title": "Life, Accidental Death & Permanent Disability - $100k - 24.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $100,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $100,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-100k",
+                  "displayCost": "24.08 USD/mo",
+                  "id": "5da9a3f7-9a94-411b-a8ff-b404c8c5207f",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $100k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - AD&D 200k; Allianz Life - Global Life - PD 200k)",
+              "title": "Life, Accidental Death & Permanent Disability - $200k - 48.14 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $200,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $200,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-200k",
+                  "displayCost": "48.14 USD/mo",
+                  "id": "6768b5c4-3062-4ef7-aa5b-4d80de6072c1",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $200k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - PD 400k; Allianz Life - Global Life - Life 400k; Allianz Life - Global Life - AD&D 400k)",
+              "title": "Life, Accidental Death & Permanent Disability - $400k - 96.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $400,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $400,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-400k",
+                  "displayCost": "96.28 USD/mo",
+                  "id": "6cc59ff6-7f9f-4b2b-bcff-f6f0a4d6b2ac",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $400k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - PD 500k; Allianz Life - Global Life - AD&D 500k; Allianz Life - Global Life - Life 500k)",
+              "title": "Life, Accidental Death & Permanent Disability - $500k - 120.36 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $500,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $500,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-500k",
+                  "displayCost": "120.36 USD/mo",
+                  "id": "e0d3e767-2357-4b08-a8b7-5582265ab0c0",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $500k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - AD&D 600k; Allianz Life - Global Life - PD 600k; Allianz Life - Global Life - Life 600k)",
+              "title": "Life, Accidental Death & Permanent Disability - $600k - 144.43 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $600,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $600,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "b7b4358d-4c3a-43f7-9bcd-2f0a14a5ee5b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-600k",
+                  "displayCost": "144.43 USD/mo",
+                  "id": "f5d73624-0c08-4795-9f8c-a4a47d8c4ea3",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $600k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "life",
+                    "ad&d",
+                    "disability"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Life Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "basic",
+                  "label": "Basic",
+                  "optionValues": [
+                    "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+                    "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+                    "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+                    "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+                    "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+                    "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "comprehensive",
+                  "label": "Comprehensive",
+                  "optionValues": [
+                    "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - AD&D 600k; Allianz Life - Global Life - PD 600k; Allianz Life - Global Life - Life 600k)",
+                    "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - PD 500k; Allianz Life - Global Life - AD&D 500k; Allianz Life - Global Life - Life 500k)",
+                    "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - PD 400k; Allianz Life - Global Life - Life 400k; Allianz Life - Global Life - AD&D 400k)",
+                    "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - AD&D 200k; Allianz Life - Global Life - PD 200k)",
+                    "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - AD&D 100k; Allianz Life - Global Life - PD 100k)",
+                    "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - Life 50k; Allianz Life - Global Life - PD 50k)",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "5abbac79-1c3f-464d-b892-5b3973667760",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "d5da9ff1-12b1-49a0-a6c2-40cdac431a08",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "5abbac79-1c3f-464d-b892-5b3973667760",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "5a0a9062-ab1e-4eae-9774-cae236774f68",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "5abbac79-1c3f-464d-b892-5b3973667760",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "2354c644-bc64-4183-8ed5-59a6b8ae214a",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "5abbac79-1c3f-464d-b892-5b3973667760",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "4e81b095-5085-4a8b-8486-311347ac586a",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "5abbac79-1c3f-464d-b892-5b3973667760",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "f5b67b12-6272-4f7f-ae65-ff6650e36bb7",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance",
+        "health_insurance",
+        "life_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "life_insurance",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "We offer optional Supplemental Health Insurance in partnership with AXA-Colpatria. The below offer is effective from <strong>January 1st, 2024 until February 28th, 2025.</strong>\n<br>\n<br>\n<strong>IMPORTANT</strong>: Remote is switching Health insurance providers effective <strong>March 1, 2025</strong>. Review the offering in force until February 28, 2025  <a href=\"https://remote.com/benefits-guide/colombia-axa-colpatria\" target=\"_blank\">Here</a>",
+        "extra": "Please note that all local payroll deductions for required coverages are included in the TCE\nPricing listed is subject to change based on age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance of updated billing.\nDependent coverage is available at the employees' expense",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "COP",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "city": {
+      "description": "What city in Colombia is the employee located?",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "compensation_currency_code": {
+      "description": "The currency you want the employee to be paid in.",
+      "oneOf": [
+        {
+          "const": "COP",
+          "title": "Colombian Peso (COP)"
+        },
+        {
+          "const": "USD",
+          "title": "United States Dollar (USD)"
+        }
+      ],
+      "title": "Contract currency",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "There is more flexibility for termination on expiry of a fixed term employment agreement. For this reason, we suggest you consider utilising a fixed term employment agreement.",
+          "severity": "info",
+          "title": "Information on termination - contract duration"
+        }
+      }
+    },
+    "contract_end_date": {
+      "description": "Please note that fixed-term contracts are limited to 36 months.",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date",
+        "maxDate": "2028-06-11"
+      }
+    },
+    "employee_internet_costs": {
+      "title": "Internet costs contributions",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "---",
+        "inputType": "money"
+      }
+    },
+    "employee_utility_costs": {
+      "title": "Utility costs contributions",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "---",
+        "inputType": "money"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length": {
+      "description": "For indefinite term contracts and fixed-term contracts between 1 and 3 years, the maximum probationary period is two months. In fixed-term contracts for less than 1 year, the probationary period may not exceed one-fifth of the agreed term not exceeding two months.",
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Probation period, in months",
+      "type": "number",
+      "x-jsf-errorMessage": {
+        "maximum": "Must be smaller or equal to 2 months"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 9013034328205,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "If you need Remote to terminate an employee in Colombia (whether inside or outside of probation) because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee. Otherwise, the termination will be deemed “without cause”, and could lead to extra costs for you.\n\nDuring probation, you do still have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we still recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "COP",
+        "inputType": "money"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "compensation_currency_code",
+    "work_hours_per_week",
+    "annual_gross_salary",
+    "available_pto",
+    "available_pto_type",
+    "city",
+    "contract_duration_type",
+    "employee_internet_costs",
+    "employee_utility_costs",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_signing_bonus",
+    "probation_length",
+    "role_description",
+    "work_address_is_home_address",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "annual_bonus_ack"
+      ],
+      "title": "Annual gross salary"
+    }
+  },
+  "x-jsf-order": [
+    "city",
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "probation_length",
+    "available_pto_type",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "compensation_currency_code",
+    "annual_gross_salary",
+    "annual_bonus_ack",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "employee_internet_costs",
+    "employee_utility_costs",
+    "benefits"
+  ],
+  "x-jsf-presentation": {
+    "inputType": "fieldset"
+  }
+}

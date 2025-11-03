@@ -1,0 +1,113 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "has_disability": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a disability?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your National ID. Foreigners living in Mauritius need to provide their UID number associated with their Occupational Permit (OP) or Residence Permit.",
+      "maxLength": 255,
+      "title": "ID number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_type": {
+      "description": "Please select your ID type, either your government-issued identification or for foreigners living or working in Mauritius, provide the UID number associated with their Occupational Permit (OP) or Residence Permit.",
+      "oneOf": [
+        {
+          "const": "id",
+          "title": "ID"
+        },
+        {
+          "const": "uid",
+          "title": "UID"
+        }
+      ],
+      "title": "Identification document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax identification number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_type",
+    "id_number",
+    "marital_status",
+    "has_disability"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_type",
+    "id_number",
+    "marital_status",
+    "tax_number",
+    "has_disability"
+  ]
+}

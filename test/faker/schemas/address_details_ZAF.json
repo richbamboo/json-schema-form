@@ -1,0 +1,102 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select your province",
+      "oneOf": [
+        {
+          "const": "Eastern Cape",
+          "title": "Eastern Cape"
+        },
+        {
+          "const": "Free State",
+          "title": "Free State"
+        },
+        {
+          "const": "Gauteng",
+          "title": "Gauteng"
+        },
+        {
+          "const": "KwaZulu-Natal",
+          "title": "KwaZulu-Natal"
+        },
+        {
+          "const": "Limpopo",
+          "title": "Limpopo"
+        },
+        {
+          "const": "Mpumalanga",
+          "title": "Mpumalanga"
+        },
+        {
+          "const": "Northern Cape",
+          "title": "Northern Cape"
+        },
+        {
+          "const": "Western Cape",
+          "title": "Western Cape"
+        },
+        {
+          "const": "North West",
+          "title": "North West"
+        }
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "bpjs_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bpjs": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bpjs"
+        ]
+      },
+      "then": {
+        "required": [
+          "bpjs_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_bpjs": {
+            "x-jsf-presentation": {
+              "statement": false
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bpjs": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_bpjs"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_bpjs": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "We will apply a new BPJS TK number for you.",
+                "inputType": "statement",
+                "severity": "info"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "ktp_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_ktp": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_ktp"
+        ]
+      },
+      "then": {
+        "required": [
+          "ktp_number"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "bpjs_number": {
+      "maxLength": 255,
+      "title": "BPJS TK Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_bpjs": {
+      "description": "Do you want to continue with your existing number?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "BPJS TK",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_ktp": {
+      "description": "Do you have a Kartu Tanda Penduduk (KTP) Number? This is applicable for locals",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a KTP Number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "ktp_number": {
+      "maxLength": 255,
+      "title": "KTP Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "description": "The total number of dependents you claim.",
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_number": {
+      "description": "Enter your tax number to help us process your payroll correctly",
+      "maxLength": 255,
+      "title": "Tax number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "has_bpjs",
+    "has_ktp",
+    "marital_status",
+    "number_of_dependents",
+    "passport_number",
+    "tax_number"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "has_bpjs",
+    "bpjs_number",
+    "has_ktp",
+    "ktp_number",
+    "passport_number",
+    "tax_number",
+    "marital_status",
+    "number_of_dependents",
+    "work_permit_number"
+  ]
+}

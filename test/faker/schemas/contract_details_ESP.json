@@ -1,0 +1,2212 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 39,
+            "minimum": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "const": 40,
+            "default": 40,
+            "description": "All employees in Spain are required to work 40 hours in a full-time position.",
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Total of <b>40 hours</b> per week."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Group Level E - Workers who perform low-complexity technical and administrative tasks subject to work instructions, training, knowledge and professional experience. They perform their tasks without autonomy and under supervision. (probation period - 3 months)"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "experience_level",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 1586056,
+            "x-jsf-errorMessage": {
+              "minimum": "€15,860.56 is the minimum wage. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out so we can help you set the correct salary."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Group Level D - Workers carry out administrative and technical-operational processes, with an average level of complexity and who have the necessary training, knowledge and professional experience. You can supervise the activities of your dependents. They perform their functions with limited autonomy. (probation period is between 3- 6 months depending on Functional Area which will be reviewed during the Onboarding process)"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "experience_level",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 1771565,
+            "x-jsf-errorMessage": {
+              "minimum": "€17,715.65 is the minimum wage. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out so we can help you set the correct salary."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Group Level C - Workers who carry out technical activities within a certain area of knowledge and are responsible for planning and supervising the activities carried out by internal or external collaborators and who have the necessary training, knowledge and experience. They organize and plan the activities under their responsibility, being able to closely supervise the activity carried out by the people who make up their teams. (probation period is between 3- 6 months depending on Functional Area which will be reviewed during the Onboarding process)"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "experience_level",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2464037,
+            "x-jsf-errorMessage": {
+              "minimum": "€24,640.37 is the minimum wage. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out so we can help you set the correct salary."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Group Level B - Workers who have assigned functions related to the analysis, definition, coordination and supervision of projects, tasks, sector-specific activities, line, area of belonging, ensuring the achievement of the objectives pursued, and who have the necessary training, knowledge and professional experience. They plan and manage the available human and technical resources by project. (probation period - 6 months)"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "experience_level",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2598659,
+            "x-jsf-errorMessage": {
+              "minimum": "€25,986.59 is the minimum wage. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out so we can help you set the correct salary."
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Group Level A - Workers who thanks to their professional knowledge and experience, coordinate, plan and manage the resources available to them, ensuring the achievement of the objectives pursued. They carry out these activities with autonomy and supervision. (probation period - 6 months)"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "experience_level",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2679031,
+            "x-jsf-errorMessage": {
+              "minimum": "€26,790.31 is the minimum wage. We reserve the right to increase the employee’s wage to adhere to the applicable laws. In case you have any doubts, please reach out so we can help you set the correct salary."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_duration_type": {
+            "oneOf": [
+              {
+                "const": "indefinite",
+                "title": "Indefinite"
+              }
+            ]
+          },
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "probation_length": {
+            "const": 0
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "const": "acknowledged",
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_compensation_amount": false,
+          "non_compete_clause_halt_period_months": false,
+          "non_compete_company_industry": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause_apply"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_clause_compensation_amount": {
+            "type": [
+              "integer"
+            ],
+            "x-jsf-logic-validations": [
+              "monthly_gross_salary_is_greater_than_sixty_percent"
+            ]
+          },
+          "non_compete_clause_halt_period_months": {
+            "type": [
+              "number"
+            ]
+          },
+          "non_compete_company_industry": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "non_compete_clause_halt_period_months",
+          "non_compete_company_industry",
+          "non_compete_clause_compensation_amount"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "experience_level": {
+            "const": "Group Level E - Workers who perform low-complexity technical and administrative tasks subject to work instructions, training, knowledge and professional experience. They perform their tasks without autonomy and under supervision. (probation period - 3 months)"
+          }
+        },
+        "required": [
+          "experience_level"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "description": "In Spain, for employees of Group Level E, probation periods can last up to 2 months.",
+            "maximum": 2
+          }
+        }
+      }
+    },
+    {
+      "else": {},
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 23,
+            "default": 23,
+            "description": "In Spain, employees are entitled to a minimum of 23 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Minimum of <strong>23 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "compensation_expenses_ack": {
+      "const": "acknowledged",
+      "description": "In Spain <b>the law determines that</b> employees should be compensated for all expenses derived from remote work, e.g. internet, telephone, and electricity costs. <b>As per the best practices in the country, we defined a monthly amount of 17 EUR, which may be modified by the CBA.</b> Note: This amount is taxed and will be paid out on top of the offered base salary.",
+      "title": "Acknowledge compensation of expenses",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "non_compete_clause_apply": {
+      "description": "In Spain, non-compete clauses carry a large cost for employers and are not enforceable. Because of these reasons, we recommend selecting No.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply non-compete clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_equipment": {
+      "description": "In Spain, employers are legally required to provide all equipment remote employees need to do their jobs. Please list all the equipment that you’ll provide to the employee and how often that equipment will be renewed. We recommend renewing equipment every 3 years.",
+      "maxLength": 1000,
+      "title": "Equipment and technical allowance",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "annual_bonus_ack": {
+      "const": "acknowledged",
+      "description": "In Spain, employees receive 13th and 14th month salaries (usually called vacation and Christmas allowances) as part of their annual gross salary. The 13th and 14th salary amounts are based on an employee's regular salary and aren't affected by bonuses or commissions.",
+      "title": "I confirm the annual gross salary includes 13th and 14th salaries",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about bonus salaries",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 10988159740301,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "annual_gross_salary": {
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "compensation_expenses": {
+      "deprecated": true,
+      "description": "In Spain employees should be compensated for all expenses derived from remote work, e.g. internet, telephone, and electricity costs. Please add the monthly gross amount you will pay to the employee to cover these. Remote suggests EUR 60 based on country practices. Note: This amount will be included in the employee's monthly gross salary.",
+      "readOnly": true,
+      "title": "Compensation of expenses",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated in favor of \"Compensation expenses acknowledge\""
+        },
+        "inputType": "money"
+      }
+    },
+    "contract_duration_type": {
+      "description": "In accordance with Spanish Royal Decree-Law 32/2021, only indefinite term contracts are supported.",
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "available_pto": {
+      "description": "In Spain, employees are entitled to a minimum of 23 paid time off days per year. Please pro-rate for part-time employment. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+      "minimum": 23,
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "probation_length": {
+      "description": "In Spain, probation periods can last up to 6 months. Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "maximum": 6,
+      "minimum": 0,
+      "title": "Probation period, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 9013034328205,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "If you need Remote to terminate a post-probation employee in Spain because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee.\n\nPerformance-related terminations must meet a high threshold of compliance.\n\nIt is common for employees in Remote to bring claims and employers to pay settlements or to opt for termination by mutual agreement.\n\nDuring probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role",
+      "oneOf": [
+        {
+          "const": "Group Level A - Workers who thanks to their professional knowledge and experience, coordinate, plan and manage the resources available to them, ensuring the achievement of the objectives pursued. They carry out these activities with autonomy and supervision. (probation period - 6 months)",
+          "description": "Workers who thanks to their professional knowledge and experience, coordinate, plan and manage the resources available to them, ensuring the achievement of the objectives pursued. They carry out these activities with autonomy and supervision. (probation period - 6 months)",
+          "title": "Group Level A"
+        },
+        {
+          "const": "Group Level B - Workers who have assigned functions related to the analysis, definition, coordination and supervision of projects, tasks, sector-specific activities, line, area of belonging, ensuring the achievement of the objectives pursued, and who have the necessary training, knowledge and professional experience. They plan and manage the available human and technical resources by project. (probation period - 6 months)",
+          "description": "Workers who have assigned functions related to the analysis, definition, coordination and supervision of projects, tasks, sector-specific activities, line, area of belonging, ensuring the achievement of the objectives pursued, and who have the necessary training, knowledge and professional experience. They plan and manage the available human and technical resources by project. (probation period - 6 months)",
+          "title": "Group Level B"
+        },
+        {
+          "const": "Group Level C - Workers who carry out technical activities within a certain area of knowledge and are responsible for planning and supervising the activities carried out by internal or external collaborators and who have the necessary training, knowledge and experience. They organize and plan the activities under their responsibility, being able to closely supervise the activity carried out by the people who make up their teams. (probation period is between 3- 6 months depending on Functional Area which will be reviewed during the Onboarding process)",
+          "description": "Workers who carry out technical activities within a certain area of knowledge and are responsible for planning and supervising the activities carried out by internal or external collaborators and who have the necessary training, knowledge and experience. They organize and plan the activities under their responsibility, being able to closely supervise the activity carried out by the people who make up their teams. (probation period is between 3- 6 months depending on Functional Area which will be reviewed during the Onboarding process)",
+          "title": "Group Level C"
+        },
+        {
+          "const": "Group Level D - Workers carry out administrative and technical-operational processes, with an average level of complexity and who have the necessary training, knowledge and professional experience. You can supervise the activities of your dependents. They perform their functions with limited autonomy. (probation period is between 3- 6 months depending on Functional Area which will be reviewed during the Onboarding process)",
+          "description": "Workers carry out administrative and technical-operational processes, with an average level of complexity and who have the necessary training, knowledge and professional experience. You can supervise the activities of your dependents. They perform their functions with limited autonomy. (probation period is between 3- 6 months depending on Functional Area which will be reviewed during the Onboarding process)",
+          "title": "Group Level D"
+        },
+        {
+          "const": "Group Level E - Workers who perform low-complexity technical and administrative tasks subject to work instructions, training, knowledge and professional experience. They perform their tasks without autonomy and under supervision. (probation period - 3 months)",
+          "description": "Workers who perform low-complexity technical and administrative tasks subject to work instructions, training, knowledge and professional experience. They perform their tasks without autonomy and under supervision. (probation period - 3 months)",
+          "title": "Group Level E"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "non_compete_clause_compensation_amount": {
+      "description": "Required to help the employee subsist while they’re unable to work. Minimum of 60% of the employee’s monthly gross salary, although between 60% and 75% of the monthly gross salary is typical. This compensation should also be proportional to the indemnity owed if the employee does not comply.",
+      "title": "Non-compete period compensation",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "non_compete_company_industry": {
+      "description": "The non-compete clause will reference this industry to tailor the employment agreement to your company. The more specific you can be, the better.",
+      "maxLength": 255,
+      "title": "What industry does your company work in?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "is_salary_prorated": {
+      "description": "In Spain, employees receive a 13th and 14th month salary allowance as part of their annual base pay.",
+      "oneOf": [
+        {
+          "const": "12 months",
+          "title": "12 months"
+        },
+        {
+          "const": "14 months",
+          "title": "14 months"
+        }
+      ],
+      "title": "Number of installments",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 33146027714829,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "Non-compete clauses in Spain can range from 1 to 12 months.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Length of non-compete clause, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "maximum": "Must be at most 12 months",
+        "minimum": "Must be at least 1 month"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "c1ba99d9-7fdc-4540-aa9e-3ad41ed9f414",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "ca169e46-9948-414c-8a8d-1a9620ca10f2",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "c1ba99d9-7fdc-4540-aa9e-3ad41ed9f414",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "e800b106-8204-4446-8b8c-f2b1ed8a9a25",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "c1ba99d9-7fdc-4540-aa9e-3ad41ed9f414",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "b9b97eab-da5b-405c-b4bd-f5395582aac7",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "c1ba99d9-7fdc-4540-aa9e-3ad41ed9f414",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "82440b97-6d54-44f5-b889-4c0e9824f11a",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "c1ba99d9-7fdc-4540-aa9e-3ad41ed9f414",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "d1903561-22eb-4dca-8fef-7a81777a2e43",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Sanitas Standard Medical (Employee Only) (Sanitas - Sanitas Standard Medical (Employee Only); Sanitas - Sanitas Dental (Employee Only))",
+              "title": "Sanitas Standard Medical (Employee Only) - ~47.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Offers Medical Insurance for the employee only, offering comprehensive healthcare, primary/emergency services, specialist care, diagnostics; dental coverage, digital health resources; extensive network, home services, and pre-existing condition coverage",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-sanitas-standard",
+                  "displayCost": "~47.83 USD/mo",
+                  "id": "c9868a93-c820-4c15-98b4-f12831b88a63",
+                  "providerName": "Sanitas",
+                  "tierName": "Sanitas Standard Medical (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Sanitas Standard Medical (Family) (Sanitas - Sanitas Standard Medical (Family))",
+              "title": "Sanitas Standard Medical (Family) - ~191.30 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Offers the Standard plan to cover the employee and their children, providing them comprehensive healthcare, primary/emergency services, specialist care, diagnostics; dental coverage, digital health resources; extensive network, home services, and pre-existing condition coverage",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-sanitas-standard-family",
+                  "displayCost": "~191.30 USD/mo",
+                  "id": "59431baf-0d7b-49dc-b33c-7658425e1779",
+                  "providerName": "Sanitas",
+                  "tierName": "Sanitas Standard Medical (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Sanitas Premium Medical (Employee Only) (Sanitas - Sanitas Premium Medical (Employee Only); Sanitas - Sanitas Vision (Employee Only); Sanitas - Sanitas Dental (Employee Only))",
+              "title": "Sanitas Premium Medical (Employee Only) - ~67.75 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Offers Medical Insurance for the employee only, offering comprehensive healthcare, primary/emergency services, specialist care, diagnostics, dental coverage, vision coverage and digital health resources; includes extensive network, home services, pre-existing condition coverage, and flexibility to choose any specialist with 80% of the bill covered.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-sanitas-premium",
+                  "displayCost": "~67.75 USD/mo",
+                  "id": "ca783714-fc67-4b96-a231-9922ed0a153e",
+                  "providerName": "Sanitas",
+                  "tierName": "Sanitas Premium Medical (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Sanitas Premium Medical (Family) (Sanitas - Sanitas Premium Medical (Family); Sanitas - Sanitas Premium Dental (Family))",
+              "title": "Sanitas Premium Medical (Family) - ~271.01 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Offers the Premium plan to cover the employee and their children, providing them comprehensive healthcare, primary/emergency services, specialist care, diagnostics, dental coverage, vision coverage and digital health resources; includes extensive network, home services, pre-existing condition coverage, and flexibility to choose any specialist with 80% of the bill covered.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-sanitas-premium-family",
+                  "displayCost": "~271.01 USD/mo",
+                  "id": "de74f4af-8a1b-4708-99a0-527941ac632a",
+                  "providerName": "Sanitas",
+                  "tierName": "Sanitas Premium Medical (Family)",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+              "title": "Allianz Standard (Employee Only) - $123.17 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. No dental or vision coverage. Includes basic maternity benefits up to $6K USD and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-standard",
+                  "displayCost": "$123.17 USD/mo",
+                  "id": "c40e5554-681c-4488-b72e-e09d4e8ae4cf",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Employee Only)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+              "title": "Allianz Standard (Family) - $184.75 - $369.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. No dental or vision coverage. Includes basic maternity benefits up to $6K USD, pediatric care, and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-standard",
+                  "displayCost": "$184.75 - $369.50 USD/mo",
+                  "id": "7cb852ce-37a9-4290-8292-c3147d683968",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Employee Only) (Allianz - Premium Medical (Employee Only); Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only))",
+              "title": "Allianz Premium (Employee Only) - $157.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more outpatient mental health and therapy support.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-premium",
+                  "displayCost": "$157.08 USD/mo",
+                  "id": "3fd0436a-b912-4abe-8e01-9dd0af6f5241",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Family) (Allianz - Premium Vision (Family); Allianz - Premium Dental (Family); Allianz - Premium Medical (Family))",
+              "title": "Allianz Premium (Family) - $235.63 - $471.25 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with higher mental health limits, pediatric coverage, and prescribed therapy sessions.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-premium",
+                  "displayCost": "$235.63 - $471.25 USD/mo",
+                  "id": "558d78cc-77c6-41c6-9875-8b3f3b9e9434",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Employee Only) (Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only); Allianz - Gold Medical (Employee Only))",
+              "title": "Allianz Gold (Employee Only) - $186.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, plus expanded mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzgoldplan-employeeonly",
+                  "displayCost": "$186.83 USD/mo",
+                  "id": "8cd5302d-a66d-456e-ae2c-ae86404a71f6",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Family) (Allianz - Gold Vision (Family); Allianz - Gold Dental (Family); Allianz - Gold Medical (Family))",
+              "title": "Allianz Gold (Family) - $280.25 - $560.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more therapy sessions, extended pediatric care, and broader outpatient benefits.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-gold",
+                  "displayCost": "$280.25 - $560.50 USD/mo",
+                  "id": "5da496e2-f8e8-43a8-96dc-08cab2402848",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Employee Only) (Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only); Allianz - Platinum Medical (Employee Only))",
+              "title": "Allianz Platinum (Employee Only) - $206.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD for employee only. Includes dental coverage up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with the most extensive mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzplatinumplan-employeeonly",
+                  "displayCost": "$206.50 USD/mo",
+                  "id": "d3acafd2-f471-416e-8452-09c81c672a9f",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Family) (Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family); Allianz - Platinum Medical (Family))",
+              "title": "Allianz Platinum (Family) - $309.75 - $619.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD. Includes dental up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with comprehensive pediatric care, full mental health support, and maximum therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "abe8dcf3-c1ee-46c4-b7ea-462cff7c83af",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-platinum",
+                  "displayCost": "$309.75 - $619.50 USD/mo",
+                  "id": "7547bd91-62d7-433a-81af-1436baec3aa1",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Allianz Platinum (Employee Only) (Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only); Allianz - Platinum Medical (Employee Only))",
+                    "Allianz Gold (Employee Only) (Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only); Allianz - Gold Medical (Employee Only))",
+                    "Allianz Premium (Employee Only) (Allianz - Premium Medical (Employee Only); Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only))",
+                    "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+                    "Sanitas Premium Medical (Employee Only) (Sanitas - Sanitas Premium Medical (Employee Only); Sanitas - Sanitas Vision (Employee Only); Sanitas - Sanitas Dental (Employee Only))",
+                    "Sanitas Standard Medical (Employee Only) (Sanitas - Sanitas Standard Medical (Employee Only); Sanitas - Sanitas Dental (Employee Only))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Allianz Platinum (Family) (Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family); Allianz - Platinum Medical (Family))",
+                    "Allianz Gold (Family) (Allianz - Gold Vision (Family); Allianz - Gold Dental (Family); Allianz - Gold Medical (Family))",
+                    "Allianz Premium (Family) (Allianz - Premium Vision (Family); Allianz - Premium Dental (Family); Allianz - Premium Medical (Family))",
+                    "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+                    "Sanitas Premium Medical (Family) (Sanitas - Sanitas Premium Medical (Family); Sanitas - Sanitas Premium Dental (Family))",
+                    "Sanitas Standard Medical (Family) (Sanitas - Sanitas Standard Medical (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "life_insurance": {
+          "oneOf": [
+            {
+              "const": "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+              "title": "Life Insurance - $50K - 5.64 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $50,000. This means that regardless of an employee's salary, the payout will not exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-plan-50k",
+                  "displayCost": "5.64 USD/mo",
+                  "id": "fffbfdd9-f069-4e9b-b153-dc8f40bf9033",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $50K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+              "title": "Life Insurance - $100K - 11.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $100,000. This means that regardless of an employee's salary, the payout will not exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-100k",
+                  "displayCost": "11.28 USD/mo",
+                  "id": "466d651c-adbb-462b-9f30-f724173a2053",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $100K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+              "title": "Life Insurance - $200K - 22.56 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $200,000. This means that regardless of an employee's salary, the payout will not exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-200k",
+                  "displayCost": "22.56 USD/mo",
+                  "id": "194f1e26-5980-4101-adee-80258f8f8ccd",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $200K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+              "title": "Life Insurance - $400K - 45.12 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $400,000. This means that regardless of an employee's salary, the payout will not exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-400k",
+                  "displayCost": "45.12 USD/mo",
+                  "id": "10a30d2e-dee1-4452-807c-a9e05533e260",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $400K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+              "title": "Life Insurance - $500K - 56.40 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $500,000. This means that regardless of an employee's salary, the payout will not exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-500k",
+                  "displayCost": "56.40 USD/mo",
+                  "id": "caa4ee62-9373-4cd0-a563-80b692e6dda7",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $500K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+              "title": "Life Insurance - $600K - 67.68 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance only. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary. However, this compensation is capped at a maximum of $600,000. This means that regardless of an employee's salary, the payout will not exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-basic-600k",
+                  "displayCost": "67.68 USD/mo",
+                  "id": "5b4d3075-5ea1-412c-8665-63cf7cee7f08",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life Insurance - $600K",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - PD 50k; Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - Life 50k)",
+              "title": "Life, Accidental Death & Permanent Disability - $50k - 12.04 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $50,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $50,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $50,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-50k",
+                  "displayCost": "12.04 USD/mo",
+                  "id": "cb02dd3f-f517-4457-b426-e87fd84a4e0b",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $50k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - AD&D 100k; Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - PD 100k)",
+              "title": "Life, Accidental Death & Permanent Disability - $100k - 24.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $100,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $100,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $100,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-100k",
+                  "displayCost": "24.08 USD/mo",
+                  "id": "2a487a0e-2df5-4b56-acac-99b38ecba5eb",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $100k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - AD&D 200k; Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - PD 200k)",
+              "title": "Life, Accidental Death & Permanent Disability - $200k - 48.14 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $200,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $200,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $200,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-200k",
+                  "displayCost": "48.14 USD/mo",
+                  "id": "c7864749-95f6-43c8-ac74-8e293bfb829b",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $200k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - Life 400k; Allianz Life - Global Life - PD 400k; Allianz Life - Global Life - AD&D 400k)",
+              "title": "Life, Accidental Death & Permanent Disability - $400k - 96.28 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $400,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $400,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $400,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-400k",
+                  "displayCost": "96.28 USD/mo",
+                  "id": "f909b6cf-248f-4d74-87ce-eb7bcdfb1373",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $400k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - Life 500k; Allianz Life - Global Life - PD 500k; Allianz Life - Global Life - AD&D 500k)",
+              "title": "Life, Accidental Death & Permanent Disability - $500k - 120.36 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $500,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $500,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $500,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-500k",
+                  "displayCost": "120.36 USD/mo",
+                  "id": "ae553d78-fd47-4e48-b4a9-b9c5269c5089",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $500k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - PD 600k; Allianz Life - Global Life - Life 600k; Allianz Life - Global Life - AD&D 600k)",
+              "title": "Life, Accidental Death & Permanent Disability - $600k - 144.43 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers Life Insurance, Accidental Death & Dismemberment, and Permanent Disability. In the unfortunate event of an employee's demise, their beneficiary will receive a payout equivalent to up to 6 times the employee's annual salary, capped at a maximum of $600,000. In cases of accidental death, dismemberment, or permanent disability, the compensation is equivalent to up to 5 times the employee's annual salary, also with a $600,000 limit. Regardless of the specifics of an incident or an employee's salary, payouts will never exceed $600,000.",
+                "meta": {
+                  "benefitGroupId": "fc57e242-0c4d-4556-96ba-f37ee2a36432",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-global-life-comprehensive-600k",
+                  "displayCost": "144.43 USD/mo",
+                  "id": "0e1e11c1-3454-4598-82f0-658898b58d91",
+                  "providerName": "Allianz Life",
+                  "tierName": "Life, Accidental Death & Permanent Disability - $600k",
+                  "types": [
+                    "ad&d",
+                    "life",
+                    "disability"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "life",
+                    "ad&d",
+                    "disability"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Life Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "basic",
+                  "label": "Basic",
+                  "optionValues": [
+                    "Life Insurance - $600K (Allianz Life - Global Life - Life 600k)",
+                    "Life Insurance - $500K (Allianz Life - Global Life - Life 500k)",
+                    "Life Insurance - $400K (Allianz Life - Global Life - Life 400k)",
+                    "Life Insurance - $200K (Allianz Life - Global Life - Life 200k)",
+                    "Life Insurance - $100K (Allianz Life - Global Life - Life 100k)",
+                    "Life Insurance - $50K (Allianz Life - Global Life - Life 50k)",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "comprehensive",
+                  "label": "Comprehensive",
+                  "optionValues": [
+                    "Life, Accidental Death & Permanent Disability - $600k (Allianz Life - Global Life - PD 600k; Allianz Life - Global Life - Life 600k; Allianz Life - Global Life - AD&D 600k)",
+                    "Life, Accidental Death & Permanent Disability - $500k (Allianz Life - Global Life - Life 500k; Allianz Life - Global Life - PD 500k; Allianz Life - Global Life - AD&D 500k)",
+                    "Life, Accidental Death & Permanent Disability - $400k (Allianz Life - Global Life - Life 400k; Allianz Life - Global Life - PD 400k; Allianz Life - Global Life - AD&D 400k)",
+                    "Life, Accidental Death & Permanent Disability - $200k (Allianz Life - Global Life - AD&D 200k; Allianz Life - Global Life - Life 200k; Allianz Life - Global Life - PD 200k)",
+                    "Life, Accidental Death & Permanent Disability - $100k (Allianz Life - Global Life - AD&D 100k; Allianz Life - Global Life - Life 100k; Allianz Life - Global Life - PD 100k)",
+                    "Life, Accidental Death & Permanent Disability - $50k (Allianz Life - Global Life - PD 50k; Allianz Life - Global Life - AD&D 50k; Allianz Life - Global Life - Life 50k)",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "78bfd2ee-5219-499b-a2bb-1089b49b607c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "de1ba277-e845-45af-a19e-6e0ca259d443",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "78bfd2ee-5219-499b-a2bb-1089b49b607c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "189ad2cc-2507-40b5-90d5-79f53df5096b",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "78bfd2ee-5219-499b-a2bb-1089b49b607c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "3f520009-8051-4727-8f5f-2efb4e06cd82",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "78bfd2ee-5219-499b-a2bb-1089b49b607c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "f6c9d8b8-43c8-44e7-8843-8e595efc98d5",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "78bfd2ee-5219-499b-a2bb-1089b49b607c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "2bd84f44-608a-41d9-9a73-dbc8fb7bd7d5",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "retirement_flex_benefits": {
+          "oneOf": [
+            {
+              "const": "Basic Retirement (VidaCaixa - Basic Retirement Plan; Cobee - Meal Salary Sacrifice; Cobee - Nursery Salary Sacrifice)",
+              "title": "Basic Retirement - 0% match",
+              "x-jsf-presentation": {
+                "description": "Matching contributions are not included. \n\nTeam members will have access to Cobee’s flexible benefits platform to allocate part of their salary, with tax advantages, toward meals, nursery care, and voluntary retirement.",
+                "meta": {
+                  "benefitGroupId": "7a55f6d3-f951-4727-b2da-d279319202a8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-retirement-basic",
+                  "displayCost": "0% match",
+                  "id": "c3d9cf0a-cbe2-4280-9ea3-2fe69bf7f608",
+                  "providerName": "VidaCaixa",
+                  "tierName": "Basic Retirement",
+                  "types": [
+                    "pension",
+                    "meal",
+                    "childcare"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Retirement (Cobee - Meal Salary Sacrifice; Cobee - Nursery Salary Sacrifice; VidaCaixa - Standard Retirement Plan)",
+              "title": "Standard Retirement - 2% match",
+              "x-jsf-presentation": {
+                "description": "You double the employee's contribution into the plan, up to 2% of the employee's salary.\n\nTeam members will have access to Cobee’s flexible benefits platform to allocate part of their salary, with tax advantages, toward meals, nursery care, and voluntary retirement.",
+                "meta": {
+                  "benefitGroupId": "7a55f6d3-f951-4727-b2da-d279319202a8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-retirement-standard",
+                  "displayCost": "2% match",
+                  "id": "52337d46-2b12-4f06-bc9b-69a893dc8c6a",
+                  "providerName": "Cobee",
+                  "tierName": "Standard Retirement",
+                  "types": [
+                    "meal",
+                    "childcare",
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Retirement (Cobee - Meal Salary Sacrifice; Cobee - Nursery Salary Sacrifice; VidaCaixa - Plus Retirement Plan)",
+              "title": "Plus Retirement - 4% match",
+              "x-jsf-presentation": {
+                "description": "You double the employee's contribution into the plan, up to 4% of the employee's salary.\n\nTeam members will have access to Cobee’s flexible benefits platform to allocate part of their salary, with tax advantages, toward meals, nursery care, and voluntary retirement.",
+                "meta": {
+                  "benefitGroupId": "7a55f6d3-f951-4727-b2da-d279319202a8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-retirement-plus",
+                  "displayCost": "4% match",
+                  "id": "9a683981-681f-4686-a27c-004ad6482553",
+                  "providerName": "Cobee",
+                  "tierName": "Plus Retirement",
+                  "types": [
+                    "meal",
+                    "childcare",
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Retirement (Cobee - Meal Salary Sacrifice; Cobee - Nursery Salary Sacrifice; VidaCaixa - Premium Retirement Plan)",
+              "title": "Premium Retirement - 6% match",
+              "x-jsf-presentation": {
+                "description": "You double the employee's contribution into the plan, up to 6% of the employee's salary.\n\nTeam members will have access to Cobee’s flexible benefits platform to allocate part of their salary, with tax advantages, toward meals, nursery care, and voluntary retirement.",
+                "meta": {
+                  "benefitGroupId": "7a55f6d3-f951-4727-b2da-d279319202a8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-retirement-premium",
+                  "displayCost": "6% match",
+                  "id": "7356e0ed-92ec-47df-9250-0e27567fa6ba",
+                  "providerName": "Cobee",
+                  "tierName": "Premium Retirement",
+                  "types": [
+                    "meal",
+                    "childcare",
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Retirement (Cobee - Meal Salary Sacrifice; Cobee - Nursery Salary Sacrifice; VidaCaixa - Platinum Retirement Plan)",
+              "title": "Platinum Retirement - 8% match",
+              "x-jsf-presentation": {
+                "description": "You double the employee's contribution into the plan, up to 8% of the employee's salary. (Above market)\n\nTeam members will have access to Cobee’s flexible benefits platform to allocate part of their salary, with tax advantages, toward meals, nursery care, and voluntary retirement.",
+                "meta": {
+                  "benefitGroupId": "7a55f6d3-f951-4727-b2da-d279319202a8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-spain-retirement-platinum",
+                  "displayCost": "8% match",
+                  "id": "880326b4-03c3-45e3-9131-9a4236cbdad3",
+                  "providerName": "Cobee",
+                  "tierName": "Platinum Retirement",
+                  "types": [
+                    "meal",
+                    "childcare",
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "pension",
+                    "meal",
+                    "childcare"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Retirement Flex Benefits",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "retirement_flex_benefits",
+        "mental_health_program",
+        "business_travel_insurance",
+        "life_insurance",
+        "health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "life_insurance",
+        "health_insurance",
+        "retirement_flex_benefits",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In this section, you can select benefits for your new team member. If you have existing team members in the same country, your new hire will receive the same benefits as those currently provided to other team members there, maintaining benefit equality. If this is your first hire in the country, you may select from the available options below. Your choice will become the standard benefits for any future hires in the country.",
+        "extra": "Prices are listed in U.S. Dollars (USD). However, when benefits are originally priced in local currencies, these amounts are estimates in USD. The final charge in local currency will be determined using the exchange rate at the time of invoicing. The pricing listed is subject to change based on the age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance.",
+        "inputType": "fieldset"
+      }
+    },
+    "probation_length_ack": {
+      "const": "acknowledged",
+      "description": "I read the information about the probation period according to the applicable CBA.",
+      "title": "Acknowledge probation period",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20263650814733,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_social_security_number": {
+      "description": "Please note that without a valid Social Security Number, we will not be able to hire the Employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Employee Social Security number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "allowances": {
+      "description": "Let us know what each allowance covers and its monthly amount. If you’re not offering allowances, you can skip this field.",
+      "maxLength": 1000,
+      "title": "Allowances",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    }
+  },
+  "required": [
+    "work_hours_per_week",
+    "annual_gross_salary",
+    "annual_bonus_ack",
+    "available_pto",
+    "available_pto_type",
+    "compensation_expenses_ack",
+    "contract_duration_type",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_signing_bonus",
+    "has_social_security_number",
+    "is_salary_prorated",
+    "non_compete_clause_apply",
+    "probation_length",
+    "probation_length_ack",
+    "role_description",
+    "work_address_is_home_address",
+    "work_equipment",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "annual_bonus_ack"
+      ],
+      "title": "Annual gross salary"
+    }
+  },
+  "x-jsf-logic": {
+    "validations": {
+      "monthly_gross_salary_is_greater_than_sixty_percent": {
+        "errorMessage": "Must be at least 60% of monthly gross salary",
+        "rule": {
+          ">=": [
+            {
+              "var": "non_compete_clause_compensation_amount"
+            },
+            {
+              "*": [
+                {
+                  "/": [
+                    {
+                      "var": "annual_gross_salary"
+                    },
+                    12
+                  ]
+                },
+                0.6
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "available_pto_type",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "probation_length",
+    "probation_length_ack",
+    "work_address_is_home_address",
+    "annual_gross_salary",
+    "annual_bonus_ack",
+    "part_time_salary_confirmation",
+    "allowances",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "has_social_security_number",
+    "is_salary_prorated",
+    "equity_compensation",
+    "non_compete_clause_apply",
+    "non_compete_clause_halt_period_months",
+    "non_compete_company_industry",
+    "non_compete_clause_compensation_amount",
+    "work_equipment",
+    "compensation_expenses",
+    "compensation_expenses_ack",
+    "benefits"
+  ]
+}

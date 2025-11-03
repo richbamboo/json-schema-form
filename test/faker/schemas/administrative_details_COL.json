@@ -1,0 +1,297 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "id_type": {
+            "const": "id"
+          }
+        },
+        "required": [
+          "id_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "passport_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "id_type": {
+            "const": "passport"
+          }
+        },
+        "required": [
+          "id_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "passport_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "mortgage_bank_entity": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_mortgage": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_mortgage"
+        ]
+      },
+      "then": {
+        "required": [
+          "mortgage_bank_entity"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "afc_account_number": {
+      "description": "Enter your AFC account number",
+      "maxLength": 255,
+      "title": "AFC Account Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "afc_bank_entity": {
+      "description": "Enter your AFC bank entity name",
+      "maxLength": 255,
+      "title": "AFC Bank Entity",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "afc_monthly_amount_contribution": {
+      "description": "Enter your AFC monthly contribution amount",
+      "maxLength": 255,
+      "title": "AFC Monthly Contribution Amount",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "amount_voluntary_contribution_pension": {
+      "description": "Enter your voluntary pension contribution amount",
+      "maxLength": 255,
+      "title": "Voluntary Pension Contribution Amount",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "birthplace": {
+      "description": "Enter the name of the city and state where you were born",
+      "maxLength": 255,
+      "title": "Place of birth",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "cesantias_fund": {
+      "description": "Enter your cesantías fund name",
+      "maxLength": 255,
+      "title": "Cesantías Fund Name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_mortgage": {
+      "description": "Choose between yes or no",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a mortgage?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "healthcare": {
+      "description": "Provide the healthcare entity you associate with",
+      "maxLength": 255,
+      "title": "Healthcare (E.P.S) Entity",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "id_type": {
+      "description": "Select the type of document number you will provide",
+      "oneOf": [
+        {
+          "const": "id",
+          "title": "ID"
+        },
+        {
+          "const": "passport",
+          "title": "Passport"
+        }
+      ],
+      "title": "Document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "mortgage_bank_entity": {
+      "description": "Enter the mortgage bank entity name",
+      "maxLength": 255,
+      "title": "Mortgage Bank Entity",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "pension_fund_entity": {
+      "description": "Enter your pension fund entity name",
+      "maxLength": 255,
+      "title": "Pension Fund Entity",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "voluntary_pension_fund_entity": {
+      "description": "Enter your voluntary pension fund entity name",
+      "maxLength": 255,
+      "title": "Voluntary Pension Fund Entity",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_type",
+    "birthplace",
+    "marital_status",
+    "healthcare",
+    "pension_fund_entity",
+    "cesantias_fund",
+    "has_mortgage"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_type",
+    "id_number",
+    "passport_number",
+    "birthplace",
+    "marital_status",
+    "healthcare",
+    "pension_fund_entity",
+    "voluntary_pension_fund_entity",
+    "amount_voluntary_contribution_pension",
+    "cesantias_fund",
+    "afc_bank_entity",
+    "afc_account_number",
+    "afc_monthly_amount_contribution",
+    "has_mortgage",
+    "mortgage_bank_entity"
+  ]
+}

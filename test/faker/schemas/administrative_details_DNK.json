@@ -1,0 +1,32 @@
+{
+  "properties": {
+    "cpr_number": {
+      "description": "Enter your civil registration number",
+      "maxLength": 255,
+      "title": "CPR Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "cpr_number"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "cpr_number"
+  ]
+}

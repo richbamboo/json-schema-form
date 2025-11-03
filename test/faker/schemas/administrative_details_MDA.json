@@ -1,0 +1,487 @@
+{
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "residency_status": {
+            "const": "resident"
+          }
+        },
+        "required": [
+          "residency_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tax_number": {
+            "pattern": "^\\d{13}$"
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "dependent_tax_exemption_apply": false,
+          "disability_dependent_exemption": false,
+          "employee_disability_exemption": false,
+          "personal_exemption_apply": false,
+          "spouse_exemption_apply": false
+        }
+      },
+      "if": {
+        "properties": {
+          "apply_for_tax_exemptions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "apply_for_tax_exemptions"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependent_tax_exemption_apply",
+          "disability_dependent_exemption",
+          "employee_disability_exemption",
+          "personal_exemption_apply",
+          "spouse_exemption_apply"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "dependent_idnp": false,
+          "number_of_dependents": false
+        }
+      },
+      "if": {
+        "properties": {
+          "dependent_tax_exemption_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "dependent_tax_exemption_apply"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependent_idnp",
+          "number_of_dependents"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "other_tax_exemption": false
+        }
+      },
+      "if": {
+        "properties": {
+          "other_tax_exemption_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "other_tax_exemption_apply"
+        ]
+      },
+      "then": {
+        "required": [
+          "other_tax_exemption"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "primary_secondary_job": false
+        }
+      },
+      "if": {
+        "properties": {
+          "primary_secondary_job_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "primary_secondary_job_apply"
+        ]
+      },
+      "then": {
+        "required": [
+          "primary_secondary_job"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "apply_for_tax_exemptions": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply for any tax exemptions?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "dependent_idnp": {
+      "description": "If you’re entering multiple identification numbers, please separate them using a comma.",
+      "maxLength": 255,
+      "title": "IDNP of each of your dependents",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "dependent_tax_exemption_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have tax exemptions for children or other people?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "disability_dependent_exemption": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply for an exemption for dependents with disabilities from congenital conditions or childhood?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "employee_disability_exemption": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply for an employee disability tax exemption?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "If using your ID card, provide the series code and number. For example, E12345678.",
+      "maxLength": 255,
+      "title": "ID, passport or resident permit number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_type": {
+      "oneOf": [
+        {
+          "const": "id_card",
+          "title": "ID card"
+        },
+        {
+          "const": "passport",
+          "title": "Passport"
+        },
+        {
+          "const": "resident_permit",
+          "title": "Resident permit"
+        }
+      ],
+      "title": "Identification document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "issue_date": {
+      "description": "This is listed on your identification document.",
+      "format": "date",
+      "title": "ID issue date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 0,
+      "title": "Number of dependents you’re claiming exemptions for",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "other_tax_exemption": {
+      "maxLength": 255,
+      "title": "Other tax exemptions",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "other_tax_exemption_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have other tax exemptions?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "patronymic": {
+      "description": "If applicable, please enter your patronymic name.",
+      "maxLength": 255,
+      "title": "Patronymic name",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "personal_exemption_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply for a personal tax exemption?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "primary_secondary_job": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is this your primary job?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "primary_secondary_job_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you work for more than 1 employer?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "residency_status": {
+      "description": "Select Resident if you have lived in Moldova for more than 6 months and have a fiscal code issued by the local authority. Select Non-resident if that option does not apply to you.",
+      "oneOf": [
+        {
+          "const": null,
+          "title": "N/A"
+        },
+        {
+          "const": "resident",
+          "title": "Resident"
+        },
+        {
+          "const": "non_resident",
+          "title": "Non resident"
+        }
+      ],
+      "title": "Residency status",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "spouse_exemption_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Claim a spouse tax exemption?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9]{1,30}$",
+      "title": "Tax identification number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "university_higher_education_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Have you attended university, a master’s program, or another higher education institution?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "apply_for_tax_exemptions",
+    "id_number",
+    "id_type",
+    "marital_status",
+    "other_tax_exemption_apply",
+    "primary_secondary_job_apply",
+    "tax_number",
+    "university_higher_education_apply"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "patronymic",
+    "id_type",
+    "id_number",
+    "issue_date",
+    "marital_status",
+    "residency_status",
+    "tax_number",
+    "apply_for_tax_exemptions",
+    "personal_exemption_apply",
+    "dependent_tax_exemption_apply",
+    "number_of_dependents",
+    "dependent_idnp",
+    "spouse_exemption_apply",
+    "disability_dependent_exemption",
+    "employee_disability_exemption",
+    "other_tax_exemption_apply",
+    "other_tax_exemption",
+    "primary_secondary_job_apply",
+    "primary_secondary_job",
+    "university_higher_education_apply"
+  ]
+}

@@ -1,0 +1,721 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_ic_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_ic_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "id_number": {
+            "x-jsf-errorMessage": {
+              "pattern": "Must be exactly 12 digits"
+            }
+          }
+        },
+        "required": [
+          "id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "passport_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_ic_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_ic_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "passport_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "socso_contribution": {
+            "oneOf": [
+              {
+                "const": "Statutory Rate (for locals and expats)",
+                "title": "Statutory Rate (for locals and expats)"
+              },
+              {
+                "const": "Above 55 years old & 1st time contributors",
+                "title": "Above 55 years old & 1st time contributors"
+              }
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "socso_contribution"
+        ]
+      },
+      "if": {
+        "properties": {
+          "socso_number": {
+            "const": null
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "socso_contribution": {
+            "oneOf": [
+              {
+                "const": null,
+                "title": "N/A"
+              },
+              {
+                "const": "Statutory Rate (for locals and expats)",
+                "title": "Statutory Rate (for locals and expats)"
+              },
+              {
+                "const": "Above 55 years old & 1st time contributors",
+                "title": "Above 55 years old & 1st time contributors"
+              }
+            ],
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "tp3_information": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_previous_employment": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_previous_employment"
+        ]
+      },
+      "then": {
+        "required": [
+          "tp3_information"
+        ]
+      }
+    }
+  ],
+  "dependantRequired": {
+    "socso_number": [
+      "socso_contribution"
+    ]
+  },
+  "properties": {
+    "beneficiary_residency_status_for_banking_purposes": {
+      "description": "Select your beneficiary residency status for banking purposes",
+      "oneOf": [
+        {
+          "const": "malaysian",
+          "title": "Malaysian"
+        },
+        {
+          "const": "non-malaysian",
+          "title": "Non-Malaysian"
+        }
+      ],
+      "title": "Beneficiary residency status for banking purposes",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "child_relief": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "claimer": false
+            }
+          },
+          "if": {
+            "properties": {
+              "is_claiming": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "is_claiming"
+            ]
+          },
+          "then": {
+            "required": [
+              "claimer"
+            ]
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "number_of_child_eighteen_years_and_above_studying": false,
+              "number_of_child_eighteen_years_and_above_studying_full_time": false,
+              "number_of_child_under_eighteen_years": false,
+              "number_of_disabled_child": false,
+              "number_of_disabled_child_studying": false,
+              "start_period": false
+            }
+          },
+          "if": {
+            "properties": {
+              "claimer": {
+                "const": "myself"
+              }
+            },
+            "required": [
+              "claimer"
+            ]
+          },
+          "then": {
+            "required": [
+              "start_period",
+              "number_of_child_under_eighteen_years",
+              "number_of_child_eighteen_years_and_above_studying",
+              "number_of_disabled_child",
+              "number_of_disabled_child_studying",
+              "number_of_child_eighteen_years_and_above_studying_full_time"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "claimer": {
+          "oneOf": [
+            {
+              "const": "myself",
+              "title": "Myself"
+            },
+            {
+              "const": "my spouse",
+              "title": "My spouse"
+            }
+          ],
+          "title": "Who will claim the child relief?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        },
+        "is_claiming": {
+          "description": "Are you claiming child relief for tax purposes?",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Child Relief",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "number_of_child_eighteen_years_and_above_studying": {
+          "description": "The number of children 18 years & above studying (included Certificate / Matriculation)",
+          "minimum": 0,
+          "title": "Number of children 18 years & above studying",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_child_eighteen_years_and_above_studying_full_time": {
+          "description": "The number of children above 18 years studying full time diploma onwards (Malaysia) or degree onwards (outside Malaysia)",
+          "minimum": 0,
+          "title": "Number of children above 18 years studying full time",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_child_under_eighteen_years": {
+          "minimum": 0,
+          "title": "Number of children under the age of 18 years",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_disabled_child": {
+          "minimum": 0,
+          "title": "Number of disabled children (If any)",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_disabled_child_studying": {
+          "description": "The number of disabled children studying in diploma or higher level (in Malaysia) or degree or its equivalent (outside Malaysia)",
+          "minimum": 0,
+          "title": "Number of disabled children studying",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "start_period": {
+          "format": "date",
+          "title": "Child relief start period",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        }
+      },
+      "required": [
+        "is_claiming"
+      ],
+      "title": "Child Relief",
+      "type": "object",
+      "x-jsf-order": [
+        "is_claiming",
+        "claimer",
+        "start_period",
+        "number_of_child_under_eighteen_years",
+        "number_of_child_eighteen_years_and_above_studying",
+        "number_of_child_eighteen_years_and_above_studying_full_time",
+        "number_of_disabled_child",
+        "number_of_disabled_child_studying"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "employee_income_tax_number": {
+      "maxLength": 255,
+      "title": "Employee Income Tax number (if applicable)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "epf_contribution": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "higher_contribution_percentage": false
+            }
+          },
+          "if": {
+            "properties": {
+              "higher_contribution": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "higher_contribution"
+            ]
+          },
+          "then": {
+            "required": [
+              "higher_contribution_percentage"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "contribution": {
+          "description": "Select your EPF contribution",
+          "oneOf": [
+            {
+              "const": "Statutory Rate",
+              "title": "Statutory Rate"
+            },
+            {
+              "const": "Employee 0% & Employer 4% (For Malaysians ages 60 and above)",
+              "title": "Employee 0% & Employer 4% (For Malaysians ages 60 and above)"
+            },
+            {
+              "const": "Employee 5.5% & 5 Malaysian Ringgit (for Expats only)",
+              "title": "Employee 5.5% & 5 Malaysian Ringgit (for Expats only)"
+            },
+            {
+              "const": "Employee 9% & 5 Malaysian Ringgit (for Expats only)",
+              "title": "Employee 9% & 5 Malaysian Ringgit (for Expats only)"
+            },
+            {
+              "const": "No EPF contribution (for Expats only)",
+              "title": "No EPF contribution (for Expats only)"
+            }
+          ],
+          "title": "EPF contribution",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        },
+        "higher_contribution": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Do you want to contribute higher EPF voluntary percentage?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "higher_contribution_percentage": {
+          "description": "Enter the additional percentage you'd like to contribute",
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Percentage you'd like to contribute",
+          "type": "number",
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        }
+      },
+      "required": [
+        "contribution",
+        "higher_contribution"
+      ],
+      "title": "Employee Provident Fund (EPF) contribution (mandatory)",
+      "type": "object",
+      "x-jsf-order": [
+        "contribution",
+        "higher_contribution",
+        "higher_contribution_percentage"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "epf_number": {
+      "maxLength": 255,
+      "title": "Employee Provident Fund (EPF) number (if applicable)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_ic_number": {
+      "description": "This is applicable for locals",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have an IC Number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_previous_employment": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have any previous employment in Malaysia for the current year?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_spent_fiscal_year_in_country": {
+      "description": "This is for tax calculation purposes",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Have you stayed in Malaysia for more than 182 days in the current calendar year?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "pattern": "^\\d{12}$",
+      "title": "IC number",
+      "type": "string",
+      "x-jsf-errorMessage": {
+        "pattern": "Must be exactly 12 digits"
+      },
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_spouse_working": {
+      "oneOf": [
+        {
+          "const": "working",
+          "title": "Working"
+        },
+        {
+          "const": "spouse not working / single / divorced / widow / widower / separated",
+          "title": "Spouse not working / Single / Divorced / Widow / Widower / Separated"
+        }
+      ],
+      "title": "Spouse working status for tax computation ",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widow",
+          "title": "Widow"
+        },
+        {
+          "const": "widower",
+          "title": "Widower"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "socso_contribution": {
+      "description": "Select your SOCSO contribution ",
+      "oneOf": [
+        {
+          "const": null,
+          "title": "N/A"
+        },
+        {
+          "const": "Statutory Rate (for locals and expats)",
+          "title": "Statutory Rate (for locals and expats)"
+        },
+        {
+          "const": "Above 55 years old & 1st time contributors",
+          "title": "Above 55 years old & 1st time contributors"
+        }
+      ],
+      "title": "Social Security Organisation (SOCSO) contribution",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "socso_number": {
+      "description": "Enter employee SOCSO number (if applicable). If you don't have this yet, we will apply this for you",
+      "maxLength": 255,
+      "title": "Employee Social Security Organisation (SOCSO) number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tp3_information": {
+      "properties": {
+        "total_epf_employee_portion": {
+          "description": "Enter the total EPF employee portion from previous employment deducted in current year (C3)",
+          "minimum": 0,
+          "title": "Total EPF employee portion",
+          "type": "integer",
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "MYR",
+            "inputType": "money"
+          }
+        },
+        "total_tax_deducted": {
+          "description": "Enter the total tax deducted from previous employment in current year (C5)",
+          "minimum": 0,
+          "title": "Total tax deducted",
+          "type": "integer",
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "MYR",
+            "inputType": "money"
+          }
+        },
+        "total_taxable_income": {
+          "description": "Enter the total taxable income from previous employment received in current year (C1)",
+          "minimum": 0,
+          "title": "Total taxable income",
+          "type": "integer",
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "MYR",
+            "inputType": "money"
+          }
+        },
+        "total_zakat": {
+          "description": "Enter the total zakat employee portion from previous employment deducted in current year (C4)",
+          "minimum": 0,
+          "title": "Total zakat employee portion",
+          "type": "integer",
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "MYR",
+            "inputType": "money"
+          }
+        }
+      },
+      "required": [
+        "total_taxable_income",
+        "total_epf_employee_portion",
+        "total_zakat",
+        "total_tax_deducted"
+      ],
+      "title": "TP3 Information",
+      "type": "object",
+      "x-jsf-order": [
+        "total_taxable_income",
+        "total_epf_employee_portion",
+        "total_zakat",
+        "total_tax_deducted"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "work_permit_number": {
+      "description": "Enter your work permit number (if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "has_ic_number",
+    "marital_status",
+    "is_spouse_working",
+    "epf_contribution",
+    "child_relief",
+    "has_previous_employment",
+    "has_spent_fiscal_year_in_country",
+    "beneficiary_residency_status_for_banking_purposes"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "has_ic_number",
+    "id_number",
+    "passport_number",
+    "employee_income_tax_number",
+    "epf_number",
+    "epf_contribution",
+    "socso_number",
+    "socso_contribution",
+    "marital_status",
+    "is_spouse_working",
+    "child_relief",
+    "has_previous_employment",
+    "tp3_information",
+    "has_spent_fiscal_year_in_country",
+    "beneficiary_residency_status_for_banking_purposes",
+    "work_permit_number"
+  ]
+}

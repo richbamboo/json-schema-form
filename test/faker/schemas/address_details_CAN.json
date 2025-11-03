@@ -1,0 +1,132 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 30,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 30,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "pattern": "^[ABCEGHJKLMNPRSTVXY]\\d[ABCEGHJKLMNPRSTVWXYZ]\\s\\d[ABCEGHJKLMNPRSTVWXYZ]\\d$",
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "enum": [
+        "AB",
+        "BC",
+        "MB",
+        "NB",
+        "NL",
+        "NT",
+        "NS",
+        "NU",
+        "ON",
+        "PE",
+        "QC",
+        "SK",
+        "YT"
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Alberta (AB)",
+            "value": "AB"
+          },
+          {
+            "label": "British Columbia (BC)",
+            "value": "BC"
+          },
+          {
+            "label": "Manitoba (MB)",
+            "value": "MB"
+          },
+          {
+            "label": "New Brunswick (NB)",
+            "value": "NB"
+          },
+          {
+            "label": "Newfoundland and Labrador (NL)",
+            "value": "NL"
+          },
+          {
+            "label": "Northwest Territories (NT)",
+            "value": "NT"
+          },
+          {
+            "label": "Nova Scotia (NS)",
+            "value": "NS"
+          },
+          {
+            "label": "Nunavut (NU)",
+            "value": "NU"
+          },
+          {
+            "label": "Ontario (ON)",
+            "value": "ON"
+          },
+          {
+            "label": "Prince Edward Island (PE)",
+            "value": "PE"
+          },
+          {
+            "label": "Quebec (QC)",
+            "value": "QC"
+          },
+          {
+            "label": "Saskatchewan (SK)",
+            "value": "SK"
+          },
+          {
+            "label": "Yukon (YT)",
+            "value": "YT"
+          }
+        ],
+        "placeholder": "Select province"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

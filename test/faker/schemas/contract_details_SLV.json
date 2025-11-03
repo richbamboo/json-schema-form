@@ -1,0 +1,1506 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 438000,
+            "x-jsf-errorMessage": {
+              "minimum": "In El Salvador, full-time employees are entitled to a minimum annual salary of $4,380.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length_days": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "required": [
+          "probation_length_days"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_probation_period": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "third_party_work_activities": false
+        }
+      },
+      "if": {
+        "properties": {
+          "third_party_work": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "third_party_work"
+        ]
+      },
+      "then": {
+        "properties": {
+          "third_party_work_activities": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "third_party_work_activities"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false,
+          "signing_bonus_clawback": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": "integer"
+          },
+          "signing_bonus_clawback": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "signing_bonus_amount",
+          "signing_bonus_clawback"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "available_pto": false
+          }
+        },
+        "if": {
+          "properties": {
+            "available_pto_type": {
+              "const": "fixed"
+            }
+          },
+          "required": [
+            "available_pto_type"
+          ]
+        },
+        "then": {
+          "properties": {
+            "available_pto": {
+              "description": "Please do not include public holidays in the number you enter. In El Salvador, employees are entitled to a minimum of 15 paid time off days per year.",
+              "minimum": 15
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 15,
+            "default": 15,
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In El Salvador, employees are entitled to a minimum of 15 paid time off days per year.",
+                "title": "Minimum of <strong>15 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 44
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule_type": {
+            "const": "night_worker"
+          }
+        },
+        "required": [
+          "work_schedule_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 39
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 25,
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-logic-computedAttrs": {
+        "minimum": "minimum_annual_gross_salary_in_cents",
+        "x-jsf-errorMessage": {
+          "minimum": "In El Salvador, part-time employees are entitled to a minimum annual salary of ${{ minimum_annual_gross_salary }}"
+        }
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "8dcf34b5-998a-4d09-b255-693e2f626a76",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "e2f6bcfa-9f09-4266-9ea1-5fafdb9cea23",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "8dcf34b5-998a-4d09-b255-693e2f626a76",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "ee403d24-dd5c-46b3-a66b-4e53867ecb94",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "8dcf34b5-998a-4d09-b255-693e2f626a76",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "b2e1591b-a4b7-4f73-9bad-d506fd19d9d4",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "8dcf34b5-998a-4d09-b255-693e2f626a76",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "71f3c379-96c2-4bf4-bf26-cbbfc9c177ca",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "8dcf34b5-998a-4d09-b255-693e2f626a76",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "573517f0-17e3-4c99-8b59-9556a88a73f5",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+              "title": "Allianz Standard (Employee Only) - $123.17 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. No dental or vision coverage. Includes basic maternity benefits up to $6K USD and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-standard",
+                  "displayCost": "$123.17 USD/mo",
+                  "id": "d854b8dc-3639-4bbb-87bb-0a2b67e2f251",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Employee Only)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+              "title": "Allianz Standard (Family) - $184.75 - $369.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. No dental or vision coverage. Includes basic maternity benefits up to $6K USD, pediatric care, and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-standard",
+                  "displayCost": "$184.75 - $369.50 USD/mo",
+                  "id": "6e86717f-e91f-4ef7-be59-167f2a4d95dc",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Employee Only) (Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only); Allianz - Premium Medical (Employee Only))",
+              "title": "Allianz Premium (Employee Only) - $157.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more outpatient mental health and therapy support.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-premium",
+                  "displayCost": "$157.08 USD/mo",
+                  "id": "a188ca5d-e6af-4e21-bb28-ea629dbb339f",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Family) (Allianz - Premium Medical (Family); Allianz - Premium Vision (Family); Allianz - Premium Dental (Family))",
+              "title": "Allianz Premium (Family) - $235.63 - $471.25 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with higher mental health limits, pediatric coverage, and prescribed therapy sessions.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-premium",
+                  "displayCost": "$235.63 - $471.25 USD/mo",
+                  "id": "8e62d658-6758-43d7-a19b-94b7f1504b2c",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Employee Only) (Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only); Allianz - Gold Medical (Employee Only))",
+              "title": "Allianz Gold (Employee Only) - $186.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, plus expanded mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzgoldplan-employeeonly",
+                  "displayCost": "$186.83 USD/mo",
+                  "id": "8fa2000c-065e-435e-9f01-21fb1d349fb9",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Family) (Allianz - Gold Vision (Family); Allianz - Gold Dental (Family); Allianz - Gold Medical (Family))",
+              "title": "Allianz Gold (Family) - $280.25 - $560.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more therapy sessions, extended pediatric care, and broader outpatient benefits.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-gold",
+                  "displayCost": "$280.25 - $560.50 USD/mo",
+                  "id": "3af9e78e-9f35-4ead-8483-c1791cfeeb42",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Employee Only) (Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only); Allianz - Platinum Medical (Employee Only))",
+              "title": "Allianz Platinum (Employee Only) - $206.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD for employee only. Includes dental coverage up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with the most extensive mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzplatinumplan-employeeonly",
+                  "displayCost": "$206.50 USD/mo",
+                  "id": "2eeb1635-5f13-4005-821b-2c78f4c919bd",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Family) (Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family); Allianz - Platinum Medical (Family))",
+              "title": "Allianz Platinum (Family) - $309.75 - $619.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD. Includes dental up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with comprehensive pediatric care, full mental health support, and maximum therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "5ac722e1-8553-4e98-b506-f8fde05f1c20",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-platinum",
+                  "displayCost": "$309.75 - $619.50 USD/mo",
+                  "id": "eb36d4c4-c3a3-47ed-89b4-bb2cfb883056",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health",
+                    "dental",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Allianz Platinum (Employee Only) (Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only); Allianz - Platinum Medical (Employee Only))",
+                    "Allianz Gold (Employee Only) (Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only); Allianz - Gold Medical (Employee Only))",
+                    "Allianz Premium (Employee Only) (Allianz - Premium Vision (Employee Only); Allianz - Premium Dental (Employee Only); Allianz - Premium Medical (Employee Only))",
+                    "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Allianz Platinum (Family) (Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family); Allianz - Platinum Medical (Family))",
+                    "Allianz Gold (Family) (Allianz - Gold Vision (Family); Allianz - Gold Dental (Family); Allianz - Gold Medical (Family))",
+                    "Allianz Premium (Family) (Allianz - Premium Medical (Family); Allianz - Premium Vision (Family); Allianz - Premium Dental (Family))",
+                    "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "49727558-548f-40b9-ac7d-7776371c0e6b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "2ab48d76-0e45-4cb2-b517-43234b3af8fd",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "49727558-548f-40b9-ac7d-7776371c0e6b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "b63ddaff-bbb5-475a-9f0a-3d6db8e13235",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "49727558-548f-40b9-ac7d-7776371c0e6b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "55f2008a-c35c-4423-b513-9019ab6351ff",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "49727558-548f-40b9-ac7d-7776371c0e6b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "ccd6f6e3-3e95-4ff3-b764-3f8234f86b2a",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "49727558-548f-40b9-ac7d-7776371c0e6b",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "84d0a71e-df78-4d86-908c-62bf0fe72a2f",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance",
+        "health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In this section, you can select benefits for your new team member. If you have existing team members in the same country, your new hire will receive the same benefits as those currently provided to other team members there, maintaining benefit equality. If this is your first hire in the country, you may select from the available options below. Your choice will become the standard benefits for any future hires in the country.",
+        "extra": "Prices are listed in U.S. Dollars (USD). However, when benefits are originally priced in local currencies, these amounts are estimates in USD. The final charge in local currency will be determined using the exchange rate at the time of invoicing. The pricing listed is subject to change based on the age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration_type": {
+      "const": "indefinite",
+      "description": "I understand that in El Salvador, Remote offers only indefinite contracts.",
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "employee_travel_required": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the employee required to travel for work?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_probation_period": {
+      "description": "We recommend selecting Yes. In the unfortunate event of a necessary termination, probation periods make the process much easier.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Include a probation period?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_non_relationship_non_solicit_clause_apply": {
+      "const": "acknowledged",
+      "title": "I understand that if my company wants to apply post-termination restrictions (for example, a non-compete or non-solicit) to this employee’s contract, we will need to craft the restriction details outside of Remote, and get the document(s) wet signed and notarized. I also understand that my company will be responsible for all legal costs associated with crafting and applying post-termination restrictions.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "notice_period_ack": {
+      "const": "acknowledged",
+      "title": "Please note that notice period details will not be included in the employment agreement. In El Salvador, employment contracts may be terminated without a notice period requirement if the employee has served less than two continuous years. After two years of service, the employer must observe applicable notice periods or provide payment in lieu, as mandated by local labor law.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "overtime_compensation_type": {
+      "const": "overtime_remunerated",
+      "title": "I understand that I must pay this employee according to their regular salary for any overtime hours worked.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "pension_ack": {
+      "const": "acknowledged",
+      "title": "I understand that my company will contribute monthly to the employee’s pension in the amount of 8.75% of the employee’s salary.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length_days": {
+      "description": "In El Salvador, probation periods can be up to 30 days.",
+      "maximum": 30,
+      "minimum": 1,
+      "title": "Probation period, in days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "minimum": 0,
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "inputType": "money"
+      }
+    },
+    "signing_bonus_clawback": {
+      "description": "If you apply this clause, the employee will be able to keep their signing bonus only if they work a full year at your company and neither your company nor the employee gives notice to end their employment during the year. Otherwise, the employee will have to repay the signing bonus within 20 days of termination.",
+      "oneOf": [
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        },
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a signing bonus clawback?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "third_party_work": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Can the employee work for third parties or do business on their own while employed by your company?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "third_party_work_activities": {
+      "maxLength": 1000,
+      "title": "Approved third-party work",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "thirteenth_salary_ack": {
+      "const": "acknowledged",
+      "description": "In El Salvador, employees receive a 13th month salary (usually called Aguinaldo). The amount of the salary is based on the employee's length of service with the company. It must be paid annually between December 12 and December 20. The amount is calculated as follows.<br/><ul><li><b>1 to 3 years of service:</b> 15 days of salary</li><li><b>3 to 10 years of service:</b> 19 days of salary</li><li><b>More than 10 years of service:</b> 21 days of salary</li></ul>",
+      "title": "I understand I must pay this employee a 13th month salary in addition to their annual gross salary.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "vacation_bonus_ack": {
+      "const": "acknowledged",
+      "title": "I understand that I am required to provide the employee with an additional annual vacation payment, equivalent to 30% of 15 days' salary, paid in advance on the vacation start date.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "work_equipment_provided_by": {
+      "description": "Please note that we can’t guarantee the return of work equipment or take action against the employee to recover anything you provide.",
+      "oneOf": [
+        {
+          "const": "provided_by_client",
+          "title": "The client provides the equipment"
+        },
+        {
+          "const": "provided_by_employee",
+          "title": "The employee provides the equipment"
+        }
+      ],
+      "title": "Who will provide the employee's work equipment?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_from_home_allowance_ack": {
+      "const": "acknowledged",
+      "title": "I understand I must pay this employee a 20 USD monthly work-from-home allowance in addition to their annual gross salary.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "El Salvador's legislation does not specifically mention part-time work, but it allows for contracts with salaries based on time worked.",
+      "minimum": 26,
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 31531534206477,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_schedule_type": {
+      "oneOf": [
+        {
+          "const": "day_worker",
+          "description": "Their work hours will be between 6:00 a.m. and 7:00 p.m.",
+          "title": "Daytime"
+        },
+        {
+          "const": "night_worker",
+          "description": "Their work hours will be between 7:00 p.m. and 6:00 a.m.",
+          "title": "Nighttime"
+        }
+      ],
+      "title": "Will this employee work during the daytime or nighttime?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "contract_duration_type",
+    "has_probation_period",
+    "role_description",
+    "employee_travel_required",
+    "third_party_work",
+    "work_schedule",
+    "available_pto_type",
+    "overtime_compensation_type",
+    "has_signing_bonus",
+    "has_commissions",
+    "work_equipment_provided_by",
+    "experience_level",
+    "equity_compensation",
+    "pension_ack",
+    "work_from_home_allowance_ack",
+    "thirteenth_salary_ack",
+    "vacation_bonus_ack",
+    "notice_period_ack",
+    "work_hours_per_week",
+    "work_schedule_type",
+    "non_compete_non_relationship_non_solicit_clause_apply",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "thirteenth_salary_ack",
+        "vacation_bonus_ack",
+        "work_from_home_allowance_ack",
+        "pension_ack",
+        "overtime_compensation_type"
+      ],
+      "title": "Annual gross salary"
+    }
+  },
+  "x-jsf-logic": {
+    "computedValues": {
+      "minimum_annual_gross_salary": {
+        "rule": {
+          "if": [
+            {
+              "var": "work_hours_per_week"
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "*": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        1.5,
+                        52,
+                        100
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            1.5,
+                            52,
+                            100
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "minimum_annual_gross_salary_in_cents": {
+        "rule": {
+          "if": [
+            {
+              "var": "work_hours_per_week"
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "*": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        150,
+                        52,
+                        100
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            150,
+                            52,
+                            100
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration_type",
+    "work_schedule",
+    "work_schedule_type",
+    "work_hours_per_week",
+    "has_probation_period",
+    "probation_length_days",
+    "notice_period_ack",
+    "available_pto_type",
+    "available_pto",
+    "overtime_compensation_type",
+    "role_description",
+    "experience_level",
+    "pension_ack",
+    "employee_travel_required",
+    "annual_gross_salary",
+    "thirteenth_salary_ack",
+    "vacation_bonus_ack",
+    "work_from_home_allowance_ack",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "signing_bonus_clawback",
+    "has_bonus",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "non_compete_non_relationship_non_solicit_clause_apply",
+    "work_equipment_provided_by",
+    "third_party_work",
+    "third_party_work_activities",
+    "benefits"
+  ]
+}

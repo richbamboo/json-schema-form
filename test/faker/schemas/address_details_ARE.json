@@ -1,0 +1,956 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "residential": {
+      "description": "If you live in Abu Dhabi, select your specific area. Otherwise, select <b>Dubai</b> or <b>Other Emirates</b>.",
+      "oneOf": [
+        {
+          "const": "Nakhlat Deira",
+          "title": "Nakhlat Deira"
+        },
+        {
+          "const": "Al Corniche",
+          "title": "Al Corniche"
+        },
+        {
+          "const": "Al Ras",
+          "title": "Al Ras"
+        },
+        {
+          "const": "Al Daghaya",
+          "title": "Al Daghaya"
+        },
+        {
+          "const": "Al Buteen",
+          "title": "Al Buteen"
+        },
+        {
+          "const": "Al Sabkha",
+          "title": "Al Sabkha"
+        },
+        {
+          "const": "Ayal Nasir",
+          "title": "Ayal Nasir"
+        },
+        {
+          "const": "Al Murar",
+          "title": "Al Murar"
+        },
+        {
+          "const": "Naif",
+          "title": "Naif"
+        },
+        {
+          "const": "Al Rigga",
+          "title": "Al Rigga"
+        },
+        {
+          "const": "Corniche Deira",
+          "title": "Corniche Deira"
+        },
+        {
+          "const": "Al Baraha",
+          "title": "Al Baraha"
+        },
+        {
+          "const": "Al Muteena",
+          "title": "Al Muteena"
+        },
+        {
+          "const": "Al Muraqqabat",
+          "title": "Al Muraqqabat"
+        },
+        {
+          "const": "Riggat Al Buteen",
+          "title": "Riggat Al Buteen"
+        },
+        {
+          "const": "Abu Hail",
+          "title": "Abu Hail"
+        },
+        {
+          "const": "Hor Al Anz",
+          "title": "Hor Al Anz"
+        },
+        {
+          "const": "Al Khabaisi",
+          "title": "Al Khabaisi"
+        },
+        {
+          "const": "Port Saeed",
+          "title": "Port Saeed"
+        },
+        {
+          "const": "Al Hamriya Port",
+          "title": "Al Hamriya Port"
+        },
+        {
+          "const": "Al Wuheida",
+          "title": "Al Wuheida"
+        },
+        {
+          "const": "Hor Al Anz East",
+          "title": "Hor Al Anz East"
+        },
+        {
+          "const": "Al Mamzar",
+          "title": "Al Mamzar"
+        },
+        {
+          "const": "Nadd Shamma",
+          "title": "Nadd Shamma"
+        },
+        {
+          "const": "Al Garhoud",
+          "title": "Al Garhoud"
+        },
+        {
+          "const": "Umm Ramool",
+          "title": "Umm Ramool"
+        },
+        {
+          "const": "Al Rashidiya",
+          "title": "Al Rashidiya"
+        },
+        {
+          "const": "Dubai Int'l Airport",
+          "title": "Dubai Int'l Airport"
+        },
+        {
+          "const": "Al Twar First",
+          "title": "Al Twar First"
+        },
+        {
+          "const": "Al Twar Second",
+          "title": "Al Twar Second"
+        },
+        {
+          "const": "Al Twar Third",
+          "title": "Al Twar Third"
+        },
+        {
+          "const": "Al Nahda First",
+          "title": "Al Nahda First"
+        },
+        {
+          "const": "Al Qusais First",
+          "title": "Al Qusais First"
+        },
+        {
+          "const": "Al Qusais Second",
+          "title": "Al Qusais Second"
+        },
+        {
+          "const": "Al Qusais Third",
+          "title": "Al Qusais Third"
+        },
+        {
+          "const": "Al Nahda Second",
+          "title": "Al Nahda Second"
+        },
+        {
+          "const": "Al Qusais Ind. First",
+          "title": "Al Qusais Ind. First"
+        },
+        {
+          "const": "Al Qusais Ind. Second",
+          "title": "Al Qusais Ind. Second"
+        },
+        {
+          "const": "Muhaisanah Third",
+          "title": "Muhaisanah Third"
+        },
+        {
+          "const": "Muhaisanah Fourth",
+          "title": "Muhaisanah Fourth"
+        },
+        {
+          "const": "Al Qusais Ind. Third",
+          "title": "Al Qusais Ind. Third"
+        },
+        {
+          "const": "Al Qusais Ind. Fourth",
+          "title": "Al Qusais Ind. Fourth"
+        },
+        {
+          "const": "Al Qusais Ind. Fifth",
+          "title": "Al Qusais Ind. Fifth"
+        },
+        {
+          "const": "Mirdif",
+          "title": "Mirdif"
+        },
+        {
+          "const": "Mushraif",
+          "title": "Mushraif"
+        },
+        {
+          "const": "Muhaisnah First",
+          "title": "Muhaisnah First"
+        },
+        {
+          "const": "Al Mizhar First",
+          "title": "Al Mizhar First"
+        },
+        {
+          "const": "Al Mizhar Second",
+          "title": "Al Mizhar Second"
+        },
+        {
+          "const": "Muhaisanah Second",
+          "title": "Muhaisanah Second"
+        },
+        {
+          "const": "Oud Al Muteena First",
+          "title": "Oud Al Muteena First"
+        },
+        {
+          "const": "Oud Al Muteena Second",
+          "title": "Oud Al Muteena Second"
+        },
+        {
+          "const": "Muhaisanah Fifth",
+          "title": "Muhaisanah Fifth"
+        },
+        {
+          "const": "Oud Al Muteena Third",
+          "title": "Oud Al Muteena Third"
+        },
+        {
+          "const": "Wadi Alamardi",
+          "title": "Wadi Alamardi"
+        },
+        {
+          "const": "Al Khwaneej First",
+          "title": "Al Khwaneej First"
+        },
+        {
+          "const": "Al Khwaneej Second",
+          "title": "Al Khwaneej Second"
+        },
+        {
+          "const": "Aleyas",
+          "title": "Aleyas"
+        },
+        {
+          "const": "Al Ttay",
+          "title": "Al Ttay"
+        },
+        {
+          "const": "World Island",
+          "title": "World Island"
+        },
+        {
+          "const": "Jumeira Island One",
+          "title": "Jumeira Island One"
+        },
+        {
+          "const": "Al Shindagha",
+          "title": "Al Shindagha"
+        },
+        {
+          "const": "Al Souq Al Kabeer",
+          "title": "Al Souq Al Kabeer"
+        },
+        {
+          "const": "Al Hamriya",
+          "title": "Al Hamriya"
+        },
+        {
+          "const": "Umm Hurair First",
+          "title": "Umm Hurair First"
+        },
+        {
+          "const": "Umm Hurair Second",
+          "title": "Umm Hurair Second"
+        },
+        {
+          "const": "Al Raffa",
+          "title": "Al Raffa"
+        },
+        {
+          "const": "Mankhool",
+          "title": "Mankhool"
+        },
+        {
+          "const": "Al Karama",
+          "title": "Al Karama"
+        },
+        {
+          "const": "Oud Metha",
+          "title": "Oud Metha"
+        },
+        {
+          "const": "Madinat Dubai Al Melaheyah",
+          "title": "Madinat Dubai Al Melaheyah"
+        },
+        {
+          "const": "Al Hudaiba",
+          "title": "Al Hudaiba"
+        },
+        {
+          "const": "Al Jafiliya",
+          "title": "Al Jafiliya"
+        },
+        {
+          "const": "Al Kifaf",
+          "title": "Al Kifaf"
+        },
+        {
+          "const": "Za'abeel First",
+          "title": "Za'abeel First"
+        },
+        {
+          "const": "Al Jadaf",
+          "title": "Al Jadaf"
+        },
+        {
+          "const": "Jumeira First",
+          "title": "Jumeira First"
+        },
+        {
+          "const": "Al Bada'a",
+          "title": "Al Bada'a"
+        },
+        {
+          "const": "Al Satwa",
+          "title": "Al Satwa"
+        },
+        {
+          "const": "Trade Center First",
+          "title": "Trade Center First"
+        },
+        {
+          "const": "Trade Center Second",
+          "title": "Trade Center Second"
+        },
+        {
+          "const": "Za'abeel Second",
+          "title": "Za'abeel Second"
+        },
+        {
+          "const": "Jumeira Second",
+          "title": "Jumeira Second"
+        },
+        {
+          "const": "Al Wasl",
+          "title": "Al Wasl"
+        },
+        {
+          "const": "Burj Khalifa",
+          "title": "Burj Khalifa"
+        },
+        {
+          "const": "Buisness Bay",
+          "title": "Buisness Bay"
+        },
+        {
+          "const": "Al Merkadh",
+          "title": "Al Merkadh"
+        },
+        {
+          "const": "Jumeira Third",
+          "title": "Jumeira Third"
+        },
+        {
+          "const": "Al Safa First",
+          "title": "Al Safa First"
+        },
+        {
+          "const": "Al Qouz First",
+          "title": "Al Qouz First"
+        },
+        {
+          "const": "Al Qouz Second",
+          "title": "Al Qouz Second"
+        },
+        {
+          "const": "Umm Suqeim First",
+          "title": "Umm Suqeim First"
+        },
+        {
+          "const": "Al Safa Second",
+          "title": "Al Safa Second"
+        },
+        {
+          "const": "Al Qouz Third",
+          "title": "Al Qouz Third"
+        },
+        {
+          "const": "Al Qouz Fourth",
+          "title": "Al Qouz Fourth"
+        },
+        {
+          "const": "Umm Suqeim Second",
+          "title": "Umm Suqeim Second"
+        },
+        {
+          "const": "Al Manara",
+          "title": "Al Manara"
+        },
+        {
+          "const": "Al Qouze Ind.first",
+          "title": "Al Qouze Ind.first"
+        },
+        {
+          "const": "Al Qouze Ind.second",
+          "title": "Al Qouze Ind.second"
+        },
+        {
+          "const": "Umm Suqeim Third",
+          "title": "Umm Suqeim Third"
+        },
+        {
+          "const": "Umm Al Sheif",
+          "title": "Umm Al Sheif"
+        },
+        {
+          "const": "Al Qouze Ind.third",
+          "title": "Al Qouze Ind.third"
+        },
+        {
+          "const": "Al Qouze Ind.fourth",
+          "title": "Al Qouze Ind.fourth"
+        },
+        {
+          "const": "Al Safouh First",
+          "title": "Al Safouh First"
+        },
+        {
+          "const": "Al Barsha First",
+          "title": "Al Barsha First"
+        },
+        {
+          "const": "Al Barsha Third",
+          "title": "Al Barsha Third"
+        },
+        {
+          "const": "Al Barsha Second",
+          "title": "Al Barsha Second"
+        },
+        {
+          "const": "Nakhlat Jumeira",
+          "title": "Nakhlat Jumeira"
+        },
+        {
+          "const": "Al Safouh Second",
+          "title": "Al Safouh Second"
+        },
+        {
+          "const": "Al Thanyah First",
+          "title": "Al Thanyah First"
+        },
+        {
+          "const": "Al Thanyah Second",
+          "title": "Al Thanyah Second"
+        },
+        {
+          "const": "Al Thanyah Third",
+          "title": "Al Thanyah Third"
+        },
+        {
+          "const": "Marsa Dubai",
+          "title": "Marsa Dubai"
+        },
+        {
+          "const": "Al Thanyah Fifth",
+          "title": "Al Thanyah Fifth"
+        },
+        {
+          "const": "Al Thanyah Fourth",
+          "title": "Al Thanyah Fourth"
+        },
+        {
+          "const": "Al Kheeran",
+          "title": "Al Kheeran"
+        },
+        {
+          "const": "Ras Al Khor",
+          "title": "Ras Al Khor"
+        },
+        {
+          "const": "Al Khairan First",
+          "title": "Al Khairan First"
+        },
+        {
+          "const": "Al Khairan Second",
+          "title": "Al Khairan Second"
+        },
+        {
+          "const": "Nadd Al Hamar",
+          "title": "Nadd Al Hamar"
+        },
+        {
+          "const": "Al Warqa'a First",
+          "title": "Al Warqa'a First"
+        },
+        {
+          "const": "Al Warqa'a Second",
+          "title": "Al Warqa'a Second"
+        },
+        {
+          "const": "Al Warqa'a Third",
+          "title": "Al Warqa'a Third"
+        },
+        {
+          "const": "Al Warqa'a Fourth",
+          "title": "Al Warqa'a Fourth"
+        },
+        {
+          "const": "Al Warqa'a Fifth",
+          "title": "Al Warqa'a Fifth"
+        },
+        {
+          "const": "Wadi Alshabak",
+          "title": "Wadi Alshabak"
+        },
+        {
+          "const": "Nakhlat Jabal Ali",
+          "title": "Nakhlat Jabal Ali"
+        },
+        {
+          "const": "Al Wajehah Al Bhariyah",
+          "title": "Al Wajehah Al Bhariyah"
+        },
+        {
+          "const": "Hessyan First",
+          "title": "Hessyan First"
+        },
+        {
+          "const": "Hessyan Second",
+          "title": "Hessyan Second"
+        },
+        {
+          "const": "Saih Shuaib 1",
+          "title": "Saih Shuaib 1"
+        },
+        {
+          "const": "Jabal Ali Industrial Third",
+          "title": "Jabal Ali Industrial Third"
+        },
+        {
+          "const": "Jabal Ali Industrial Second",
+          "title": "Jabal Ali Industrial Second"
+        },
+        {
+          "const": "Madinat Al Mataar",
+          "title": "Madinat Al Mataar"
+        },
+        {
+          "const": "Saih Shuaib 2",
+          "title": "Saih Shuaib 2"
+        },
+        {
+          "const": "Saih Shuaib 3",
+          "title": "Saih Shuaib 3"
+        },
+        {
+          "const": "Saih Shuaib 4",
+          "title": "Saih Shuaib 4"
+        },
+        {
+          "const": "Jabal Ali First",
+          "title": "Jabal Ali First"
+        },
+        {
+          "const": "Jabal Ali Second",
+          "title": "Jabal Ali Second"
+        },
+        {
+          "const": "Jabal Ali Third",
+          "title": "Jabal Ali Third"
+        },
+        {
+          "const": "Mena Jabal Ali",
+          "title": "Mena Jabal Ali"
+        },
+        {
+          "const": "Dubai Investment Park Second",
+          "title": "Dubai Investment Park Second"
+        },
+        {
+          "const": "Dubai Investment Park First",
+          "title": "Dubai Investment Park First"
+        },
+        {
+          "const": "Jabal Ali Industrial First",
+          "title": "Jabal Ali Industrial First"
+        },
+        {
+          "const": "Bu Kadra",
+          "title": "Bu Kadra"
+        },
+        {
+          "const": "Ras Al Khor Ind. First",
+          "title": "Ras Al Khor Ind. First"
+        },
+        {
+          "const": "Ras Al Khor Ind. Second",
+          "title": "Ras Al Khor Ind. Second"
+        },
+        {
+          "const": "Ras Al Khor Ind. Third",
+          "title": "Ras Al Khor Ind. Third"
+        },
+        {
+          "const": "Nadd Al Shiba Second",
+          "title": "Nadd Al Shiba Second"
+        },
+        {
+          "const": "Nadd Al Shiba Third",
+          "title": "Nadd Al Shiba Third"
+        },
+        {
+          "const": "Nadd Al Shiba Fourth",
+          "title": "Nadd Al Shiba Fourth"
+        },
+        {
+          "const": "Nadd Al Shiba First",
+          "title": "Nadd Al Shiba First"
+        },
+        {
+          "const": "Warsan First",
+          "title": "Warsan First"
+        },
+        {
+          "const": "Warsan Second",
+          "title": "Warsan Second"
+        },
+        {
+          "const": "Warsan Fourth",
+          "title": "Warsan Fourth"
+        },
+        {
+          "const": "Nadd Hessa",
+          "title": "Nadd Hessa"
+        },
+        {
+          "const": "Hadaeq Sheikh Mohammed Bin Rashid",
+          "title": "Hadaeq Sheikh Mohammed Bin Rashid"
+        },
+        {
+          "const": "Wadi Al Safa 2",
+          "title": "Wadi Al Safa 2"
+        },
+        {
+          "const": "Wadi Al Safa 3",
+          "title": "Wadi Al Safa 3"
+        },
+        {
+          "const": "Wadi Al Safa 4",
+          "title": "Wadi Al Safa 4"
+        },
+        {
+          "const": "Wadi Al Safa 5",
+          "title": "Wadi Al Safa 5"
+        },
+        {
+          "const": "Wadi Al Asafa 6",
+          "title": "Wadi Al Asafa 6"
+        },
+        {
+          "const": "Wadi Al Asafa 7",
+          "title": "Wadi Al Asafa 7"
+        },
+        {
+          "const": "Al Barsha South First",
+          "title": "Al Barsha South First"
+        },
+        {
+          "const": "Al Barsha South Second",
+          "title": "Al Barsha South Second"
+        },
+        {
+          "const": "Al Barsha South Third",
+          "title": "Al Barsha South Third"
+        },
+        {
+          "const": "Al Hebiah First",
+          "title": "Al Hebiah First"
+        },
+        {
+          "const": "Al Hebiah Second",
+          "title": "Al Hebiah Second"
+        },
+        {
+          "const": "Al Hebiah Third",
+          "title": "Al Hebiah Third"
+        },
+        {
+          "const": "Al Barsha South Fourth",
+          "title": "Al Barsha South Fourth"
+        },
+        {
+          "const": "Al Hebiah Fourth",
+          "title": "Al Hebiah Fourth"
+        },
+        {
+          "const": "Al Hebiah Fifth",
+          "title": "Al Hebiah Fifth"
+        },
+        {
+          "const": "Al Barsha South Fifth",
+          "title": "Al Barsha South Fifth"
+        },
+        {
+          "const": "Me'aisem First",
+          "title": "Me'aisem First"
+        },
+        {
+          "const": "Me'aisem Second",
+          "title": "Me'aisem Second"
+        },
+        {
+          "const": "Al Awir First",
+          "title": "Al Awir First"
+        },
+        {
+          "const": "Al Awir Second",
+          "title": "Al Awir Second"
+        },
+        {
+          "const": "Enkhali",
+          "title": "Enkhali"
+        },
+        {
+          "const": "Al Wohoosh",
+          "title": "Al Wohoosh"
+        },
+        {
+          "const": "Lehbab First",
+          "title": "Lehbab First"
+        },
+        {
+          "const": "Al Meryal",
+          "title": "Al Meryal"
+        },
+        {
+          "const": "Nazwah",
+          "title": "Nazwah"
+        },
+        {
+          "const": "Warsan Third",
+          "title": "Warsan Third"
+        },
+        {
+          "const": "Al Rowaiyah First",
+          "title": "Al Rowaiyah First"
+        },
+        {
+          "const": "Al Rowaiyah Second",
+          "title": "Al Rowaiyah Second"
+        },
+        {
+          "const": "Al Rowaiyah Third",
+          "title": "Al Rowaiyah Third"
+        },
+        {
+          "const": "Mereiyeel",
+          "title": "Mereiyeel"
+        },
+        {
+          "const": "Umm Al Daman",
+          "title": "Umm Al Daman"
+        },
+        {
+          "const": "Le Hemaira",
+          "title": "Le Hemaira"
+        },
+        {
+          "const": "Lehbab Second",
+          "title": "Lehbab Second"
+        },
+        {
+          "const": "Umm Al Mo'meneen",
+          "title": "Umm Al Mo'meneen"
+        },
+        {
+          "const": "Margham",
+          "title": "Margham"
+        },
+        {
+          "const": "Al Maha",
+          "title": "Al Maha"
+        },
+        {
+          "const": "Umm Eselay",
+          "title": "Umm Eselay"
+        },
+        {
+          "const": "Remah",
+          "title": "Remah"
+        },
+        {
+          "const": "Margab",
+          "title": "Margab"
+        },
+        {
+          "const": "Yaraah",
+          "title": "Yaraah"
+        },
+        {
+          "const": "Hatta",
+          "title": "Hatta"
+        },
+        {
+          "const": "Umm Nahad First",
+          "title": "Umm Nahad First"
+        },
+        {
+          "const": "Umm Nahad Second",
+          "title": "Umm Nahad Second"
+        },
+        {
+          "const": "Umm Nahad Third",
+          "title": "Umm Nahad Third"
+        },
+        {
+          "const": "Umm Nahad Fourth",
+          "title": "Umm Nahad Fourth"
+        },
+        {
+          "const": "Al Yufrah 1",
+          "title": "Al Yufrah 1"
+        },
+        {
+          "const": "Al Yufrah 2",
+          "title": "Al Yufrah 2"
+        },
+        {
+          "const": "Al Marmoom",
+          "title": "Al Marmoom"
+        },
+        {
+          "const": "Al Yalayis 1",
+          "title": "Al Yalayis 1"
+        },
+        {
+          "const": "Al Yalayis 2",
+          "title": "Al Yalayis 2"
+        },
+        {
+          "const": "Al Yalayis 3",
+          "title": "Al Yalayis 3"
+        },
+        {
+          "const": "Al Yalayis 4",
+          "title": "Al Yalayis 4"
+        },
+        {
+          "const": "Al Yalayis 5",
+          "title": "Al Yalayis 5"
+        },
+        {
+          "const": "Al Lesaily",
+          "title": "Al Lesaily"
+        },
+        {
+          "const": "Grayteesah",
+          "title": "Grayteesah"
+        },
+        {
+          "const": "Al Fagaa'",
+          "title": "Al Fagaa'"
+        },
+        {
+          "const": "Saih Al Salam",
+          "title": "Saih Al Salam"
+        },
+        {
+          "const": "Al Hathmah",
+          "title": "Al Hathmah"
+        },
+        {
+          "const": "Al Selal",
+          "title": "Al Selal"
+        },
+        {
+          "const": "Ghadeer Barashy",
+          "title": "Ghadeer Barashy"
+        },
+        {
+          "const": "Saih Al Dahal",
+          "title": "Saih Al Dahal"
+        },
+        {
+          "const": "Al O'shoosh",
+          "title": "Al O'shoosh"
+        },
+        {
+          "const": "Saih Shua'alah",
+          "title": "Saih Shua'alah"
+        },
+        {
+          "const": "Mugatrah",
+          "title": "Mugatrah"
+        },
+        {
+          "const": "Al Layan 1",
+          "title": "Al Layan 1"
+        },
+        {
+          "const": "Al Layan 2",
+          "title": "Al Layan 2"
+        },
+        {
+          "const": "Hefair",
+          "title": "Hefair"
+        },
+        {
+          "const": "Other Emirates (Outside Dubai)",
+          "title": "Other Emirates (Outside Dubai)"
+        },
+        {
+          "const": "Dubai (District Unknown)",
+          "title": "Dubai (District Unknown)"
+        }
+      ],
+      "title": "Residential location",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "residential"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "residential"
+  ]
+}

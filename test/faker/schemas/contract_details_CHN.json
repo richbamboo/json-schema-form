@@ -1,0 +1,2560 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "x-jsf-logic-computedAttrs": {
+              "minimum": "minimum_annual_gross_salary_in_cents",
+              "x-jsf-errorMessage": {
+                "minimum": "Must be greater or equal to CN¥{{minimum_annual_gross_salary}}"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "ZJ"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2988000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥29,880.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "TJ"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2784000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥27,840.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "SH"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 3228000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥32,280.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "SD"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2640000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥26,400.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "SC"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2520000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥25,200.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "JS"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2988000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥29,880.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "GD"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2760000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥27,600.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "const": "BJ"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "province_of_residency",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2904000,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to CN¥29,040.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "probation_length"
+        ]
+      }
+    },
+    {
+      "else": {
+        "if": {
+          "properties": {
+            "has_probation_period": {
+              "const": "no"
+            }
+          },
+          "required": [
+            "has_probation_period"
+          ]
+        },
+        "properties": {
+          "notice_period_days": {
+            "minimum": 30
+          },
+          "work_days_number": false,
+          "work_hours_per_week": {
+            "maximum": 40,
+            "minimum": 25
+          }
+        },
+        "required": [
+          "has_probation_period",
+          "termination_rules_ack"
+        ],
+        "then": {
+          "properties": {
+            "has_probation_period": {
+              "x-jsf-presentation": {
+                "statement": {
+                  "description": "Waiving the probation period is possible but discouraged",
+                  "severity": "warning"
+                }
+              }
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_overtime_eligibility": {
+            "description": "Part-time employees can work overtime. The hourly pay rate for overtime must be agreed upon between the employee and the employer."
+          },
+          "has_probation_period": {
+            "const": "no",
+            "default": "no",
+            "description": "In China, part-time contracts cannot have a probation period",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In China, part-time contracts cannot have a probation period",
+                "title": "Probation period"
+              }
+            }
+          },
+          "notice_period_days": {
+            "const": 0,
+            "default": 0,
+            "description": "In China, part-time contracts do not have a notice period"
+          },
+          "termination_rules_ack": false,
+          "work_hours_per_day": {
+            "description": "Part-time employees can work up to 4 hours per day. There are a few different working hour systems that can be applied to employees in the People’s Republic of China.",
+            "maximum": 4,
+            "minimum": 0
+          },
+          "work_hours_per_week": {
+            "description": "Part-time employees can work a maximum of 24 hours per week.",
+            "maximum": 24,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "work_days_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "minimum": 5
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 5,
+            "default": 5,
+            "title": "Minimum paid time off days"
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "third_party_work_activities": false
+        }
+      },
+      "if": {
+        "properties": {
+          "third_party_work": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "third_party_work"
+        ]
+      },
+      "then": {
+        "properties": {
+          "third_party_work_activities": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "third_party_work_activities"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false,
+          "signing_bonus_clawback": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": "integer"
+          },
+          "signing_bonus_clawback": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "signing_bonus_amount",
+          "signing_bonus_clawback"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_apply": false,
+          "non_interference_apply": false,
+          "non_solicitation_customers": false,
+          "non_solicitation_employees": false
+        }
+      },
+      "if": {
+        "properties": {
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "type": [
+              "string"
+            ]
+          },
+          "non_interference_apply": {
+            "type": [
+              "string"
+            ]
+          },
+          "non_solicitation_customers": {
+            "type": [
+              "string"
+            ]
+          },
+          "non_solicitation_employees": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "non_compete_clause_apply",
+          "non_interference_apply",
+          "non_solicitation_customers",
+          "non_solicitation_employees"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_breach_compensation": false,
+          "non_compete_clause_compensation_percentage": false,
+          "non_compete_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause_apply"
+        ]
+      },
+      "then": {
+        "properties": {
+          "non_compete_breach_compensation": {
+            "minimum": 1,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater than or equal to CN¥1."
+            },
+            "x-jsf-logic-computedAttrs": {
+              "maximum": "maximum_breach_salary_in_cents",
+              "x-jsf-errorMessage": {
+                "maximum": "Must be smaller or equal to CN¥{{maximum_breach_salary}}."
+              }
+            }
+          }
+        },
+        "required": [
+          "non_compete_breach_compensation",
+          "non_compete_clause_compensation_percentage",
+          "non_compete_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_solicitation_employees_number_of_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_solicitation_employees": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_solicitation_employees",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_solicitation_employees_number_of_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_solicitation_customer_number_of_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_solicitation_customers": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_solicitation_customers",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_solicitation_customer_number_of_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_interference_halt_period": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_interference_apply": {
+            "const": "yes"
+          },
+          "post_termination_restrictions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_interference_apply",
+          "post_termination_restrictions"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_interference_halt_period"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "has_overtime_eligibility": {
+      "description": "Full-time employees receive overtime pay up to 3 times the rate of their regular pay.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the employee eligible for overtime?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20880214137613,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "non_compete_clause_apply": {
+      "description": "This discourages the employee from entering or starting a similar company in competition against your company.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-compete clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20957579987341,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "non_solicitation_customers": {
+      "description": "This would restrict the employee from seeking business from your company’s customers on behalf of a competing business.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-solicitation of customers clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "post_termination_restrictions": {
+      "description": "We crafted the post-termination restrictions with local counsel to provide the best language possible. However, they likely cannot be enforced. They can only be added as deterrents.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you want to apply any post-termination restrictions (non-compete, non-solicit)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20956976821901,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "non_compete_breach_compensation": {
+      "description": "Enter the amount that the employee needs to repay if they breach the non-compete clause. This is normally 2-3 times their annual salary. Additionally, the repayment does not release the employee from the non-compete.",
+      "title": "Non-compete breach compensation",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "RMB",
+        "inputType": "money"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Full-time employees can work between 25 and 40 hours per week. It's possible for employees to work overtime but the amount of overtime is restricted.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20750107244301,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "third_party_work_activities": {
+      "description": "Provide as many details about the approved activities as you can. We’ll include them in the employment agreement.",
+      "maxLength": 10000,
+      "title": "Approved third-party work",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "notice_period_days": {
+      "description": "In the People’s Republic of China, notice periods must be at least 30 days for terminations outside of the probation period.",
+      "minimum": 0,
+      "title": "Employer notice period, in days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "non_compete_clause_compensation_percentage": {
+      "description": "The average rate for a non-compete compensation is 30%-50% of the average monthly salary during the 12 months prior to the termination of the agreement for the length of the non-compete whether or not the employee joins a competitor. Please enter a percentage number.",
+      "maximum": 50,
+      "minimum": 30,
+      "title": "Non-compete clause compensation",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_equipment_provided_by": {
+      "description": "Please note that we can’t guarantee the return of work equipment or take action against the employee to recover anything you provide.",
+      "oneOf": [
+        {
+          "const": "provided_by_client",
+          "title": "The client provides the equipment"
+        },
+        {
+          "const": "provided_by_employee",
+          "title": "The employee provides the equipment"
+        }
+      ],
+      "title": "Who will provide the employee's work equipment?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "non_interference_halt_period": {
+      "description": "Non-interference clauses can last between 1 and 24 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 24,
+      "minimum": 1,
+      "title": "Length of non-interference in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "annual_gross_salary": {
+      "description": "In Chinese Yuan (RMB).",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "RMB",
+        "inputType": "money"
+      }
+    },
+    "third_party_work": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Can the employee work for third parties or do business on their own while employed by your company?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_interference_apply": {
+      "description": "This prevents the employee from interfering with your company’s business and customer relationships after they leave.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-interference clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto": {
+      "description": "In the People's Republic of China, employees get annual leave based on their accumulative working years.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20500968689677,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "probation_length": {
+      "maximum": 6,
+      "minimum": 1,
+      "title": "Length of probation period in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "See the requirements",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20500809489549,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "non_solicitation_employees_number_of_months": {
+      "description": "Non-solicits can last between 1 and 24 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 24,
+      "minimum": 1,
+      "title": "Length of non-solicit of employees in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_hours_per_day": {
+      "description": "Full-time employees can work up to 8 hours per day. There are a few different working hour systems that can be applied to employees in the People’s Republic of China.",
+      "maximum": 8,
+      "minimum": 0,
+      "title": "Work hours per day",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 20750100434445,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_probation_period": {
+      "description": "We recommend selecting Yes. In the unfortunate event of a necessary termination, probation periods make the process much easier.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Include a probation period?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "description": "In Chinese Yuan (RMB).",
+      "minimum": 1,
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "RMB",
+        "inputType": "money"
+      }
+    },
+    "signing_bonus_clawback": {
+      "description": "If you apply this clause, the employee will be able to keep their signing bonus only if they work a full year at your company and neither your company nor the employee gives notice to end their employment during the year. Otherwise, the employee will have to repay the signing bonus within 20 days of termination.",
+      "oneOf": [
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        },
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a signing bonus clawback?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_employees": {
+      "description": "This restricts the employee from hiring key employees for a competing business.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply a non-solicit of key employees clause?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "expenses_policy": {
+      "description": "You can outline your policy and reimburse expenses on the platform. However, the employment agreement will not include details on expenses. Please send full policy details directly to the employee.",
+      "maxLength": 1000,
+      "title": "Outline your policy on expenses",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "non_solicitation_customer_number_of_months": {
+      "description": "Non-solicits can last between 1 and 24 months. The clause begins after the termination of the employment agreement.",
+      "maximum": 24,
+      "minimum": 1,
+      "title": "Length of non-solicit of customers in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "province_of_residency": {
+      "description": "Remote can currently only employ employees residing in these provinces. If your employee is not based in the registered city, please let us know.",
+      "oneOf": [
+        {
+          "const": "BJ",
+          "title": "Beijing"
+        },
+        {
+          "const": "GD",
+          "title": "Guangdong"
+        },
+        {
+          "const": "JS",
+          "title": "Jiangsu"
+        },
+        {
+          "const": "SD",
+          "title": "Shandong"
+        },
+        {
+          "const": "SH",
+          "title": "Shanghai"
+        },
+        {
+          "const": "SC",
+          "title": "Sichuan"
+        },
+        {
+          "const": "TJ",
+          "title": "Tianjin"
+        },
+        {
+          "const": "ZJ",
+          "title": "Zhejiang"
+        }
+      ],
+      "title": "Employee's province of residence",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about our registered locations and employee benefits in China",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 33899495661837,
+            "location": "statement",
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "The Social Insurance and Housing Fund benefits available to employees are limited to only the cities in which Remote is officially registered.\n\nAs a result, please make prospective employees aware that their access to Social Insurance and Housing Fund benefits will be determined by our registered locations and are not permitted to be transferred to other cities.\n\n",
+          "severity": "info",
+          "title": "Employee's province of residence and benefits"
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "other_work_locations": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the employee required to work in or travel to other locations?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "Under PRC laws, the non-compete period shall not exceed 24 months (2 years) after employment termination.",
+      "maximum": 24,
+      "minimum": 1,
+      "title": "Non-compete clause duration, in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "99f4303e-bace-472f-a618-5e8939aac104",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "0b3f3296-1867-4ae6-9ed1-26a54189965a",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "99f4303e-bace-472f-a618-5e8939aac104",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "ff4d926f-6eb4-4019-a28f-bb44d4c16832",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "99f4303e-bace-472f-a618-5e8939aac104",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "89750cb6-4837-46e1-bef9-1273fafaffde",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "99f4303e-bace-472f-a618-5e8939aac104",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "e57a6c00-407e-48b2-bdb9-64d4f833c6eb",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "99f4303e-bace-472f-a618-5e8939aac104",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "d0ddad34-b944-4064-9489-2e1e3025cb82",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "201b8575-e0c4-4f37-80a3-e46dbb3e8fea",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "22394c6b-442d-4965-8ce7-163a8465f201",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "201b8575-e0c4-4f37-80a3-e46dbb3e8fea",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "9f965bde-12ae-45cc-8578-a1a01e232c66",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "201b8575-e0c4-4f37-80a3-e46dbb3e8fea",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "dab65110-1c15-4ecc-ae99-d7a497b5c472",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "201b8575-e0c4-4f37-80a3-e46dbb3e8fea",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "5bd41422-24f8-4215-b2eb-2786fcc3129d",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "201b8575-e0c4-4f37-80a3-e46dbb3e8fea",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "f5aa3a50-e726-441c-8d87-07ceef92b25c",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "We offer employee [only] supplemental, comprehensive coverage with Remote Health, provided in partnership with Allianz and flexible benefits platform - ThanksBEN. Plans available for selection are Premium and Standard. Dependent coverage available at employees' expense.",
+        "extra": "Prices listed in USD, local currency equivalent will be determined based on exchange rate at the time of invoicing.\nPlease note that all local payroll deductions for required coverages are included in the TCE.\nPricing listed is subject to change based on age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance of updated billing.",
+        "inputType": "fieldset"
+      }
+    },
+    "work_days_number": {
+      "description": "A part-time employee can work up to 5 days per week but please note, they cannot exceed 24 hours per week. Their average daily working hours cannot exceed 4 hours",
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Number of work days per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "termination_rules_ack": {
+      "const": "acknowledged",
+      "description": "1. China Law prohibits termination at will, <b>termination of full time employment contract needs to be based on sufficient legal grounds and follow the procedures provided by law.</b>\n\n2. Extending or shortening the notice period from employee is not allowed in China. However, extending the employer's notice period is allowed.",
+      "title": "Please acknowledge the Termination Rules",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you want the employee's home address to be their work address?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "annual_leave_carry_forward": {
+      "description": "In the People’s Republic of China, employees are entitled to carryover time off or payment equivalent to the time off days they don’t use each year. Please consider that compensation of full-time employees for unused statutory leave is calculated at three times the employee’s base rate.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "The employee can carry over unused time off days to the following year"
+        },
+        {
+          "const": "no",
+          "title": "We’ll pay the employee the value of unused days at the end of each year"
+        }
+      ],
+      "title": "How do you want to handle carryover paid time off?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "annual_leave_carry_forward",
+    "available_pto",
+    "available_pto_type",
+    "contract_duration_type",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_overtime_eligibility",
+    "has_signing_bonus",
+    "notice_period_days",
+    "other_work_locations",
+    "post_termination_restrictions",
+    "province_of_residency",
+    "role_description",
+    "third_party_work",
+    "work_address_is_home_address",
+    "work_equipment_provided_by",
+    "work_hours_per_day",
+    "work_hours_per_week",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-logic": {
+    "computedValues": {
+      "maximum_breach_salary": {
+        "rule": {
+          "/": [
+            {
+              "*": [
+                {
+                  "var": "annual_gross_salary"
+                },
+                3
+              ]
+            },
+            100
+          ]
+        }
+      },
+      "maximum_breach_salary_in_cents": {
+        "rule": {
+          "*": [
+            {
+              "var": "annual_gross_salary"
+            },
+            3
+          ]
+        }
+      },
+      "minimum_annual_gross_salary": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "BJ"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2640
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "GD"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2220
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "JS"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2400
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "SC"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2200
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "SD"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2200
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "SH"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2400
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "TJ"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2440
+                  ]
+                },
+                100
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "ZJ"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "/": [
+                {
+                  "*": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    52,
+                    2400
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "minimum_annual_gross_salary_in_cents": {
+        "rule": {
+          "if": [
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "BJ"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2640
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "GD"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2220
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "JS"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2400
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "SC"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2200
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "SD"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2200
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "SH"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2400
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "TJ"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2440
+              ]
+            },
+            {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "province_of_residency"
+                    },
+                    "ZJ"
+                  ]
+                },
+                {
+                  ">": [
+                    {
+                      "var": "work_hours_per_week"
+                    },
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                52,
+                2400
+              ]
+            },
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "province_of_residency",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "work_hours_per_day",
+    "work_days_number",
+    "has_probation_period",
+    "probation_length",
+    "notice_period_days",
+    "termination_rules_ack",
+    "available_pto_type",
+    "available_pto",
+    "annual_leave_carry_forward",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "other_work_locations",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "has_overtime_eligibility",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "signing_bonus_clawback",
+    "has_bonus",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "post_termination_restrictions",
+    "non_compete_clause_apply",
+    "non_compete_clause_halt_period_months",
+    "non_compete_breach_compensation",
+    "non_compete_clause_compensation_percentage",
+    "non_solicitation_customers",
+    "non_solicitation_customer_number_of_months",
+    "non_solicitation_employees",
+    "non_solicitation_employees_number_of_months",
+    "non_interference_apply",
+    "non_interference_halt_period",
+    "work_equipment_provided_by",
+    "expenses_policy",
+    "third_party_work",
+    "third_party_work_activities",
+    "benefits"
+  ]
+}

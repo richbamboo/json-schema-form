@@ -1,0 +1,482 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select a province",
+      "oneOf": [
+        {
+          "const": "Agrigento",
+          "title": "Agrigento"
+        },
+        {
+          "const": "Alessandria",
+          "title": "Alessandria"
+        },
+        {
+          "const": "Ancona",
+          "title": "Ancona"
+        },
+        {
+          "const": "Arezzo",
+          "title": "Arezzo"
+        },
+        {
+          "const": "Ascoli Piceno",
+          "title": "Ascoli Piceno"
+        },
+        {
+          "const": "Asti",
+          "title": "Asti"
+        },
+        {
+          "const": "Avellino",
+          "title": "Avellino"
+        },
+        {
+          "const": "Bari",
+          "title": "Bari"
+        },
+        {
+          "const": "Barletta-Andria-Tr.",
+          "title": "Barletta-Andria-Tr."
+        },
+        {
+          "const": "Belluno",
+          "title": "Belluno"
+        },
+        {
+          "const": "Benevento",
+          "title": "Benevento"
+        },
+        {
+          "const": "Bergamo",
+          "title": "Bergamo"
+        },
+        {
+          "const": "Biella",
+          "title": "Biella"
+        },
+        {
+          "const": "Bologna",
+          "title": "Bologna"
+        },
+        {
+          "const": "Bolzano",
+          "title": "Bolzano"
+        },
+        {
+          "const": "Brescia",
+          "title": "Brescia"
+        },
+        {
+          "const": "Brindisi",
+          "title": "Brindisi"
+        },
+        {
+          "const": "Cagliari",
+          "title": "Cagliari"
+        },
+        {
+          "const": "Caltanisetta",
+          "title": "Caltanisetta"
+        },
+        {
+          "const": "Campobasso",
+          "title": "Campobasso"
+        },
+        {
+          "const": "Caserta",
+          "title": "Caserta"
+        },
+        {
+          "const": "Catania",
+          "title": "Catania"
+        },
+        {
+          "const": "Catanzaro",
+          "title": "Catanzaro"
+        },
+        {
+          "const": "Chieti",
+          "title": "Chieti"
+        },
+        {
+          "const": "Como",
+          "title": "Como"
+        },
+        {
+          "const": "Cosenza",
+          "title": "Cosenza"
+        },
+        {
+          "const": "Cremona",
+          "title": "Cremona"
+        },
+        {
+          "const": "Crotone",
+          "title": "Crotone"
+        },
+        {
+          "const": "Cuneo",
+          "title": "Cuneo"
+        },
+        {
+          "const": "Enna",
+          "title": "Enna"
+        },
+        {
+          "const": "Fermo",
+          "title": "Fermo"
+        },
+        {
+          "const": "Ferrara",
+          "title": "Ferrara"
+        },
+        {
+          "const": "Florence",
+          "title": "Florence"
+        },
+        {
+          "const": "Foggia",
+          "title": "Foggia"
+        },
+        {
+          "const": "Forli/Cesana",
+          "title": "Forli/Cesana"
+        },
+        {
+          "const": "Frosinone",
+          "title": "Frosinone"
+        },
+        {
+          "const": "Genova",
+          "title": "Genova"
+        },
+        {
+          "const": "Grosseto",
+          "title": "Grosseto"
+        },
+        {
+          "const": "Imperia",
+          "title": "Imperia"
+        },
+        {
+          "const": "Isernia",
+          "title": "Isernia"
+        },
+        {
+          "const": "L'Aquila",
+          "title": "L'Aquila"
+        },
+        {
+          "const": "La Spezia",
+          "title": "La Spezia"
+        },
+        {
+          "const": "Latina",
+          "title": "Latina"
+        },
+        {
+          "const": "Lecce",
+          "title": "Lecce"
+        },
+        {
+          "const": "Lecco",
+          "title": "Lecco"
+        },
+        {
+          "const": "Livorno",
+          "title": "Livorno"
+        },
+        {
+          "const": "Lodi",
+          "title": "Lodi"
+        },
+        {
+          "const": "Lucca",
+          "title": "Lucca"
+        },
+        {
+          "const": "Macerata",
+          "title": "Macerata"
+        },
+        {
+          "const": "Mantova",
+          "title": "Mantova"
+        },
+        {
+          "const": "Massa Carrara",
+          "title": "Massa Carrara"
+        },
+        {
+          "const": "Matera",
+          "title": "Matera"
+        },
+        {
+          "const": "Messina",
+          "title": "Messina"
+        },
+        {
+          "const": "Milan",
+          "title": "Milan"
+        },
+        {
+          "const": "Modena",
+          "title": "Modena"
+        },
+        {
+          "const": "Monza e Brianza",
+          "title": "Monza e Brianza"
+        },
+        {
+          "const": "Naples",
+          "title": "Naples"
+        },
+        {
+          "const": "Novara",
+          "title": "Novara"
+        },
+        {
+          "const": "Nuoro",
+          "title": "Nuoro"
+        },
+        {
+          "const": "Oristano",
+          "title": "Oristano"
+        },
+        {
+          "const": "Padova",
+          "title": "Padova"
+        },
+        {
+          "const": "Palermo",
+          "title": "Palermo"
+        },
+        {
+          "const": "Parma",
+          "title": "Parma"
+        },
+        {
+          "const": "Pavia",
+          "title": "Pavia"
+        },
+        {
+          "const": "Perugia",
+          "title": "Perugia"
+        },
+        {
+          "const": "Pesaro-Urbino",
+          "title": "Pesaro-Urbino"
+        },
+        {
+          "const": "Pescara",
+          "title": "Pescara"
+        },
+        {
+          "const": "Piacenza",
+          "title": "Piacenza"
+        },
+        {
+          "const": "Pisa",
+          "title": "Pisa"
+        },
+        {
+          "const": "Pistoia",
+          "title": "Pistoia"
+        },
+        {
+          "const": "Potenza",
+          "title": "Potenza"
+        },
+        {
+          "const": "Prato",
+          "title": "Prato"
+        },
+        {
+          "const": "Ragusa",
+          "title": "Ragusa"
+        },
+        {
+          "const": "Ravenna",
+          "title": "Ravenna"
+        },
+        {
+          "const": "Reggio Calabria",
+          "title": "Reggio Calabria"
+        },
+        {
+          "const": "Reggio Emilia",
+          "title": "Reggio Emilia"
+        },
+        {
+          "const": "Rieti",
+          "title": "Rieti"
+        },
+        {
+          "const": "Rimini",
+          "title": "Rimini"
+        },
+        {
+          "const": "Rome",
+          "title": "Rome"
+        },
+        {
+          "const": "Rovigo",
+          "title": "Rovigo"
+        },
+        {
+          "const": "Salerno",
+          "title": "Salerno"
+        },
+        {
+          "const": "Sassari",
+          "title": "Sassari"
+        },
+        {
+          "const": "Savona",
+          "title": "Savona"
+        },
+        {
+          "const": "Siena",
+          "title": "Siena"
+        },
+        {
+          "const": "Siracusa",
+          "title": "Siracusa"
+        },
+        {
+          "const": "Sondrio",
+          "title": "Sondrio"
+        },
+        {
+          "const": "South Sardinia",
+          "title": "South Sardinia"
+        },
+        {
+          "const": "Taranto",
+          "title": "Taranto"
+        },
+        {
+          "const": "Teramo",
+          "title": "Teramo"
+        },
+        {
+          "const": "Terni",
+          "title": "Terni"
+        },
+        {
+          "const": "Trapani",
+          "title": "Trapani"
+        },
+        {
+          "const": "Trento",
+          "title": "Trento"
+        },
+        {
+          "const": "Treviso",
+          "title": "Treviso"
+        },
+        {
+          "const": "Trieste",
+          "title": "Trieste"
+        },
+        {
+          "const": "Turin",
+          "title": "Turin"
+        },
+        {
+          "const": "Udine",
+          "title": "Udine"
+        },
+        {
+          "const": "Varese",
+          "title": "Varese"
+        },
+        {
+          "const": "Venice",
+          "title": "Venice"
+        },
+        {
+          "const": "Verbania",
+          "title": "Verbania"
+        },
+        {
+          "const": "Vercelli",
+          "title": "Vercelli"
+        },
+        {
+          "const": "Verona",
+          "title": "Verona"
+        },
+        {
+          "const": "Vibo Valentia",
+          "title": "Vibo Valentia"
+        },
+        {
+          "const": "Vicenza",
+          "title": "Vicenza"
+        },
+        {
+          "const": "Viterbo",
+          "title": "Viterbo"
+        }
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

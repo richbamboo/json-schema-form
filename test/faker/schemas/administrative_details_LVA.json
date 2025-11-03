@@ -1,0 +1,197 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_id_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_id_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "passport_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_id_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_id_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "passport_number"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "has_id_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a Latvian national identification number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "maxLength": 255,
+      "title": "National identification number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "social_tax_status": {
+      "description": "Select the option that best applies to you.",
+      "oneOf": [
+        {
+          "const": "employee",
+          "title": "Employee"
+        },
+        {
+          "const": "employee_pensioner",
+          "title": "Employee - pensioner"
+        },
+        {
+          "const": "employee_retirement_pension_recipient",
+          "title": "Employee - retirement pension recipient"
+        },
+        {
+          "const": "has_disability",
+          "title": "I have a disability"
+        },
+        {
+          "const": "recipient_state_special_pension",
+          "title": "Recipient of a state special pension"
+        }
+      ],
+      "title": "Social tax status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "statement": {
+          "description": "Remember to submit your payroll tax booklet. You can submit it through the Electronic Declaration System of the State Revenue Service’s website.",
+          "inputType": "statement",
+          "severity": "info"
+        }
+      }
+    },
+    "tax_residency_status": {
+      "description": "Select the option that matches your status on your taxes. If you’re unsure, you can confirm your tax residency status with the State Revenue Service.",
+      "oneOf": [
+        {
+          "const": "resident",
+          "title": "Resident"
+        },
+        {
+          "const": "non_resident",
+          "title": "Non-resident"
+        }
+      ],
+      "title": "What is your tax residency status?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "has_id_number",
+    "tax_residency_status",
+    "social_tax_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "has_id_number",
+    "id_number",
+    "passport_number",
+    "tax_residency_status",
+    "social_tax_status",
+    "prior_inventions"
+  ]
+}

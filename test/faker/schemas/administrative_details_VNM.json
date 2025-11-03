@@ -1,0 +1,653 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "id_card": false
+        }
+      },
+      "if": {
+        "properties": {
+          "type_of_worker": {
+            "const": "local_employee"
+          }
+        },
+        "required": [
+          "type_of_worker"
+        ]
+      },
+      "then": {
+        "required": [
+          "id_card"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "passport_expiry_date": false,
+          "passport_issue_date": false,
+          "passport_number": false,
+          "residential_date_on_temporary_residence_card": false
+        }
+      },
+      "if": {
+        "properties": {
+          "type_of_worker": {
+            "const": "expat_employee"
+          }
+        },
+        "required": [
+          "type_of_worker"
+        ]
+      },
+      "then": {
+        "required": [
+          "passport_number",
+          "passport_issue_date",
+          "passport_expiry_date",
+          "residential_date_on_temporary_residence_card"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "dependent_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_dependents": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_dependents"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependent_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "dependent_details": {
+      "items": {
+        "properties": {
+          "birth_certificate_book_number": {
+            "maxLength": 255,
+            "title": "Dependent Book Number of Birth Certificate",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birth_certificate_city": {
+            "maxLength": 255,
+            "title": "Dependent City on Birth Certificate",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birth_certificate_country": {
+            "maxLength": 255,
+            "title": "Dependent Country on Birth Certificate",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birth_certificate_district": {
+            "maxLength": 255,
+            "title": "Dependent District on Birth Certificate",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birth_certificate_number": {
+            "maxLength": 255,
+            "title": "Dependent Birth Certificate Number",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birth_certificate_province": {
+            "maxLength": 255,
+            "title": "Dependent Province on Birth Certificate",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birth_certificate_ward": {
+            "maxLength": 255,
+            "title": "Dependent Ward on Birth Certificate",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "birthdate": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Date of birth of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Vietnamese full name of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "has_passport": {
+            "oneOf": [
+              {
+                "const": "yes",
+                "title": "Yes"
+              },
+              {
+                "const": "no",
+                "title": "No"
+              }
+            ],
+            "title": "Does the dependent have an ID card and Passport?",
+            "type": "string",
+            "x-jsf-presentation": {
+              "direction": "row",
+              "inputType": "radio"
+            }
+          },
+          "id_card_number": {
+            "maxLength": 255,
+            "title": "Dependent ID Card Number",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "job": {
+            "maxLength": 255,
+            "title": "Job name of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "nationality": {
+            "maxLength": 255,
+            "title": "Nationality of the dependent",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "passport_expiry_date": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Passport Date of Expiry",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "passport_issue_date": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Passport Date of Issue",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "passport_number": {
+            "maxLength": 255,
+            "title": "Dependent Passport Number",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "relationship": {
+            "maxLength": 255,
+            "title": "Family relationship of the dependent with the employee",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "tax_code_number": {
+            "maxLength": 255,
+            "title": "Dependent Tax Code Number",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "birthdate",
+          "relationship",
+          "tax_code_number",
+          "has_passport",
+          "job",
+          "nationality"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "birthdate",
+          "relationship",
+          "tax_code_number",
+          "job",
+          "nationality",
+          "has_passport",
+          "id_card_number",
+          "passport_number",
+          "passport_issue_date",
+          "passport_expiry_date",
+          "birth_certificate_number",
+          "birth_certificate_book_number",
+          "birth_certificate_country",
+          "birth_certificate_province",
+          "birth_certificate_city",
+          "birth_certificate_district",
+          "birth_certificate_ward"
+        ]
+      },
+      "title": "Dependent Information for PIT purposes",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "education": {
+      "description": "Please select the degree associated with your highest level of education.",
+      "enum": [
+        "high_school",
+        "bachelor",
+        "master",
+        "doctorate_postdoctorate"
+      ],
+      "oneOf": [
+        {
+          "const": "high_school",
+          "title": "High School/equivalent"
+        },
+        {
+          "const": "bachelor",
+          "title": "Bachelor's Degree"
+        },
+        {
+          "const": "master",
+          "title": "Master's Degree"
+        },
+        {
+          "const": "doctorate_postdoctorate",
+          "title": "Doctorate or Post-doctorate"
+        }
+      ],
+      "title": "Highest degree",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "has_dependents": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Would you like to declare your dependents for Personal Income Tax (PIT) purposes?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_other_job": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Will you be working another job while under employment with us?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_card": {
+      "properties": {
+        "date_of_issue": {
+          "format": "date",
+          "maxLength": 255,
+          "title": "Date of Issue",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9]*$",
+          "title": "ID Number (Chứng minh nhân dân / Căn cước công dân)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "place_of_issue": {
+          "maxLength": 255,
+          "title": "Place of Issue",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "id_number",
+        "date_of_issue",
+        "place_of_issue"
+      ],
+      "title": "ID Card",
+      "type": "object",
+      "x-jsf-order": [
+        "id_number",
+        "date_of_issue",
+        "place_of_issue"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "passport_expiry_date": {
+      "format": "date",
+      "title": "Passport Date of Expiry",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "passport_issue_date": {
+      "format": "date",
+      "title": "Passport Date of Issue",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "pit_code": {
+      "maxLength": 255,
+      "title": "PIT Code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "residential_date_on_temporary_residence_card": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Residential Date on Temporary Residence Card",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "shui_contribution_opt_in": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Would you like us to register all SHUI contributions for you beginning the month you start work with us?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "social_insurance": {
+      "properties": {
+        "book_number": {
+          "maxLength": 255,
+          "title": "Social Insurance book number",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text",
+            "maskSecret": 3
+          }
+        },
+        "date_of_issue": {
+          "format": "date",
+          "maxLength": 255,
+          "title": "Date of Issue",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "place_of_issue": {
+          "maxLength": 255,
+          "title": "Place of Issue",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "book_number",
+        "date_of_issue",
+        "place_of_issue"
+      ],
+      "title": "Social Insurance Book Number",
+      "type": "object",
+      "x-jsf-order": [
+        "book_number",
+        "date_of_issue",
+        "place_of_issue"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "type_of_worker": {
+      "description": "Are you a local employee or an expat employee?",
+      "enum": [
+        "local_employee",
+        "expat_employee"
+      ],
+      "oneOf": [
+        {
+          "const": "local_employee",
+          "title": "I am a local employee"
+        },
+        {
+          "const": "expat_employee",
+          "title": "I am an expat employee"
+        }
+      ],
+      "title": "Type of worker",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "work_permit_expiration_date": {
+      "description": "(if applicable)",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Work Permit Expiry Date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "education",
+    "has_dependents",
+    "marital_status",
+    "pit_code",
+    "social_insurance",
+    "type_of_worker",
+    "has_other_job",
+    "shui_contribution_opt_in"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "type_of_worker",
+    "id_card",
+    "passport_number",
+    "passport_issue_date",
+    "passport_expiry_date",
+    "residential_date_on_temporary_residence_card",
+    "social_insurance",
+    "education",
+    "marital_status",
+    "pit_code",
+    "has_dependents",
+    "dependent_details",
+    "work_permit_number",
+    "work_permit_expiration_date",
+    "has_other_job",
+    "shui_contribution_opt_in"
+  ]
+}

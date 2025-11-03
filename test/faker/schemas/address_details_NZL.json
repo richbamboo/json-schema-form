@@ -1,0 +1,138 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "Auckland",
+          "title": "Auckland"
+        },
+        {
+          "const": "Bay Of Plenty",
+          "title": "Bay Of Plenty"
+        },
+        {
+          "const": "Canterbury",
+          "title": "Canterbury"
+        },
+        {
+          "const": "Gisborne",
+          "title": "Gisborne"
+        },
+        {
+          "const": "Hawke's Bay",
+          "title": "Hawke's Bay"
+        },
+        {
+          "const": "Wanganui - Manawatu",
+          "title": "Wanganui - Manawatu"
+        },
+        {
+          "const": "Marlborough",
+          "title": "Marlborough"
+        },
+        {
+          "const": "Nelson - Tasman",
+          "title": "Nelson - Tasman"
+        },
+        {
+          "const": "Northland",
+          "title": "Northland"
+        },
+        {
+          "const": "Otago",
+          "title": "Otago"
+        },
+        {
+          "const": "Southland",
+          "title": "Southland"
+        },
+        {
+          "const": "Taranaki",
+          "title": "Taranaki"
+        },
+        {
+          "const": "Waikato",
+          "title": "Waikato"
+        },
+        {
+          "const": "Wellington",
+          "title": "Wellington"
+        },
+        {
+          "const": "West Coast",
+          "title": "West Coast"
+        }
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "suburb": {
+      "maxLength": 255,
+      "title": "Suburb",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "suburb",
+    "postal_code"
+  ]
+}

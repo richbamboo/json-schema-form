@@ -1,0 +1,1673 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 2808000,
+            "x-jsf-errorMessage": {
+              "minimum": "In Ireland, full-time employees are entitled to a minimum annual salary of €28,080.00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 48,
+            "minimum": 35,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 48 hours per week.",
+              "minimum": "Must be at least 35 hour per week."
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 34,
+            "minimum": 1,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 34 hours per week.",
+              "minimum": "Must be at least 1 hour per week."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_extend_length": false,
+          "probation_length": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "required": [
+          "probation_length",
+          "probation_extend_length"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_probation_period": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_probation_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_probation_period": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "third_party_work_activities": false
+        }
+      },
+      "if": {
+        "properties": {
+          "third_party_work": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "third_party_work"
+        ]
+      },
+      "then": {
+        "required": [
+          "third_party_work_activities"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "available_pto": {
+              "minimum": 20
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "part_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "available_pto": {
+              "minimum": 0
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 20,
+            "default": 20,
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In Ireland, employees are entitled to a minimum of 20 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+                "title": "Minimum of <strong>20 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "The minimum annual salary is calculated based on the country's applicable laws.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-logic-computedAttrs": {
+        "minimum": "minimum_annual_gross_salary_in_cents",
+        "x-jsf-errorMessage": {
+          "minimum": "In Ireland, part-time employees are entitled to a minimum annual salary of €{{ minimum_annual_gross_salary }}"
+        }
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "In Ireland, employees are entitled to a minimum of 20 paid time off days per year. Please pro-rate for part-time employment. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "62f8bc63-8080-4fde-ab2a-40339e1b8892",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "41d8bc17-4f2c-45e7-a600-d2f4911c29a3",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "62f8bc63-8080-4fde-ab2a-40339e1b8892",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "e3271941-e9db-4968-950e-41ed6adedf44",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "62f8bc63-8080-4fde-ab2a-40339e1b8892",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "7508f843-6b8c-49b6-b2af-476cf0988117",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "62f8bc63-8080-4fde-ab2a-40339e1b8892",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "e3f028bb-fe37-495e-9da9-8c283abdfc88",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "62f8bc63-8080-4fde-ab2a-40339e1b8892",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "3233156d-7a88-4761-9012-5fc0f2e02ef9",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Guide 2 Health Plan 2025 (Single) (Irish Life Health - Guide 2 Health Plan 2025 (Single); Irish Life Health - Guide 2 Vision Plan 2025; Irish Life Health - Guide 2 Dental Plan 2025)",
+              "title": "Guide 2 Health Plan 2025 (Single) - 134.36 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee, covering medical emergencies, inpatient and outpatient services, maternity, and psychiatric support. \nVision: 50% up to €75. \nDental: Emergency €250; non-emergency 50% up to €175.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide2-employee-only",
+                  "displayCost": "134.36 EUR/mo",
+                  "id": "f15caa71-1212-4a2a-86bd-9dc99691252f",
+                  "providerName": "Irish Life Health",
+                  "tierName": "Guide 2 Health Plan 2025 (Single)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 3 Health Plan 2025 (Single) (Irish Life Health - Guide 3 Health Plan 2025 (Single); Irish Life Health - Guide 3 Vision Plan 2025; Irish Life Health - Guide 3 Dental Plan 2025)",
+              "title": "Guide 3 Health Plan 2025 (Single) - 156.02 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee with higher limits on medical emergencies, inpatient and outpatient services, maternity, and psychiatric support. \nVision: 75% up to €150. \nDental: Emergency €500; non-emergency 75% up to €300.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide3-employee-only",
+                  "displayCost": "156.02 EUR/mo",
+                  "id": "36ebe400-62e3-4a10-a245-2b8741ba7376",
+                  "providerName": "Irish Life Health",
+                  "tierName": "Guide 3 Health Plan 2025 (Single)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 2 Health + Extended Dental 2025 (Single) (Irish Life Health - Guide 2 Health Plan 2025 (Single); Irish Life Health - Guide 2 Vision Plan 2025; Irish Life Health - Guide 2 Dental Plan 2025; DeCare - Extended Dental Plan 2025 (Single))",
+              "title": "Guide 2 Health + Extended Dental 2025 (Single) - 134.36 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee with extended dental benefits. \nVision: 50% up to €75. \nDental: Emergency €250; non-emergency 50% up to €175, plus additional dental treatments through DeCare.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide2-plus-extended-dental-employee-only",
+                  "displayCost": "134.36 EUR/mo",
+                  "id": "638daf9e-5725-43b4-b351-3168a53fa491",
+                  "providerName": "DeCare",
+                  "tierName": "Guide 2 Health + Extended Dental 2025 (Single)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 3 Health  + Extended Dental 2025 (Single) (Irish Life Health - Guide 3 Health Plan 2025 (Single); Irish Life Health - Guide 3 Vision Plan 2025; Irish Life Health - Guide 3 Dental Plan 2025; DeCare - Extended Dental Plan 2025 (Single))",
+              "title": "Guide 3 Health  + Extended Dental 2025 (Single) - 177.02 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee with extended dental benefits. \nVision: 75% up to €150. \nDental: Emergency €500; non-emergency 75% up to €300, plus comprehensive dental treatments.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide3-plus-extended-dental-employee-only",
+                  "displayCost": "177.02 EUR/mo",
+                  "id": "8e91a3cc-46eb-4d25-93c1-86b700f67c05",
+                  "providerName": "DeCare",
+                  "tierName": "Guide 3 Health  + Extended Dental 2025 (Single)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 2 Health Plan 2025 (Family) (Irish Life Health - Guide 2 Dental Plan 2025; Irish Life Health - Guide 2 Health Plan 2025 (Family); Irish Life Health - Guide 2 Vision Plan 2025)",
+              "title": "Guide 2 Health Plan 2025 (Family) - ~340.20 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee and family, covering medical emergencies, inpatient and outpatient services, maternity, and psychiatric support. \nVision: 50% up to €75. \nDental: Emergency €250; non-emergency 50% up to €175. \nFinal pricing will vary based on the number of dependents added.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide-2-family",
+                  "displayCost": "~340.20 EUR/mo",
+                  "id": "26e090f7-5826-4265-805f-dd1f171db580",
+                  "providerName": "Irish Life Health",
+                  "tierName": "Guide 2 Health Plan 2025 (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 3 Health Plan 2025 (Family) (Irish Life Health - Guide 3 Dental Plan 2025; Irish Life Health - Guide 3 Health Plan 2025 (Family); Irish Life Health - Guide 3 Vision Plan 2025)",
+              "title": "Guide 3 Health Plan 2025 (Family) - ~408.68 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee and family, featuring higher limits on medical emergencies, inpatient and outpatient services, maternity, and psychiatric support. \nVision: 75% up to €150. \nDental: Emergency €500; non-emergency 75% up to €300.\nFinal pricing will vary based on the number of dependents added.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide3-family",
+                  "displayCost": "~408.68 EUR/mo",
+                  "id": "68c89c68-0915-4af9-9a93-f5c64c559997",
+                  "providerName": "Irish Life Health",
+                  "tierName": "Guide 3 Health Plan 2025 (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 2 Health + Extended Dental 2025 (Family) (DeCare - Extended Dental Plan 2025 (Family); Irish Life Health - Guide 2 Dental Plan 2025; Irish Life Health - Guide 2 Health Plan 2025 (Family); Irish Life Health - Guide 2 Vision Plan 2025)",
+              "title": "Guide 2 Health + Extended Dental 2025 (Family) - ~401.44 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee, spouse and children with extended dental benefits. \nVision: 50% up to €75. \nDental: Emergency €250; non-emergency 50% up to €175, plus additional dental treatments. \nFinal pricing will vary based on the number of dependents added.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide2-plus-extended-dental-family",
+                  "displayCost": "~401.44 EUR/mo",
+                  "id": "3ac3f0d2-57e1-487c-9b7f-dade737de4ba",
+                  "providerName": "DeCare",
+                  "tierName": "Guide 2 Health + Extended Dental 2025 (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Guide 3 Health + Extended Dental 2025 (Family) (DeCare - Extended Dental Plan 2025 (Family); Irish Life Health - Guide 3 Dental Plan 2025; Irish Life Health - Guide 3 Health Plan 2025 (Family); Irish Life Health - Guide 3 Vision Plan 2025)",
+              "title": "Guide 3 Health + Extended Dental 2025 (Family) - ~469.92 EUR/mo",
+              "x-jsf-presentation": {
+                "description": "Offers healthcare for the employee, spouse and children with extended dental benefits. \nVision: 75% up to €150. \nDental: Emergency €500; non-emergency 75% up to €300, plus comprehensive dental treatments. \nFinal pricing will vary based on the number of dependents added.",
+                "meta": {
+                  "benefitGroupId": "6a10d2b1-8563-47fc-9f23-e7ef4c11aeb1",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-health-guide3-plus-extended-dental-family",
+                  "displayCost": "~469.92 EUR/mo",
+                  "id": "50507597-2305-4053-a334-2f16c385438b",
+                  "providerName": "DeCare",
+                  "tierName": "Guide 3 Health + Extended Dental 2025 (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Guide 3 Health  + Extended Dental 2025 (Single) (Irish Life Health - Guide 3 Health Plan 2025 (Single); Irish Life Health - Guide 3 Vision Plan 2025; Irish Life Health - Guide 3 Dental Plan 2025; DeCare - Extended Dental Plan 2025 (Single))",
+                    "Guide 2 Health + Extended Dental 2025 (Single) (Irish Life Health - Guide 2 Health Plan 2025 (Single); Irish Life Health - Guide 2 Vision Plan 2025; Irish Life Health - Guide 2 Dental Plan 2025; DeCare - Extended Dental Plan 2025 (Single))",
+                    "Guide 3 Health Plan 2025 (Single) (Irish Life Health - Guide 3 Health Plan 2025 (Single); Irish Life Health - Guide 3 Vision Plan 2025; Irish Life Health - Guide 3 Dental Plan 2025)",
+                    "Guide 2 Health Plan 2025 (Single) (Irish Life Health - Guide 2 Health Plan 2025 (Single); Irish Life Health - Guide 2 Vision Plan 2025; Irish Life Health - Guide 2 Dental Plan 2025)",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Guide 3 Health + Extended Dental 2025 (Family) (DeCare - Extended Dental Plan 2025 (Family); Irish Life Health - Guide 3 Dental Plan 2025; Irish Life Health - Guide 3 Health Plan 2025 (Family); Irish Life Health - Guide 3 Vision Plan 2025)",
+                    "Guide 2 Health + Extended Dental 2025 (Family) (DeCare - Extended Dental Plan 2025 (Family); Irish Life Health - Guide 2 Dental Plan 2025; Irish Life Health - Guide 2 Health Plan 2025 (Family); Irish Life Health - Guide 2 Vision Plan 2025)",
+                    "Guide 3 Health Plan 2025 (Family) (Irish Life Health - Guide 3 Dental Plan 2025; Irish Life Health - Guide 3 Health Plan 2025 (Family); Irish Life Health - Guide 3 Vision Plan 2025)",
+                    "Guide 2 Health Plan 2025 (Family) (Irish Life Health - Guide 2 Dental Plan 2025; Irish Life Health - Guide 2 Health Plan 2025 (Family); Irish Life Health - Guide 2 Vision Plan 2025)",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "life_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Life Insurance 2025 (Irish Life: Life Insurance - 2x Annual Coverage Plan 2025)",
+              "title": "Basic Life Insurance 2025 - 0.09% of the insured benefit",
+              "x-jsf-presentation": {
+                "description": "Offers a payout of 2 times the annual salary plus support for the employee’s family along with bereavement assistance.",
+                "meta": {
+                  "benefitGroupId": "4c262acf-be9f-4dda-8837-589f0fccb142",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-life-insurance-basic",
+                  "displayCost": "0.09% of the insured benefit",
+                  "id": "3eb060eb-e9dd-43e0-bd27-b05d6b633cf8",
+                  "providerName": "Irish Life: Life Insurance",
+                  "tierName": "Basic Life Insurance 2025",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Life Insurance 2025 (Irish Life: Life Insurance - 4x Annual Coverage Plan 2025)",
+              "title": "Premium Life Insurance 2025 - 0.09% of the insured benefit",
+              "x-jsf-presentation": {
+                "description": "Offers a payout of 4 times the annual salary plus support for the employee’s family along with bereavement assistance.",
+                "meta": {
+                  "benefitGroupId": "4c262acf-be9f-4dda-8837-589f0fccb142",
+                  "detailsUrl": "https://remote.com/benefits-guide/ireland-life-insurance-premium",
+                  "displayCost": "0.09% of the insured benefit",
+                  "id": "19237523-a64c-4e3a-afae-b2f5e606f9f4",
+                  "providerName": "Irish Life: Life Insurance",
+                  "tierName": "Premium Life Insurance 2025",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Life Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "d1426f50-c4d8-44ba-9748-1f59875c96b7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "22f2a634-6c73-4fe4-bf76-792c5f8aedac",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "d1426f50-c4d8-44ba-9748-1f59875c96b7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "c67a09e9-bbc8-4573-9898-25476b74055f",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "d1426f50-c4d8-44ba-9748-1f59875c96b7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "e45c0bac-8887-4574-b322-b3ecd677d1bc",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "d1426f50-c4d8-44ba-9748-1f59875c96b7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "f45ecbeb-82fd-43cc-b703-a9e47c53e6ec",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "d1426f50-c4d8-44ba-9748-1f59875c96b7",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "aecbf774-8636-4cf0-9b92-10a61f375640",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "pension": {
+          "oneOf": [
+            {
+              "const": "Basic Pension (Irish Life Pension - Irish Life Pension 1% matching - 2025)",
+              "title": "Basic Pension - 1% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan, up to 1% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "5cb242a0-82b9-49db-a464-f1e3646313dc",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-ireland-pension-1",
+                  "displayCost": "1% match",
+                  "id": "239f4eed-9b4f-4d0e-acff-5e93bb5ccd6d",
+                  "providerName": "Irish Life Pension",
+                  "tierName": "Basic Pension",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Pension (Irish Life Pension - Irish Life Pension 3% matching - 2025)",
+              "title": "Standard Pension - 3% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan, up to 3% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "5cb242a0-82b9-49db-a464-f1e3646313dc",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-ireland-pension-3",
+                  "displayCost": "3% match",
+                  "id": "6d0a3cfa-fbba-4386-b1aa-5ea35a84e7b5",
+                  "providerName": "Irish Life Pension",
+                  "tierName": "Standard Pension",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Pension (Irish Life Pension - Irish Life Pension 5% matching - 2025)",
+              "title": "Plus Pension - 5% match",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution into the plan, up to 5% of the employee's salary.",
+                "meta": {
+                  "benefitGroupId": "5cb242a0-82b9-49db-a464-f1e3646313dc",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-ireland-pension-5",
+                  "displayCost": "5% match",
+                  "id": "414b64cf-4083-4819-b355-2bbda9f7f7de",
+                  "providerName": "Irish Life Pension",
+                  "tierName": "Plus Pension",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Pension (Irish Life Pension - Irish Life Pension (Top-Up 3%) - 2025)",
+              "title": "Premium Pension - Up to 8%",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution up to 5% and add an extra 3%. For example, if an employee contributes the maximum of 5%, the total employer contribution would be 8% (5% matched + 3% additional), totaling a 13% combined contribution.",
+                "meta": {
+                  "benefitGroupId": "5cb242a0-82b9-49db-a464-f1e3646313dc",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-ireland-pension-top-up-3",
+                  "displayCost": "Up to 8%",
+                  "id": "36fa04d3-5396-4fdd-9ac6-4886d489146a",
+                  "providerName": "Irish Life Pension",
+                  "tierName": "Premium Pension",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Pension (Irish Life Pension - Irish Life Pension (Top-Up 5%) - 2025)",
+              "title": "Platinum Pension - Up to 10%",
+              "x-jsf-presentation": {
+                "description": "You match the employee's contribution up to 5% and add an extra 5%. So, if an employee contributes the maximum of 5%, the total employer contribution would be 10% (5% matched + 5% additional), totaling a 15% combined contribution.",
+                "meta": {
+                  "benefitGroupId": "5cb242a0-82b9-49db-a464-f1e3646313dc",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-ireland-pension-top-up-5",
+                  "displayCost": "Up to 10%",
+                  "id": "2712473f-fdcf-4ad4-b292-a333ced662d8",
+                  "providerName": "Irish Life Pension",
+                  "tierName": "Platinum Pension",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Pension",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "pension",
+        "life_insurance",
+        "mental_health_program",
+        "business_travel_insurance",
+        "health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "life_insurance",
+        "pension",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "We offer employees supplemental, comprehensive group benefit coverages provided in partnership with Irish Life and DeCare.\nLife Insurance benefits will be available from January 2025.",
+        "extra": "The package you have selected will apply to any current and future employees in Ireland.\r\nPlease note that all local payroll deductions for required coverages are included in the TCE\r\nPricing listed is subject to change based on age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance of updated billing.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_probation_period": {
+      "description": "We recommend selecting Yes. In the unfortunate event of a necessary termination, probation periods make the process much easier.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Include a probation period?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_extend_length": {
+      "description": "This cannot exceed 6 months. Please put 0 if you don't desire to apply a probation extension.",
+      "maximum": 6,
+      "minimum": 0,
+      "title": "Length of extended probation period, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "probation_length": {
+      "description": "In Ireland, probation periods can last up to 6 months.",
+      "maximum": 6,
+      "minimum": 1,
+      "title": "Probation period, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "sick_leave_pay": {
+      "deprecated": true,
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "readOnly": true,
+      "title": "Sick Leave Pay",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because now we're using sick_leave_pay_ack field."
+        },
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "sick_leave_pay_ack": {
+      "const": "acknowledged",
+      "description": "In Ireland, employees are entitled to 7 paid sick leave days per year if they have worked  with you for more than 13 weeks.",
+      "title": "I acknowledge the paid sick leave policy in Ireland",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "See more details",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 33175767489165,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "sick_leave_pay_length": {
+      "deprecated": true,
+      "description": "We suggest 13 weeks full pay",
+      "readOnly": true,
+      "title": "Paid sick leave (in weeks)",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because now we're using sick_leave_pay_ack field."
+        },
+        "inputType": "number"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "third_party_work": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Can the employee work for third parties or do business on their own while working with your company?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "third_party_work_activities": {
+      "description": "Provide as many details about the approved activities as you can. We'll include them in the employment agreement.",
+      "maxLength": 1000,
+      "title": "Approved third-party work",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "work_hours_per_week",
+    "contract_duration_type",
+    "work_schedule",
+    "available_pto_type",
+    "available_pto",
+    "sick_leave_pay_ack",
+    "equity_compensation",
+    "experience_level",
+    "has_signing_bonus",
+    "has_bonus",
+    "has_commissions",
+    "has_probation_period",
+    "role_description",
+    "third_party_work",
+    "work_address_is_home_address",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "part_time_salary_confirmation"
+      ],
+      "title": "Annual gross salary"
+    }
+  },
+  "x-jsf-logic": {
+    "computedValues": {
+      "minimum_annual_gross_salary": {
+        "rule": {
+          "if": [
+            {
+              "var": "work_hours_per_week"
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "*": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        13.5,
+                        52,
+                        100
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            13.5,
+                            52,
+                            100
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      },
+      "minimum_annual_gross_salary_in_cents": {
+        "rule": {
+          "if": [
+            {
+              "var": "work_hours_per_week"
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "*": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        1350,
+                        52,
+                        100
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "*": [
+                            {
+                              "var": "work_hours_per_week"
+                            },
+                            1350,
+                            52,
+                            100
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "has_probation_period",
+    "probation_length",
+    "probation_extend_length",
+    "sick_leave_pay_length",
+    "sick_leave_pay_ack",
+    "available_pto_type",
+    "available_pto",
+    "sick_leave_pay",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "third_party_work",
+    "third_party_work_activities",
+    "benefits"
+  ]
+}

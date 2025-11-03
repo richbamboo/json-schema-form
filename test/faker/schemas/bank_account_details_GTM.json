@@ -1,0 +1,135 @@
+{
+  "properties": {
+    "account_holder": {
+      "maxLength": 255,
+      "title": "Account holder name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "account_number": {
+      "maxLength": 255,
+      "title": "Account number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "account_type": {
+      "description": "Is this a Checking or Savings Account?",
+      "enum": [
+        "savings",
+        "checking"
+      ],
+      "title": "Checking or Savings account",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Savings",
+            "value": "savings"
+          },
+          {
+            "label": "Checking",
+            "value": "checking"
+          }
+        ],
+        "placeholder": "Select option"
+      }
+    },
+    "bank_routing_code": {
+      "description": "Enter your bank routing code",
+      "maxLength": 255,
+      "title": "Bank routing code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "bic_swift": {
+      "description": "Enter your BIC/SWIFT code. You can usually find this with your IBAN number",
+      "maxLength": 12,
+      "title": "BIC/SWIFT",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "iban": {
+      "description": "International Bank Account Number",
+      "maxLength": 29,
+      "pattern": "^\\w{2}\\d{2}[a-zA-Z0-9]{4}\\d{20}$",
+      "title": "IBAN",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "label_name": {
+      "description": "So you can easily recognize the account.",
+      "maxLength": 255,
+      "title": "Account nickname",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "name": {
+      "description": "The bank name",
+      "maxLength": 255,
+      "title": "Bank name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "ownership_type": {
+      "enum": [
+        "PRIVATE",
+        "BUSINESS"
+      ],
+      "title": "Account ownership type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Personal",
+            "value": "PRIVATE"
+          },
+          {
+            "label": "Business",
+            "value": "BUSINESS"
+          }
+        ],
+        "placeholder": "Select account ownership type"
+      }
+    }
+  },
+  "required": [
+    "label_name",
+    "account_holder",
+    "ownership_type",
+    "account_type",
+    "name",
+    "iban",
+    "bic_swift",
+    "account_number",
+    "bank_routing_code"
+  ],
+  "x-jsf-order": [
+    "label_name",
+    "account_holder",
+    "ownership_type",
+    "account_type",
+    "name",
+    "iban",
+    "bic_swift",
+    "account_number",
+    "bank_routing_code"
+  ]
+}

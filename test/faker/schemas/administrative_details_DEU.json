@@ -1,0 +1,1804 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "church_tax_number": false,
+          "has_quit_church": false,
+          "religious_community": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_church_tax_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_church_tax_number"
+        ]
+      },
+      "then": {
+        "required": [
+          "church_tax_number",
+          "religious_community",
+          "has_quit_church"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "health_insurance_provider": false,
+          "health_insurance_provider_type": false,
+          "ssn": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_ssn": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_ssn"
+        ]
+      },
+      "then": {
+        "required": [
+          "ssn",
+          "health_insurance_provider",
+          "health_insurance_provider_type"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "ssn_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_ssn": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_ssn"
+        ]
+      },
+      "then": {
+        "required": [
+          "ssn_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_ssn": {
+            "x-jsf-presentation": {
+              "statement": false
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "has_ssn": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_ssn"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_ssn": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "We cannot start your employment until you have your <b>German social security number</b>. Make sure that you have registered yourself with <b>Public Health Insurance</b> before your start date, as this will ensure you automatically get a <b>Sozialversicherungsnummer</b>.<br><a href=\"https://support.remote.com/hc/en-us/articles/16768414764557-How-to-obtain-Health-Insurance-a-Social-Security-Number-or-Tax-ID-in-Germany\" target=\"_blank\" rel=\"noopener noreferrer\">Check out how to get your health insurance in Germany</a>",
+                "severity": "info"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "previous_public_health_insurer": false
+        }
+      },
+      "if": {
+        "properties": {
+          "health_insurance_provider_type": {
+            "const": "private"
+          }
+        },
+        "required": [
+          "health_insurance_provider_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "previous_public_health_insurer"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "dependent_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_dependents": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_dependents"
+        ]
+      },
+      "then": {
+        "required": [
+          "dependent_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "child_allowance": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Child allowance",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "church_tax_number": {
+      "maxLength": 255,
+      "title": "Church tax number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "citizenship": {
+      "enum": [
+        "german",
+        "eu",
+        "other"
+      ],
+      "oneOf": [
+        {
+          "const": "german",
+          "title": "German citizenship"
+        },
+        {
+          "const": "eu",
+          "title": "European Union country citizenship"
+        },
+        {
+          "const": "other",
+          "title": "Other citizenship"
+        }
+      ],
+      "title": "Citizenship",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "denomination": {
+      "enum": [
+        "Class I: Single/widowed/civil partnership/divorced. Married persons not in tax classes II, III or IV",
+        "Class II: Single but entitled to single parent allowance",
+        "Class III: Married but spouse does not earn wages/is classified under tax category V/recently deceased",
+        "Class IV: Married (not separated); both earning and residing in Germany",
+        "Class V: Married but one spouse is classified under tax class III",
+        "Class VI: Individuals on multiple wages from more than one employer"
+      ],
+      "oneOf": [
+        {
+          "const": "Class I: Single/widowed/civil partnership/divorced. Married persons not in tax classes II, III or IV",
+          "description": "Single/widowed/civil partnership/divorced. Married persons not in tax classes II, III or IV",
+          "title": "Class I"
+        },
+        {
+          "const": "Class II: Single but entitled to single parent allowance",
+          "description": "Single but entitled to single parent allowance",
+          "title": "Class II"
+        },
+        {
+          "const": "Class III: Married but spouse does not earn wages/is classified under tax category V/recently deceased",
+          "description": "Married but spouse does not earn wages/is classified under tax category V/recently deceased",
+          "title": "Class III"
+        },
+        {
+          "const": "Class IV: Married (not separated); both earning and residing in Germany",
+          "description": "Married (not separated); both earning and residing in Germany",
+          "title": "Class IV"
+        },
+        {
+          "const": "Class V: Married but one spouse is classified under tax class III",
+          "description": "Married but one spouse is classified under tax class III",
+          "title": "Class V"
+        },
+        {
+          "const": "Class VI: Individuals on multiple wages from more than one employer",
+          "description": "Individuals on multiple wages from more than one employer",
+          "title": "Class VI"
+        }
+      ],
+      "title": "Denomination",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "dependent_details": {
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "first_name": {
+            "maxLength": 255,
+            "title": "First name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "is_below_25": {
+            "oneOf": [
+              {
+                "const": "yes",
+                "title": "Yes"
+              },
+              {
+                "const": "no",
+                "title": "No"
+              }
+            ],
+            "title": "Is this child below 25 years?",
+            "type": "string",
+            "x-jsf-presentation": {
+              "direction": "row",
+              "inputType": "radio"
+            }
+          },
+          "last_name": {
+            "maxLength": 255,
+            "title": "Last name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "first_name",
+          "last_name",
+          "birthdate",
+          "is_below_25"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "first_name",
+          "last_name",
+          "birthdate",
+          "is_below_25"
+        ]
+      },
+      "title": "Dependent",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add new section for dependent",
+        "inputType": "group-array"
+      }
+    },
+    "has_church_tax_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you pay church taxes?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_dependents": {
+      "description": "We are requesting this information and applicable documentation, in order to apply the correct care insurance rates during payroll.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have dependents to claim?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_disability": {
+      "description": "We’re asking this because we’ve been asked by your country of residence to report the number of employees who have declared a disability. We will not share this information with the company you provide services to without your explicit consent.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": "prefer_not_to_say",
+          "title": "I prefer not to say"
+        }
+      ],
+      "title": "Do you have a disability?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "<h1 data-component=\"HeadingIcon\">Why does Remote need to know my disability status?</h1><p>Your country of residence asks Remote to report the number of employees we have who have declared a disability. We’ll only report the number to relevant authorities, and will not share any employee names or identifying information.<br><br>We’ll also use your disability status information to make sure we fulfill our legal obligations to you, as disabled employees are entitled to additional rights and protections in many countries.<br><br>We’ll always keep your information encrypted, and it will be accessible only on a need-to-know basis. We will not share your disability status with the company you provide services to without your explicit consent.</p><h1  data-component=\"HeadingIcon\">What’s considered a disability?</h1><p>Chronic health conditions, mental health conditions, mobility impairments, sensory impairments, cognitive impairments, and any other condition that significantly impacts daily living are all considered disabilities.</p><h1  data-component=\"HeadingIcon\">Will the company that I provide services to know that I disclosed a disability?</h1><p>No, only Remote will know that you disclosed a disability. We’ll treat your disclosure with the utmost confidentiality and we’ll never let them know your disability status without your explicit consent.</p><h1 data-component=\"HeadingIcon\">Will my disclosure affect my job security or my chances of promotion?</h1><p>Your disclosure of your disability status will have no impact on your working life, including job security and chances of promotion. This information will not be shared with the company you provide services to unless we have your explicit consent to do so.</p><h1 data-component=\"HeadingIcon\">Can I choose not to disclose my disability status?</h1><p>Yes, absolutely. You are not obligated to disclose your disability status to Remote, so please don’t feel pressured to disclose.</p><h1 data-component=\"HeadingIcon\">What happens if I choose to disclose my disability status at a later date?</h1><p>You can choose to disclose your disability status at any time. You can do this in the Personal details section of your Remote profile.</p><h1  data-component=\"HeadingIcon\">How is my disability status information going to be used and stored?</h1><p>Remote values your privacy and is committed to ensuring the confidentiality and security of your personal data. As part of our legal obligations in your country of residence, we are required to collect and process employment disability data and to report the number of persons with disabilities we employ to relevant authorities.<br><br>Voluntary provision: The provision of employment disability data is voluntary. However, please note that failure to provide this information may limit our ability to provide necessary adjustments and support in accordance with legal requirements.<br><br>Purpose: The data is collected to comply with our legal obligations and to provide appropriate adjustments and support.<br><br>Categories of data: Your disclosure and the supporting document you upload (if any).<br><br>Legal basis: Processing this data is necessary to fulfill our legal obligations as an employer.<br><br>Data storage and retention: Your employment disability data will be securely stored on our platform and accessed only by authorized personnel for the duration of your employment and for up to 3 years thereafter.<br><br>Data sharing: We will share this information only with relevant internal departments, and we will report having hired a person with disability to the competent authority in your jurisdiction of residence, without revealing your identity. Your information will not be shared with our client hiring you without your permission.<br><br>Your rights: You have the right to access, rectify, and delete your employment disability data. You can remove the document you upload by simply deleting it from the platform.<br><br>If you have any questions, concerns, or require further clarification about the collection and processing of your information, please do not hesitate to contact our CX team via the Help button on your dashboard or our data protection officer at <a href=\"mailto:dpo@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">dpo@remote.com</a></p><h1 data-component=\"HeadingIcon\">Why do I have to submit a medical document verifying my disability?</h1><p>We need to work with the relevant authorities in your country of residence to make sure you get access to all the employee benefits you’re entitled to. As part of this process, we need to share documented verification of your disability with your country of residence.</p><h1 data-component=\"HeadingIcon\">Who can I contact if I have questions or concerns about this process?</h1><p>If you have any questions or concerns about disability disclosure, please do not hesitate to contact us at <a href=\"mailto:help@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">help@remote.com</a>.</p>",
+            "title": "Medical disability"
+          }
+        }
+      }
+    },
+    "has_quit_church": {
+      "description": "Have you officially quit the Church?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Quit the Church",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_ssn": {
+      "description": "You must have a social security number (<b>Sozialversicherungsnummer</b>) to be hired in Germany. If you do not have one, we'll provide resources to help you get one.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a german social security number?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "health_insurance_provider": {
+      "description": "Enter your health insurance provider.\n  Kindly reach out to your health insurance provider to register yourself closer to the start date, while we process the registration on our end, as the provider should match the employer and employee registration.",
+      "maxLength": 255,
+      "title": "Health insurance provider",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "health_insurance_provider_type": {
+      "enum": [
+        "private",
+        "public"
+      ],
+      "oneOf": [
+        {
+          "const": "private",
+          "title": "Private"
+        },
+        {
+          "const": "public",
+          "title": "Public"
+        }
+      ],
+      "title": "Is your health insurance provider public or private?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "statement": {
+          "description": "For private insurance we’ll need your Beitragsbescheinigung zur Erlangung des Arbeitgeberzuschusses which is a certification for the employer grant showing the amounts for KV-Beitrag and PV-Beitrag. You’ll be able to upload this document in the step Supporting documentation.",
+          "severity": "info",
+          "title": ""
+        }
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "previous_public_health_insurer": {
+      "description": "The full name of your most recent public health insurer.",
+      "maxLength": 255,
+      "title": "Previous public health insurer",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "religious_community": {
+      "description": "Please indicate the religious community you belong to. This will be forwarded to the tax office.",
+      "enum": [
+        "ev",
+        "rf",
+        "rk",
+        "ak",
+        "is",
+        "vd"
+      ],
+      "oneOf": [
+        {
+          "const": "ev",
+          "title": "Evangelical (ev)"
+        },
+        {
+          "const": "rf",
+          "title": "Reform (rf)"
+        },
+        {
+          "const": "rk",
+          "title": "Roman Catholic (rk)"
+        },
+        {
+          "const": "ak",
+          "title": "Old Catholic (ak)"
+        },
+        {
+          "const": "is",
+          "title": "Jewish (is)"
+        },
+        {
+          "const": "vd",
+          "title": "Not applicable (vd)"
+        }
+      ],
+      "title": "Religious community",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "ssn": {
+      "description": "<b>Rentenversicherungsnummer</b> from your <b>Sozialversicherungsausweis</b>.",
+      "maxLength": 15,
+      "pattern": "^\\d{2}\\s*\\d{6}\\s*[A-Za-zÄäÖöÜüẞß]\\s*\\d{3}$",
+      "title": "German Social Security Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "ssn_details": {
+      "description": "Please complete the details so we can retrieve your social security number.",
+      "properties": {
+        "city": {
+          "maxLength": 255,
+          "title": "City of birth",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "country_of_birth": {
+          "items": {
+            "enum": [
+              "Zimbabwe",
+              "Zambia",
+              "Yemen",
+              "Wallis and Futuna Islands",
+              "Vietnam",
+              "Venezuela",
+              "Vatican City (Holy See)",
+              "Vanuatu",
+              "Uzbekistan",
+              "U.S. Virgin Islands",
+              "Uruguay",
+              "United States",
+              "United Kingdom (UK)",
+              "United Arab Emirates (UAE)",
+              "Ukraine",
+              "Uganda",
+              "Tuvalu",
+              "Turks and Caicos Islands",
+              "Turkmenistan",
+              "Turkey",
+              "Tunisia",
+              "Trinidad and Tobago",
+              "Tonga",
+              "Togo",
+              "Timor-Leste",
+              "Thailand",
+              "Tanzania",
+              "Tajikistan",
+              "Taiwan",
+              "Switzerland",
+              "Sweden",
+              "Swaziland",
+              "Suriname",
+              "Sudan",
+              "Sri Lanka",
+              "Spain",
+              "South Sudan",
+              "South Korea",
+              "South Africa",
+              "Somalia",
+              "Solomon Islands",
+              "Slovenia",
+              "Slovakia",
+              "Singapore",
+              "Sierra Leone",
+              "Seychelles",
+              "Serbia",
+              "Senegal",
+              "Saudi Arabia",
+              "Sao Tome and Principe",
+              "San Marino",
+              "Samoa",
+              "Saint Vincent and the Grenadines",
+              "Saint Pierre and Miquelon",
+              "Saint Lucia",
+              "Saint Kitts and Nevis",
+              "Saint Helena",
+              "Rwanda",
+              "Russia",
+              "Romania",
+              "Réunion",
+              "Republic of the Congo",
+              "Qatar",
+              "Portugal",
+              "Poland",
+              "Philippines",
+              "Peru",
+              "Paraguay",
+              "Papua New Guinea",
+              "Panama",
+              "Palestine",
+              "Palau",
+              "Pakistan",
+              "Oman",
+              "Norway",
+              "North Macedonia",
+              "Northern Mariana Islands",
+              "Norfolk Island",
+              "Niue",
+              "Nigeria",
+              "Niger",
+              "Nicaragua",
+              "New Zealand",
+              "New Caledonia",
+              "Netherlands",
+              "Nepal",
+              "Nauru",
+              "Namibia",
+              "Myanmar (Burma)",
+              "Mozambique",
+              "Morocco",
+              "Montserrat",
+              "Montenegro",
+              "Mongolia",
+              "Monaco",
+              "Moldova",
+              "Micronesia",
+              "Mexico",
+              "Mayotte",
+              "Mauritius",
+              "Mauritania",
+              "Martinique",
+              "Marshall Islands",
+              "Malta",
+              "Mali",
+              "Maldives",
+              "Malaysia",
+              "Malawi",
+              "Madagascar",
+              "Macao",
+              "Luxembourg",
+              "Lithuania",
+              "Liechtenstein",
+              "Libya",
+              "Liberia",
+              "Lesotho",
+              "Lebanon",
+              "Latvia",
+              "Laos",
+              "Kyrgyzstan",
+              "Kuwait",
+              "Kosovo",
+              "Kiribati",
+              "Kenya",
+              "Kazakhstan",
+              "Jordan",
+              "Japan",
+              "Jamaica",
+              "Italy",
+              "Israel",
+              "Isle of Man",
+              "Ireland",
+              "Iraq",
+              "Indonesia",
+              "India",
+              "Iceland",
+              "Hungary",
+              "Hong Kong",
+              "Honduras",
+              "Haiti",
+              "Guyana",
+              "Guinea-Bissau",
+              "Guinea",
+              "Guernsey",
+              "Guatemala",
+              "Guam",
+              "Guadeloupe",
+              "Grenada",
+              "Greenland",
+              "Greece",
+              "Gibraltar",
+              "Ghana",
+              "Germany",
+              "Georgia",
+              "Gambia",
+              "Gabon",
+              "French Polynesia",
+              "French Guiana",
+              "France",
+              "Finland",
+              "Fiji",
+              "Faroe Islands",
+              "Falkland Islands (Malvinas)",
+              "Ethiopia",
+              "Estonia",
+              "Eritrea",
+              "Equatorial Guinea",
+              "El Salvador",
+              "Egypt",
+              "Ecuador",
+              "Dominican Republic",
+              "Dominica",
+              "Djibouti",
+              "Denmark",
+              "Democratic Republic of the Congo",
+              "Czech Republic",
+              "Cyprus",
+              "Curacao",
+              "Croatia",
+              "Cote d'Ivoire",
+              "Costa Rica",
+              "Cook Islands",
+              "Comoros",
+              "Colombia",
+              "Cocos (Keeling) Islands",
+              "Christmas Island",
+              "China",
+              "Chile",
+              "Chad",
+              "Central African Republic (CAR)",
+              "Cayman Islands",
+              "Canada",
+              "Cameroon",
+              "Cambodia",
+              "Cabo Verde",
+              "Burundi",
+              "Burkina Faso",
+              "Bulgaria",
+              "Brunei",
+              "Brazil",
+              "Botswana",
+              "Bosnia and Herzegovina",
+              "Bolivia",
+              "Bhutan",
+              "Bermuda",
+              "Benin",
+              "Belize",
+              "Belgium",
+              "Belarus",
+              "Barbados",
+              "Bangladesh",
+              "Bahrain",
+              "Bahamas",
+              "Azerbaijan",
+              "Austria",
+              "Australia",
+              "Aruba",
+              "Armenia",
+              "Argentina",
+              "Antigua and Barbuda",
+              "Anguilla",
+              "Angola",
+              "Andorra",
+              "American Samoa",
+              "Algeria",
+              "Albania",
+              "Afghanistan"
+            ]
+          },
+          "title": "Country of birth",
+          "type": "string",
+          "uniqueItems": true,
+          "x-jsf-presentation": {
+            "inputType": "countries",
+            "options": [
+              {
+                "label": "Afghanistan",
+                "value": "Afghanistan"
+              },
+              {
+                "label": "Albania",
+                "value": "Albania"
+              },
+              {
+                "label": "Algeria",
+                "value": "Algeria"
+              },
+              {
+                "label": "American Samoa",
+                "value": "American Samoa"
+              },
+              {
+                "label": "Andorra",
+                "value": "Andorra"
+              },
+              {
+                "label": "Angola",
+                "value": "Angola"
+              },
+              {
+                "label": "Anguilla",
+                "value": "Anguilla"
+              },
+              {
+                "label": "Antigua and Barbuda",
+                "value": "Antigua and Barbuda"
+              },
+              {
+                "label": "Argentina",
+                "value": "Argentina"
+              },
+              {
+                "label": "Armenia",
+                "value": "Armenia"
+              },
+              {
+                "label": "Aruba",
+                "value": "Aruba"
+              },
+              {
+                "label": "Australia",
+                "value": "Australia"
+              },
+              {
+                "label": "Austria",
+                "value": "Austria"
+              },
+              {
+                "label": "Azerbaijan",
+                "value": "Azerbaijan"
+              },
+              {
+                "label": "Bahamas",
+                "value": "Bahamas"
+              },
+              {
+                "label": "Bahrain",
+                "value": "Bahrain"
+              },
+              {
+                "label": "Bangladesh",
+                "value": "Bangladesh"
+              },
+              {
+                "label": "Barbados",
+                "value": "Barbados"
+              },
+              {
+                "label": "Belarus",
+                "value": "Belarus"
+              },
+              {
+                "label": "Belgium",
+                "value": "Belgium"
+              },
+              {
+                "label": "Belize",
+                "value": "Belize"
+              },
+              {
+                "label": "Benin",
+                "value": "Benin"
+              },
+              {
+                "label": "Bermuda",
+                "value": "Bermuda"
+              },
+              {
+                "label": "Bhutan",
+                "value": "Bhutan"
+              },
+              {
+                "label": "Bolivia",
+                "value": "Bolivia"
+              },
+              {
+                "label": "Bosnia and Herzegovina",
+                "value": "Bosnia and Herzegovina"
+              },
+              {
+                "label": "Botswana",
+                "value": "Botswana"
+              },
+              {
+                "label": "Brazil",
+                "value": "Brazil"
+              },
+              {
+                "label": "Brunei",
+                "value": "Brunei"
+              },
+              {
+                "label": "Bulgaria",
+                "value": "Bulgaria"
+              },
+              {
+                "label": "Burkina Faso",
+                "value": "Burkina Faso"
+              },
+              {
+                "label": "Burundi",
+                "value": "Burundi"
+              },
+              {
+                "label": "Cabo Verde",
+                "value": "Cabo Verde"
+              },
+              {
+                "label": "Cambodia",
+                "value": "Cambodia"
+              },
+              {
+                "label": "Cameroon",
+                "value": "Cameroon"
+              },
+              {
+                "label": "Canada",
+                "value": "Canada"
+              },
+              {
+                "label": "Cayman Islands",
+                "value": "Cayman Islands"
+              },
+              {
+                "label": "Central African Republic (CAR)",
+                "value": "Central African Republic (CAR)"
+              },
+              {
+                "label": "Chad",
+                "value": "Chad"
+              },
+              {
+                "label": "Chile",
+                "value": "Chile"
+              },
+              {
+                "label": "China",
+                "value": "China"
+              },
+              {
+                "label": "Christmas Island",
+                "value": "Christmas Island"
+              },
+              {
+                "label": "Cocos (Keeling) Islands",
+                "value": "Cocos (Keeling) Islands"
+              },
+              {
+                "label": "Colombia",
+                "value": "Colombia"
+              },
+              {
+                "label": "Comoros",
+                "value": "Comoros"
+              },
+              {
+                "label": "Cook Islands",
+                "value": "Cook Islands"
+              },
+              {
+                "label": "Costa Rica",
+                "value": "Costa Rica"
+              },
+              {
+                "label": "Cote d'Ivoire",
+                "value": "Cote d'Ivoire"
+              },
+              {
+                "label": "Croatia",
+                "value": "Croatia"
+              },
+              {
+                "label": "Curacao",
+                "value": "Curacao"
+              },
+              {
+                "label": "Cyprus",
+                "value": "Cyprus"
+              },
+              {
+                "label": "Czech Republic",
+                "value": "Czech Republic"
+              },
+              {
+                "label": "Democratic Republic of the Congo",
+                "value": "Democratic Republic of the Congo"
+              },
+              {
+                "label": "Denmark",
+                "value": "Denmark"
+              },
+              {
+                "label": "Djibouti",
+                "value": "Djibouti"
+              },
+              {
+                "label": "Dominica",
+                "value": "Dominica"
+              },
+              {
+                "label": "Dominican Republic",
+                "value": "Dominican Republic"
+              },
+              {
+                "label": "Ecuador",
+                "value": "Ecuador"
+              },
+              {
+                "label": "Egypt",
+                "value": "Egypt"
+              },
+              {
+                "label": "El Salvador",
+                "value": "El Salvador"
+              },
+              {
+                "label": "Equatorial Guinea",
+                "value": "Equatorial Guinea"
+              },
+              {
+                "label": "Eritrea",
+                "value": "Eritrea"
+              },
+              {
+                "label": "Estonia",
+                "value": "Estonia"
+              },
+              {
+                "label": "Ethiopia",
+                "value": "Ethiopia"
+              },
+              {
+                "label": "Falkland Islands (Malvinas)",
+                "value": "Falkland Islands (Malvinas)"
+              },
+              {
+                "label": "Faroe Islands",
+                "value": "Faroe Islands"
+              },
+              {
+                "label": "Fiji",
+                "value": "Fiji"
+              },
+              {
+                "label": "Finland",
+                "value": "Finland"
+              },
+              {
+                "label": "France",
+                "value": "France"
+              },
+              {
+                "label": "French Guiana",
+                "value": "French Guiana"
+              },
+              {
+                "label": "French Polynesia",
+                "value": "French Polynesia"
+              },
+              {
+                "label": "Gabon",
+                "value": "Gabon"
+              },
+              {
+                "label": "Gambia",
+                "value": "Gambia"
+              },
+              {
+                "label": "Georgia",
+                "value": "Georgia"
+              },
+              {
+                "label": "Germany",
+                "value": "Germany"
+              },
+              {
+                "label": "Ghana",
+                "value": "Ghana"
+              },
+              {
+                "label": "Gibraltar",
+                "value": "Gibraltar"
+              },
+              {
+                "label": "Greece",
+                "value": "Greece"
+              },
+              {
+                "label": "Greenland",
+                "value": "Greenland"
+              },
+              {
+                "label": "Grenada",
+                "value": "Grenada"
+              },
+              {
+                "label": "Guadeloupe",
+                "value": "Guadeloupe"
+              },
+              {
+                "label": "Guam",
+                "value": "Guam"
+              },
+              {
+                "label": "Guatemala",
+                "value": "Guatemala"
+              },
+              {
+                "label": "Guernsey",
+                "value": "Guernsey"
+              },
+              {
+                "label": "Guinea",
+                "value": "Guinea"
+              },
+              {
+                "label": "Guinea-Bissau",
+                "value": "Guinea-Bissau"
+              },
+              {
+                "label": "Guyana",
+                "value": "Guyana"
+              },
+              {
+                "label": "Haiti",
+                "value": "Haiti"
+              },
+              {
+                "label": "Honduras",
+                "value": "Honduras"
+              },
+              {
+                "label": "Hong Kong",
+                "value": "Hong Kong"
+              },
+              {
+                "label": "Hungary",
+                "value": "Hungary"
+              },
+              {
+                "label": "Iceland",
+                "value": "Iceland"
+              },
+              {
+                "label": "India",
+                "value": "India"
+              },
+              {
+                "label": "Indonesia",
+                "value": "Indonesia"
+              },
+              {
+                "label": "Iraq",
+                "value": "Iraq"
+              },
+              {
+                "label": "Ireland",
+                "value": "Ireland"
+              },
+              {
+                "label": "Isle of Man",
+                "value": "Isle of Man"
+              },
+              {
+                "label": "Israel",
+                "value": "Israel"
+              },
+              {
+                "label": "Italy",
+                "value": "Italy"
+              },
+              {
+                "label": "Jamaica",
+                "value": "Jamaica"
+              },
+              {
+                "label": "Japan",
+                "value": "Japan"
+              },
+              {
+                "label": "Jordan",
+                "value": "Jordan"
+              },
+              {
+                "label": "Kazakhstan",
+                "value": "Kazakhstan"
+              },
+              {
+                "label": "Kenya",
+                "value": "Kenya"
+              },
+              {
+                "label": "Kiribati",
+                "value": "Kiribati"
+              },
+              {
+                "label": "Kosovo",
+                "value": "Kosovo"
+              },
+              {
+                "label": "Kuwait",
+                "value": "Kuwait"
+              },
+              {
+                "label": "Kyrgyzstan",
+                "value": "Kyrgyzstan"
+              },
+              {
+                "label": "Laos",
+                "value": "Laos"
+              },
+              {
+                "label": "Latvia",
+                "value": "Latvia"
+              },
+              {
+                "label": "Lebanon",
+                "value": "Lebanon"
+              },
+              {
+                "label": "Lesotho",
+                "value": "Lesotho"
+              },
+              {
+                "label": "Liberia",
+                "value": "Liberia"
+              },
+              {
+                "label": "Libya",
+                "value": "Libya"
+              },
+              {
+                "label": "Liechtenstein",
+                "value": "Liechtenstein"
+              },
+              {
+                "label": "Lithuania",
+                "value": "Lithuania"
+              },
+              {
+                "label": "Luxembourg",
+                "value": "Luxembourg"
+              },
+              {
+                "label": "Macao",
+                "value": "Macao"
+              },
+              {
+                "label": "Madagascar",
+                "value": "Madagascar"
+              },
+              {
+                "label": "Malawi",
+                "value": "Malawi"
+              },
+              {
+                "label": "Malaysia",
+                "value": "Malaysia"
+              },
+              {
+                "label": "Maldives",
+                "value": "Maldives"
+              },
+              {
+                "label": "Mali",
+                "value": "Mali"
+              },
+              {
+                "label": "Malta",
+                "value": "Malta"
+              },
+              {
+                "label": "Marshall Islands",
+                "value": "Marshall Islands"
+              },
+              {
+                "label": "Martinique",
+                "value": "Martinique"
+              },
+              {
+                "label": "Mauritania",
+                "value": "Mauritania"
+              },
+              {
+                "label": "Mauritius",
+                "value": "Mauritius"
+              },
+              {
+                "label": "Mayotte",
+                "value": "Mayotte"
+              },
+              {
+                "label": "Mexico",
+                "value": "Mexico"
+              },
+              {
+                "label": "Micronesia",
+                "value": "Micronesia"
+              },
+              {
+                "label": "Moldova",
+                "value": "Moldova"
+              },
+              {
+                "label": "Monaco",
+                "value": "Monaco"
+              },
+              {
+                "label": "Mongolia",
+                "value": "Mongolia"
+              },
+              {
+                "label": "Montenegro",
+                "value": "Montenegro"
+              },
+              {
+                "label": "Montserrat",
+                "value": "Montserrat"
+              },
+              {
+                "label": "Morocco",
+                "value": "Morocco"
+              },
+              {
+                "label": "Mozambique",
+                "value": "Mozambique"
+              },
+              {
+                "label": "Myanmar (Burma)",
+                "value": "Myanmar (Burma)"
+              },
+              {
+                "label": "Namibia",
+                "value": "Namibia"
+              },
+              {
+                "label": "Nauru",
+                "value": "Nauru"
+              },
+              {
+                "label": "Nepal",
+                "value": "Nepal"
+              },
+              {
+                "label": "Netherlands",
+                "value": "Netherlands"
+              },
+              {
+                "label": "New Caledonia",
+                "value": "New Caledonia"
+              },
+              {
+                "label": "New Zealand",
+                "value": "New Zealand"
+              },
+              {
+                "label": "Nicaragua",
+                "value": "Nicaragua"
+              },
+              {
+                "label": "Niger",
+                "value": "Niger"
+              },
+              {
+                "label": "Nigeria",
+                "value": "Nigeria"
+              },
+              {
+                "label": "Niue",
+                "value": "Niue"
+              },
+              {
+                "label": "Norfolk Island",
+                "value": "Norfolk Island"
+              },
+              {
+                "label": "North Macedonia",
+                "value": "North Macedonia"
+              },
+              {
+                "label": "Northern Mariana Islands",
+                "value": "Northern Mariana Islands"
+              },
+              {
+                "label": "Norway",
+                "value": "Norway"
+              },
+              {
+                "label": "Oman",
+                "value": "Oman"
+              },
+              {
+                "label": "Pakistan",
+                "value": "Pakistan"
+              },
+              {
+                "label": "Palau",
+                "value": "Palau"
+              },
+              {
+                "label": "Palestine",
+                "value": "Palestine"
+              },
+              {
+                "label": "Panama",
+                "value": "Panama"
+              },
+              {
+                "label": "Papua New Guinea",
+                "value": "Papua New Guinea"
+              },
+              {
+                "label": "Paraguay",
+                "value": "Paraguay"
+              },
+              {
+                "label": "Peru",
+                "value": "Peru"
+              },
+              {
+                "label": "Philippines",
+                "value": "Philippines"
+              },
+              {
+                "label": "Poland",
+                "value": "Poland"
+              },
+              {
+                "label": "Portugal",
+                "value": "Portugal"
+              },
+              {
+                "label": "Qatar",
+                "value": "Qatar"
+              },
+              {
+                "label": "Republic of the Congo",
+                "value": "Republic of the Congo"
+              },
+              {
+                "label": "Romania",
+                "value": "Romania"
+              },
+              {
+                "label": "Russia",
+                "value": "Russia"
+              },
+              {
+                "label": "Rwanda",
+                "value": "Rwanda"
+              },
+              {
+                "label": "Réunion",
+                "value": "Réunion"
+              },
+              {
+                "label": "Saint Helena",
+                "value": "Saint Helena"
+              },
+              {
+                "label": "Saint Kitts and Nevis",
+                "value": "Saint Kitts and Nevis"
+              },
+              {
+                "label": "Saint Lucia",
+                "value": "Saint Lucia"
+              },
+              {
+                "label": "Saint Pierre and Miquelon",
+                "value": "Saint Pierre and Miquelon"
+              },
+              {
+                "label": "Saint Vincent and the Grenadines",
+                "value": "Saint Vincent and the Grenadines"
+              },
+              {
+                "label": "Samoa",
+                "value": "Samoa"
+              },
+              {
+                "label": "San Marino",
+                "value": "San Marino"
+              },
+              {
+                "label": "Sao Tome and Principe",
+                "value": "Sao Tome and Principe"
+              },
+              {
+                "label": "Saudi Arabia",
+                "value": "Saudi Arabia"
+              },
+              {
+                "label": "Senegal",
+                "value": "Senegal"
+              },
+              {
+                "label": "Serbia",
+                "value": "Serbia"
+              },
+              {
+                "label": "Seychelles",
+                "value": "Seychelles"
+              },
+              {
+                "label": "Sierra Leone",
+                "value": "Sierra Leone"
+              },
+              {
+                "label": "Singapore",
+                "value": "Singapore"
+              },
+              {
+                "label": "Slovakia",
+                "value": "Slovakia"
+              },
+              {
+                "label": "Slovenia",
+                "value": "Slovenia"
+              },
+              {
+                "label": "Solomon Islands",
+                "value": "Solomon Islands"
+              },
+              {
+                "label": "Somalia",
+                "value": "Somalia"
+              },
+              {
+                "label": "South Africa",
+                "value": "South Africa"
+              },
+              {
+                "label": "South Korea",
+                "value": "South Korea"
+              },
+              {
+                "label": "South Sudan",
+                "value": "South Sudan"
+              },
+              {
+                "label": "Spain",
+                "value": "Spain"
+              },
+              {
+                "label": "Sri Lanka",
+                "value": "Sri Lanka"
+              },
+              {
+                "label": "Sudan",
+                "value": "Sudan"
+              },
+              {
+                "label": "Suriname",
+                "value": "Suriname"
+              },
+              {
+                "label": "Swaziland",
+                "value": "Swaziland"
+              },
+              {
+                "label": "Sweden",
+                "value": "Sweden"
+              },
+              {
+                "label": "Switzerland",
+                "value": "Switzerland"
+              },
+              {
+                "label": "Taiwan",
+                "value": "Taiwan"
+              },
+              {
+                "label": "Tajikistan",
+                "value": "Tajikistan"
+              },
+              {
+                "label": "Tanzania",
+                "value": "Tanzania"
+              },
+              {
+                "label": "Thailand",
+                "value": "Thailand"
+              },
+              {
+                "label": "Timor-Leste",
+                "value": "Timor-Leste"
+              },
+              {
+                "label": "Togo",
+                "value": "Togo"
+              },
+              {
+                "label": "Tonga",
+                "value": "Tonga"
+              },
+              {
+                "label": "Trinidad and Tobago",
+                "value": "Trinidad and Tobago"
+              },
+              {
+                "label": "Tunisia",
+                "value": "Tunisia"
+              },
+              {
+                "label": "Turkey",
+                "value": "Turkey"
+              },
+              {
+                "label": "Turkmenistan",
+                "value": "Turkmenistan"
+              },
+              {
+                "label": "Turks and Caicos Islands",
+                "value": "Turks and Caicos Islands"
+              },
+              {
+                "label": "Tuvalu",
+                "value": "Tuvalu"
+              },
+              {
+                "label": "U.S. Virgin Islands",
+                "value": "U.S. Virgin Islands"
+              },
+              {
+                "label": "Uganda",
+                "value": "Uganda"
+              },
+              {
+                "label": "Ukraine",
+                "value": "Ukraine"
+              },
+              {
+                "label": "United Arab Emirates (UAE)",
+                "value": "United Arab Emirates (UAE)"
+              },
+              {
+                "label": "United Kingdom (UK)",
+                "value": "United Kingdom (UK)"
+              },
+              {
+                "label": "United States",
+                "value": "United States"
+              },
+              {
+                "label": "Uruguay",
+                "value": "Uruguay"
+              },
+              {
+                "label": "Uzbekistan",
+                "value": "Uzbekistan"
+              },
+              {
+                "label": "Vanuatu",
+                "value": "Vanuatu"
+              },
+              {
+                "label": "Vatican City (Holy See)",
+                "value": "Vatican City (Holy See)"
+              },
+              {
+                "label": "Venezuela",
+                "value": "Venezuela"
+              },
+              {
+                "label": "Vietnam",
+                "value": "Vietnam"
+              },
+              {
+                "label": "Wallis and Futuna Islands",
+                "value": "Wallis and Futuna Islands"
+              },
+              {
+                "label": "Yemen",
+                "value": "Yemen"
+              },
+              {
+                "label": "Zambia",
+                "value": "Zambia"
+              },
+              {
+                "label": "Zimbabwe",
+                "value": "Zimbabwe"
+              }
+            ],
+            "placeholder": "Country of birth"
+          }
+        },
+        "maiden_name": {
+          "maxLength": 255,
+          "title": "Name of birth",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "preferred_insurance_company": {
+          "description": "It is mandatory in Germany that you register yourself with a health insurance company.",
+          "maxLength": 255,
+          "title": "Germany health insurance provider",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "maiden_name",
+        "city",
+        "country_of_birth",
+        "preferred_insurance_company"
+      ],
+      "title": "Social security details",
+      "type": "object",
+      "x-jsf-order": [
+        "maiden_name",
+        "city",
+        "country_of_birth",
+        "preferred_insurance_company"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "tax_number": {
+      "description": "Your <b>steuerliche Identifikationsnummer</b>, sometimes referred to as <b>IdNr.</b> or <b>Steuer-IdNr</b>. Make sure the number you enter is accurate. If it's not, we must apply the highest tax rate.",
+      "maxLength": 11,
+      "minLength": 11,
+      "pattern": "^[0-9]{11}$",
+      "title": "Tax ID",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "child_allowance",
+    "citizenship",
+    "denomination",
+    "has_church_tax_number",
+    "has_disability",
+    "has_ssn",
+    "marital_status",
+    "has_dependents",
+    "tax_number"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "has_ssn",
+    "ssn",
+    "health_insurance_provider",
+    "health_insurance_provider_type",
+    "previous_public_health_insurer",
+    "ssn_details",
+    "tax_number",
+    "citizenship",
+    "has_disability",
+    "marital_status",
+    "has_dependents",
+    "dependent_details",
+    "has_church_tax_number",
+    "church_tax_number",
+    "religious_community",
+    "has_quit_church",
+    "child_allowance",
+    "denomination"
+  ]
+}

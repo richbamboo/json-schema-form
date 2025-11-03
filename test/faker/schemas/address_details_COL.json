@@ -1,0 +1,197 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "Capital District",
+          "title": "Capital District"
+        },
+        {
+          "const": "Amazonas",
+          "title": "Amazonas"
+        },
+        {
+          "const": "Antioquia",
+          "title": "Antioquia"
+        },
+        {
+          "const": "Arauca",
+          "title": "Arauca"
+        },
+        {
+          "const": "Atlántico",
+          "title": "Atlántico"
+        },
+        {
+          "const": "Bolívar",
+          "title": "Bolívar"
+        },
+        {
+          "const": "Boyacá",
+          "title": "Boyacá"
+        },
+        {
+          "const": "Caldas",
+          "title": "Caldas"
+        },
+        {
+          "const": "Caquetá",
+          "title": "Caquetá"
+        },
+        {
+          "const": "Casanare",
+          "title": "Casanare"
+        },
+        {
+          "const": "Cauca",
+          "title": "Cauca"
+        },
+        {
+          "const": "Cesar",
+          "title": "Cesar"
+        },
+        {
+          "const": "Chocó",
+          "title": "Chocó"
+        },
+        {
+          "const": "Córdoba",
+          "title": "Córdoba"
+        },
+        {
+          "const": "Cundinamarca",
+          "title": "Cundinamarca"
+        },
+        {
+          "const": "Guainía",
+          "title": "Guainía"
+        },
+        {
+          "const": "Guaviare",
+          "title": "Guaviare"
+        },
+        {
+          "const": "Huila",
+          "title": "Huila"
+        },
+        {
+          "const": "La Guajira",
+          "title": "La Guajira"
+        },
+        {
+          "const": "Magdalena",
+          "title": "Magdalena"
+        },
+        {
+          "const": "Meta",
+          "title": "Meta"
+        },
+        {
+          "const": "Nariño",
+          "title": "Nariño"
+        },
+        {
+          "const": "Norte de Santander",
+          "title": "Norte de Santander"
+        },
+        {
+          "const": "Putumayo",
+          "title": "Putumayo"
+        },
+        {
+          "const": "Quindío",
+          "title": "Quindío"
+        },
+        {
+          "const": "Risaralda",
+          "title": "Risaralda"
+        },
+        {
+          "const": "San Andrés y Providencia",
+          "title": "San Andrés y Providencia"
+        },
+        {
+          "const": "Santander",
+          "title": "Santander"
+        },
+        {
+          "const": "Sucre",
+          "title": "Sucre"
+        },
+        {
+          "const": "Tolima",
+          "title": "Tolima"
+        },
+        {
+          "const": "Valle del Cauca",
+          "title": "Valle del Cauca"
+        },
+        {
+          "const": "Vaupés",
+          "title": "Vaupés"
+        },
+        {
+          "const": "Vichada",
+          "title": "Vichada"
+        }
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "state",
+    "city",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

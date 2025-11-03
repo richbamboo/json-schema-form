@@ -1,0 +1,576 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "marital_details": false
+          }
+        },
+        "if": {
+          "properties": {
+            "marital_status": {
+              "const": "civil_partnership"
+            }
+          },
+          "required": [
+            "marital_status"
+          ]
+        },
+        "then": {
+          "required": [
+            "marital_details"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "const": "married"
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "marital_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "health_condition_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_health_condition": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_health_condition"
+        ]
+      },
+      "then": {
+        "required": [
+          "health_condition_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "disability_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_disability": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_disability"
+        ]
+      },
+      "then": {
+        "required": [
+          "disability_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "second_employer_name": false,
+          "second_job_title": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_second_job": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_second_job"
+        ]
+      },
+      "then": {
+        "required": [
+          "second_job_title",
+          "second_employer_name"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "previous_employer_name": false,
+          "previous_job_end_date": false,
+          "previous_job_start_date": false,
+          "previous_job_title": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_previous_job": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_previous_job"
+        ]
+      },
+      "then": {
+        "required": [
+          "previous_employer_name",
+          "previous_job_title",
+          "previous_job_start_date",
+          "previous_job_end_date"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "dependent_details": {
+      "description": "Do you have any children you would like to add as dependents to your benefits?",
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "title": "Birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "id_number": {
+            "description": "The number that appears on your government-issued identification",
+            "maxLength": 255,
+            "title": "ID Number",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "birthdate",
+          "id_number"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "birthdate",
+          "id_number"
+        ]
+      },
+      "title": "Child details",
+      "type": [
+        "array",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "disability_details": {
+      "maxLength": 255,
+      "title": "Disability name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "education": {
+      "properties": {
+        "education_end_date": {
+          "description": "Date of graduation from highest level of education",
+          "format": "date",
+          "title": "Date of graduation",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "education_institute_name": {
+          "description": "Name of institute where highest level of education was achieved",
+          "maxLength": 255,
+          "title": "Name of institute",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "education_title": {
+          "description": "Title of your highest level of education",
+          "oneOf": [
+            {
+              "const": null,
+              "title": "N/A"
+            },
+            {
+              "const": "high_school",
+              "title": "High School/equivalent"
+            },
+            {
+              "const": "bachelor",
+              "title": "Bachelor's Degree"
+            },
+            {
+              "const": "master",
+              "title": "Master's Degree"
+            },
+            {
+              "const": "doctorate_postdoctorate",
+              "title": "Doctorate or Post-doctorate"
+            }
+          ],
+          "title": "Title achieved",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        }
+      },
+      "required": [],
+      "title": "Highest level of education",
+      "type": "object",
+      "x-jsf-order": [
+        "education_institute_name",
+        "education_title",
+        "education_end_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "has_disability": {
+      "description": "We are committed to meeting your needs, do you require additional support from any special needs or disabilities? Blind/partially sighted, deaf/hearing impairment, wheelchair user/mobility problem, dyslexia are examples of disabilities which require special needs.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Disability",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_health_condition": {
+      "description": "We are committed to meeting your needs, do you have pre-existing health conditions we should consider? Conditions like diabetes, cancer, lupus, epilepsy, and depression, are examples of pre-existing conditions.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Health condition",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_previous_job": {
+      "description": "Do you have previous employment experience to describe?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Employment experience",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_second_job": {
+      "description": "Do you have another job or perform any other paid activity (for income tax purposes)?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Another job",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "health_condition_details": {
+      "maxLength": 255,
+      "title": "Health condition name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "Cédula de Identidad y Electoral",
+      "maxLength": 255,
+      "pattern": "^[0-9]{11}$",
+      "title": "ID number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "pattern": "Must be exactly 11 digits"
+      },
+      "x-jsf-presentation": {
+        "description": "<span lang=\"es-DO\">Cédula de Identidad y Electoral</span>",
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_details": {
+      "properties": {
+        "address": {
+          "maxLength": 1000,
+          "title": "Address",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "textarea"
+          }
+        },
+        "date_of_birth": {
+          "format": "date",
+          "title": "Date of birth",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "title": "ID number",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "full_name",
+        "date_of_birth",
+        "address",
+        "id_number"
+      ],
+      "title": "Spouse/Partner details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name",
+        "date_of_birth",
+        "address",
+        "id_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "previous_employer_name": {
+      "description": "Name of company at previous employment",
+      "maxLength": 255,
+      "title": "Name of company",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "previous_job_end_date": {
+      "description": "End date at previous employment",
+      "format": "date",
+      "title": "End date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "previous_job_start_date": {
+      "description": "Start date at previous employment",
+      "format": "date",
+      "title": "Start date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "previous_job_title": {
+      "description": "Job title at at previous employment",
+      "maxLength": 255,
+      "title": "Job title",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "second_employer_name": {
+      "description": "Company name for other job",
+      "maxLength": 255,
+      "title": "Name of company",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "second_job_title": {
+      "description": "Job title or activity name for other job",
+      "maxLength": 255,
+      "title": "Job title/activity name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_number": {
+      "description": "Enter your tax number to help us process your payroll correctly",
+      "maxLength": 255,
+      "pattern": "^[0-9]{9,11}$",
+      "title": "Tax ID",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "pattern": "Should be between nine and 11 digits long"
+      },
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "marital_status",
+    "has_health_condition",
+    "has_disability",
+    "has_second_job",
+    "has_previous_job"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "marital_details",
+    "dependent_details",
+    "education",
+    "has_health_condition",
+    "health_condition_details",
+    "has_disability",
+    "disability_details",
+    "has_second_job",
+    "second_job_title",
+    "second_employer_name",
+    "has_previous_job",
+    "previous_employer_name",
+    "previous_job_title",
+    "previous_job_start_date",
+    "previous_job_end_date",
+    "tax_number",
+    "work_permit_number"
+  ]
+}

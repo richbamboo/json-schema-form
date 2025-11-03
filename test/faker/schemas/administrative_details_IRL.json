@@ -1,0 +1,32 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "pps_number": {
+      "maxLength": 255,
+      "title": "PPS Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "pps_number"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "pps_number"
+  ]
+}

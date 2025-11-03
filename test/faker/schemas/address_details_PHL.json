@@ -1,0 +1,490 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "barangay": {
+      "maxLength": 255,
+      "title": "Barangay",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select your province",
+      "enum": [
+        "Abra",
+        "Agusan del Norte",
+        "Agusan del Sur",
+        "Aklan",
+        "Albay",
+        "Antique",
+        "Apayao",
+        "Aurora",
+        "Basilan",
+        "Bataan",
+        "Batanes",
+        "Batangas",
+        "Benguet",
+        "Biliran",
+        "Bohol",
+        "Bukidnon",
+        "Bulacan",
+        "Cagayan",
+        "Camarines Norte Daet",
+        "Camarines Sur",
+        "Camiguin",
+        "Capiz",
+        "Catanduanes Virac",
+        "Cavite",
+        "Cebu",
+        "Cotabato",
+        "Mindanao",
+        "Davao del Norte",
+        "Davao del Sur",
+        "Davao Occidental",
+        "Davao Oriental",
+        "Dinagat Islands",
+        "Eastern Samar",
+        "Guimaras",
+        "Ifugao",
+        "Ilocos Norte",
+        "Ilocos Sur",
+        "Iloilo",
+        "Isabela",
+        "Kalinga",
+        "La Union",
+        "Laguna",
+        "Lanao del Norte",
+        "Lanao del Sur",
+        "Leyte",
+        "Maguindanao",
+        "Marinduque",
+        "Masbate",
+        "Metro Manila",
+        "Misamis Occidental",
+        "Misamis Oriental",
+        "Mountain Province",
+        "Negros Occidental",
+        "Negros Oriental",
+        "Northern Samar",
+        "Nueva Ecija",
+        "Nueva Vizcaya",
+        "Occidental Mindoro",
+        "Oriental Mindoro",
+        "Palawan",
+        "Pampanga",
+        "Pangasinan",
+        "Quezon",
+        "Quirino",
+        "Rizal",
+        "Romblon",
+        "Samar",
+        "Sarangani",
+        "Siquijor",
+        "Sorsogon",
+        "South Cotabato",
+        "Southern Leyte",
+        "Sultan Kudarat",
+        "Sulu",
+        "Surigao del Norte",
+        "Surigao del Sur",
+        "Tarlac",
+        "Tawi-Tawi",
+        "Zambales",
+        "Zamboanga del Norte",
+        "Zamboanga del Sur",
+        "Zamboanga Sibugay"
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Abra",
+            "value": "Abra"
+          },
+          {
+            "label": "Agusan del Norte",
+            "value": "Agusan del Norte"
+          },
+          {
+            "label": "Agusan del Sur",
+            "value": "Agusan del Sur"
+          },
+          {
+            "label": "Aklan",
+            "value": "Aklan"
+          },
+          {
+            "label": "Albay",
+            "value": "Albay"
+          },
+          {
+            "label": "Antique",
+            "value": "Antique"
+          },
+          {
+            "label": "Apayao",
+            "value": "Apayao"
+          },
+          {
+            "label": "Aurora",
+            "value": "Aurora"
+          },
+          {
+            "label": "Basilan",
+            "value": "Basilan"
+          },
+          {
+            "label": "Bataan",
+            "value": "Bataan"
+          },
+          {
+            "label": "Batanes",
+            "value": "Batanes"
+          },
+          {
+            "label": "Batangas",
+            "value": "Batangas"
+          },
+          {
+            "label": "Benguet",
+            "value": "Benguet"
+          },
+          {
+            "label": "Biliran",
+            "value": "Biliran"
+          },
+          {
+            "label": "Bohol",
+            "value": "Bohol"
+          },
+          {
+            "label": "Bukidnon",
+            "value": "Bukidnon"
+          },
+          {
+            "label": "Bulacan",
+            "value": "Bulacan"
+          },
+          {
+            "label": "Cagayan",
+            "value": "Cagayan"
+          },
+          {
+            "label": "Camarines Norte Daet",
+            "value": "Camarines Norte Daet"
+          },
+          {
+            "label": "Camarines Sur",
+            "value": "Camarines Sur"
+          },
+          {
+            "label": "Camiguin",
+            "value": "Camiguin"
+          },
+          {
+            "label": "Capiz",
+            "value": "Capiz"
+          },
+          {
+            "label": "Catanduanes Virac",
+            "value": "Catanduanes Virac"
+          },
+          {
+            "label": "Cavite",
+            "value": "Cavite"
+          },
+          {
+            "label": "Cebu",
+            "value": "Cebu"
+          },
+          {
+            "label": "Cotabato",
+            "value": "Cotabato"
+          },
+          {
+            "label": "Mindanao",
+            "value": "Mindanao"
+          },
+          {
+            "label": "Davao del Norte",
+            "value": "Davao del Norte"
+          },
+          {
+            "label": "Davao del Sur",
+            "value": "Davao del Sur"
+          },
+          {
+            "label": "Davao Occidental",
+            "value": "Davao Occidental"
+          },
+          {
+            "label": "Davao Oriental",
+            "value": "Davao Oriental"
+          },
+          {
+            "label": "Dinagat Islands",
+            "value": "Dinagat Islands"
+          },
+          {
+            "label": "Eastern Samar",
+            "value": "Eastern Samar"
+          },
+          {
+            "label": "Guimaras",
+            "value": "Guimaras"
+          },
+          {
+            "label": "Ifugao",
+            "value": "Ifugao"
+          },
+          {
+            "label": "Ilocos Norte",
+            "value": "Ilocos Norte"
+          },
+          {
+            "label": "Ilocos Sur",
+            "value": "Ilocos Sur"
+          },
+          {
+            "label": "Iloilo",
+            "value": "Iloilo"
+          },
+          {
+            "label": "Isabela",
+            "value": "Isabela"
+          },
+          {
+            "label": "Kalinga",
+            "value": "Kalinga"
+          },
+          {
+            "label": "La Union",
+            "value": "La Union"
+          },
+          {
+            "label": "Laguna",
+            "value": "Laguna"
+          },
+          {
+            "label": "Lanao del Norte",
+            "value": "Lanao del Norte"
+          },
+          {
+            "label": "Lanao del Sur",
+            "value": "Lanao del Sur"
+          },
+          {
+            "label": "Leyte",
+            "value": "Leyte"
+          },
+          {
+            "label": "Maguindanao",
+            "value": "Maguindanao"
+          },
+          {
+            "label": "Marinduque",
+            "value": "Marinduque"
+          },
+          {
+            "label": "Masbate",
+            "value": "Masbate"
+          },
+          {
+            "label": "Metro Manila",
+            "value": "Metro Manila"
+          },
+          {
+            "label": "Misamis Occidental",
+            "value": "Misamis Occidental"
+          },
+          {
+            "label": "Misamis Oriental",
+            "value": "Misamis Oriental"
+          },
+          {
+            "label": "Mountain Province",
+            "value": "Mountain Province"
+          },
+          {
+            "label": "Negros Occidental",
+            "value": "Negros Occidental"
+          },
+          {
+            "label": "Negros Oriental",
+            "value": "Negros Oriental"
+          },
+          {
+            "label": "Northern Samar",
+            "value": "Northern Samar"
+          },
+          {
+            "label": "Nueva Ecija",
+            "value": "Nueva Ecija"
+          },
+          {
+            "label": "Nueva Vizcaya",
+            "value": "Nueva Vizcaya"
+          },
+          {
+            "label": "Occidental Mindoro",
+            "value": "Occidental Mindoro"
+          },
+          {
+            "label": "Oriental Mindoro",
+            "value": "Oriental Mindoro"
+          },
+          {
+            "label": "Palawan",
+            "value": "Palawan"
+          },
+          {
+            "label": "Pampanga",
+            "value": "Pampanga"
+          },
+          {
+            "label": "Pangasinan",
+            "value": "Pangasinan"
+          },
+          {
+            "label": "Quezon",
+            "value": "Quezon"
+          },
+          {
+            "label": "Quirino",
+            "value": "Quirino"
+          },
+          {
+            "label": "Rizal",
+            "value": "Rizal"
+          },
+          {
+            "label": "Romblon",
+            "value": "Romblon"
+          },
+          {
+            "label": "Samar",
+            "value": "Samar"
+          },
+          {
+            "label": "Sarangani",
+            "value": "Sarangani"
+          },
+          {
+            "label": "Siquijor",
+            "value": "Siquijor"
+          },
+          {
+            "label": "Sorsogon",
+            "value": "Sorsogon"
+          },
+          {
+            "label": "South Cotabato",
+            "value": "South Cotabato"
+          },
+          {
+            "label": "Southern Leyte",
+            "value": "Southern Leyte"
+          },
+          {
+            "label": "Sultan Kudarat",
+            "value": "Sultan Kudarat"
+          },
+          {
+            "label": "Sulu",
+            "value": "Sulu"
+          },
+          {
+            "label": "Surigao del Norte",
+            "value": "Surigao del Norte"
+          },
+          {
+            "label": "Surigao del Sur",
+            "value": "Surigao del Sur"
+          },
+          {
+            "label": "Tarlac",
+            "value": "Tarlac"
+          },
+          {
+            "label": "Tawi-Tawi",
+            "value": "Tawi-Tawi"
+          },
+          {
+            "label": "Zambales",
+            "value": "Zambales"
+          },
+          {
+            "label": "Zamboanga del Norte",
+            "value": "Zamboanga del Norte"
+          },
+          {
+            "label": "Zamboanga del Sur",
+            "value": "Zamboanga del Sur"
+          },
+          {
+            "label": "Zamboanga Sibugay",
+            "value": "Zamboanga Sibugay"
+          }
+        ],
+        "placeholder": "Select your province"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "barangay",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "barangay",
+    "postal_code"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "time_tracking_policy_acknowledgement": false
+        }
+      },
+      "if": false,
+      "then": {
+        "required": [
+          "time_tracking_policy_acknowledgement"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Tell us about your prior invention or intellectual property",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "ssn": {
+      "maxLength": 11,
+      "pattern": "^[0-9]{3}-[0-9]{2}-(?!0{4})[0-9]{4}$",
+      "title": "Social security number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4
+      }
+    },
+    "time_tracking_policy_acknowledgement": {
+      "const": "acknowledged",
+      "description": "I acknowledge that I have read and accept the time tracking policy",
+      "title": "Accept time tracking policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "I acknowledge that I have read and accept the <a href='https://cdn.employ-assets.remote.com/employee_onboarding/usa_time_tracking_policy.pdf' target=\"_blank\" rel=\"noopener noreferrer\">Time tracking policy</a>",
+        "inputType": "checkbox"
+      }
+    }
+  },
+  "required": [
+    "ssn"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "ssn",
+    "prior_inventions",
+    "time_tracking_policy_acknowledgement"
+  ]
+}

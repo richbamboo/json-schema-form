@@ -1,0 +1,2215 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 35,
+            "minimum": 1,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 35 hours per week.",
+              "minimum": "Must be at least 1 hour per week."
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 40,
+            "minimum": 36,
+            "x-jsf-errorMessage": {
+              "maximum": "Must be no more than 40 hours per week.",
+              "minimum": "Must be at least 36 hours per week."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "annual_gross_salary": false
+        }
+      },
+      "if": {
+        "properties": {
+          "salary_rate": {
+            "const": "yearly"
+          }
+        },
+        "required": [
+          "salary_rate"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "annual_gross_salary"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "hourly_gross_salary": false
+        }
+      },
+      "if": {
+        "properties": {
+          "salary_rate": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "salary_rate"
+        ]
+      },
+      "then": {
+        "required": [
+          "hourly_gross_salary"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "salary_rate": {
+            "const": "yearly"
+          },
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule",
+          "salary_rate"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation",
+          "annual_gross_salary"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "holiday_allowance": {
+            "const": "Within the salary"
+          },
+          "salary_rate": {
+            "const": "yearly"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule",
+          "salary_rate"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In the Netherlands, full-time employees are entitled to a minimum annual salary of €31,705.86 INCLUDING holiday pay",
+            "minimum": 3170586,
+            "type": "integer",
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in the Netherlands"
+            }
+          },
+          "part_time_salary_confirmation": false
+        },
+        "required": [
+          "annual_gross_salary"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "holiday_allowance": {
+            "const": "On top of salary"
+          },
+          "salary_rate": {
+            "const": "yearly"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule",
+          "salary_rate"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In the Netherlands, full-time employees are entitled to a minimum annual salary of €29,357.28 EXCLUDING holiday pay",
+            "minimum": 2935728,
+            "type": "integer",
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in the Netherlands"
+            }
+          },
+          "part_time_salary_confirmation": false
+        },
+        "required": [
+          "annual_gross_salary"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_halt_period_months": false,
+          "non_solicitation_clause_halt_period_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause_apply"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_compete_clause_halt_period_months",
+          "non_solicitation_clause_halt_period_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "available_pto": {
+              "description": "In The Netherlands, employees are entitled to a minimum of 20 paid time off days per year. Please pro-rate for part-time employment. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+              "x-jsf-logic-computedAttrs": {
+                "minimum": "min_part_time_pto",
+                "x-jsf-errorMessage": {
+                  "minimum": "Must be at least {{min_part_time_pto}} days"
+                }
+              }
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "full_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "available_pto": {
+              "description": "In The Netherlands, employees are entitled to a minimum of 20 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+              "minimum": 20,
+              "x-jsf-errorMessage": {
+                "minimum": "Must be at least 20 days"
+              }
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 20,
+            "default": 20,
+            "title": "Minimum paid time off days",
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "In The Netherlands, employees are entitled to a minimum of 20 paid time off days per year. Please note that Statutory, Bank Holidays and Public Holidays are excluded from the above.",
+                "title": "Minimum of <strong>20 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_duration_type_ack": false,
+          "non_compete_clause_apply": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "indefinite"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "notice_period": {
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "The statutory notice period for the <strong>employer is defined at termination</strong>"
+              }
+            }
+          }
+        },
+        "required": [
+          "non_compete_clause_apply",
+          "contract_duration_type_ack"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "non_compete_clause_apply": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-compete and non-solicit clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 23445884235661,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "notice_period": {
+      "const": 1,
+      "default": 1,
+      "description": "The notice period must be 1 month due to the length of the contract.",
+      "title": "Notice period",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "statement": {
+          "title": "Notice period of <strong>1 month.</strong>"
+        }
+      }
+    },
+    "holiday_allowance": {
+      "description": "This is 8% of gross annual salary, this can be added on top of the salary or within the salary.",
+      "oneOf": [
+        {
+          "const": "On top of salary",
+          "title": "On top of salary"
+        },
+        {
+          "const": "Within the salary",
+          "title": "Within the salary"
+        }
+      ],
+      "title": "Holiday Allowance",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Full-time employment is between 36-40 hours a week",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "sick_leave_pay": {
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "sick_leave_percentage": {
+                "const": "internal"
+              }
+            },
+            "required": [
+              "sick_leave_percentage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sick_leave_pay_cap_100": false,
+              "sick_leave_pay_cap_70": false,
+              "sick_leave_pay_internal": {
+                "type": "string"
+              },
+              "sick_leave_percentage": {
+                "oneOf": [
+                  {
+                    "const": "70%",
+                    "title": "Offer sick pay at 70% of the employee’s wages",
+                    "x-jsf-presentation": {
+                      "recommended": true
+                    }
+                  },
+                  {
+                    "const": "100%",
+                    "title": "Offer sick pay at 100% of the employee’s wages"
+                  },
+                  {
+                    "const": "internal",
+                    "description": "I have direct employees in the Netherlands and an internal sick pay policy more favorable than the statutory sick pay policy (70% sick pay policy or 70% of the maximum daily wage, if applicable)",
+                    "title": "I have an applicable internal policy"
+                  }
+                ],
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "radio"
+                }
+              }
+            },
+            "required": [
+              "sick_leave_pay_internal"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sick_leave_percentage": {
+                "const": "100%"
+              }
+            },
+            "required": [
+              "sick_leave_percentage"
+            ]
+          },
+          "then": {
+            "properties": {
+              "sick_leave_pay_cap_100": {
+                "type": "string"
+              },
+              "sick_leave_pay_cap_70": false,
+              "sick_leave_pay_internal": false
+            },
+            "required": [
+              "sick_leave_pay_cap_100"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sick_leave_percentage": {
+                "const": "70%"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sick_leave_pay_cap_100": false,
+              "sick_leave_pay_cap_70": {
+                "type": "string"
+              },
+              "sick_leave_pay_internal": false
+            },
+            "required": [
+              "sick_leave_pay_cap_70"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "sick_leave_pay_cap_100": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "description": "For example, based on a monthly salary of 5000.00 EUR, if the policy is 100% with cap, the employee's sick pay would be 5000.00 EUR (100% of 5000.00 EUR) per month.<br /><br />If later they receive a salary increase to 7000.00 EUR per month, their sick pay would be 6154.16 EUR (100% of UWV's cap of 6154.16 EUR) per month, since their salary would be above the cap.",
+              "title": "Yes, 100% with cap (Recommended)",
+              "x-jsf-presentation": {
+                "expanded": true
+              }
+            },
+            {
+              "const": "no",
+              "description": "For example, based on a monthly salary of 5000.00 EUR, if the policy is 100% without cap, the employee's sick pay would be 5000.00 EUR (100% of 5000.00 EUR) per month.",
+              "title": "No, 100% without cap",
+              "x-jsf-presentation": {
+                "expanded": true
+              }
+            }
+          ],
+          "title": "Do you want to apply the Dutch Employee Insurance Agency (UWV) wage cap (6154.16 EUR per month) to the sick pay?",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "direction": "column",
+            "inputType": "radio",
+            "variant": "card-expandable"
+          }
+        },
+        "sick_leave_pay_cap_70": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "description": "For example, based on a monthly salary of 5000.00 EUR, if the policy is 70% with cap, the employee's sick pay would be 3500.00 EUR (70% of 5000.00 EUR) per month.<br /><br />If later they receive a salary increase to 7000.00 EUR per month, their sick pay would be 4307.91 EUR (70% of UWV's cap of 6154.16 EUR) per month, since their salary would be above the cap.",
+              "title": "Yes, 70% with cap (Recommended)",
+              "x-jsf-presentation": {
+                "expanded": true
+              }
+            },
+            {
+              "const": "no",
+              "description": "For example, based on a monthly salary of 5000.00 EUR, if the policy is 70% without cap, the employee's sick pay would be 3500.00 EUR (70% of 5000.00 EUR) per month.",
+              "title": "No, 70% without cap",
+              "x-jsf-presentation": {
+                "expanded": true
+              }
+            }
+          ],
+          "title": "Do you want to apply the Dutch Employee Insurance Agency (UWV) wage cap (6154.16 EUR per month) to the sick pay?",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "direction": "column",
+            "inputType": "radio",
+            "variant": "card-expandable"
+          }
+        },
+        "sick_leave_pay_internal": {
+          "maxLength": 1000,
+          "title": "Describe your policy details",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "textarea"
+          }
+        },
+        "sick_leave_percentage": {
+          "oneOf": [
+            {
+              "const": "70%",
+              "title": "Offer sick pay at 70% of the employee’s wages",
+              "x-jsf-presentation": {
+                "recommended": true
+              }
+            },
+            {
+              "const": "100%",
+              "title": "Offer sick pay at 100% of the employee’s wages"
+            },
+            {
+              "const": "internal",
+              "title": "I have an applicable internal policy"
+            }
+          ],
+          "title": "Sick leave",
+          "type": "string",
+          "x-jsf-presentation": {
+            "hideLabel": true,
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "sick_leave_percentage"
+      ],
+      "title": "Sick pay",
+      "type": "object",
+      "x-jsf-order": [
+        "sick_leave_percentage",
+        "sick_leave_pay_cap_70",
+        "sick_leave_pay_cap_100",
+        "sick_leave_pay_internal"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "salary_rate": {
+      "oneOf": [
+        {
+          "const": "yearly",
+          "title": "Yearly"
+        },
+        {
+          "const": "hourly",
+          "title": "Hourly"
+        }
+      ],
+      "title": "Salary rate",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "hourly_gross_salary": {
+      "description": "Timesheets will be requested each payroll cycle to process the actual number of worked hours during the previous cycle.",
+      "title": "Hourly gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_solicitation_clause_halt_period_months": {
+      "description": "In the Netherlands, non-solicits can be between 1 and 12 months.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Length of non-solicitation in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "has_bonus": {
+      "description": "Do you want to include any other types of bonuses, such as performance-related bonuses?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "I confirm the annual gross salary has been adjusted for part-time hours. Remote will use this gross salary in the employment agreement for the part-time employee.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "supplemental_benefits_eligible": {
+      "description": "If you have any additional benefits you offer to Employees, such as allowances, additional maternity/paternity leave, PTO policies, travel insurance, or expense policies, you can provide them to the Employee directly. Please be aware, that any policies are subject to applicable law and WILL be considered contractual and so difficult to change once provided.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Supplemental Benefits Eligible?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "annual_gross_salary": {
+      "minimum": 0,
+      "title": "Annual gross salary",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "contract_duration_type": {
+      "default": "fixed_term",
+      "description": "To minimize risks associated with indefinite contracts, we recommend using three fixed-term agreements of 12 months before offering a permanent position.",
+      "oneOf": [
+        {
+          "const": "fixed_term",
+          "nested_field": "contract_end_date",
+          "title": "Fixed Term",
+          "x-jsf-presentation": {
+            "recommended": true
+          }
+        },
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 31356937628685,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "In the Netherlands, except on expiry of the fixed term (or during probation), an employee cannot be terminated without the consent of the authorities. For this reason, we recommend you engage employees on a fixed term agreement of 7 to 12 months in the first instance and utilise the maximum fixed term agreements thereafter.\n\nWhy a minimum of 7 months? Because we also recommend including a probation period and probation periods are not valid in fixed term agreements of 6 months or less.",
+          "severity": "info",
+          "title": "Information on termination - contract duration"
+        }
+      }
+    },
+    "available_pto": {
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about the requirements",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 23446399059853,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "probation_length": {
+      "oneOf": [
+        {
+          "const": 2,
+          "description": "We recommend using the longest probation period available in the Netherlands, as you'll need the consent of either the labor court or the Dutch Employee Insurance Agency (UWV) to terminate the employee post-probation. Not electing a probationary period will adversely impact other employment actions including background checks.",
+          "title": "2 months",
+          "x-jsf-presentation": {
+            "recommended": true
+          }
+        },
+        {
+          "const": 1,
+          "title": "1 month"
+        },
+        {
+          "const": 0,
+          "title": "No probation period"
+        }
+      ],
+      "title": "Probation period",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 14718802739341,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "In the Netherlands, a post-probation employee cannot be terminated without the consent of the authorities. During probation, consent is not required. For this reason, we recommend you set the probation period to the maximum allowed.\n\nPlease use a fixed-term of over 6 months (i.e not exactly 6 months) if you want to use a probation period. 6 months is not enough to have a valid probation.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year. The number below is the mandatory minimum number of days they must take.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "confidentiality_acknowledgment": {
+      "const": "acknowledged",
+      "description": "There is no minimum or maximum duration for the employee's confidentiality after termination.",
+      "title": "I acknowledge the confidentiality terms",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "contract_duration_type_ack": {
+      "const": "acknowledged",
+      "title": "By selecting this option, you acknowledge that you understand and accept the risks associated with an indefinite agreement and consent to proceed with an indefinite agreement",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "non_compete_clause_halt_period_months": {
+      "description": "In the Netherlands, non-competes can be between 1 and 12 months.",
+      "maximum": 12,
+      "minimum": 1,
+      "title": "Length of non-compete in months",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "718e7957-263e-4e8c-a0a0-8190d396b5eb",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "5053ddc7-b68a-4892-9d96-97a7aaf47bc2",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "718e7957-263e-4e8c-a0a0-8190d396b5eb",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "1eb52be9-70dc-4634-9040-d4c5c78774d8",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "718e7957-263e-4e8c-a0a0-8190d396b5eb",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "9d1f3e54-c259-4e82-926a-99fad3f13e83",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "718e7957-263e-4e8c-a0a0-8190d396b5eb",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "7c9f13aa-a19a-4169-9e2b-82ae0b798e42",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "718e7957-263e-4e8c-a0a0-8190d396b5eb",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "c119f538-b0a8-4fcb-b039-339f0937e02f",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "global_health_insurance": {
+          "oneOf": [
+            {
+              "const": "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+              "title": "Allianz Standard (Employee Only) - $123.17 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. No dental or vision coverage. Includes basic maternity benefits up to $6K USD and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-standard",
+                  "displayCost": "$123.17 USD/mo",
+                  "id": "6c70f245-340a-461f-99a2-378e6b5ea59f",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Employee Only)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+              "title": "Allianz Standard (Family) - $184.75 - $369.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. No dental or vision coverage. Includes basic maternity benefits up to $6K USD, pediatric care, and limited mental health support.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-standard",
+                  "displayCost": "$184.75 - $369.50 USD/mo",
+                  "id": "76ab9d03-867e-44ea-a222-4117961130a9",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Standard (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Employee Only) (Allianz - Premium Medical (Employee Only); Allianz - Premium Dental (Employee Only); Allianz - Premium Vision (Employee Only))",
+              "title": "Allianz Premium (Employee Only) - $157.08 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more outpatient mental health and therapy support.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-premium",
+                  "displayCost": "$157.08 USD/mo",
+                  "id": "efce9d29-1560-49c8-b5f7-0261ab0f0c38",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Premium (Family) (Allianz - Premium Medical (Family); Allianz - Premium Vision (Family); Allianz - Premium Dental (Family))",
+              "title": "Allianz Premium (Family) - $235.63 - $471.25 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $1M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with higher mental health limits, pediatric coverage, and prescribed therapy sessions.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-premium",
+                  "displayCost": "$235.63 - $471.25 USD/mo",
+                  "id": "5165833e-d6cb-4402-806b-aa7dc72c39eb",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Premium (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Employee Only) (Allianz - Gold Medical (Employee Only); Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only))",
+              "title": "Allianz Gold (Employee Only) - $186.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD for employee only. Includes dental coverage up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, plus expanded mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzgoldplan-employeeonly",
+                  "displayCost": "$186.83 USD/mo",
+                  "id": "416ae48d-2bb5-4ab7-a752-a538fecec721",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Gold (Family) (Allianz - Gold Medical (Family); Allianz - Gold Dental (Family); Allianz - Gold Vision (Family))",
+              "title": "Allianz Gold (Family) - $280.25 - $560.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $2.5M USD. Includes dental up to $1K USD and vision up to $250 USD. Maternity covered up to $6K USD, with more therapy sessions, extended pediatric care, and broader outpatient benefits.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-gold",
+                  "displayCost": "$280.25 - $560.50 USD/mo",
+                  "id": "5c8c90e9-fa1b-4b31-b3c4-3b3d1018b967",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Gold (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Employee Only) (Allianz - Platinum Medical (Employee Only); Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only))",
+              "title": "Allianz Platinum (Employee Only) - $206.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD for employee only. Includes dental coverage up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with the most extensive mental health and therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianzplatinumplan-employeeonly",
+                  "displayCost": "$206.50 USD/mo",
+                  "id": "443310b0-ecb6-486f-840d-e8b5b038fd27",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Employee Only)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Allianz Platinum (Family) (Allianz - Platinum Medical (Family); Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family))",
+              "title": "Allianz Platinum (Family) - $309.75 - $619.50 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Covers medical care for the employee and family with private hospital rooms, intensive care, surgeries, and prescriptions up to $5M USD. Includes dental up to $2.5K USD and vision up to $500 USD. Maternity covered up to $10K USD, with comprehensive pediatric care, full mental health support, and maximum therapy benefits.",
+                "meta": {
+                  "benefitGroupId": "d2eeef07-7d16-49c6-9663-097da329b9ed",
+                  "detailsUrl": "https://remote.com/benefits-guide/allianz-employee-and-family-platinum",
+                  "displayCost": "$309.75 - $619.50 USD/mo",
+                  "id": "6968f1be-8d9e-4206-8e07-cc6287cd0cec",
+                  "providerName": "Allianz",
+                  "tierName": "Allianz Platinum (Family)",
+                  "types": [
+                    "dental",
+                    "health",
+                    "vision"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health",
+                    "dental",
+                    "vision"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Global Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Allianz Platinum (Employee Only) (Allianz - Platinum Medical (Employee Only); Allianz - Platinum Vision (Employee Only); Allianz - Platinum Dental (Employee Only))",
+                    "Allianz Gold (Employee Only) (Allianz - Gold Medical (Employee Only); Allianz - Gold Vision (Employee Only); Allianz - Gold Dental (Employee Only))",
+                    "Allianz Premium (Employee Only) (Allianz - Premium Medical (Employee Only); Allianz - Premium Dental (Employee Only); Allianz - Premium Vision (Employee Only))",
+                    "Allianz Standard (Employee Only) (Allianz - Standard Medical (Employee Only))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Allianz Platinum (Family) (Allianz - Platinum Medical (Family); Allianz - Platinum Vision (Family); Allianz - Platinum Dental (Family))",
+                    "Allianz Gold (Family) (Allianz - Gold Medical (Family); Allianz - Gold Dental (Family); Allianz - Gold Vision (Family))",
+                    "Allianz Premium (Family) (Allianz - Premium Medical (Family); Allianz - Premium Vision (Family); Allianz - Premium Dental (Family))",
+                    "Allianz Standard (Family) (Allianz - Standard Medical (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "local_health_insurance": {
+          "oneOf": [
+            {
+              "const": "Local Basic Tier (Single) (ONVZ - Local Basic Plan (Single))",
+              "title": "Local Basic Tier (Single) - ~177 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p><span>Covers </span><strong>employee only</strong><span>. Provides essential healthcare in the Netherlands, including GP visits, specialist care, hospital stays, mental healthcare, maternity services, and prescription medication.</span></p>",
+                "meta": {
+                  "benefitGroupId": "ed27687d-d2ae-4f5b-ae9b-e62b99988424",
+                  "detailsUrl": "https://remote.com/benefits-guide/onvzbasic",
+                  "displayCost": "~177 USD/mo",
+                  "id": "afe20897-040f-4bac-8963-3b407877cbd6",
+                  "providerName": "ONVZ",
+                  "tierName": "Local Basic Tier (Single)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Local Basic Tier (Family) (ONVZ - Local Basic Plan (Family))",
+              "title": "Local Basic Tier (Family) - ~531 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p><span>Covers </span>employee and dependents<span>. Provides essential healthcare in the Netherlands, including GP visits, specialist care, hospital stays, mental healthcare, maternity services, and prescription medication.</span></p>",
+                "meta": {
+                  "benefitGroupId": "ed27687d-d2ae-4f5b-ae9b-e62b99988424",
+                  "detailsUrl": "https://remote.com/benefits-guide/onvzbasic-family",
+                  "displayCost": "~531 USD/mo",
+                  "id": "fce4bba9-f52e-450f-8c09-564cecbe0a76",
+                  "providerName": "ONVZ",
+                  "tierName": "Local Basic Tier (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Local Benfit Tier (Single) (ONVZ - Local Benfit Plan (Single))",
+              "title": "Local Benfit Tier (Single) - ~245 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p><span>Covers </span><strong>employee only</strong><span>. Includes all services in the Local Basic Plan, plus enhanced maternity care, dental treatments, and global emergency medical coverage.</span></p>",
+                "meta": {
+                  "benefitGroupId": "ed27687d-d2ae-4f5b-ae9b-e62b99988424",
+                  "detailsUrl": "https://remote.com/benefits-guide/onvzbenfit",
+                  "displayCost": "~245 USD/mo",
+                  "id": "2f7e53f5-50c3-4891-a145-36b13ab978aa",
+                  "providerName": "ONVZ",
+                  "tierName": "Local Benfit Tier (Single)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Local Benfit Tier (Family) (ONVZ - Local Benfit Plan (Family))",
+              "title": "Local Benfit Tier (Family) - ~720 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p><span>Covers </span>employee and dependents<span>. </span>Includes all services in the Local Basic Plan, plus enhanced maternity care, dental treatments, and global emergency medical coverage.</p>",
+                "meta": {
+                  "benefitGroupId": "ed27687d-d2ae-4f5b-ae9b-e62b99988424",
+                  "detailsUrl": "https://remote.com/benefits-guide/onvzbenfit-family",
+                  "displayCost": "~720 USD/mo",
+                  "id": "47659778-81e2-4423-aaca-1ccb6b9ec2d2",
+                  "providerName": "ONVZ",
+                  "tierName": "Local Benfit Tier (Family)",
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "health"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Local Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "meta": {
+              "subGroups": [
+                {
+                  "id": "single",
+                  "label": "Single",
+                  "optionValues": [
+                    "Local Benfit Tier (Single) (ONVZ - Local Benfit Plan (Single))",
+                    "Local Basic Tier (Single) (ONVZ - Local Basic Plan (Single))",
+                    "no"
+                  ]
+                },
+                {
+                  "id": "family",
+                  "label": "Family",
+                  "optionValues": [
+                    "Local Benfit Tier (Family) (ONVZ - Local Benfit Plan (Family))",
+                    "Local Basic Tier (Family) (ONVZ - Local Basic Plan (Family))",
+                    "no"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "3d129136-4621-40d2-a2fa-aecc358d27f6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "a52c8f0c-9018-4ae8-86f8-b5bf14e915d4",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "3d129136-4621-40d2-a2fa-aecc358d27f6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "93b7075e-a010-42d1-a18a-a3ae10f6678b",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "3d129136-4621-40d2-a2fa-aecc358d27f6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "416af112-b884-4ffa-a4de-c0ac6f596587",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "3d129136-4621-40d2-a2fa-aecc358d27f6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "131d2077-e32f-4212-b9e9-03671dbd17ba",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "3d129136-4621-40d2-a2fa-aecc358d27f6",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "4a8bf8a8-abda-4d97-bdde-1c6672ad7ac9",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "retirement": {
+          "oneOf": [
+            {
+              "const": "Pension (a.s.r. (formerly Aegon) - Pension (Includes death & disability coverage))",
+              "title": "Pension - 15.8%",
+              "x-jsf-presentation": {
+                "description": "<p>Pension contributions include a 15.2% employer contribution toward retirement, approximately 0.6% for risk coverage (death and disability), and a 4.8% employee contribution.</p>\n\n<p>Contributions are calculated based on the pensionable salary (gross salary minus a franchise of €18,475).</p>\n\n<p><b>Note: </b> In the Netherlands, participation in a group pension scheme is mandatory under Remote’s model. This benefit must be selected and will apply to all employees in the country.</p>",
+                "meta": {
+                  "benefitGroupId": "9c8704c0-a6ee-4bdd-9833-905b4166a2de",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-netherlands-pension",
+                  "displayCost": "15.8%",
+                  "id": "66b68f2d-abf3-40f1-a0df-1b41656d4944",
+                  "providerName": "a.s.r. (formerly Aegon)",
+                  "tierName": "Pension",
+                  "types": [
+                    "pension"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Retirement",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance",
+        "retirement",
+        "local_health_insurance",
+        "global_health_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "local_health_insurance",
+        "global_health_insurance",
+        "retirement",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In this section, you can select benefits for your new team member. If you have existing team members in the same country, your new hire will receive the same benefits as those currently provided to other team members there, maintaining benefit equality. If this is your first hire in the country, you may select from the available options below. Your choice will become the standard benefits for any future hires in the country.",
+        "extra": "Prices are listed in U.S. Dollars (USD). However, when benefits are originally priced in local currencies, these amounts are estimates in USD. The final charge in local currency will be determined using the exchange rate at the time of invoicing. The pricing listed is subject to change based on the age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance.",
+        "inputType": "fieldset"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_equipment_ack": {
+      "const": "acknowledged",
+      "description": "In the Netherlands, you must ensure the employee has a suitable workplace. If they do not, you must provide the equipment or other items like a chair and desk so they can perform their duties.",
+      "title": "I acknowledge the work equipment requirements",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "work_address": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "address": false,
+              "address_line_2": false,
+              "city": false,
+              "postal_code": false
+            }
+          },
+          "if": {
+            "properties": {
+              "is_home_address": {
+                "const": "no"
+              }
+            },
+            "required": [
+              "is_home_address"
+            ]
+          },
+          "then": {
+            "required": [
+              "address",
+              "city",
+              "postal_code"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "address": {
+          "description": "Address number and street name.",
+          "maxLength": 255,
+          "title": "Work address line 1",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "address_line_2": {
+          "description": "Apartment number or building number if applicable.",
+          "maxLength": 255,
+          "title": "Work address line 2 (optional)",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "city": {
+          "maxLength": 255,
+          "title": "City",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "is_home_address": {
+          "enum": [
+            "yes",
+            "no"
+          ],
+          "title": "Local",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "column",
+            "inputType": "radio",
+            "options": [
+              {
+                "description": "Select this option if the employee is fully remote.",
+                "label": "Same as the employee's residential address",
+                "value": "yes"
+              },
+              {
+                "description": "Select this option if the employee is under a hybrid work regime.",
+                "label": "Different than the employee's residential address",
+                "value": "no"
+              }
+            ]
+          }
+        },
+        "postal_code": {
+          "maxLength": 255,
+          "title": "Postal code",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "is_home_address"
+      ],
+      "title": "Work Address",
+      "type": "object",
+      "x-jsf-order": [
+        "is_home_address",
+        "address",
+        "address_line_2",
+        "city",
+        "postal_code"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "work_address_is_home_address": {
+      "deprecated": true,
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "title": "null"
+        }
+      ],
+      "readOnly": true,
+      "title": "Work Address (Deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated in favor of 'work_address'."
+        },
+        "inputType": "radio"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "has_notice_period": {
+      "deprecated": true,
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "readOnly": true,
+      "title": "(Deprecated) Add a notice period?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because we shouldn't allow customers to select (No)."
+        },
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "skills_and_qualifications": {
+      "description": "Please add skills, qualifications and fields of expertise of the employee (2-3 points).",
+      "maxLength": 1000,
+      "title": "Skills and qualifications",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "employee_travel_required": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the employee required to travel for work?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "Do you want to include a one-time signing bonus?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "it_equipment": {
+      "deprecated": true,
+      "description": "Will you provide the employee with IT equipment?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "readOnly": true,
+      "title": "IT Equipment",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated in favor of 'work_equipment_ack'."
+        },
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "holiday_allowance_payment_frequency": {
+      "oneOf": [
+        {
+          "const": "monthly",
+          "title": "Monthly"
+        },
+        {
+          "const": "yearly",
+          "title": "Once a year"
+        }
+      ],
+      "title": "Holiday allowance payment frequency",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "contract_duration_type",
+    "available_pto_type",
+    "available_pto",
+    "confidentiality_acknowledgment",
+    "employee_travel_required",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "notice_period",
+    "probation_length",
+    "has_signing_bonus",
+    "holiday_allowance_payment_frequency",
+    "holiday_allowance",
+    "role_description",
+    "sick_leave_pay",
+    "skills_and_qualifications",
+    "supplemental_benefits_eligible",
+    "work_equipment_ack",
+    "salary_rate",
+    "work_hours_per_week",
+    "work_schedule",
+    "work_address",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-logic": {
+    "computedValues": {
+      "min_part_time_pto": {
+        "rule": {
+          "if": [
+            {
+              "var": "work_hours_per_week"
+            },
+            {
+              "*": [
+                {
+                  "var": "work_hours_per_week"
+                },
+                0.5
+              ]
+            },
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_duration_type_ack",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "salary_rate",
+    "probation_length",
+    "has_notice_period",
+    "notice_period",
+    "available_pto_type",
+    "available_pto",
+    "sick_leave_pay",
+    "role_description",
+    "experience_level",
+    "skills_and_qualifications",
+    "work_address_is_home_address",
+    "work_address",
+    "employee_travel_required",
+    "salary_rate",
+    "annual_gross_salary",
+    "hourly_gross_salary",
+    "part_time_salary_confirmation",
+    "holiday_allowance",
+    "holiday_allowance_payment_frequency",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "non_compete_clause_apply",
+    "non_compete_clause_halt_period_months",
+    "non_solicitation_clause_halt_period_months",
+    "it_equipment",
+    "work_equipment_ack",
+    "confidentiality_acknowledgment",
+    "supplemental_benefits_eligible",
+    "benefits"
+  ]
+}

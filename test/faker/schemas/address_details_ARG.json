@@ -1,0 +1,197 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "municipality": {
+      "maxLength": 255,
+      "title": "Municipality",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "enum": [
+        "Capital Federal",
+        "Buenos Aires",
+        "Catamarca",
+        "Córdoba",
+        "Corrientes",
+        "Chaco",
+        "Chubut",
+        "Entre Ríos",
+        "Formosa",
+        "Jujuy",
+        "La Pampa",
+        "La Rioja",
+        "Mendoza",
+        "Misiones",
+        "Neuquén",
+        "Río Negro",
+        "Salta",
+        "San Juan",
+        "San Luis",
+        "Santa Cruz",
+        "Santa Fe",
+        "Santiago del Estero",
+        "Tierra del Fuego",
+        "Tucumán"
+      ],
+      "oneOf": [
+        {
+          "const": "Capital Federal",
+          "title": "Capital Federal"
+        },
+        {
+          "const": "Buenos Aires",
+          "title": "Buenos Aires"
+        },
+        {
+          "const": "Catamarca",
+          "title": "Catamarca"
+        },
+        {
+          "const": "Córdoba",
+          "title": "Córdoba"
+        },
+        {
+          "const": "Corrientes",
+          "title": "Corrientes"
+        },
+        {
+          "const": "Chaco",
+          "title": "Chaco"
+        },
+        {
+          "const": "Chubut",
+          "title": "Chubut"
+        },
+        {
+          "const": "Entre Ríos",
+          "title": "Entre Ríos"
+        },
+        {
+          "const": "Formosa",
+          "title": "Formosa"
+        },
+        {
+          "const": "Jujuy",
+          "title": "Jujuy"
+        },
+        {
+          "const": "La Pampa",
+          "title": "La Pampa"
+        },
+        {
+          "const": "La Rioja",
+          "title": "La Rioja"
+        },
+        {
+          "const": "Mendoza",
+          "title": "Mendoza"
+        },
+        {
+          "const": "Misiones",
+          "title": "Misiones"
+        },
+        {
+          "const": "Neuquén",
+          "title": "Neuquén"
+        },
+        {
+          "const": "Río Negro",
+          "title": "Río Negro"
+        },
+        {
+          "const": "Salta",
+          "title": "Salta"
+        },
+        {
+          "const": "San Juan",
+          "title": "San Juan"
+        },
+        {
+          "const": "San Luis",
+          "title": "San Luis"
+        },
+        {
+          "const": "Santa Cruz",
+          "title": "Santa Cruz"
+        },
+        {
+          "const": "Santa Fe",
+          "title": "Santa Fe"
+        },
+        {
+          "const": "Santiago del Estero",
+          "title": "Santiago del Estero"
+        },
+        {
+          "const": "Tierra del Fuego",
+          "title": "Tierra del Fuego"
+        },
+        {
+          "const": "Tucumán",
+          "title": "Tucumán"
+        }
+      ],
+      "title": "Province",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "municipality",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "municipality",
+    "postal_code"
+  ]
+}

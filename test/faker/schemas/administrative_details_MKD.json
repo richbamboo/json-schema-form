@@ -1,0 +1,101 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "degree_details": {
+      "properties": {
+        "graduation_date": {
+          "format": "date",
+          "title": "Date of graduation",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "institute_name": {
+          "maxLength": 255,
+          "title": "Name of the institute",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "title": {
+          "description": "Please select the degree associated with your highest level of education.",
+          "enum": [
+            "high_school",
+            "bachelor",
+            "master",
+            "doctorate_postdoctorate"
+          ],
+          "oneOf": [
+            {
+              "const": "high_school",
+              "title": "High School/equivalent"
+            },
+            {
+              "const": "bachelor",
+              "title": "Bachelor's Degree"
+            },
+            {
+              "const": "master",
+              "title": "Master's Degree"
+            },
+            {
+              "const": "doctorate_postdoctorate",
+              "title": "Doctorate or Post-doctorate"
+            }
+          ],
+          "title": "Highest degree",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        }
+      },
+      "required": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "title": "Highest level of education",
+      "type": "object",
+      "x-jsf-order": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "id_municipality": {
+      "maxLength": 255,
+      "title": "Municipality on ID card",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "Please provide the number from your passport or national ID card.",
+      "maxLength": 255,
+      "title": "National identification number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "id_municipality",
+    "degree_details"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "id_municipality",
+    "degree_details"
+  ]
+}

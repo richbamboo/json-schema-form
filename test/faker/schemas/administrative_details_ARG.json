@@ -1,0 +1,431 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "birthplace": {
+      "description": "Enter the name of the city and state where you were born",
+      "maxLength": 255,
+      "title": "Place of birth",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "cuenta_sueldo": {
+      "description": "Remote offers a Cuenta Sueldo for your salary deposit each month. If you would prefer to use your own Cuenta Sueldo, please select no",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Cuenta Sueldo",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "extra": "Please see information on Remote's Cuenta Sueldo option with HSBC in this document <a href=\"https://cdn.employ-assets.remote.com/employee_onboarding/argentina_hsbc_cuenta_sueldo.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Cuenta Sueldo information</a>",
+        "inputType": "radio"
+      }
+    },
+    "cuil": {
+      "description": "CUIL (Single Tax Identification/ Single Labor Identification)",
+      "maxLength": 255,
+      "title": "CUIL (Laboral ID)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID/Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "obra_social": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "has_obra_social": {
+                "x-jsf-presentation": {
+                  "statement": false
+                }
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "has_obra_social": {
+                "const": "no"
+              }
+            },
+            "required": [
+              "has_obra_social"
+            ]
+          },
+          "then": {
+            "properties": {
+              "has_obra_social": {
+                "x-jsf-presentation": {
+                  "statement": {
+                    "description": "To access medical benefits, you must be enrolled in an Obra Social. Remote will enroll you into Obra Social ASE, so you can access medical benefits via Swiss Medical as an employee in Argentina.",
+                    "inputType": "statement",
+                    "severity": "info"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "obra_social_type": {
+                "x-jsf-presentation": {
+                  "statement": null
+                }
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "obra_social_type": {
+                "const": "union"
+              }
+            },
+            "required": [
+              "obra_social_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "obra_social_type": {
+                "x-jsf-presentation": {
+                  "statement": {
+                    "description": "Unfortunately, Remote can’t hire employees in a union Obra Social. Please choose a <a href=\"https://www.sssalud.gob.ar/?page=listRnosc&tipo=10\" target=\"_blank\" rel=\"noopener noreferrer\">non-union Obra Social</a> and then <a href=\"https://www.argentina.gob.ar/servicio/realizar-opcion-de-cambio-de-obra-social\"  target=\"_blank\" rel=\"noopener noreferrer\">transfer to that Obra Social</a>. If you’d like to receive medical benefits through Swiss Medical, you must transfer to <strong>Obra Social ASE</strong>. In order to transfer to a new plan, you must have been enrolled in your current Obra Social for at least a year.",
+                    "inputType": "statement",
+                    "severity": "warning"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "obra_social_type": false
+            }
+          },
+          "if": {
+            "properties": {
+              "has_obra_social": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "has_obra_social"
+            ]
+          },
+          "then": {
+            "required": [
+              "obra_social_type"
+            ]
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "obra_social_code": {
+                "x-jsf-presentation": {
+                  "statement": {
+                    "description": "Remote offers medical benefits to all employees in Argentina enrolled in Obra Social ASE. To access these benefits, please <a href=\"https://www.argentina.gob.ar/servicio/realizar-opcion-de-cambio-de-obra-social\"  target=\"_blank\" rel=\"noopener noreferrer\">transfer to Obra Social ASE</a>.",
+                    "inputType": "statement",
+                    "severity": "info"
+                  }
+                }
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "obra_social_code": {
+                "const": "4-0090-9"
+              }
+            },
+            "required": [
+              "obra_social_code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "obra_social_code": {
+                "x-jsf-presentation": {
+                  "statement": null
+                }
+              }
+            }
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "obra_social_code": false
+            }
+          },
+          "if": {
+            "properties": {
+              "obra_social_type": {
+                "const": "fuera_de_convenio"
+              }
+            },
+            "required": [
+              "obra_social_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "obra_social_code"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "has_obra_social": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Are you enrolled in an Obra Social?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "obra_social_code": {
+          "description": "If you don’t know which Obra Social you’re enrolled in, submit your CUIL and ID number on <a href=\"https://www.sssalud.gob.ar/index.php?b_publica=Acceso+P%C3%BAblico&user=GRAL&page=bus650\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Consultas al Padrón de Beneficiarios de los Agentes Nacionales del Seguro de Salud\">this page</a> to find out.",
+          "oneOf": [
+            {
+              "const": "4-0010-7",
+              "title": "4-0010-7 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LAS EMPRESAS DE LA ALIMENTACION Y DEMAS ACTIVIDADES EMPRESARIAS"
+            },
+            {
+              "const": "4-0020-6",
+              "title": "4-0020-6 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA AUTOMOTRIZ ARGENTINA"
+            },
+            {
+              "const": "4-0030-5",
+              "title": "4-0030-5 - OBRA SOCIAL COOPERATIVA LTDA. DE ASISTENCIA MEDICA Y FARMACEUTICA , SERVICIOS ASISTENCIALE S Y TURISMO DEL PERSONAL SUPERIOR DE LA INDUSTRIA DEL CAUCHO Y OTRAS ACTIVIDADES INDUSTRIALES"
+            },
+            {
+              "const": "4-0040-4",
+              "title": "4-0040-4 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA CERVECERA Y MALTERA"
+            },
+            {
+              "const": "4-0050-3",
+              "title": "4-0050-3 - OBRA SOCIAL DE LA ASOCIACION DEL PERSONAL DE DIRECCION Y JERARQUICO DE LA INDUSTRIA DEL CIGARRILLO"
+            },
+            {
+              "const": "4-0060-2",
+              "title": "4-0060-2 - OBRA SOCIAL DEL PERSONAL DIRECTIVO DE LA INDUSTRIA DE LA CONSTRUCCION"
+            },
+            {
+              "const": "4-0070-1",
+              "title": "4-0070-1 - OBRA SOCIAL PERSONAL DE DIRECCION DE LA INDUSTRIA CURTIDORA ARGENTINA"
+            },
+            {
+              "const": "4-0080-0",
+              "title": "4-0080-0 - OBRA SOCIAL DE EJECUTIVOS Y DEL PERSONAL DE DIRECCION DE EMPRESAS"
+            },
+            {
+              "const": "4-0090-9",
+              "title": "4-0090-9 - OBRA SOCIAL DEL PERSONAL DE DIRECCION ACCION SOCIAL DE EMPRESARIOS (A:S:E.)"
+            },
+            {
+              "const": "4-0100-1",
+              "title": "4-0100-1 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LAS EMPRESAS QUE ACTUAN EN FRUTOS DEL PAIS"
+            },
+            {
+              "const": "4-0110-0",
+              "title": "4-0110-0 - OBRA SOCIAL DEL PERSONAL DE DIRECCION ALFREDO FORTABAT"
+            },
+            {
+              "const": "4-0120-9",
+              "title": "4-0120-9 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA METALURGICA Y DEMAS ACTIVIDADES EMPRESARIAS"
+            },
+            {
+              "const": "4-0130-8",
+              "title": "4-0130-8 - OBRA SOCIAL PARA EL PERSONAL DE DIRECCION DE LA INDUSTRIA MADERERA"
+            },
+            {
+              "const": "4-0160-5",
+              "title": "4-0160-5 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA PRIVADA DEL PETROLEO"
+            },
+            {
+              "const": "4-0170-4",
+              "title": "4-0170-4 - OBRA SOCIAL DE EMPRESARIOS, PROFESIONALE S Y MONOTRIBUTIS TAS"
+            },
+            {
+              "const": "4-0180-3",
+              "title": "4-0180-3 - OBRA SOCIAL ASOCIACION MUTUAL DEL PERSONAL DE PHILIPS ARGENTINA (AMPAR)"
+            },
+            {
+              "const": "4-0190-2",
+              "title": "4-0190-2 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE PERFUMERIA E.W. HOPE"
+            },
+            {
+              "const": "4-0200-4",
+              "title": "4-0200-4 - OBRA SOCIAL DEL PERSONAL DE DIRECCION DE SANIDAD LUIS PASTEUR"
+            },
+            {
+              "const": "4-0210-3",
+              "title": "4-0210-3 - OBRA SOCIAL ASOCIACION DEL PERSONAL DE DIRECCION DE LA INDUSTRIA SIDERURGICA"
+            },
+            {
+              "const": "4-0220-2",
+              "title": "4-0220-2 - OBRA SOCIAL MUTUALIDAD INDUSTRIAL TEXTIL ARGENTINA"
+            },
+            {
+              "const": "4-0230-1",
+              "title": "4-0230-1 - OBRA SOCIAL ASOCIACION DEL PERSONAL SUPERIOR DE LA ORGANIZACION TECHINT"
+            },
+            {
+              "const": "4-0240-0",
+              "title": "4-0240-0 - OBRA SOCIAL PARA EL PERSONAL DE DIRECCION DE LA INDUSTRIA VITIVINICOLA Y AFINES"
+            },
+            {
+              "const": "4-0250-9",
+              "title": "4-0250-9 - OBRA SOCIAL YPF"
+            },
+            {
+              "const": "4-0260-8",
+              "title": "4-0260-8 - OBRA SOCIAL ASOCIACION DE SERVICIOS SOCIALES PARA EMPRESARIOS Y PERSONAL DE DIRECCION DE EMPRESAS DEL COMERCIO, SERVICIOS, PRODUCCION, INDUSTRIA Y CIVIL (ASSPE)"
+            },
+            {
+              "const": "4-0270-7",
+              "title": "4-0270-7 - OBRA SOCIAL DE DIRECCION OSDO"
+            },
+            {
+              "const": "4-0280-6",
+              "title": "4-0280-6 - OBRA SOCIAL DE DIRECCION DE LA ACTIVIDAD AEROCOMERCIA L PRIVADA"
+            }
+          ],
+          "title": "What is your Obra Social?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select",
+            "statement": {
+              "description": "Remote offers medical benefits to all employees in Argentina enrolled in Obra Social ASE. To access these benefits, please <a href=\"https://www.argentina.gob.ar/servicio/realizar-opcion-de-cambio-de-obra-social\"  target=\"_blank\" rel=\"noopener noreferrer\">transfer to Obra Social ASE</a>.",
+              "inputType": "statement",
+              "severity": "info"
+            }
+          }
+        },
+        "obra_social_type": {
+          "oneOf": [
+            {
+              "const": "union",
+              "title": "Union"
+            },
+            {
+              "const": "fuera_de_convenio",
+              "title": "Fuera de Convenio"
+            }
+          ],
+          "title": "Which type of Obra Social are you enrolled in?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio",
+            "statement": {
+              "description": "Unfortunately, Remote can’t hire employees in a union Obra Social. Please choose a <a href=\"https://www.sssalud.gob.ar/?page=listRnosc&tipo=10\" target=\"_blank\" rel=\"noopener noreferrer\">non-union Obra Social</a> and then <a href=\"https://www.argentina.gob.ar/servicio/realizar-opcion-de-cambio-de-obra-social\"  target=\"_blank\" rel=\"noopener noreferrer\">transfer to that Obra Social</a>. If you’d like to receive medical benefits through Swiss Medical, you must transfer to <strong>Obra Social ASE</strong>. In order to transfer to a new plan, you must have been enrolled in your current Obra Social for at least a year.",
+              "inputType": "statement",
+              "severity": "warning"
+            }
+          }
+        }
+      },
+      "required": [
+        "has_obra_social"
+      ],
+      "title": "Obra Social",
+      "type": "object",
+      "x-jsf-order": [
+        "has_obra_social",
+        "obra_social_type",
+        "obra_social_code"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    }
+  },
+  "required": [
+    "cuenta_sueldo",
+    "birthplace",
+    "cuil",
+    "id_number",
+    "marital_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "cuil",
+    "marital_status",
+    "birthplace",
+    "cuenta_sueldo",
+    "obra_social"
+  ]
+}

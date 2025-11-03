@@ -1,0 +1,191 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "tax_incentive_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "tax_incentive_eligible": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "tax_incentive_eligible"
+        ]
+      },
+      "then": {
+        "required": [
+          "tax_incentive_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "education": {
+      "description": "Please list the degree associated with your highest level of education.",
+      "maxLength": 255,
+      "title": "Highest degree",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "Personal identification number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "personal_deduction_factor": {
+      "description": "Do you have a personal deduction factor? If applicable, indicate the percentage.",
+      "maxLength": 255,
+      "title": "Personal deduction factor",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "previous_employment_length": {
+      "description": "If applicable, please enter the length of your previous employment.",
+      "maxLength": 255,
+      "title": "Length of previous employment",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_incentive": {
+      "deprecated": true,
+      "description": "Are you entitled to the tax incentive for first employment or for being under 30 years old of age? (Yes or No). If yes please explain.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Tax incentive",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_incentive_details": {
+      "description": "Please, briefly explain your situation.",
+      "maxLength": 255,
+      "title": "Tax incentive details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "tax_incentive_eligible": {
+      "description": "Are you entitled to the tax incentive for first employment or for being under 30 years old of age?.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Tax incentive eligibility",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "work_permit_number": {
+      "description": "If applicable, please enter your work permit number.",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "education",
+    "tax_incentive_eligible"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "education",
+    "tax_incentive",
+    "tax_incentive_eligible",
+    "tax_incentive_details",
+    "personal_deduction_factor",
+    "previous_employment_length",
+    "work_permit_number"
+  ]
+}

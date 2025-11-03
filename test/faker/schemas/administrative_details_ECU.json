@@ -1,0 +1,83 @@
+{
+  "properties": {
+    "birthplace": {
+      "description": "Enter the name of the city and country where you were born",
+      "maxLength": 255,
+      "title": "Place of birth",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "education": {
+      "description": "Please list the degree associated with your highest level of education.",
+      "maxLength": 255,
+      "title": "Highest degree",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "marital_status",
+    "birthplace",
+    "id_number",
+    "education"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "marital_status",
+    "birthplace",
+    "id_number",
+    "education"
+  ]
+}

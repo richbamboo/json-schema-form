@@ -1,0 +1,390 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "passport_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "id_type": {
+            "const": "passport"
+          }
+        },
+        "required": [
+          "id_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "passport_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "id_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "id_type": {
+            "const": "id_number"
+          }
+        },
+        "required": [
+          "id_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "id_number"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "children_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_children": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_children"
+        ]
+      },
+      "then": {
+        "required": [
+          "children_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "birth_certificate_number": {
+      "maxLength": 255,
+      "title": "Birth certificate number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "children_details": {
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "title": "Child's date of birth",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "disability": {
+            "oneOf": [
+              {
+                "const": "yes",
+                "title": "Yes"
+              },
+              {
+                "const": "no",
+                "title": "No"
+              }
+            ],
+            "title": "Does this child have a disability?",
+            "type": "string",
+            "x-jsf-presentation": {
+              "direction": "row",
+              "inputType": "radio"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Child's full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "is_in_school": {
+            "oneOf": [
+              {
+                "const": "yes",
+                "title": "Yes"
+              },
+              {
+                "const": "no",
+                "title": "No"
+              }
+            ],
+            "title": "Is this child in school?",
+            "type": "string",
+            "x-jsf-presentation": {
+              "direction": "row",
+              "inputType": "radio"
+            }
+          }
+        },
+        "required": [
+          "disability",
+          "full_name",
+          "birthdate",
+          "is_in_school"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "disability",
+          "birthdate",
+          "is_in_school"
+        ]
+      },
+      "title": "Child's details",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another child",
+        "inputType": "group-array"
+      }
+    },
+    "cnss_number": {
+      "maxLength": 255,
+      "title": "Caisse Nationale de Sécurité Sociale (CNSS) number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "family_size": {
+      "title": "Number of immediate family members",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "has_children": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have children?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "head_of_family": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Are you the primary wage earner in your immediate family?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_date_of_issue": {
+      "format": "date",
+      "title": "ID or passport issue date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "id_number": {
+      "maxLength": 255,
+      "title": "National ID number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_type": {
+      "description": "Tunisian citizens must select National ID. Non-citizens must select Passport.",
+      "oneOf": [
+        {
+          "const": "id_number",
+          "title": "National ID"
+        },
+        {
+          "const": "passport",
+          "title": "Passport"
+        }
+      ],
+      "title": "ID type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependent_parents": {
+      "description": "A dependent parent is a parent who depends on you financially.",
+      "title": "Number of dependent parents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "passport_number": {
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "prior_inventions": {
+      "description": "This could be a concept, design, software program, or any original work you created that's patented or copyrighted.",
+      "items": {
+        "properties": {
+          "invention": {
+            "additionalProperties": false,
+            "properties": {
+              "invention_details": {
+                "description": "Include the name or relevant type of invention or intellectual property, the date range of when it was created, and any other details that may be relevant for identification.",
+                "maxLength": 1000,
+                "title": "Provide as many details about your prior inventions as you can. We’ll include them in the employment agreement.",
+                "type": "string",
+                "x-jsf-presentation": {
+                  "inputType": "textarea"
+                }
+              }
+            },
+            "required": [
+              "invention_details"
+            ],
+            "title": "Prior invention",
+            "type": "object",
+            "x-jsf-order": [
+              "invention_details"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "fieldset"
+            }
+          }
+        },
+        "required": [
+          "invention"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "invention"
+        ]
+      },
+      "title": "Do you have any prior inventions or intellectual property you want to exclude from your employment?",
+      "type": "array",
+      "x-jsf-presentation": {
+        "addFieldText": "Add another prior invention",
+        "inputType": "group-array"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax number (matricule fiscal)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "birth_certificate_number",
+    "cnss_number",
+    "family_size",
+    "head_of_family",
+    "id_date_of_issue",
+    "id_type",
+    "marital_status",
+    "number_of_dependent_parents",
+    "has_children"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_type",
+    "id_number",
+    "passport_number",
+    "id_date_of_issue",
+    "cnss_number",
+    "tax_number",
+    "marital_status",
+    "birth_certificate_number",
+    "family_size",
+    "head_of_family",
+    "number_of_dependent_parents",
+    "has_children",
+    "children_details",
+    "prior_inventions"
+  ],
+  "x-jsf-presentation": {
+    "inputType": "fieldset"
+  }
+}

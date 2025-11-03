@@ -1,0 +1,183 @@
+{
+  "properties": {
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "ssn": {
+      "maxLength": 255,
+      "title": "Social security number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "tax_card_additional_percentage": {
+      "description": "if applicable",
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Additional tax percentage on tax card",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "tax_card_basic_percentage": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Basic tax percentage on tax card",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "tax_card_date": {
+      "format": "date",
+      "title": "Tax card date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "tax_card_income_limit": {
+      "description": "if applicable",
+      "title": "Income limit on tax card",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "tax_card_number": {
+      "maxLength": 255,
+      "title": "Tax card number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "union_code": {
+      "description": "if applicable",
+      "maxLength": 255,
+      "title": "Union code",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "union_department": {
+      "description": "if applicable",
+      "maxLength": 255,
+      "title": "Union department",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "union_fee_start_date": {
+      "description": "if applicable",
+      "format": "date",
+      "title": "Union fee start date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "ssn",
+    "tax_card_number",
+    "tax_card_date",
+    "tax_card_basic_percentage",
+    "marital_status",
+    "number_of_dependents"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "ssn",
+    "tax_card_number",
+    "tax_card_date",
+    "tax_card_basic_percentage",
+    "tax_card_additional_percentage",
+    "tax_card_income_limit",
+    "marital_status",
+    "number_of_dependents",
+    "union_code",
+    "union_department",
+    "union_fee_start_date",
+    "work_permit_number"
+  ]
+}

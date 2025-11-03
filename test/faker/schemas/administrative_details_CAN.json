@@ -1,0 +1,138 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "sin_expiry_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "sin": {
+            "pattern": "^9"
+          }
+        },
+        "required": [
+          "sin"
+        ]
+      },
+      "then": {
+        "required": [
+          "sin_expiry_date"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "personal_tax_credit_return": {
+      "description": "",
+      "properties": {
+        "additional_tax_deducted": {
+          "description": "Enter any additional tax to be deducted (page 2 of your federal personal tax credits return form).",
+          "title": "Additional tax deduction amount",
+          "type": "integer",
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "CAN",
+            "inputType": "money"
+          }
+        },
+        "total_claim_amount": {
+          "description": "Enter your total claim amount (line 13 of your federal personal tax credits return form).",
+          "title": "Total claim amount",
+          "type": "integer",
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "CAN",
+            "inputType": "money"
+          }
+        }
+      },
+      "required": [
+        "total_claim_amount",
+        "additional_tax_deducted"
+      ],
+      "title": "Federal personal tax credits return",
+      "type": "object",
+      "x-jsf-order": [
+        "total_claim_amount",
+        "additional_tax_deducted"
+      ],
+      "x-jsf-presentation": {
+        "description": "After you finish setting up your profile, please upload your <a href='https://www.canada.ca/en/revenue-agency/services/forms-publications/td1-personal-tax-credits-returns/td1-forms-pay-received-on-january-1-later.html' target='_blank' rel='noopener noreferrer'>federal personal tax credits return form</a>.",
+        "inputType": "fieldset"
+      }
+    },
+    "provincial_tax": {
+      "properties": {
+        "basic_personal_amount": {
+          "description": "Enter your total claim amount as indicated on your provincial personal tax credits return form.",
+          "title": "Total claim amount",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "x-jsf-errorMessage": {
+            "type": "Please, use US standard currency format. Ex: 1024.12"
+          },
+          "x-jsf-presentation": {
+            "currency": "CAD",
+            "inputType": "money"
+          }
+        }
+      },
+      "required": [
+        "basic_personal_amount"
+      ],
+      "title": "Provincial personal tax credits return",
+      "type": "object",
+      "x-jsf-order": [
+        "basic_personal_amount"
+      ],
+      "x-jsf-presentation": {
+        "description": "After you finish setting up your profile, please upload your <a href='https://www.canada.ca/en/revenue-agency/services/forms-publications/td1-personal-tax-credits-returns/td1-forms-pay-received-on-january-1-later.html' target='_blank' rel='noopener noreferrer'>provincial personal tax credits return form</a> or your <a href='https://www.revenuquebec.ca/en/online-services/forms-and-publications/current-details/tp-1015-3-v/' target='_blank' rel='noopener noreferrer'>source deductions return</a> if you live in Quebec.",
+        "inputType": "fieldset"
+      }
+    },
+    "sin": {
+      "description": "Enter your social insurance number",
+      "pattern": "^\\d{3}-?\\d{3}-?\\d{3}$",
+      "title": "Social insurance number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4
+      }
+    },
+    "sin_expiry_date": {
+      "description": "If your SIN starts with a 9 please provide your SIN expiry date.",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Social Insurance Number expiry date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    }
+  },
+  "required": [
+    "sin",
+    "personal_tax_credit_return",
+    "provincial_tax"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "sin",
+    "sin_expiry_date",
+    "personal_tax_credit_return",
+    "provincial_tax"
+  ]
+}

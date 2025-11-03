@@ -1,0 +1,107 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "ACT",
+          "title": "Australian Capital Territory (ACT)"
+        },
+        {
+          "const": "NSW",
+          "title": "New South Wales (NSW)"
+        },
+        {
+          "const": "NT",
+          "title": "Northern Territory (NT)"
+        },
+        {
+          "const": "QLD",
+          "title": "Queensland (QLD)"
+        },
+        {
+          "const": "SA",
+          "title": "South Australia (SA)"
+        },
+        {
+          "const": "TAS",
+          "title": "Tasmania (TAS)"
+        },
+        {
+          "const": "VIC",
+          "title": "Victoria (VIC)"
+        },
+        {
+          "const": "WA",
+          "title": "Western Australia (WA)"
+        }
+      ],
+      "title": "State/Territory",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "suburb": {
+      "maxLength": 255,
+      "title": "Suburb",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state",
+    "suburb"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "suburb",
+    "postal_code"
+  ]
+}

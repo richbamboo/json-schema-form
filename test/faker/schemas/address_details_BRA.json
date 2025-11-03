@@ -1,0 +1,186 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "district": {
+      "description": "Your neighborhood name",
+      "maxLength": 255,
+      "title": "District",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select your state",
+      "oneOf": [
+        {
+          "const": "AC",
+          "title": "Acre (AC)"
+        },
+        {
+          "const": "AL",
+          "title": "Alagoas (AL)"
+        },
+        {
+          "const": "AM",
+          "title": "Amazonas (AM)"
+        },
+        {
+          "const": "AP",
+          "title": "Amapá (AP)"
+        },
+        {
+          "const": "BA",
+          "title": "Bahia (BA)"
+        },
+        {
+          "const": "CE",
+          "title": "Ceará (CE)"
+        },
+        {
+          "const": "DF",
+          "title": "Distrito Federal (DF)"
+        },
+        {
+          "const": "ES",
+          "title": "Espírito Santo (ES)"
+        },
+        {
+          "const": "GO",
+          "title": "Goiás (GO)"
+        },
+        {
+          "const": "MA",
+          "title": "Maranhão (MA)"
+        },
+        {
+          "const": "MG",
+          "title": "Minas Gerais (MG)"
+        },
+        {
+          "const": "MS",
+          "title": "Mato Grosso do Sul (MS)"
+        },
+        {
+          "const": "MT",
+          "title": "Mato Grosso (MT)"
+        },
+        {
+          "const": "PA",
+          "title": "Pará (PA)"
+        },
+        {
+          "const": "PB",
+          "title": "Paraíba (PB)"
+        },
+        {
+          "const": "PE",
+          "title": "Pernambuco (PE)"
+        },
+        {
+          "const": "PI",
+          "title": "Piauí (PI)"
+        },
+        {
+          "const": "PR",
+          "title": "Paraná (PR)"
+        },
+        {
+          "const": "RJ",
+          "title": "Rio de Janeiro (RJ)"
+        },
+        {
+          "const": "RN",
+          "title": "Rio Grande do Norte (RN)"
+        },
+        {
+          "const": "RO",
+          "title": "Rondônia (RO)"
+        },
+        {
+          "const": "RR",
+          "title": "Roraima (RR)"
+        },
+        {
+          "const": "RS",
+          "title": "Rio Grande do Sul (RS)"
+        },
+        {
+          "const": "SC",
+          "title": "Santa Catarina (SC)"
+        },
+        {
+          "const": "SE",
+          "title": "Sergipe (SE)"
+        },
+        {
+          "const": "SP",
+          "title": "São Paulo (SP)"
+        },
+        {
+          "const": "TO",
+          "title": "Tocantins (TO)"
+        }
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "placeholder": "Select state"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "district",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "district",
+    "postal_code"
+  ]
+}

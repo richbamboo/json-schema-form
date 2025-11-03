@@ -1,0 +1,3932 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "benefits": {
+            "properties": {
+              "health_insurance": {
+                "oneOf": [
+                  {
+                    "const": "Basic Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Basic Health Tier - $363.74",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers half of the employee's health insurance costs, including medical, dental, and vision. No contribution for dependents' coverage. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-basic-tier",
+                        "displayCost": "$363.74",
+                        "id": "20cb66f5-2597-47f6-b5c7-22f21435d2da",
+                        "providerName": "Guideline",
+                        "tierName": "Basic Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Core Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Core Health Tier - $500 - $1,090",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 70% of the employee's insurance and 50% of the combined employee plus dependents' total insurance costs for medical, dental, and vision coverage. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-core-tier",
+                        "displayCost": "$500 - $1,090",
+                        "id": "956ab86c-b895-4292-9939-55031a419be2",
+                        "providerName": "Guideline",
+                        "tierName": "Core Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Prime Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Prime Health Tier - $560 - $720",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 100% of the employee's medical, dental, and vision insurance. Dependents' coverage is not included. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-prime-tier",
+                        "displayCost": "$560 - $720",
+                        "id": "be27046b-9130-4bf9-b088-48e58092c90a",
+                        "providerName": "Guideline",
+                        "tierName": "Prime Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Standard Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Standard Health Tier - $550 - $1,530",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 95% coverage of the employee's health insurance costs and contributes to 70% of the total cost when dependents are included. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-standard-tier",
+                        "displayCost": "$550 - $1,530",
+                        "id": "17bd73b9-23b1-4432-b673-67ced06ab13c",
+                        "providerName": "Guideline",
+                        "tierName": "Standard Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Enhanced Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Enhanced Health Tier - $555 - $1,760",
+                    "x-jsf-presentation": {
+                      "description": "<p>Fully covers the employee's health insurance and contributes 80% towards the total cost of coverage that includes dependents. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-enhanced-tier",
+                        "displayCost": "$555 - $1,760",
+                        "id": "c5f16336-0851-4de3-9753-52676595052f",
+                        "providerName": "Guideline",
+                        "tierName": "Enhanced Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Plus Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Plus Health Tier - $560 - $2,240",
+                    "x-jsf-presentation": {
+                      "description": "<p>Fully covers the employee's costs for medical, dental, and vision coverages and 90% of the combined employee plus dependents' total insurance costs. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-plus-tier",
+                        "displayCost": "$560 - $2,240",
+                        "id": "bb029501-1ead-4ad6-b35d-e523172cc3d0",
+                        "providerName": "Guideline",
+                        "tierName": "Plus Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Premium Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Premium Health Tier - $560 - $2,500",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 100% coverage for the employee's medical, dental, and vision insurance, as well as full coverage for dependents. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-premium-tier",
+                        "displayCost": "$560 - $2,500",
+                        "id": "c6994151-9b5e-477a-a956-4d31524a2f0b",
+                        "providerName": "Guideline",
+                        "tierName": "Premium Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_hours_per_week": {
+            "minimum": 30
+          },
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_hours_per_week",
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "benefits": {
+            "properties": {
+              "health_insurance": {
+                "oneOf": [
+                  {
+                    "const": "Basic Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Basic Health Tier - $363.74",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers half of the employee's health insurance costs, including medical, dental, and vision. No contribution for dependents' coverage. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-basic-tier",
+                        "displayCost": "$363.74",
+                        "id": "20cb66f5-2597-47f6-b5c7-22f21435d2da",
+                        "providerName": "Guideline",
+                        "tierName": "Basic Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Core Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Core Health Tier - $500 - $1,090",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 70% of the employee's insurance and 50% of the combined employee plus dependents' total insurance costs for medical, dental, and vision coverage. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-core-tier",
+                        "displayCost": "$500 - $1,090",
+                        "id": "956ab86c-b895-4292-9939-55031a419be2",
+                        "providerName": "Guideline",
+                        "tierName": "Core Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Prime Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Prime Health Tier - $560 - $720",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 100% of the employee's medical, dental, and vision insurance. Dependents' coverage is not included. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-prime-tier",
+                        "displayCost": "$560 - $720",
+                        "id": "be27046b-9130-4bf9-b088-48e58092c90a",
+                        "providerName": "Guideline",
+                        "tierName": "Prime Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Standard Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Standard Health Tier - $550 - $1,530",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 95% coverage of the employee's health insurance costs and contributes to 70% of the total cost when dependents are included. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-standard-tier",
+                        "displayCost": "$550 - $1,530",
+                        "id": "17bd73b9-23b1-4432-b673-67ced06ab13c",
+                        "providerName": "Guideline",
+                        "tierName": "Standard Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Enhanced Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Enhanced Health Tier - $555 - $1,760",
+                    "x-jsf-presentation": {
+                      "description": "<p>Fully covers the employee's health insurance and contributes 80% towards the total cost of coverage that includes dependents. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-enhanced-tier",
+                        "displayCost": "$555 - $1,760",
+                        "id": "c5f16336-0851-4de3-9753-52676595052f",
+                        "providerName": "Guideline",
+                        "tierName": "Enhanced Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Plus Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Plus Health Tier - $560 - $2,240",
+                    "x-jsf-presentation": {
+                      "description": "<p>Fully covers the employee's costs for medical, dental, and vision coverages and 90% of the combined employee plus dependents' total insurance costs. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-plus-tier",
+                        "displayCost": "$560 - $2,240",
+                        "id": "bb029501-1ead-4ad6-b35d-e523172cc3d0",
+                        "providerName": "Guideline",
+                        "tierName": "Plus Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "const": "Premium Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+                    "title": "Premium Health Tier - $560 - $2,500",
+                    "x-jsf-presentation": {
+                      "description": "<p>Covers 100% coverage for the employee's medical, dental, and vision insurance, as well as full coverage for dependents. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                      "meta": {
+                        "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                        "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-premium-tier",
+                        "displayCost": "$560 - $2,500",
+                        "id": "c6994151-9b5e-477a-a956-4d31524a2f0b",
+                        "providerName": "Guideline",
+                        "tierName": "Premium Health Tier",
+                        "types": [
+                          "pension",
+                          "life-plus-ad&d",
+                          "dental",
+                          "flexible-spending-account",
+                          "health-savings-account",
+                          "hospital-coverage",
+                          "disability",
+                          "health",
+                          "vision",
+                          "personal-accident",
+                          "critical-illness",
+                          "life"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "minimum": 0
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "unlimited"
+          }
+        },
+        "required": [
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "const": 0,
+            "default": 0,
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Recommended minimum of <strong>20 days</strong> of paid time off."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "WA"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Washington requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Washington"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "VT"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Vermont requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Vermont"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "RI"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Rhode Island requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Rhode Island"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "PA"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Pennsylvania requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Pennsylvania"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "OR"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Oregon requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Oregon"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "NY"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "New York requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in New York"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "NV"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Nevada requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Nevada"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "NM"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "New Mexico requires a minimum of 8 paid time off days",
+            "minimum": 8,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in New Mexico"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "NJ"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "New Jersey requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in New Jersey"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "MI"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Michigan requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Michigan"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "ME"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Maine requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Maine"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "MD"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Maryland requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Maryland"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "MA"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Massachusetts requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Massachusetts"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "IL"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Illinois requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Illinois"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "DC"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "District of Columbia requires a minimum of 7 paid time off days",
+            "minimum": 7,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in District of Columbia"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "CT"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Connecticut requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Connecticut"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "CO"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Colorado requires a minimum of 6 paid time off days",
+            "minimum": 6,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Colorado"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "CA"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "California requires a minimum of 3 paid time off days",
+            "minimum": 3,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in California"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "available_pto_type": {
+            "const": "fixed"
+          },
+          "state_of_residency": {
+            "const": "AZ"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "available_pto_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Arizona requires a minimum of 5 paid time off days",
+            "minimum": 5,
+            "x-jsf-errorMessage": {
+              "minimum": "The paid time off days entered is below the minimum requirement for employees in Arizona"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "flsa_classification": false,
+          "hourly_gross_salary": false
+        },
+        "required": [
+          "annual_gross_salary"
+        ]
+      },
+      "if": {
+        "properties": {
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": false,
+          "flsa_classification": {
+            "const": "non_exempt",
+            "default": "non_exempt"
+          }
+        },
+        "required": [
+          "hourly_gross_salary"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "wage_type": {
+            "const": "salary"
+          },
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 3556800,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to $35,568.00"
+            }
+          }
+        },
+        "required": [
+          "annual_gross_salary"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "minimum": 725,
+            "x-jsf-errorMessage": {
+              "minimum": "Must be greater or equal to $7.25"
+            }
+          }
+        },
+        "required": [
+          "hourly_gross_salary"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "GU"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Guam, full-time employees are entitled to a minimum hourly salary of $9.25",
+            "minimum": 925,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Guam"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "NY"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In New York, full-time employees are entitled to a minimum hourly salary of $16.50",
+            "minimum": 1650,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in New York"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "NM"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In New Mexico, full-time employees are entitled to a minimum hourly salary of $12.00",
+            "minimum": 1200,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in New Mexico"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "RI"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Rhode Island, full-time employees are entitled to a minimum hourly salary of $15.00",
+            "minimum": 1500,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Rhode Island"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "DE"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Delaware, full-time employees are entitled to a minimum hourly salary of $15.00",
+            "minimum": 1500,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Delaware"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "AK"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Alaska, full-time employees are entitled to a minimum hourly salary of $11.91",
+            "minimum": 1191,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Alaska"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "NE"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Nebraska, full-time employees are entitled to a minimum hourly salary of $13.50",
+            "minimum": 1350,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Nebraska"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "VA"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Virginia, full-time employees are entitled to a minimum hourly salary of $12.41",
+            "minimum": 1241,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Virginia"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "CA"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In California, full-time employees are entitled to a minimum hourly salary of $16.50",
+            "minimum": 1650,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in California"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "OR"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Oregon, full-time employees are entitled to a minimum hourly salary of $15.95",
+            "minimum": 1595,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Oregon"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "ME"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Maine, full-time employees are entitled to a minimum hourly salary of $14.65",
+            "minimum": 1465,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Maine"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "AR"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Arkansas, full-time employees are entitled to a minimum hourly salary of $11.00",
+            "minimum": 1100,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Arkansas"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "VT"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Vermont, full-time employees are entitled to a minimum hourly salary of $14.01",
+            "minimum": 1401,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Vermont"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MT"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Montana, full-time employees are entitled to a minimum hourly salary of $10.55",
+            "minimum": 1055,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Montana"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MN"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Minnesota, full-time employees are entitled to a minimum hourly salary of $11.13",
+            "minimum": 1113,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Minnesota"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "SD"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In South Dakota, full-time employees are entitled to a minimum hourly salary of $11.50",
+            "minimum": 1150,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in South Dakota"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MI"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Michigan, full-time employees are entitled to a minimum hourly salary of $12.48",
+            "minimum": 1248,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Michigan"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "CT"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Connecticut, full-time employees are entitled to a minimum hourly salary of $16.35",
+            "minimum": 1635,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Connecticut"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MD"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Maryland, full-time employees are entitled to a minimum hourly salary of $15.00",
+            "minimum": 1500,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Maryland"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "WA"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Washington, full-time employees are entitled to a minimum hourly salary of $16.66",
+            "minimum": 1666,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Washington"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "HI"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Hawaii, full-time employees are entitled to a minimum hourly salary of $14.00",
+            "minimum": 1400,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Hawaii"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MO"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Missouri, full-time employees are entitled to a minimum hourly salary of $13.75",
+            "minimum": 1375,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Missouri"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "IL"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Illinois, full-time employees are entitled to a minimum hourly salary of $15.00",
+            "minimum": 1500,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Illinois"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "FL"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Florida, full-time employees are entitled to a minimum hourly salary of $13.00",
+            "minimum": 1300,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Florida"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "OH"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Ohio, full-time employees are entitled to a minimum hourly salary of $10.70",
+            "minimum": 1070,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Ohio"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "VI"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Virgin Islands, full-time employees are entitled to a minimum hourly salary of $10.50",
+            "minimum": 1050,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Virgin Islands"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "PR"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Puerto Rico, full-time employees are entitled to a minimum hourly salary of $10.50",
+            "minimum": 1050,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Puerto Rico"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "CO"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Colorado, full-time employees are entitled to a minimum hourly salary of $14.81",
+            "minimum": 1481,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Colorado"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "NJ"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In New Jersey, full-time employees are entitled to a minimum hourly salary of $15.49",
+            "minimum": 1549,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in New Jersey"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MA"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Massachusetts, full-time employees are entitled to a minimum hourly salary of $15.00",
+            "minimum": 1500,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Massachusetts"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "DC"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In District of Columbia, full-time employees are entitled to a minimum hourly salary of $17.50",
+            "minimum": 1750,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in District of Columbia"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "AZ"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Arizona, full-time employees are entitled to a minimum hourly salary of $14.70",
+            "minimum": 1470,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Arizona"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "WV"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In West Virginia, full-time employees are entitled to a minimum hourly salary of $8.75",
+            "minimum": 875,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in West Virginia"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "NV"
+          },
+          "wage_type": {
+            "const": "hourly"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "hourly_gross_salary": {
+            "description": "In Nevada, full-time employees are entitled to a minimum hourly salary of $12.00",
+            "minimum": 1200,
+            "x-jsf-errorMessage": {
+              "minimum": "The hourly salary entered is below the minimum requirement for full-time employees in Nevada"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "WA"
+          },
+          "wage_type": {
+            "const": "salary"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In Washington, full-time employees are entitled to a minimum annual salary of $77,968.80",
+            "minimum": 7796880,
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in Washington"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "NY"
+          },
+          "wage_type": {
+            "const": "salary"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In New York, full-time employees are entitled to a minimum annual salary of $64,350.00",
+            "minimum": 6435000,
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in New York"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "ME"
+          },
+          "wage_type": {
+            "const": "salary"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In Maine, full-time employees are entitled to a minimum annual salary of $43,951.00",
+            "minimum": 4395100,
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in Maine"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "CO"
+          },
+          "wage_type": {
+            "const": "salary"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In Colorado, full-time employees are entitled to a minimum annual salary of $56,485.00",
+            "minimum": 5648500,
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in Colorado"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "CA"
+          },
+          "wage_type": {
+            "const": "salary"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In California, full-time employees are entitled to a minimum annual salary of $68,640.00",
+            "minimum": 6864000,
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in California"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "AK"
+          },
+          "wage_type": {
+            "const": "salary"
+          }
+        },
+        "required": [
+          "state_of_residency",
+          "wage_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "description": "In Alaska, full-time employees are entitled to a minimum annual salary of $49,545.60",
+            "minimum": 4954560,
+            "x-jsf-errorMessage": {
+              "minimum": "The salary entered is below the minimum requirement for full-time employees in Alaska"
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "full_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "work_hours_per_week": {
+              "maximum": 40,
+              "minimum": 30
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 29
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "has_notice_period": false,
+          "has_severance": false,
+          "notice_period_weeks": false,
+          "severance_days": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_notice_period": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "has_severance",
+          "has_notice_period"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "severance_days": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          },
+          "has_severance": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_severance"
+        ]
+      },
+      "then": {
+        "properties": {
+          "severance_days": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "severance_days"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "notice_period_weeks": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          },
+          "has_notice_period": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_notice_period"
+        ]
+      },
+      "then": {
+        "properties": {
+          "notice_period_weeks": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "notice_period_weeks"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "non_compete_clause_halt_months": false
+        }
+      },
+      "if": {
+        "properties": {
+          "non_compete_clause_apply": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "non_compete_clause_apply"
+        ]
+      },
+      "then": {
+        "required": [
+          "non_compete_clause_halt_months"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "probation_length_days": false
+        }
+      },
+      "if": {
+        "properties": {
+          "state_of_residency": {
+            "const": "MT"
+          }
+        },
+        "required": [
+          "state_of_residency"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length_days": {
+            "description": "In Montana, a probationary period is required for new hires.",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "probation_length_days"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_schedule": {
+            "enum": [
+              "full_time",
+              "part_time"
+            ]
+          }
+        }
+      },
+      "if": true,
+      "then": {
+        "properties": {
+          "work_schedule": {
+            "enum": [
+              "full_time"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "In the United States, full-time employees are entitled to a minimum annual salary of $35,568.00",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "We recommend at least 20 days. Please note that Statutory, Bank Holidays and Public Holidays, based on employee's country of residence are excluded from the above.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "available_pto_type": {
+      "description": "For personal time off. Also called vacation or annual leave.",
+      "oneOf": [
+        {
+          "const": "unlimited",
+          "description": "Gives the employee an uncapped number of paid time off days per year.",
+          "title": "Unlimited paid time off"
+        },
+        {
+          "const": "fixed",
+          "description": "The employee gets a set number of paid time off days per year that you establish.",
+          "title": "Fixed paid time off"
+        }
+      ],
+      "title": "Paid time off policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "55ae0d32-57b1-402f-93cb-ba0d8b2bdd5c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "7f1dd8ae-efdd-4441-acee-221cf9665f8f",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "55ae0d32-57b1-402f-93cb-ba0d8b2bdd5c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "729f63b4-2bec-4bfd-a54b-c99222895ff8",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "55ae0d32-57b1-402f-93cb-ba0d8b2bdd5c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "a03e40f0-bfaa-47b6-993d-238b5b784547",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "55ae0d32-57b1-402f-93cb-ba0d8b2bdd5c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "72550b06-4610-48fd-93ec-76248a1474ac",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "55ae0d32-57b1-402f-93cb-ba0d8b2bdd5c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "98bc0ec5-5c38-4192-a27e-238fe512cb7f",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Basic Health Tier - $363.74",
+              "x-jsf-presentation": {
+                "description": "<p>Covers half of the employee's health insurance costs, including medical, dental, and vision. No contribution for dependents' coverage. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-basic-tier",
+                  "displayCost": "$363.74",
+                  "id": "20cb66f5-2597-47f6-b5c7-22f21435d2da",
+                  "providerName": "Guideline",
+                  "tierName": "Basic Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Core Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Core Health Tier - $500 - $1,090",
+              "x-jsf-presentation": {
+                "description": "<p>Covers 70% of the employee's insurance and 50% of the combined employee plus dependents' total insurance costs for medical, dental, and vision coverage. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-core-tier",
+                  "displayCost": "$500 - $1,090",
+                  "id": "956ab86c-b895-4292-9939-55031a419be2",
+                  "providerName": "Guideline",
+                  "tierName": "Core Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Prime Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Prime Health Tier - $560 - $720",
+              "x-jsf-presentation": {
+                "description": "<p>Covers 100% of the employee's medical, dental, and vision insurance. Dependents' coverage is not included. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-prime-tier",
+                  "displayCost": "$560 - $720",
+                  "id": "be27046b-9130-4bf9-b088-48e58092c90a",
+                  "providerName": "Guideline",
+                  "tierName": "Prime Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Standard Health Tier - $550 - $1,530",
+              "x-jsf-presentation": {
+                "description": "<p>Covers 95% coverage of the employee's health insurance costs and contributes to 70% of the total cost when dependents are included. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-standard-tier",
+                  "displayCost": "$550 - $1,530",
+                  "id": "17bd73b9-23b1-4432-b673-67ced06ab13c",
+                  "providerName": "Guideline",
+                  "tierName": "Standard Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Enhanced Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Enhanced Health Tier - $555 - $1,760",
+              "x-jsf-presentation": {
+                "description": "<p>Fully covers the employee's health insurance and contributes 80% towards the total cost of coverage that includes dependents. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-enhanced-tier",
+                  "displayCost": "$555 - $1,760",
+                  "id": "c5f16336-0851-4de3-9753-52676595052f",
+                  "providerName": "Guideline",
+                  "tierName": "Enhanced Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Plus Health Tier - $560 - $2,240",
+              "x-jsf-presentation": {
+                "description": "<p>Fully covers the employee's costs for medical, dental, and vision coverages and 90% of the combined employee plus dependents' total insurance costs. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-plus-tier",
+                  "displayCost": "$560 - $2,240",
+                  "id": "bb029501-1ead-4ad6-b35d-e523172cc3d0",
+                  "providerName": "Guideline",
+                  "tierName": "Plus Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Health Tier (Guideline - 2025 401k Retirement Plan; Guardian - 2025 Basic Life and AD&D; Guardian - 2025 Dental Basic; Guardian - 2025 Dental Premium; American Benefits Group - 2025 Dependent Care FSA; American Benefits Group - 2025 Flexible Spending Account; Cigna - HSABank - 2025 Health Savings Plan (HSA); Guardian - 2025 Hospital Coverage; Guardian - 2025 Long Term Disability (LTD); Cigna - 2025 Medical (HDHP 3000); Cigna - 2025 Medical (PPO 0); Cigna - 2025 Medical (PPO 1200); Cigna - 2025 Medical (PPO 250); Guardian - 2025 Short Term Disability (STD); Guardian - 2025 Vision Basic; Guardian - 2025 Vision Premium; Guardian - 2025 Voluntary Accident; Guardian - 2025 Voluntary Critical Illness; Guardian - 2025 Voluntary Life)",
+              "title": "Premium Health Tier - $560 - $2,500",
+              "x-jsf-presentation": {
+                "description": "<p>Covers 100% coverage for the employee's medical, dental, and vision insurance, as well as full coverage for dependents. Basic Life, Short-Term Disability (STD), and Long-Term Disability (LTD) insurance are mandatory and fully covered by the employer.</p>",
+                "meta": {
+                  "benefitGroupId": "3284f782-3a81-47b2-90a2-8ee1b6f49ba8",
+                  "detailsUrl": "https://remote.com/benefits-guide/united-states-employee-premium-tier",
+                  "displayCost": "$560 - $2,500",
+                  "id": "c6994151-9b5e-477a-a956-4d31524a2f0b",
+                  "providerName": "Guideline",
+                  "tierName": "Premium Health Tier",
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "pension",
+                    "life-plus-ad&d",
+                    "dental",
+                    "flexible-spending-account",
+                    "health-savings-account",
+                    "hospital-coverage",
+                    "disability",
+                    "health",
+                    "vision",
+                    "personal-accident",
+                    "critical-illness",
+                    "life"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p>Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.</p>",
+                "meta": {
+                  "benefitGroupId": "6999d392-5aa0-402f-9d5b-3d19e1966319",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "f8b0e387-a479-4284-ad3e-21cbb1f594a1",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p>1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.</p>",
+                "meta": {
+                  "benefitGroupId": "6999d392-5aa0-402f-9d5b-3d19e1966319",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "9f9c176c-8c12-42b6-81af-b3ffa1b25962",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p>3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.</p>",
+                "meta": {
+                  "benefitGroupId": "6999d392-5aa0-402f-9d5b-3d19e1966319",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "6514f14d-2255-41dc-9776-65a2cf6ceb94",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p>6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.</p>",
+                "meta": {
+                  "benefitGroupId": "6999d392-5aa0-402f-9d5b-3d19e1966319",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "7bff1d8b-3e37-4a7c-9407-69a8964e8b4c",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "<p>12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.</p>",
+                "meta": {
+                  "benefitGroupId": "6999d392-5aa0-402f-9d5b-3d19e1966319",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "930168ac-3158-449d-a33e-cd61ed77f758",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "health_insurance",
+        "business_travel_insurance",
+        "mental_health_program"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In this section, you can select benefits for your new team member. If you have existing team members in the same country, your new hire will receive the same benefits as those currently provided to other team members there, maintaining benefit equality. If this is your first hire in the country, you may select from the available options below. Your choice will become the standard benefits for any future hires in the country.",
+        "extra": "Prices are listed in U.S. Dollars (USD). However, when benefits are originally priced in local currencies, these amounts are estimates in USD. The final charge in local currency will be determined using the exchange rate at the time of invoicing. The pricing listed is subject to change based on the age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance.\n\nOur 401K (retirement) plan deductions in the US, which are separate from our insurance plans and will remain the same for the 2025 plan year.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here.",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_notice_period": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you want to include a notice period?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_severance": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Is the position eligible for severance?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "job_code": {
+      "description": "According to U.S. federal guidelines, which job category best fits the Employee’s current role?",
+      "oneOf": [
+        {
+          "const": "senior_managers",
+          "title": "Category 1 : Executive/Senior Level Officials and Managers"
+        },
+        {
+          "const": "mid_managers",
+          "title": "Category 2: First/Mid-Level Officials and Managers"
+        },
+        {
+          "const": "professionals",
+          "title": "Category 3: Professionals"
+        },
+        {
+          "const": "technicians",
+          "title": "Category 4: Technicians"
+        },
+        {
+          "const": "sales_workers",
+          "title": "Category 5: Sales Workers"
+        },
+        {
+          "const": "administrative_support_workers",
+          "title": "Category 6: Administrative Support Workers"
+        },
+        {
+          "const": "craft_workers",
+          "title": "Category 7: Craft Workers"
+        },
+        {
+          "const": "operatives",
+          "title": "Category 8: Operatives"
+        },
+        {
+          "const": "laborers_and_helpers",
+          "title": "Category 9: Laborers and Helpers"
+        },
+        {
+          "const": "service_workers",
+          "title": "Category 10: Service Workers"
+        }
+      ],
+      "title": "Job category",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "non_compete_clause_apply": {
+      "description": "We can add a non-compete clause. However, we can't guarantee its effectiveness or take action to enforce it against the employee. Because of these details, we recommend selecting No.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply a non-compete clause?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "We can add a non-compete clause. However, we can't guarantee its effectiveness or take action to enforce it against the employee. Because of these details, we recommend selecting <strong>No</strong>.",
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_halt_months": {
+      "description": "How many months should the non-compete clause last after termination of the employee contract? (We do not recommend anything more than 12 months). This will prevent the employee from engaging with competitors.",
+      "minimum": 1,
+      "title": "Non-activity period, in months",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "notice_period_weeks": {
+      "minimum": 0,
+      "title": "Notice period in weeks",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "probation_length_days": {
+      "description": "In the United States there is no legally mandated minimum probation period, but it's typically 90 days.",
+      "minimum": 1,
+      "title": "Probation period, in days",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Why do I need to do this?",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "severance_days": {
+      "description": "In the United States, severance benefits are not required by law; instead, you and your employee must mutually agree on them.",
+      "minimum": 0,
+      "title": "How many days severance do you want to offer?",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "USD",
+        "inputType": "money"
+      }
+    },
+    "state_of_residency": {
+      "description": "Where the employee's permanent address is located.",
+      "enum": [
+        "AL",
+        "AK",
+        "AR",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "FL",
+        "GA",
+        "HI",
+        "IN",
+        "ID",
+        "IL",
+        "IA",
+        "KS",
+        "KY",
+        "LA",
+        "MD",
+        "MA",
+        "ME",
+        "MI",
+        "MO",
+        "MN",
+        "MS",
+        "MT",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "NC",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VT",
+        "VA",
+        "WA",
+        "DC",
+        "WV",
+        "WI",
+        "WY"
+      ],
+      "oneOf": [
+        {
+          "const": "AL",
+          "title": "Alabama (AL)"
+        },
+        {
+          "const": "AK",
+          "title": "Alaska (AK)"
+        },
+        {
+          "const": "AZ",
+          "title": "Arizona (AZ)"
+        },
+        {
+          "const": "AR",
+          "title": "Arkansas (AR)"
+        },
+        {
+          "const": "CA",
+          "title": "California (CA)"
+        },
+        {
+          "const": "CO",
+          "title": "Colorado (CO)"
+        },
+        {
+          "const": "CT",
+          "title": "Connecticut (CT)"
+        },
+        {
+          "const": "DE",
+          "title": "Delaware (DE)"
+        },
+        {
+          "const": "FL",
+          "title": "Florida (FL)"
+        },
+        {
+          "const": "GA",
+          "title": "Georgia (GA)"
+        },
+        {
+          "const": "HI",
+          "title": "Hawaii (HI)"
+        },
+        {
+          "const": "IN",
+          "title": "Indiana (IN)"
+        },
+        {
+          "const": "ID",
+          "title": "Idaho (ID)"
+        },
+        {
+          "const": "IL",
+          "title": "Illinois (IL)"
+        },
+        {
+          "const": "IA",
+          "title": "Iowa (IA)"
+        },
+        {
+          "const": "KS",
+          "title": "Kansas (KS)"
+        },
+        {
+          "const": "KY",
+          "title": "Kentucky (KY)"
+        },
+        {
+          "const": "LA",
+          "title": "Louisiana (LA)"
+        },
+        {
+          "const": "ME",
+          "title": "Maine (ME)"
+        },
+        {
+          "const": "MD",
+          "title": "Maryland (MD)"
+        },
+        {
+          "const": "MA",
+          "title": "Massachusetts (MA)"
+        },
+        {
+          "const": "MI",
+          "title": "Michigan (MI)"
+        },
+        {
+          "const": "MO",
+          "title": "Missouri (MO)"
+        },
+        {
+          "const": "MN",
+          "title": "Minnesota (MN)"
+        },
+        {
+          "const": "MS",
+          "title": "Mississippi (MS)"
+        },
+        {
+          "const": "MT",
+          "title": "Montana (MT)"
+        },
+        {
+          "const": "NE",
+          "title": "Nebraska (NE)"
+        },
+        {
+          "const": "NV",
+          "title": "Nevada (NV)"
+        },
+        {
+          "const": "NH",
+          "title": "New Hampshire (NH)"
+        },
+        {
+          "const": "NJ",
+          "title": "New Jersey (NJ)"
+        },
+        {
+          "const": "NM",
+          "title": "New Mexico (NM)"
+        },
+        {
+          "const": "NY",
+          "title": "New York (NY)"
+        },
+        {
+          "const": "NC",
+          "title": "North Carolina (NC)"
+        },
+        {
+          "const": "ND",
+          "title": "North Dakota (ND)"
+        },
+        {
+          "const": "OH",
+          "title": "Ohio (OH)"
+        },
+        {
+          "const": "OK",
+          "title": "Oklahoma (OK)"
+        },
+        {
+          "const": "OR",
+          "title": "Oregon (OR)"
+        },
+        {
+          "const": "PA",
+          "title": "Pennsylvania (PA)"
+        },
+        {
+          "const": "RI",
+          "title": "Rhode Island (RI)"
+        },
+        {
+          "const": "SC",
+          "title": "South Carolina (SC)"
+        },
+        {
+          "const": "SD",
+          "title": "South Dakota (SD)"
+        },
+        {
+          "const": "TN",
+          "title": "Tennessee (TN)"
+        },
+        {
+          "const": "TX",
+          "title": "Texas (TX)"
+        },
+        {
+          "const": "UT",
+          "title": "Utah (UT)"
+        },
+        {
+          "const": "VT",
+          "title": "Vermont (VT)"
+        },
+        {
+          "const": "VA",
+          "title": "Virginia (VA)"
+        },
+        {
+          "const": "WA",
+          "title": "Washington (WA)"
+        },
+        {
+          "const": "DC",
+          "title": "Washington DC (DC)"
+        },
+        {
+          "const": "WV",
+          "title": "West Virginia (WV)"
+        },
+        {
+          "const": "WI",
+          "title": "Wisconsin (WI)"
+        },
+        {
+          "const": "WY",
+          "title": "Wyoming (WY)"
+        }
+      ],
+      "title": "Employee's US state of residency",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "training_required_for_position": {
+      "description": "Is there any specific training required for the position? If yes, please let us know.",
+      "maxLength": 10000,
+      "title": "Training requirement",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "description": "Hiring a part-time USA employee is not available.",
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "disabled": true,
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4563117011597,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "available_pto_type",
+    "available_pto",
+    "contract_duration_type",
+    "equity_compensation",
+    "experience_level",
+    "has_signing_bonus",
+    "has_bonus",
+    "has_commissions",
+    "non_compete_clause_apply",
+    "role_description",
+    "job_code",
+    "state_of_residency",
+    "work_address_is_home_address",
+    "work_hours_per_week",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "job_code",
+    "state_of_residency",
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "probation_length_days",
+    "has_notice_period",
+    "notice_period_weeks",
+    "has_severance",
+    "severance_days",
+    "available_pto_type",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "training_required_for_position",
+    "work_address_is_home_address",
+    "annual_gross_salary",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "non_compete_clause_apply",
+    "non_compete_clause_halt_months",
+    "benefits"
+  ]
+}

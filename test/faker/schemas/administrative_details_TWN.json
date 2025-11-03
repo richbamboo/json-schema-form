@@ -1,0 +1,385 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "acknowlege_labor_pension_act": false,
+          "labor_pension_act_percentage": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_labor_pension_act": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_labor_pension_act"
+        ]
+      },
+      "then": {
+        "required": [
+          "labor_pension_act_percentage",
+          "acknowlege_labor_pension_act"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "national_health_insurance_dependents": false,
+          "national_health_insurance_dependents_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_national_health_insurance_dependents": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_national_health_insurance_dependents"
+        ]
+      },
+      "then": {
+        "required": [
+          "national_health_insurance_dependents",
+          "national_health_insurance_dependents_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "national_health_insurance_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "national_health_insurance_withholding_tax": {
+            "enum": [
+              "matrix_table",
+              "5_percent"
+            ]
+          }
+        },
+        "required": [
+          "national_health_insurance_withholding_tax"
+        ]
+      },
+      "then": {
+        "required": [
+          "national_health_insurance_confirmation"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "acknowlege_labor_pension_act": {
+      "const": "acknowledged",
+      "title": "Confirm LPA contribution",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "education": {
+      "maxLength": 255,
+      "title": "Highest Major/Degree",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_labor_pension_act": {
+      "description": "You can contribute up to 6% of your salary to your retirement.",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "title": "Do you want to contribute to the Labor Pension Act?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          }
+        ]
+      }
+    },
+    "has_national_health_insurance_dependents": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you want to enroll your dependents in National Health Insurance?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "maxLength": 10,
+      "pattern": "^(([a-zA-Z]{1})([0-9]{9})|([a-zA-Z]{2})([0-9]{8}))$",
+      "title": "National ID number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "labor_pension_act_percentage": {
+      "description": "Max is 6%",
+      "maximum": 6,
+      "minimum": 0,
+      "title": "What percentage?",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "national_health_insurance_confirmation": {
+      "const": "acknowledged",
+      "description": "I hereby declare that I read and fully understand that the above withholding tax methods are only applicable to R.O.C citizens who have house registration and have accumulatively resided in R.O.C Taiwan for over 31 days (inclusive) in a taxable year (Related legislation: Article 7 of <a href=\"https://www.etax.nat.gov.tw/etwmain/tax-info/understanding/tax-q-and-a/national/individual-income-tax/withheld-rule/rule/NM11BZY\" target=\"_blank\" rel=\"noopener noreferrer\">Income Tax Act</a> and MOF 101.09.27 Tai Tsai Sui Tze No. 10104610410).",
+      "title": "Income Tax Withholding Election confirmation",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "national_health_insurance_dependents": {
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "id_number": {
+            "maxLength": 10,
+            "pattern": "^([a-zA-Z]{1})([0-9]{9})$",
+            "title": "ID number",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text",
+              "maskSecret": 3
+            }
+          },
+          "national_health_insurance_start_date": {
+            "format": "date",
+            "maxLength": 255,
+            "title": "Start date of National Health Insurance enrollment",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "relationship": {
+            "maxLength": 255,
+            "title": "Relationship",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "id_number",
+          "birthdate",
+          "relationship",
+          "national_health_insurance_start_date"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "id_number",
+          "birthdate",
+          "relationship",
+          "national_health_insurance_start_date"
+        ]
+      },
+      "title": "Benefits dependents detail",
+      "type": "array",
+      "x-jsf-presentation": {
+        "description": "<ol> <li>Do <strong>not</strong> fill out this section if your dependents have been enrolled with another insured unit.</li> <li>If your dependent recently completed R.O.C household registration (except for Taiwan National who has previously subscribed to this Insurance within the last 2 years and new-born baby), he/she shall establish a registered domicile for at least 6 consecutive months in the Taiwan area prior to subscription of this Insurance.<br/>For dependent with newly R.O.C domicile registration or new born baby (Taiwan National), please provide supporting document household registration copy.</li> <li>If your dependent is a foreigner, overseas Chinese, Mainland Chinese, or Hong Kong/Macao citizen, he/she shall have proof of legal residence (e.g Alien Residence Certificate) and have resided for at least 6 consecutive months in the Taiwan area prior to subscription of this Insurance.</li> </ol>",
+        "inputType": "group-array"
+      }
+    },
+    "national_health_insurance_dependents_confirmation": {
+      "const": "acknowledged",
+      "title": "Confirm National Health Insurance dependents information",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "national_health_insurance_withholding_tax": {
+      "description": "Minimum withholding threshold is NT 86,001. If you earn commission, that is considered monthly income.",
+      "enum": [
+        "matrix_table",
+        "5_percent",
+        "18_percent"
+      ],
+      "title": "Select how you want to withhold income tax for household registration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Withhold tax based on matrix table (Recommended if you earn well above the minimum withholding threshold of NT 86,0001).",
+            "value": "matrix_table"
+          },
+          {
+            "label": "Withhold 5% of monthly income (Recommended if you earn less than the minimum withholding threshold or close to it. Income tax is not withheld until you earn above NT 86,001).",
+            "value": "5_percent"
+          },
+          {
+            "label": "Withhold 18% flat tax rate (Recommended if you are a non-resident who doesn't meet the tax resident requirement of residing in Taiwan for more that 183 days in a calendar year).",
+            "value": "18_percent"
+          }
+        ]
+      }
+    },
+    "passport_expiration_date": {
+      "description": "(if applicable)",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Passport expiration date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "passport_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Passport number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_permit_expiration_date": {
+      "description": "(if applicable)",
+      "format": "date",
+      "maxLength": 255,
+      "title": "Work Permit Expiry Date",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "education",
+    "has_labor_pension_act",
+    "has_national_health_insurance_dependents",
+    "national_health_insurance_withholding_tax"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "passport_number",
+    "passport_expiration_date",
+    "education",
+    "has_labor_pension_act",
+    "labor_pension_act_percentage",
+    "acknowlege_labor_pension_act",
+    "has_national_health_insurance_dependents",
+    "national_health_insurance_dependents",
+    "national_health_insurance_dependents_confirmation",
+    "national_health_insurance_withholding_tax",
+    "national_health_insurance_confirmation",
+    "work_permit_number",
+    "work_permit_expiration_date"
+  ]
+}

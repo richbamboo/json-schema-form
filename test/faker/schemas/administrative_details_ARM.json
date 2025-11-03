@@ -1,0 +1,116 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "spouse_full_name": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "const": "married"
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "spouse_full_name"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "id_document_series": {
+      "maxLength": 255,
+      "title": "Identification document series",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4
+      }
+    },
+    "id_document_type": {
+      "maxLength": 255,
+      "title": "Identification document type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "social_card_number": {
+      "maxLength": 255,
+      "title": "Social card number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4
+      }
+    },
+    "spouse_full_name": {
+      "description": "Enter your spouse’s full name",
+      "maxLength": 255,
+      "title": "Spouse’s full name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_document_series",
+    "id_document_type",
+    "social_card_number",
+    "marital_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "social_card_number",
+    "marital_status",
+    "spouse_full_name",
+    "id_document_type",
+    "id_document_series"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Street",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_building_name": {
+      "maxLength": 255,
+      "title": "Building name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_district": {
+      "maxLength": 255,
+      "title": "District",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "maxLength": 255,
+      "title": "House number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_moo": {
+      "maxLength": 255,
+      "title": "Moo",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_subdistrict": {
+      "maxLength": 255,
+      "title": "Subdistrict",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "address_line_2",
+    "address_building_name",
+    "address",
+    "address_moo",
+    "address_subdistrict",
+    "address_district",
+    "city",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address_line_2",
+    "address_building_name",
+    "address",
+    "address_moo",
+    "address_subdistrict",
+    "address_district",
+    "city",
+    "postal_code"
+  ]
+}

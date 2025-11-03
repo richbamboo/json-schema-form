@@ -1,0 +1,141 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_type": {
+      "oneOf": [
+        {
+          "const": "Physical",
+          "title": "Physical"
+        },
+        {
+          "const": "Street",
+          "title": "Street"
+        },
+        {
+          "const": "P.O. box",
+          "title": "P.O. box"
+        },
+        {
+          "const": "Private bag",
+          "title": "Private bag"
+        }
+      ],
+      "title": "Address type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "oneOf": [
+        {
+          "const": "Béni Mellal-Khénifra",
+          "title": "Béni Mellal-Khénifra"
+        },
+        {
+          "const": "Casablanca-Settat",
+          "title": "Casablanca-Settat"
+        },
+        {
+          "const": "Dakhla-Oued Ed-Dahab",
+          "title": "Dakhla-Oued Ed-Dahab"
+        },
+        {
+          "const": "Drâa-Tafilalet",
+          "title": "Drâa-Tafilalet"
+        },
+        {
+          "const": "Fès-Meknès",
+          "title": "Fès-Meknès"
+        },
+        {
+          "const": "Guelmim-Oued Noun",
+          "title": "Guelmim-Oued Noun"
+        },
+        {
+          "const": "Laâyoune-Sakia El Hamra",
+          "title": "Laâyoune-Sakia El Hamra"
+        },
+        {
+          "const": "Marrakesh-Safi",
+          "title": "Marrakesh-Safi"
+        },
+        {
+          "const": "Oriental",
+          "title": "Oriental"
+        },
+        {
+          "const": "Rabat-Salé-Kénitra",
+          "title": "Rabat-Salé-Kénitra"
+        },
+        {
+          "const": "Souss-Massa",
+          "title": "Souss-Massa"
+        },
+        {
+          "const": "Tanger-Tetouan-Al Hoceima",
+          "title": "Tanger-Tetouan-Al Hoceima"
+        }
+      ],
+      "title": "State Region",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state",
+    "address_type"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "address_type",
+    "postal_code"
+  ]
+}

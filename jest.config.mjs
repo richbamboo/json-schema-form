@@ -45,11 +45,26 @@ const testPathIgnorePatterns = [
 
 /** @type {import('jest').Config} */
 const config = {
-  roots,
-  moduleNameMapper,
-  testPathIgnorePatterns,
   reporters: ['default', '<rootDir>/test/json-schema-test-suite/json-schema-test-suite-tracker.js'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/json-schema-typed/'],
+  projects: [
+    // Default project: fast tests (runs by default)
+    {
+      displayName: 'fast',
+      roots,
+      moduleNameMapper,
+      testPathIgnorePatterns: [...testPathIgnorePatterns, '.*\\.slow\\.test\\.(ts|js)'],
+      transformIgnorePatterns: ['<rootDir>/node_modules/json-schema-typed/'],
+    },
+    // Slow project: comprehensive tests (opt-in)
+    {
+      displayName: 'slow',
+      roots,
+      moduleNameMapper,
+      testPathIgnorePatterns,
+      transformIgnorePatterns: ['<rootDir>/node_modules/json-schema-typed/'],
+      testMatch: ['**/*.slow.test.ts'],
+    },
+  ],
 }
 
 export default config

@@ -1,0 +1,224 @@
+{
+  "properties": {
+    "apv": {
+      "maxLength": 255,
+      "title": "APV (Institución/Cotización)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "cnps": {
+      "maxLength": 255,
+      "title": "Afiliado CNPS Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "education": {
+      "description": "Please list the degree associated with your highest level of education.",
+      "maxLength": 255,
+      "title": "Highest degree",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "father_last_name": {
+      "maxLength": 255,
+      "title": "Father's last name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "has_disability": {
+      "description": "Do you belong to a group of employees who has disabilities?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Disabled person",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "health_certificate_isapre": {
+      "maxLength": 255,
+      "title": "FUN ISAPRE Plan Salud",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID Number (Cédula de Identidad)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "isapre": {
+      "maxLength": 255,
+      "title": "FUN ISAPRE (Institución)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "mother_last_name": {
+      "maxLength": 255,
+      "title": "Mother's last name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "needs_citizenship_application": {
+      "description": "Do you want to apply to Chilean citizenship during the length of your employment?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes, I want to apply for Chilean citizenship"
+        },
+        {
+          "const": "no",
+          "title": "No, I do not want to apply for Chilean citizenship"
+        },
+        {
+          "const": "no_already_a_chilean_citizen",
+          "title": "No, I am already a Chilean Citizen"
+        }
+      ],
+      "title": "Chilean Citizenship Application",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "pension_certificate_afp": {
+      "maxLength": 255,
+      "title": "Certificado Afiliación AFP",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "rut_number": {
+      "maxLength": 255,
+      "title": "RUT Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "work_permit_number": {
+      "description": "(if applicable)",
+      "maxLength": 255,
+      "title": "Work permit number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "rut_number",
+    "marital_status",
+    "number_of_dependents",
+    "mother_last_name",
+    "father_last_name",
+    "education",
+    "has_disability",
+    "isapre",
+    "health_certificate_isapre",
+    "pension_certificate_afp",
+    "apv"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "rut_number",
+    "marital_status",
+    "number_of_dependents",
+    "mother_last_name",
+    "father_last_name",
+    "needs_citizenship_application",
+    "education",
+    "has_disability",
+    "isapre",
+    "health_certificate_isapre",
+    "pension_certificate_afp",
+    "apv",
+    "cnps",
+    "work_permit_number"
+  ]
+}

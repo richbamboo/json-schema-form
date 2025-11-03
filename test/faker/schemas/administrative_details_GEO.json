@@ -1,0 +1,83 @@
+{
+  "properties": {
+    "has_disability": {
+      "description": "Do you belong to a group of employees who has disabilities?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Disabled person",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_pension_fund_excluded": {
+      "description": "If you are over 45 years old, have you opted out of the Pension fund system?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Pension Fund Excluded",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_tax_relief": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Has Tax Relief",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "has_disability",
+    "has_tax_relief",
+    "has_pension_fund_excluded"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "has_disability",
+    "has_tax_relief",
+    "has_pension_fund_excluded"
+  ]
+}

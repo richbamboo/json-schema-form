@@ -1,0 +1,143 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select a autonomous community",
+      "oneOf": [
+        {
+          "const": "Andalusia",
+          "title": "Andalusia"
+        },
+        {
+          "const": "Aragon",
+          "title": "Aragon"
+        },
+        {
+          "const": "Asturias",
+          "title": "Asturias"
+        },
+        {
+          "const": "Balearic Islands",
+          "title": "Balearic Islands"
+        },
+        {
+          "const": "Basque Country",
+          "title": "Basque Country"
+        },
+        {
+          "const": "Canary Islands",
+          "title": "Canary Islands"
+        },
+        {
+          "const": "Cantabria",
+          "title": "Cantabria"
+        },
+        {
+          "const": "Castile and León",
+          "title": "Castile and León"
+        },
+        {
+          "const": "Castilla–La Mancha",
+          "title": "Castilla–La Mancha"
+        },
+        {
+          "const": "Catalonia",
+          "title": "Catalonia"
+        },
+        {
+          "const": "Extremadura",
+          "title": "Extremadura"
+        },
+        {
+          "const": "Galicia",
+          "title": "Galicia"
+        },
+        {
+          "const": "La Rioja",
+          "title": "La Rioja"
+        },
+        {
+          "const": "Madrid",
+          "title": "Madrid"
+        },
+        {
+          "const": "Murcia",
+          "title": "Murcia"
+        },
+        {
+          "const": "Navarre",
+          "title": "Navarre"
+        },
+        {
+          "const": "Valencia",
+          "title": "Valencia"
+        },
+        {
+          "const": "Ceuta",
+          "title": "Ceuta"
+        },
+        {
+          "const": "Melilla",
+          "title": "Melilla"
+        }
+      ],
+      "title": "Autonomous community",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

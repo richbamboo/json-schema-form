@@ -1,0 +1,209 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select address state",
+      "oneOf": [
+        {
+          "const": "Andaman Nicobar Islands",
+          "title": "Andaman Nicobar Islands"
+        },
+        {
+          "const": "Andhra Pradesh",
+          "title": "Andhra Pradesh"
+        },
+        {
+          "const": "Arunachal Pradesh",
+          "title": "Arunachal Pradesh"
+        },
+        {
+          "const": "Assam",
+          "title": "Assam"
+        },
+        {
+          "const": "Bihar",
+          "title": "Bihar"
+        },
+        {
+          "const": "Chandigarh",
+          "title": "Chandigarh"
+        },
+        {
+          "const": "Chhattisgarh",
+          "title": "Chhattisgarh"
+        },
+        {
+          "const": "Dadra Nagar Haveli and Daman Diu",
+          "title": "Dadra Nagar Haveli and Daman Diu"
+        },
+        {
+          "const": "Delhi",
+          "title": "Delhi"
+        },
+        {
+          "const": "Goa",
+          "title": "Goa"
+        },
+        {
+          "const": "Gujarat",
+          "title": "Gujarat"
+        },
+        {
+          "const": "Haryana",
+          "title": "Haryana"
+        },
+        {
+          "const": "Himachal Pradesh",
+          "title": "Himachal Pradesh"
+        },
+        {
+          "const": "Jammu and Kashmir",
+          "title": "Jammu and Kashmir"
+        },
+        {
+          "const": "Jharkhand",
+          "title": "Jharkhand"
+        },
+        {
+          "const": "Karnataka",
+          "title": "Karnataka"
+        },
+        {
+          "const": "Kerala",
+          "title": "Kerala"
+        },
+        {
+          "const": "Ladakh",
+          "title": "Ladakh"
+        },
+        {
+          "const": "Lakshadweep",
+          "title": "Lakshadweep"
+        },
+        {
+          "const": "Madhya Pradesh",
+          "title": "Madhya Pradesh"
+        },
+        {
+          "const": "Maharashtra",
+          "title": "Maharashtra"
+        },
+        {
+          "const": "Manipur",
+          "title": "Manipur"
+        },
+        {
+          "const": "Meghalaya",
+          "title": "Meghalaya"
+        },
+        {
+          "const": "Mizoram",
+          "title": "Mizoram"
+        },
+        {
+          "const": "Nagaland",
+          "title": "Nagaland"
+        },
+        {
+          "const": "Odisha",
+          "title": "Odisha"
+        },
+        {
+          "const": "Puducherry",
+          "title": "Puducherry"
+        },
+        {
+          "const": "Punjab",
+          "title": "Punjab"
+        },
+        {
+          "const": "Rajasthan",
+          "title": "Rajasthan"
+        },
+        {
+          "const": "Sikkim",
+          "title": "Sikkim"
+        },
+        {
+          "const": "Tamil Nadu",
+          "title": "Tamil Nadu"
+        },
+        {
+          "const": "Telangana",
+          "title": "Telangana"
+        },
+        {
+          "const": "Tripura",
+          "title": "Tripura"
+        },
+        {
+          "const": "Uttar Pradesh",
+          "title": "Uttar Pradesh"
+        },
+        {
+          "const": "Uttarakhand",
+          "title": "Uttarakhand"
+        },
+        {
+          "const": "West Bengal",
+          "title": "West Bengal"
+        }
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "state",
+    "postal_code"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

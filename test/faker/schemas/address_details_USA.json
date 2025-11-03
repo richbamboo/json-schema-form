@@ -1,0 +1,356 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "pattern": "^\\d{5}(?:-\\d{4})?$",
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select your state",
+      "enum": [
+        "AL",
+        "AK",
+        "AZ",
+        "AR",
+        "CA",
+        "CO",
+        "CT",
+        "DE",
+        "DC",
+        "FL",
+        "GA",
+        "HI",
+        "ID",
+        "IL",
+        "IN",
+        "IA",
+        "KS",
+        "KY",
+        "LA",
+        "ME",
+        "MD",
+        "MA",
+        "MI",
+        "MN",
+        "MS",
+        "MO",
+        "MT",
+        "NE",
+        "NV",
+        "NH",
+        "NJ",
+        "NM",
+        "NY",
+        "NC",
+        "ND",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VT",
+        "VA",
+        "WA",
+        "WV",
+        "WI",
+        "WY",
+        "AS",
+        "GU",
+        "MP",
+        "PR",
+        "UM",
+        "VI"
+      ],
+      "title": "State",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select",
+        "options": [
+          {
+            "label": "Alabama (AL)",
+            "value": "AL"
+          },
+          {
+            "label": "Alaska (AK)",
+            "value": "AK"
+          },
+          {
+            "label": "Arizona (AZ)",
+            "value": "AZ"
+          },
+          {
+            "label": "Arkansas (AR)",
+            "value": "AR"
+          },
+          {
+            "label": "California (CA)",
+            "value": "CA"
+          },
+          {
+            "label": "Colorado (CO)",
+            "value": "CO"
+          },
+          {
+            "label": "Connecticut (CT)",
+            "value": "CT"
+          },
+          {
+            "label": "Delaware (DE)",
+            "value": "DE"
+          },
+          {
+            "label": "District of Columbia (DC)",
+            "value": "DC"
+          },
+          {
+            "label": "Florida (FL)",
+            "value": "FL"
+          },
+          {
+            "label": "Georgia (GA)",
+            "value": "GA"
+          },
+          {
+            "label": "Hawaii (HI)",
+            "value": "HI"
+          },
+          {
+            "label": "Idaho (ID)",
+            "value": "ID"
+          },
+          {
+            "label": "Illinois (IL)",
+            "value": "IL"
+          },
+          {
+            "label": "Indiana (IN)",
+            "value": "IN"
+          },
+          {
+            "label": "Iowa (IA)",
+            "value": "IA"
+          },
+          {
+            "label": "Kansas (KS)",
+            "value": "KS"
+          },
+          {
+            "label": "Kentucky (KY)",
+            "value": "KY"
+          },
+          {
+            "label": "Louisiana (LA)",
+            "value": "LA"
+          },
+          {
+            "label": "Maine (ME)",
+            "value": "ME"
+          },
+          {
+            "label": "Maryland (MD)",
+            "value": "MD"
+          },
+          {
+            "label": "Massachusetts (MA)",
+            "value": "MA"
+          },
+          {
+            "label": "Michigan (MI)",
+            "value": "MI"
+          },
+          {
+            "label": "Minnesota (MN)",
+            "value": "MN"
+          },
+          {
+            "label": "Mississippi (MS)",
+            "value": "MS"
+          },
+          {
+            "label": "Missouri (MO)",
+            "value": "MO"
+          },
+          {
+            "label": "Montana (MT)",
+            "value": "MT"
+          },
+          {
+            "label": "Nebraska (NE)",
+            "value": "NE"
+          },
+          {
+            "label": "Nevada (NV)",
+            "value": "NV"
+          },
+          {
+            "label": "New Hampshire (NH)",
+            "value": "NH"
+          },
+          {
+            "label": "New Jersey (NJ)",
+            "value": "NJ"
+          },
+          {
+            "label": "New Mexico (NM)",
+            "value": "NM"
+          },
+          {
+            "label": "New York (NY)",
+            "value": "NY"
+          },
+          {
+            "label": "North Carolina (NC)",
+            "value": "NC"
+          },
+          {
+            "label": "North Dakota (ND)",
+            "value": "ND"
+          },
+          {
+            "label": "Ohio (OH)",
+            "value": "OH"
+          },
+          {
+            "label": "Oklahoma (OK)",
+            "value": "OK"
+          },
+          {
+            "label": "Oregon (OR)",
+            "value": "OR"
+          },
+          {
+            "label": "Pennsylvania (PA)",
+            "value": "PA"
+          },
+          {
+            "label": "Rhode Island (RI)",
+            "value": "RI"
+          },
+          {
+            "label": "South Carolina (SC)",
+            "value": "SC"
+          },
+          {
+            "label": "South Dakota (SD)",
+            "value": "SD"
+          },
+          {
+            "label": "Tennessee (TN)",
+            "value": "TN"
+          },
+          {
+            "label": "Texas (TX)",
+            "value": "TX"
+          },
+          {
+            "label": "Utah (UT)",
+            "value": "UT"
+          },
+          {
+            "label": "Vermont (VT)",
+            "value": "VT"
+          },
+          {
+            "label": "Virginia (VA)",
+            "value": "VA"
+          },
+          {
+            "label": "Washington (WA)",
+            "value": "WA"
+          },
+          {
+            "label": "West Virginia (WV)",
+            "value": "WV"
+          },
+          {
+            "label": "Wisconsin (WI)",
+            "value": "WI"
+          },
+          {
+            "label": "Wyoming (WY)",
+            "value": "WY"
+          },
+          {
+            "label": "American Samoa (AS)",
+            "value": "AS"
+          },
+          {
+            "label": "Guam (GU)",
+            "value": "GU"
+          },
+          {
+            "label": "Northern Mariana Islands (MP)",
+            "value": "MP"
+          },
+          {
+            "label": "Puerto Rico (PR)",
+            "value": "PR"
+          },
+          {
+            "label": "U.S. Minor Outlying Islands (UM)",
+            "value": "UM"
+          },
+          {
+            "label": "U.S. Virgin Islands (VI)",
+            "value": "VI"
+          }
+        ],
+        "placeholder": "Select state"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

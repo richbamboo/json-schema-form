@@ -1,0 +1,171 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Enter zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "state": {
+      "description": "Select a county",
+      "oneOf": [
+        {
+          "const": "Carlow",
+          "title": "Carlow"
+        },
+        {
+          "const": "Cavan",
+          "title": "Cavan"
+        },
+        {
+          "const": "Clare",
+          "title": "Clare"
+        },
+        {
+          "const": "Cork",
+          "title": "Cork"
+        },
+        {
+          "const": "Donegal",
+          "title": "Donegal"
+        },
+        {
+          "const": "Dublin",
+          "title": "Dublin"
+        },
+        {
+          "const": "Galway",
+          "title": "Galway"
+        },
+        {
+          "const": "Kerry",
+          "title": "Kerry"
+        },
+        {
+          "const": "Kildare",
+          "title": "Kildare"
+        },
+        {
+          "const": "Kilkenny",
+          "title": "Kilkenny"
+        },
+        {
+          "const": "Laois",
+          "title": "Laois"
+        },
+        {
+          "const": "Leitrim",
+          "title": "Leitrim"
+        },
+        {
+          "const": "Limerick",
+          "title": "Limerick"
+        },
+        {
+          "const": "Longford",
+          "title": "Longford"
+        },
+        {
+          "const": "Louth",
+          "title": "Louth"
+        },
+        {
+          "const": "Mayo",
+          "title": "Mayo"
+        },
+        {
+          "const": "Meath",
+          "title": "Meath"
+        },
+        {
+          "const": "Monaghan",
+          "title": "Monaghan"
+        },
+        {
+          "const": "Offaly",
+          "title": "Offaly"
+        },
+        {
+          "const": "Roscommon",
+          "title": "Roscommon"
+        },
+        {
+          "const": "Sligo",
+          "title": "Sligo"
+        },
+        {
+          "const": "Tipperary",
+          "title": "Tipperary"
+        },
+        {
+          "const": "Waterford",
+          "title": "Waterford"
+        },
+        {
+          "const": "Westmeath",
+          "title": "Westmeath"
+        },
+        {
+          "const": "Wexford",
+          "title": "Wexford"
+        },
+        {
+          "const": "Wicklow",
+          "title": "Wicklow"
+        }
+      ],
+      "title": "County",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "state"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "state",
+    "postal_code"
+  ]
+}

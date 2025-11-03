@@ -1,0 +1,291 @@
+{
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "tax_exempt_amount": false,
+          "use_max_possible_income_tax_free_min": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_tax_exempt": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "is_tax_exempt"
+        ]
+      },
+      "then": {
+        "required": [
+          "use_max_possible_income_tax_free_min"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "tax_exempt_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_tax_exempt": {
+            "const": "yes"
+          },
+          "use_max_possible_income_tax_free_min": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "is_tax_exempt",
+          "use_max_possible_income_tax_free_min"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tax_exempt_amount": {
+            "x-jsf-errorMessage": {
+              "maximum": "The maximum tax exempt amount is 654 EUR"
+            }
+          }
+        },
+        "required": [
+          "tax_exempt_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "disabled_children_id": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_raising_disabled_children": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "is_raising_disabled_children"
+        ]
+      },
+      "then": {
+        "properties": {
+          "disabled_children_id": {
+            "x-jsf-errorMessage": {
+              "pattern": "Must be exactly 11 digits"
+            }
+          }
+        },
+        "required": [
+          "disabled_children_id"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "disabled_children_id": {
+      "maxLength": 255,
+      "pattern": "^[0-9]{11}$",
+      "title": "Children ID code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "has_disability": {
+      "description": "Do you belong to a group of employees who has disabilities?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Disabled person",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "Enter your Personal Identification Code of 11 digits",
+      "maxLength": 255,
+      "pattern": "^[0-9]{11}$",
+      "title": "Personal code",
+      "type": "string",
+      "x-jsf-errorMessage": {
+        "pattern": "Must be exactly 11 digits"
+      },
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_raising_disabled_children": {
+      "description": "Do you belong to a group of employees who is raising a child or children under 14 years or a disabled child or children under 18 years?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Raising a disabled child",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "is_tax_exempt": {
+      "description": "Is the tax exempt amount (Tulumaksuvaba Avaldus) applicable?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Apply the monthly tax exemption?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "Is the tax exempt amount <span lang=\"et\">(Tulumaksuvaba Avaldus)</span> applicable?",
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "tax_exempt_amount": {
+      "description": "Enter up to 654 EUR.",
+      "maximum": 65400,
+      "minimum": 0,
+      "title": "Tax exempt amount per month",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "use_max_possible_income_tax_free_min": {
+      "description": "You'll be able to view the tax-free amount on your payslip each month.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Apply maximum amount based on your monthly salary?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "is_tax_exempt",
+    "is_raising_disabled_children",
+    "has_disability"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "tax_exempt_details": {
+      "description": "If you're eligible for a monthly tax exemption (Tulumaksuvaba Avaldus in Estonian), let us know and choose how much of your salary it should apply to.",
+      "propertiesByName": [
+        "is_tax_exempt",
+        "use_max_possible_income_tax_free_min",
+        "tax_exempt_amount"
+      ],
+      "title": "Monthly tax exemption"
+    }
+  },
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "is_tax_exempt",
+    "use_max_possible_income_tax_free_min",
+    "tax_exempt_amount",
+    "is_raising_disabled_children",
+    "disabled_children_id",
+    "has_disability"
+  ]
+}

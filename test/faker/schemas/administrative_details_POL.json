@@ -1,0 +1,2169 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "disability_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_disability": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_disability"
+        ]
+      },
+      "then": {
+        "required": [
+          "disability_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "children_birthdate": false
+        }
+      },
+      "if": {
+        "properties": {
+          "is_children_under_14_years": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "is_children_under_14_years"
+        ]
+      },
+      "then": {
+        "required": [
+          "children_birthdate"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "ppk_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "ppk_employee_capital_plans": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "ppk_employee_capital_plans"
+        ]
+      },
+      "then": {
+        "required": [
+          "ppk_confirmation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ppk_employee_capital_plans": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "ppk_employee_capital_plans"
+        ]
+      },
+      "then": {
+        "properties": {
+          "ppk_employee_capital_plans": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Please sign the <a href=\"https://cdn.employ-assets.remote.com/employee_onboarding/poland_ppk_resignation.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">PPK opt-out form</a> and submit it in the <em>additional documents</em> step. Otherwise, Remote will start contributions 90 days after your start date.",
+                "severity": "info"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "children_birthdate": {
+      "description": "This is required to verify child age for child leave entitlement.",
+      "format": "date",
+      "title": "Date of birth for the youngest child",
+      "type": "string",
+      "x-jsf-presentation": {
+        "_maxYearsFromToday": 14,
+        "inputType": "date",
+        "minDate": "2011-06-11"
+      }
+    },
+    "disability_details": {
+      "oneOf": [
+        {
+          "const": "hearing_disability",
+          "title": "Hearing disability"
+        },
+        {
+          "const": "visual_disability",
+          "title": "Visual disability"
+        },
+        {
+          "const": "multiple_disabilities",
+          "title": "Multiple disabilities"
+        },
+        {
+          "const": "physical_or_motor_disability",
+          "title": "Physical or motor disability"
+        },
+        {
+          "const": "intellectual_disability",
+          "title": "Intellectual disability"
+        },
+        {
+          "const": "other",
+          "title": "Other"
+        },
+        {
+          "const": "prefer_not_to_say",
+          "title": "I prefer not to say"
+        }
+      ],
+      "title": "Disability type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "has_disability": {
+      "description": "We’re asking this because Poland requires us to report the number of employees who have a declared disability. We will not share this information with your company without your explicit consent.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": "prefer_not_to_say",
+          "title": "I prefer not to say"
+        }
+      ],
+      "title": "Do you have any disability?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "health_fund_branch": {
+      "oneOf": [
+        {
+          "const": "01 - Dolnośląski Oddział Wojewódzki NFZ we Wrocławiu",
+          "title": "01 - Dolnośląski Oddział Wojewódzki NFZ we Wrocławiu"
+        },
+        {
+          "const": "02 - Kujawsko-Pomorski Oddział Wojewódzki NFZ w Bydgoszczy",
+          "title": "02 - Kujawsko-Pomorski Oddział Wojewódzki NFZ w Bydgoszczy"
+        },
+        {
+          "const": "03 - Lubelski Oddział Wojewódzki NFZ w Lublinie",
+          "title": "03 - Lubelski Oddział Wojewódzki NFZ w Lublinie"
+        },
+        {
+          "const": "04 - Lubuski Oddział Wojewódzki NFZ w Zielonej Górze",
+          "title": "04 - Lubuski Oddział Wojewódzki NFZ w Zielonej Górze"
+        },
+        {
+          "const": "05 - Łódzki Oddział Wojewódzki NFZ w Łodzi",
+          "title": "05 - Łódzki Oddział Wojewódzki NFZ w Łodzi"
+        },
+        {
+          "const": "06 - Małopolski Oddział Wojewódzki NFZ w Krakowie",
+          "title": "06 - Małopolski Oddział Wojewódzki NFZ w Krakowie"
+        },
+        {
+          "const": "07 - Mazowiecki Oddział Wojewódzki NFZ w Warszawie",
+          "title": "07 - Mazowiecki Oddział Wojewódzki NFZ w Warszawie"
+        },
+        {
+          "const": "08 - Opolski Oddział Wojewódzki NFZ w Opolu",
+          "title": "08 - Opolski Oddział Wojewódzki NFZ w Opolu"
+        },
+        {
+          "const": "09 - Podkarpacki Oddział Wojewódzki NFZ w Rzeszowie",
+          "title": "09 - Podkarpacki Oddział Wojewódzki NFZ w Rzeszowie"
+        },
+        {
+          "const": "10 - Podlaski Oddział Wojewódzki NFZ w",
+          "title": "10 - Podlaski Oddział Wojewódzki NFZ w"
+        },
+        {
+          "const": "11 - Pomorski Oddział Wojewódzki NFZ w Gdańsku",
+          "title": "11 - Pomorski Oddział Wojewódzki NFZ w Gdańsku"
+        },
+        {
+          "const": "12 - Śląski Oddział Wojewódzki NFZ w Katowicach",
+          "title": "12 - Śląski Oddział Wojewódzki NFZ w Katowicach"
+        },
+        {
+          "const": "13 - Świętokrzyski Oddział Wojewódzki NFZ w Kielcach",
+          "title": "13 - Świętokrzyski Oddział Wojewódzki NFZ w Kielcach"
+        },
+        {
+          "const": "14 - Warmińsko-Mazurski Oddział Wojewódzki NFZ w Olsztynie",
+          "title": "14 - Warmińsko-Mazurski Oddział Wojewódzki NFZ w Olsztynie"
+        },
+        {
+          "const": "15 - Wielkopolski Oddział Wojewódzki NFZ w Poznaniu",
+          "title": "15 - Wielkopolski Oddział Wojewódzki NFZ w Poznaniu"
+        },
+        {
+          "const": "16 - Zachodniopomorski Oddział Wojewódzki NFZ w Szczecinie",
+          "title": "16 - Zachodniopomorski Oddział Wojewódzki NFZ w Szczecinie"
+        }
+      ],
+      "title": "National health fund branch",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "is_children_under_14_years": {
+      "description": "You are entitled to two days of child leave if you have children under the age of 14. Unused leave does not carry over into the next calendar year. To be eligible, please complete the “Rodzic/Parent” form in the <em>additional documents</em> step.",
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "title": "Do you have any children under the age of 14 years?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          }
+        ]
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "medical_check_certificate": {
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "title": "Do you have a recent medical check certificate (not more than 60 days old)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio",
+        "options": [
+          {
+            "description": "Upload your work medical certificate and previous employer's referral letter in the <em>additional documents</em> step",
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "description": "Undergo the medical test and upload the certificate under work medical certificate in the <em>additional documents</em> step",
+            "label": "No",
+            "value": "no"
+          }
+        ]
+      }
+    },
+    "nip_number": {
+      "description": "If you do not have one, re-enter your PESEL number",
+      "maxLength": 255,
+      "title": "NIP number (Tax ID)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "number_of_dependents": {
+      "description": "The total number of dependents you claim.",
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "pesel_number": {
+      "maxLength": 255,
+      "title": "PESEL Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "ppk_confirmation": {
+      "const": "I acknowledge that 90 days after my start date, Remote will begin contributing 2% of my gross salary to the PPK.",
+      "title": "I acknowledge that 90 days after my start date, Remote will begin contributing 2% of my gross salary to the PPK.",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "ppk_employee_capital_plans": {
+      "enum": [
+        "yes",
+        "no"
+      ],
+      "title": "Would you like to contribute to the PPK?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "The PPK is a voluntary and statutory pension scheme in Poland. You can begin contributing 2% of your gross salary 90 days after your start date.<br/><a href=\"https://cdn.employ-assets.remote.com/employee_onboarding/poland_ppk_info.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Learn more about PPK</a>",
+        "inputType": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "yes"
+          },
+          {
+            "label": "No",
+            "value": "no"
+          }
+        ]
+      }
+    },
+    "tax_office": {
+      "description": "In Poland, Employees should inform the Address of their chosen Tax Office.",
+      "oneOf": [
+        {
+          "const": "Urząd Skarbowy w Bolesławcu Garncarska 10 59-700 Bolesławiec",
+          "title": "Urząd Skarbowy w Bolesławcu Garncarska 10 59-700 Bolesławiec"
+        },
+        {
+          "const": "Urząd Skarbowy w Bystrzycy Kłodzkiej Adama Mickiewicza 5 57-500 Bystrzyca Kłodzka",
+          "title": "Urząd Skarbowy w Bystrzycy Kłodzkiej Adama Mickiewicza 5 57-500 Bystrzyca Kłodzka"
+        },
+        {
+          "const": "Urząd Skarbowy w Dzierżoniowie Pocztowa 14 58-200 Dzierżoniów",
+          "title": "Urząd Skarbowy w Dzierżoniowie Pocztowa 14 58-200 Dzierżoniów"
+        },
+        {
+          "const": "Urząd Skarbowy w Głogowie Adama Mickiewicza 53 67-200 Głogów",
+          "title": "Urząd Skarbowy w Głogowie Adama Mickiewicza 53 67-200 Głogów"
+        },
+        {
+          "const": "Urząd Skarbowy w Jaworze Jurija Gagarina 5 59-400 Jawor",
+          "title": "Urząd Skarbowy w Jaworze Jurija Gagarina 5 59-400 Jawor"
+        },
+        {
+          "const": "Urząd Skarbowy w Jeleniej Górze Adama Thebesiusa 1 58-506 Jelenia Góra",
+          "title": "Urząd Skarbowy w Jeleniej Górze Adama Thebesiusa 1 58-506 Jelenia Góra"
+        },
+        {
+          "const": "Urząd Skarbowy w Kamiennej Górze Papieża Jana Pawła II 18 58-400 Kamienna Góra",
+          "title": "Urząd Skarbowy w Kamiennej Górze Papieża Jana Pawła II 18 58-400 Kamienna Góra"
+        },
+        {
+          "const": "Urząd Skarbowy w Kłodzku Stanisławy Walasiewiczówny 1 57-300 Kłodzko",
+          "title": "Urząd Skarbowy w Kłodzku Stanisławy Walasiewiczówny 1 57-300 Kłodzko"
+        },
+        {
+          "const": "Urząd Skarbowy w Legnicy Wrocławska 37 59-220 Legnica",
+          "title": "Urząd Skarbowy w Legnicy Wrocławska 37 59-220 Legnica"
+        },
+        {
+          "const": "Urząd Skarbowy w Lubaniu Stara 1 59-800 Lubań",
+          "title": "Urząd Skarbowy w Lubaniu Stara 1 59-800 Lubań"
+        },
+        {
+          "const": "Urząd Skarbowy w Lubinie Marii Skłodowskiej-Curie 94 59-300 Lubin",
+          "title": "Urząd Skarbowy w Lubinie Marii Skłodowskiej-Curie 94 59-300 Lubin"
+        },
+        {
+          "const": "Urząd Skarbowy w Lwówku Śląskim Budowlanych 1 59-600 Lwówek Śląski",
+          "title": "Urząd Skarbowy w Lwówku Śląskim Budowlanych 1 59-600 Lwówek Śląski"
+        },
+        {
+          "const": "Urząd Skarbowy w Miliczu Składowa 2 56-300 Milicz",
+          "title": "Urząd Skarbowy w Miliczu Składowa 2 56-300 Milicz"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowej Rudzie Kolejowa 23 57-400 Nowa Ruda",
+          "title": "Urząd Skarbowy w Nowej Rudzie Kolejowa 23 57-400 Nowa Ruda"
+        },
+        {
+          "const": "Urząd Skarbowy w Oleśnicy Lwowska 34-38 56-400 Oleśnica",
+          "title": "Urząd Skarbowy w Oleśnicy Lwowska 34-38 56-400 Oleśnica"
+        },
+        {
+          "const": "Urząd Skarbowy w Oławie Lwowska 1 55-200 Oława",
+          "title": "Urząd Skarbowy w Oławie Lwowska 1 55-200 Oława"
+        },
+        {
+          "const": "Urząd Skarbowy w Strzelinie Bolka I Świdnickiego 14 57-100 Strzelin",
+          "title": "Urząd Skarbowy w Strzelinie Bolka I Świdnickiego 14 57-100 Strzelin"
+        },
+        {
+          "const": "Urząd Skarbowy w Środzie Śląskiej Oławska 5A 55-300 Środa Śląska",
+          "title": "Urząd Skarbowy w Środzie Śląskiej Oławska 5A 55-300 Środa Śląska"
+        },
+        {
+          "const": "Urząd Skarbowy w Świdnicy Marii Skłodowskiej-Curie 1-3 58-100 Świdnica",
+          "title": "Urząd Skarbowy w Świdnicy Marii Skłodowskiej-Curie 1-3 58-100 Świdnica"
+        },
+        {
+          "const": "Urząd Skarbowy w Trzebnicy Prusicka 2 55-100 Trzebnica",
+          "title": "Urząd Skarbowy w Trzebnicy Prusicka 2 55-100 Trzebnica"
+        },
+        {
+          "const": "Urząd Skarbowy w Wałbrzychu Uczniowska 21 58-306 Wałbrzych",
+          "title": "Urząd Skarbowy w Wałbrzychu Uczniowska 21 58-306 Wałbrzych"
+        },
+        {
+          "const": "Urząd Skarbowy w Wołowie Tadeusza Kościuszki 17 56-100 Wołów",
+          "title": "Urząd Skarbowy w Wołowie Tadeusza Kościuszki 17 56-100 Wołów"
+        },
+        {
+          "const": "Urząd Skarbowy Wrocław - Fabryczna Aleksandra Ostrowskiego 5 53-238 Wrocław",
+          "title": "Urząd Skarbowy Wrocław - Fabryczna Aleksandra Ostrowskiego 5 53-238 Wrocław"
+        },
+        {
+          "const": "Urząd Skarbowy Wrocław - Krzyki Sztabowa 100 53-310 Wrocław",
+          "title": "Urząd Skarbowy Wrocław - Krzyki Sztabowa 100 53-310 Wrocław"
+        },
+        {
+          "const": "Urząd Skarbowy Wrocław - Psie Pole Trzebnicka 33 50-231 Wrocław",
+          "title": "Urząd Skarbowy Wrocław - Psie Pole Trzebnicka 33 50-231 Wrocław"
+        },
+        {
+          "const": "Urząd Skarbowy Wrocław - Stare Miasto Inowrocławska 4 53-654 Wrocław",
+          "title": "Urząd Skarbowy Wrocław - Stare Miasto Inowrocławska 4 53-654 Wrocław"
+        },
+        {
+          "const": "Urząd Skarbowy Wrocław - Śródmieście marsz. Józefa Piłsudskiego 27-29 50-044 Wrocław",
+          "title": "Urząd Skarbowy Wrocław - Śródmieście marsz. Józefa Piłsudskiego 27-29 50-044 Wrocław"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy we Wrocławiu Ks. Czesława Klimasa 34 50-515 Wrocław",
+          "title": "Pierwszy Urząd Skarbowy we Wrocławiu Ks. Czesława Klimasa 34 50-515 Wrocław"
+        },
+        {
+          "const": "Urząd Skarbowy w Ząbkowicach Śląskich Ludwika Waryńskiego 2A 57-200 Ząbkowice Śląskie",
+          "title": "Urząd Skarbowy w Ząbkowicach Śląskich Ludwika Waryńskiego 2A 57-200 Ząbkowice Śląskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Zgorzelcu Bohaterów II Armii Wojska Polskiego 8B 59-900 Zgorzelec",
+          "title": "Urząd Skarbowy w Zgorzelcu Bohaterów II Armii Wojska Polskiego 8B 59-900 Zgorzelec"
+        },
+        {
+          "const": "Urząd Skarbowy w Złotoryi Rynek 42 59-500 Złotoryja",
+          "title": "Urząd Skarbowy w Złotoryi Rynek 42 59-500 Złotoryja"
+        },
+        {
+          "const": "Urząd skarbowy w Górze Poznańska 4 56-200 Góra",
+          "title": "Urząd skarbowy w Górze Poznańska 4 56-200 Góra"
+        },
+        {
+          "const": "Urząd Skarbowy w Polkowicach Zachodnia 10 59-100 Polkowice",
+          "title": "Urząd Skarbowy w Polkowicach Zachodnia 10 59-100 Polkowice"
+        },
+        {
+          "const": "Dolnośląski Urząd Skarbowy we Wrocławiu Żmigrodzka 141 51-130 Wrocław",
+          "title": "Dolnośląski Urząd Skarbowy we Wrocławiu Żmigrodzka 141 51-130 Wrocław"
+        },
+        {
+          "const": "Dolnośląski Urząd Celno-Skarbowy we Wrocławiu Stacyjna 10 53-613 Wrocław",
+          "title": "Dolnośląski Urząd Celno-Skarbowy we Wrocławiu Stacyjna 10 53-613 Wrocław"
+        },
+        {
+          "const": "Urząd Skarbowy w Aleksandrowie Kujawskim Kościelna 18 87-700 Aleksandrów Kujawski",
+          "title": "Urząd Skarbowy w Aleksandrowie Kujawskim Kościelna 18 87-700 Aleksandrów Kujawski"
+        },
+        {
+          "const": "Urząd Skarbowy w Brodnicy Gen. Władysława Sikorskiego 19 87-300 Brodnica",
+          "title": "Urząd Skarbowy w Brodnicy Gen. Władysława Sikorskiego 19 87-300 Brodnica"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Bydgoszczy Fordońska 77 85-950 Bydgoszcz",
+          "title": "Pierwszy Urząd Skarbowy w Bydgoszczy Fordońska 77 85-950 Bydgoszcz"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Bydgoszczy Wojska Polskiego 20B 85-822 Bydgoszcz",
+          "title": "Drugi Urząd Skarbowy w Bydgoszczy Wojska Polskiego 20B 85-822 Bydgoszcz"
+        },
+        {
+          "const": "Trzeci Urząd Skarbowy w Bydgoszczy Tadeusza Rejtana 5 85-032 Bydgoszcz",
+          "title": "Trzeci Urząd Skarbowy w Bydgoszczy Tadeusza Rejtana 5 85-032 Bydgoszcz"
+        },
+        {
+          "const": "Urząd Skarbowy w Chełmnie Grudziądzka 6 86-200 Chełmno",
+          "title": "Urząd Skarbowy w Chełmnie Grudziądzka 6 86-200 Chełmno"
+        },
+        {
+          "const": "Urząd Skarbowy w Grudziądzu Droga Łąkowa 23 86-300 Grudziądz",
+          "title": "Urząd Skarbowy w Grudziądzu Droga Łąkowa 23 86-300 Grudziądz"
+        },
+        {
+          "const": "Urząd Skarbowy w Inowrocławiu al. Niepodległości 5 88-100 Inowrocław",
+          "title": "Urząd Skarbowy w Inowrocławiu al. Niepodległości 5 88-100 Inowrocław"
+        },
+        {
+          "const": "Urząd Skarbowy w Lipnie Stanisława Staszica 4 87-600 Lipno",
+          "title": "Urząd Skarbowy w Lipnie Stanisława Staszica 4 87-600 Lipno"
+        },
+        {
+          "const": "Urząd Skarbowy w Mogilnie 900-lecia 20 88-300 Mogilno",
+          "title": "Urząd Skarbowy w Mogilnie 900-lecia 20 88-300 Mogilno"
+        },
+        {
+          "const": "Urząd Skarbowy w Nakle nad Notecią Sądowa 8 89-100 Nakło nad Notecią",
+          "title": "Urząd Skarbowy w Nakle nad Notecią Sądowa 8 89-100 Nakło nad Notecią"
+        },
+        {
+          "const": "Urząd Skarbowy w Radziejowie Rolnicza 6 88-200 Radziejów",
+          "title": "Urząd Skarbowy w Radziejowie Rolnicza 6 88-200 Radziejów"
+        },
+        {
+          "const": "Urząd Skarbowy w Rypinie Dojazdowa 10 87-500 Rypin",
+          "title": "Urząd Skarbowy w Rypinie Dojazdowa 10 87-500 Rypin"
+        },
+        {
+          "const": "Urząd Skarbowy w Świeciu 10 lutego 16 86-100 Świecie",
+          "title": "Urząd Skarbowy w Świeciu 10 lutego 16 86-100 Świecie"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Toruniu Szosa Chełmińska 34/36 87-100 Toruń",
+          "title": "Pierwszy Urząd Skarbowy w Toruniu Szosa Chełmińska 34/36 87-100 Toruń"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Toruniu Mazowiecka 63 87-100 Toruń",
+          "title": "Drugi Urząd Skarbowy w Toruniu Mazowiecka 63 87-100 Toruń"
+        },
+        {
+          "const": "Urząd Skarbowy w Tucholi Pl. Zamkowy 4 89-500 Tuchola",
+          "title": "Urząd Skarbowy w Tucholi Pl. Zamkowy 4 89-500 Tuchola"
+        },
+        {
+          "const": "Urząd Skarbowy w Wąbrzeźnie Macieja Rataja 2 87-200 Wąbrzeźno",
+          "title": "Urząd Skarbowy w Wąbrzeźnie Macieja Rataja 2 87-200 Wąbrzeźno"
+        },
+        {
+          "const": "Urząd Skarbowy we Włocławku Stefana Okrzei 72B 87-800 Włocławek",
+          "title": "Urząd Skarbowy we Włocławku Stefana Okrzei 72B 87-800 Włocławek"
+        },
+        {
+          "const": "Urząd Skarbowy w Żninie Klemensa Janickiego 18 88-400 Żnin",
+          "title": "Urząd Skarbowy w Żninie Klemensa Janickiego 18 88-400 Żnin"
+        },
+        {
+          "const": "Urząd Skarbowy w Golubiu-Dobrzyniu Dr. Jerzego Gerarda Koppa 1A 87-400 Golub-Dobrzyń",
+          "title": "Urząd Skarbowy w Golubiu-Dobrzyniu Dr. Jerzego Gerarda Koppa 1A 87-400 Golub-Dobrzyń"
+        },
+        {
+          "const": "Urząd Skarbowy w Sępólnie Krajeńskim Tadeusza Kościuszki 22 89-400 Sępólno Krajeńskie",
+          "title": "Urząd Skarbowy w Sępólnie Krajeńskim Tadeusza Kościuszki 22 89-400 Sępólno Krajeńskie"
+        },
+        {
+          "const": "Kujawsko-Pomorski Urząd Skarbowy w Bydgoszczy Grunwaldzka 50 85-236 Bydgoszcz",
+          "title": "Kujawsko-Pomorski Urząd Skarbowy w Bydgoszczy Grunwaldzka 50 85-236 Bydgoszcz"
+        },
+        {
+          "const": "Kujawsko-Pomorski Urząd Celno-Skarbowy w Toruniu Batorego 61 87-100 Toruń",
+          "title": "Kujawsko-Pomorski Urząd Celno-Skarbowy w Toruniu Batorego 61 87-100 Toruń"
+        },
+        {
+          "const": "Urząd Skarbowy w Białej Podlaskiej Prosta 19 21-500 Biała Podlaska",
+          "title": "Urząd Skarbowy w Białej Podlaskiej Prosta 19 21-500 Biała Podlaska"
+        },
+        {
+          "const": "Urząd Skarbowy w Biłgoraju Tadeusza Kościuszki 78 23-400 Biłgoraj",
+          "title": "Urząd Skarbowy w Biłgoraju Tadeusza Kościuszki 78 23-400 Biłgoraj"
+        },
+        {
+          "const": "Urząd Skarbowy w Chełmie Obłońska 20A 22-100 Chełm",
+          "title": "Urząd Skarbowy w Chełmie Obłońska 20A 22-100 Chełm"
+        },
+        {
+          "const": "Urząd Skarbowy w Hrubieszowie 27 Wołyńskiej Dywizji Piechoty AK 11 22-500 Hrubieszów",
+          "title": "Urząd Skarbowy w Hrubieszowie 27 Wołyńskiej Dywizji Piechoty AK 11 22-500 Hrubieszów"
+        },
+        {
+          "const": "Urząd Skarbowy w Janowie Lubelskim Wojska Polskiego 32 23-300 Janów Lubelski",
+          "title": "Urząd Skarbowy w Janowie Lubelskim Wojska Polskiego 32 23-300 Janów Lubelski"
+        },
+        {
+          "const": "Urząd Skarbowy w Krasnymstawie Rzeczna 5 22-300 Krasnystaw",
+          "title": "Urząd Skarbowy w Krasnymstawie Rzeczna 5 22-300 Krasnystaw"
+        },
+        {
+          "const": "Urząd Skarbowy w Kraśniku Tadeusza Kościuszki 5 23-200 Kraśnik",
+          "title": "Urząd Skarbowy w Kraśniku Tadeusza Kościuszki 5 23-200 Kraśnik"
+        },
+        {
+          "const": "Urząd Skarbowy w Lubartowie Legionów 55 21-100 Lubartów",
+          "title": "Urząd Skarbowy w Lubartowie Legionów 55 21-100 Lubartów"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Lublinie Sądowa 5 20-027 Lublin",
+          "title": "Pierwszy Urząd Skarbowy w Lublinie Sądowa 5 20-027 Lublin"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Lublinie Tadeusza Szeligowskiego 24 20-883 Lublin",
+          "title": "Drugi Urząd Skarbowy w Lublinie Tadeusza Szeligowskiego 24 20-883 Lublin"
+        },
+        {
+          "const": "Trzeci Urząd Skarbowy w Lublinie Prezydenta Gabriela Narutowicza 56 20-016 Lublin",
+          "title": "Trzeci Urząd Skarbowy w Lublinie Prezydenta Gabriela Narutowicza 56 20-016 Lublin"
+        },
+        {
+          "const": "Urząd Skarbowy w Łukowie Międzyrzecka 72A 21-400 Łuków",
+          "title": "Urząd Skarbowy w Łukowie Międzyrzecka 72A 21-400 Łuków"
+        },
+        {
+          "const": "Urząd Skarbowy w Opolu Lubelskim Józefa Piłsudskiego 12 24-300 Opole Lubelskie",
+          "title": "Urząd Skarbowy w Opolu Lubelskim Józefa Piłsudskiego 12 24-300 Opole Lubelskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Parczewie Żabia 2a 21-200 Parczew",
+          "title": "Urząd Skarbowy w Parczewie Żabia 2a 21-200 Parczew"
+        },
+        {
+          "const": "Urząd Skarbowy w Puławach Władysława Grabskiego 4 24-100 Puławy",
+          "title": "Urząd Skarbowy w Puławach Władysława Grabskiego 4 24-100 Puławy"
+        },
+        {
+          "const": "Urząd Skarbowy w Radzyniu Podlaskim Lubelska 1/2 21-300 Radzyń Podlaski",
+          "title": "Urząd Skarbowy w Radzyniu Podlaskim Lubelska 1/2 21-300 Radzyń Podlaski"
+        },
+        {
+          "const": "Urząd Skarbowy w Tomaszowie Lubelskim Rolnicza 17 22-600 Tomaszów Lubelski",
+          "title": "Urząd Skarbowy w Tomaszowie Lubelskim Rolnicza 17 22-600 Tomaszów Lubelski"
+        },
+        {
+          "const": "Urząd Skarbowy we Włodawie Rynek 9 22-200 Włodawa",
+          "title": "Urząd Skarbowy we Włodawie Rynek 9 22-200 Włodawa"
+        },
+        {
+          "const": "Urząd Skarbowy w Zamościu Jana Kilińskiego 82 22-400 Zamość",
+          "title": "Urząd Skarbowy w Zamościu Jana Kilińskiego 82 22-400 Zamość"
+        },
+        {
+          "const": "Urząd Skarbowy w Łęcznej Aleja Jana Pawła II 95 21-010 Łęczna",
+          "title": "Urząd Skarbowy w Łęcznej Aleja Jana Pawła II 95 21-010 Łęczna"
+        },
+        {
+          "const": "Urząd Skarbowy w Rykach Leona Wyczółkowskiego 10A 08-500 Ryki",
+          "title": "Urząd Skarbowy w Rykach Leona Wyczółkowskiego 10A 08-500 Ryki"
+        },
+        {
+          "const": "Lubelski Urząd Skarbowy w Lublinie Tomasza Zana 38 20-601 Lublin",
+          "title": "Lubelski Urząd Skarbowy w Lublinie Tomasza Zana 38 20-601 Lublin"
+        },
+        {
+          "const": "Lubelski Urząd Celno-Skarbowy w Białej Podlaskiej Celników Polskich 21 21-500 Biała Podlaska",
+          "title": "Lubelski Urząd Celno-Skarbowy w Białej Podlaskiej Celników Polskich 21 21-500 Biała Podlaska"
+        },
+        {
+          "const": "Urząd Skarbowy w Gorzowie Wielkopolskim Kazimierza Jagiellończyka 10 66-400 Gorzów Wielkopolski",
+          "title": "Urząd Skarbowy w Gorzowie Wielkopolskim Kazimierza Jagiellończyka 10 66-400 Gorzów Wielkopolski"
+        },
+        {
+          "const": "Urząd Skarbowy w Krośnie Odrzańskim Słubicka 3 66-600 Krosno Odrzańskie",
+          "title": "Urząd Skarbowy w Krośnie Odrzańskim Słubicka 3 66-600 Krosno Odrzańskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Międzyrzeczu Rynek 3 66-300 Międzyrzecz",
+          "title": "Urząd Skarbowy w Międzyrzeczu Rynek 3 66-300 Międzyrzecz"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowej Soli Staszica 1 67-100 Nowa Sól",
+          "title": "Urząd Skarbowy w Nowej Soli Staszica 1 67-100 Nowa Sól"
+        },
+        {
+          "const": "Urząd Skarbowy w Słubicach Wojska Polskiego 155 69-100 Słubice",
+          "title": "Urząd Skarbowy w Słubicach Wojska Polskiego 155 69-100 Słubice"
+        },
+        {
+          "const": "Urząd Skarbowy w Świebodzinie Sobieskiego 6 66-200 Świebodzin",
+          "title": "Urząd Skarbowy w Świebodzinie Sobieskiego 6 66-200 Świebodzin"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Zielonej Górze Dr. Pieniężnego 24 65-054 Zielona Góra",
+          "title": "Pierwszy Urząd Skarbowy w Zielonej Górze Dr. Pieniężnego 24 65-054 Zielona Góra"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Zielonej Górze Dr. Pieniężnego 24 65-054 Zielona Góra",
+          "title": "Drugi Urząd Skarbowy w Zielonej Górze Dr. Pieniężnego 24 65-054 Zielona Góra"
+        },
+        {
+          "const": "Urząd Skarbowy w Żaganiu Skarbowa 26 68-100 Żagań",
+          "title": "Urząd Skarbowy w Żaganiu Skarbowa 26 68-100 Żagań"
+        },
+        {
+          "const": "Urząd Skarbowy w Żarach Osadników Wojskowych 3-4 68-200 Żary",
+          "title": "Urząd Skarbowy w Żarach Osadników Wojskowych 3-4 68-200 Żary"
+        },
+        {
+          "const": "Urząd Skarbowy w Drezdenku Pierwszej Brygady 21 66-530 Drezdenko",
+          "title": "Urząd Skarbowy w Drezdenku Pierwszej Brygady 21 66-530 Drezdenko"
+        },
+        {
+          "const": "Urząd Skarbowy w Sulęcinie Daszyńskiego 47 69-200 Sulęcin",
+          "title": "Urząd Skarbowy w Sulęcinie Daszyńskiego 47 69-200 Sulęcin"
+        },
+        {
+          "const": "Urząd Skarbowy we Wschowie Zielony Rynek 7 67-400 Wschowa",
+          "title": "Urząd Skarbowy we Wschowie Zielony Rynek 7 67-400 Wschowa"
+        },
+        {
+          "const": "Lubuski Urząd Skarbowy w Zielonej Górze Dr. Pieniężnego 24 65-054 Zielona Góra",
+          "title": "Lubuski Urząd Skarbowy w Zielonej Górze Dr. Pieniężnego 24 65-054 Zielona Góra"
+        },
+        {
+          "const": "Lubuski Urząd Celno-Skarbowy w Gorzowie Wielkopolskim Kazimierza Wielkiego 65 66-400 Gorzów Wielkopolski",
+          "title": "Lubuski Urząd Celno-Skarbowy w Gorzowie Wielkopolskim Kazimierza Wielkiego 65 66-400 Gorzów Wielkopolski"
+        },
+        {
+          "const": "Urząd Skarbowy w Bełchatowie Józefa Piłsudskiego 18 97-400 Bełchatów",
+          "title": "Urząd Skarbowy w Bełchatowie Józefa Piłsudskiego 18 97-400 Bełchatów"
+        },
+        {
+          "const": "Urząd Skarbowy w Brzezinach Henryka Sienkiewicza 16 95-060 Brzeziny",
+          "title": "Urząd Skarbowy w Brzezinach Henryka Sienkiewicza 16 95-060 Brzeziny"
+        },
+        {
+          "const": "Urząd Skarbowy w Głownie Ludwika Norblina 2 95-015 Głowno",
+          "title": "Urząd Skarbowy w Głownie Ludwika Norblina 2 95-015 Głowno"
+        },
+        {
+          "const": "Urząd Skarbowy w Kutnie Dr. Antoniego Troczewskiego 12 99-300 Kutno",
+          "title": "Urząd Skarbowy w Kutnie Dr. Antoniego Troczewskiego 12 99-300 Kutno"
+        },
+        {
+          "const": "Urząd Skarbowy w Łasku 9 Maja 31 98-100 Łask",
+          "title": "Urząd Skarbowy w Łasku 9 Maja 31 98-100 Łask"
+        },
+        {
+          "const": "Urząd Skarbowy w Łowiczu Józefa Chełmońskiego 2 99-400 Łowicz",
+          "title": "Urząd Skarbowy w Łowiczu Józefa Chełmońskiego 2 99-400 Łowicz"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy Łódź - Bałuty Zachodnia 47 91-066 Łódź",
+          "title": "Pierwszy Urząd Skarbowy Łódź - Bałuty Zachodnia 47 91-066 Łódź"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy Łódź - Bałuty Św. Teresy od Dzieciątka Jezus 105 91-222 Łódź",
+          "title": "Drugi Urząd Skarbowy Łódź - Bałuty Św. Teresy od Dzieciątka Jezus 105 91-222 Łódź"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy Łódź - Górna Walerego Wróblewskiego 10 93-578 Łódź",
+          "title": "Pierwszy Urząd Skarbowy Łódź - Górna Walerego Wróblewskiego 10 93-578 Łódź"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy Łódź - Górna Walerego Wróblewskiego 10A 93-578 Łódź",
+          "title": "Drugi Urząd Skarbowy Łódź - Górna Walerego Wróblewskiego 10A 93-578 Łódź"
+        },
+        {
+          "const": "Urząd Skarbowy Łódź - Polesie 6 Sierpnia 86A 90-646 Łódź",
+          "title": "Urząd Skarbowy Łódź - Polesie 6 Sierpnia 86A 90-646 Łódź"
+        },
+        {
+          "const": "Urząd Skarbowy Łódź - Śródmieście Dowborczyków 9/11 90-019 Łódź",
+          "title": "Urząd Skarbowy Łódź - Śródmieście Dowborczyków 9/11 90-019 Łódź"
+        },
+        {
+          "const": "Urząd Skarbowy Łódź - Widzew Papiernicza 7 92-312 Łódź",
+          "title": "Urząd Skarbowy Łódź - Widzew Papiernicza 7 92-312 Łódź"
+        },
+        {
+          "const": "Urząd Skarbowy w Opocznie Piotrkowska 14 26-300 Opoczno",
+          "title": "Urząd Skarbowy w Opocznie Piotrkowska 14 26-300 Opoczno"
+        },
+        {
+          "const": "Urząd Skarbowy w Pabianicach Zamkowa 26 95-200 Pabianice",
+          "title": "Urząd Skarbowy w Pabianicach Zamkowa 26 95-200 Pabianice"
+        },
+        {
+          "const": "Urząd Skarbowy w Piotrkowie Trybunalskim Wronia 65 97-300 Piotrków Trybunalski",
+          "title": "Urząd Skarbowy w Piotrkowie Trybunalskim Wronia 65 97-300 Piotrków Trybunalski"
+        },
+        {
+          "const": "Urząd Skarbowy w Poddębicach Narutowicza 12 99-200 Poddębice",
+          "title": "Urząd Skarbowy w Poddębicach Narutowicza 12 99-200 Poddębice"
+        },
+        {
+          "const": "Urząd Skarbowy w Radomsku Mickiewicza 4 97-500 Radomsko",
+          "title": "Urząd Skarbowy w Radomsku Mickiewicza 4 97-500 Radomsko"
+        },
+        {
+          "const": "Urząd Skarbowy w Rawie Mazowieckiej Juliusza Słowackiego 4 96-200 Rawa Mazowiecka",
+          "title": "Urząd Skarbowy w Rawie Mazowieckiej Juliusza Słowackiego 4 96-200 Rawa Mazowiecka"
+        },
+        {
+          "const": "Urząd Skarbowy w Sieradzu Spółdzielcza 3 98-200 Sieradz",
+          "title": "Urząd Skarbowy w Sieradzu Spółdzielcza 3 98-200 Sieradz"
+        },
+        {
+          "const": "Urząd Skarbowy w Skierniewicach Czerwona 22 96-100 Skierniewice",
+          "title": "Urząd Skarbowy w Skierniewicach Czerwona 22 96-100 Skierniewice"
+        },
+        {
+          "const": "Urząd Skarbowy w Tomaszowie Mazowieckim Mireckiego 37 97-200 Tomaszów Mazowiecki",
+          "title": "Urząd Skarbowy w Tomaszowie Mazowieckim Mireckiego 37 97-200 Tomaszów Mazowiecki"
+        },
+        {
+          "const": "Urząd Skarbowy w Wieluniu Krakowskie Przedmieście 34 98-300 Wieluń",
+          "title": "Urząd Skarbowy w Wieluniu Krakowskie Przedmieście 34 98-300 Wieluń"
+        },
+        {
+          "const": "Urząd Skarbowy w Zduńskiej Woli Zielona 15 98-220 Zduńska Wola",
+          "title": "Urząd Skarbowy w Zduńskiej Woli Zielona 15 98-220 Zduńska Wola"
+        },
+        {
+          "const": "Urząd Skarbowy w Zgierzu ks. Jerzego Popiełuszki 8 95-100 Zgierz",
+          "title": "Urząd Skarbowy w Zgierzu ks. Jerzego Popiełuszki 8 95-100 Zgierz"
+        },
+        {
+          "const": "Urząd Skarbowy w Wieruszowie Rynek 12/13 98-400 Wieruszów",
+          "title": "Urząd Skarbowy w Wieruszowie Rynek 12/13 98-400 Wieruszów"
+        },
+        {
+          "const": "Urząd Skarbowy w Łęczycy al. Jana Pawła II 17 99-100 Łęczyca",
+          "title": "Urząd Skarbowy w Łęczycy al. Jana Pawła II 17 99-100 Łęczyca"
+        },
+        {
+          "const": "Urząd Skarbowy w Pajęcznie 1 Maja 9 98-330 Pajęczno",
+          "title": "Urząd Skarbowy w Pajęcznie 1 Maja 9 98-330 Pajęczno"
+        },
+        {
+          "const": "Łódzki Urząd Skarbowy w Łodzi aleja T. Kościuszki 85 90-436 Łódź",
+          "title": "Łódzki Urząd Skarbowy w Łodzi aleja T. Kościuszki 85 90-436 Łódź"
+        },
+        {
+          "const": "Łódzki Urząd Celno-Skarbowy w Łodzi Ks. Stanisława Brzóski 24 91-315 Łódź",
+          "title": "Łódzki Urząd Celno-Skarbowy w Łodzi Ks. Stanisława Brzóski 24 91-315 Łódź"
+        },
+        {
+          "const": "Urząd Skarbowy w Bochni Gołębia 3 32-700 Bochnia",
+          "title": "Urząd Skarbowy w Bochni Gołębia 3 32-700 Bochnia"
+        },
+        {
+          "const": "Urząd Skarbowy w Brzesku Królowej Jadwigi 16 32-800 Brzesko",
+          "title": "Urząd Skarbowy w Brzesku Królowej Jadwigi 16 32-800 Brzesko"
+        },
+        {
+          "const": "Urząd Skarbowy w Chrzanowie Garncarska 9 32-500 Chrzanów",
+          "title": "Urząd Skarbowy w Chrzanowie Garncarska 9 32-500 Chrzanów"
+        },
+        {
+          "const": "Urząd Skarbowy w Dąbrowie Tarnowskiej Berka Joselewicza 5 33-200 Dąbrowa Tarnowska",
+          "title": "Urząd Skarbowy w Dąbrowie Tarnowskiej Berka Joselewicza 5 33-200 Dąbrowa Tarnowska"
+        },
+        {
+          "const": "Urząd Skarbowy w Gorlicach Bardiowska 9 38-300 Gorlice",
+          "title": "Urząd Skarbowy w Gorlicach Bardiowska 9 38-300 Gorlice"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy Kraków Rzemieślnicza 20 30-363 Kraków",
+          "title": "Pierwszy Urząd Skarbowy Kraków Rzemieślnicza 20 30-363 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy Kraków - Krowodrza Władysława Łokietka 20 30-016 Kraków",
+          "title": "Urząd Skarbowy Kraków - Krowodrza Władysława Łokietka 20 30-016 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy Kraków - Nowa Huta os. Bohaterów Września 80 31-621 Kraków",
+          "title": "Urząd Skarbowy Kraków - Nowa Huta os. Bohaterów Września 80 31-621 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy Kraków - Podgórze Wadowicka 10 30-415 Kraków",
+          "title": "Urząd Skarbowy Kraków - Podgórze Wadowicka 10 30-415 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy Kraków - Prądnik Krowoderskich Zuchów 2 31-272 Kraków",
+          "title": "Urząd Skarbowy Kraków - Prądnik Krowoderskich Zuchów 2 31-272 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy Kraków - Stare Miasto Grodzka 65 31-001 Kraków",
+          "title": "Urząd Skarbowy Kraków - Stare Miasto Grodzka 65 31-001 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy Kraków - Śródmieście Krowoderskich Zuchów 2 31-272 Kraków",
+          "title": "Urząd Skarbowy Kraków - Śródmieście Krowoderskich Zuchów 2 31-272 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy w Limanowej Matki Boskiej Bolesnej 9 34-600 Limanowa",
+          "title": "Urząd Skarbowy w Limanowej Matki Boskiej Bolesnej 9 34-600 Limanowa"
+        },
+        {
+          "const": "Urząd Skarbowy w Miechowie Stanisławy Daneckiej 1 32-200 Miechów",
+          "title": "Urząd Skarbowy w Miechowie Stanisławy Daneckiej 1 32-200 Miechów"
+        },
+        {
+          "const": "Urząd Skarbowy w Myślenicach Hipolita Cegielskiego 2 32-400 Myślenice",
+          "title": "Urząd Skarbowy w Myślenicach Hipolita Cegielskiego 2 32-400 Myślenice"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowym Sączu Władysława Barbackiego 10 33-300 Nowy Sącz",
+          "title": "Urząd Skarbowy w Nowym Sączu Władysława Barbackiego 10 33-300 Nowy Sącz"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowym Targu Parkowa 13 34-400 Nowy Targ",
+          "title": "Urząd Skarbowy w Nowym Targu Parkowa 13 34-400 Nowy Targ"
+        },
+        {
+          "const": "Urząd Skarbowy w Olkuszu Budowlanych 2 32-300 Olkusz",
+          "title": "Urząd Skarbowy w Olkuszu Budowlanych 2 32-300 Olkusz"
+        },
+        {
+          "const": "Urząd Skarbowy w Oświęcimiu Plebańska 2 32-600 Oświęcim",
+          "title": "Urząd Skarbowy w Oświęcimiu Plebańska 2 32-600 Oświęcim"
+        },
+        {
+          "const": "Urząd Skarbowy w Proszowicach Mikołaja Reja 1 32-100 Proszowice",
+          "title": "Urząd Skarbowy w Proszowicach Mikołaja Reja 1 32-100 Proszowice"
+        },
+        {
+          "const": "Urząd Skarbowy w Suchej Beskidzkiej Adama Mickiewicza 36 34-200 Sucha Beskidzka",
+          "title": "Urząd Skarbowy w Suchej Beskidzkiej Adama Mickiewicza 36 34-200 Sucha Beskidzka"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Tarnowie Lwowska 72-96A 33-100 Tarnów",
+          "title": "Pierwszy Urząd Skarbowy w Tarnowie Lwowska 72-96A 33-100 Tarnów"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Tarnowie Al.Solidarności 5-9B 33-100 Tarnów",
+          "title": "Drugi Urząd Skarbowy w Tarnowie Al.Solidarności 5-9B 33-100 Tarnów"
+        },
+        {
+          "const": "Urząd Skarbowy w Wadowicach Legionów 22 34-100 Wadowice",
+          "title": "Urząd Skarbowy w Wadowicach Legionów 22 34-100 Wadowice"
+        },
+        {
+          "const": "Urząd Skarbowy w Wieliczce Zamkowa 2 32-020 Wieliczka",
+          "title": "Urząd Skarbowy w Wieliczce Zamkowa 2 32-020 Wieliczka"
+        },
+        {
+          "const": "Urząd Skarbowy w Zakopanem Szymony 14 34-500 Zakopane",
+          "title": "Urząd Skarbowy w Zakopanem Szymony 14 34-500 Zakopane"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy Kraków Krowoderskich Zuchów 2 31-272 Kraków",
+          "title": "Drugi Urząd Skarbowy Kraków Krowoderskich Zuchów 2 31-272 Kraków"
+        },
+        {
+          "const": "Małopolski Urząd Skarbowy w Krakowie os. Bohaterów Września 80 31-621 Kraków",
+          "title": "Małopolski Urząd Skarbowy w Krakowie os. Bohaterów Września 80 31-621 Kraków"
+        },
+        {
+          "const": "Małopolski Urząd Celno-Skarbowy w Krakowie Pachońskiego 3A 31-223 Kraków",
+          "title": "Małopolski Urząd Celno-Skarbowy w Krakowie Pachońskiego 3A 31-223 Kraków"
+        },
+        {
+          "const": "Urząd Skarbowy w Białobrzegach Władysława Stanisława Reymonta 46 26-800 Białobrzegi",
+          "title": "Urząd Skarbowy w Białobrzegach Władysława Stanisława Reymonta 46 26-800 Białobrzegi"
+        },
+        {
+          "const": "Urząd Skarbowy w Ciechanowie Warszawska 58 06-400 Ciechanów",
+          "title": "Urząd Skarbowy w Ciechanowie Warszawska 58 06-400 Ciechanów"
+        },
+        {
+          "const": "Urząd Skarbowy w Garwolinie Senatorska 30 08-400 Garwolin",
+          "title": "Urząd Skarbowy w Garwolinie Senatorska 30 08-400 Garwolin"
+        },
+        {
+          "const": "Urząd Skarbowy w Gostyninie Płocka 10 09-500 Gostynin",
+          "title": "Urząd Skarbowy w Gostyninie Płocka 10 09-500 Gostynin"
+        },
+        {
+          "const": "Urząd Skarbowy w Grodzisku Mazowieckim Daleka 22 05-825 Grodzisk Mazowiecki",
+          "title": "Urząd Skarbowy w Grodzisku Mazowieckim Daleka 22 05-825 Grodzisk Mazowiecki"
+        },
+        {
+          "const": "Urząd Skarbowy w Grójcu Ks. Piotra Skargi 35 05-600 Grójec",
+          "title": "Urząd Skarbowy w Grójcu Ks. Piotra Skargi 35 05-600 Grójec"
+        },
+        {
+          "const": "Urząd Skarbowy w Kozienicach Parkowa 5 26-900 Kozienice",
+          "title": "Urząd Skarbowy w Kozienicach Parkowa 5 26-900 Kozienice"
+        },
+        {
+          "const": "Urząd Skarbowy w Legionowie Marszałka Józefa Piłsudskiego 43C 05-120 Legionowo",
+          "title": "Urząd Skarbowy w Legionowie Marszałka Józefa Piłsudskiego 43C 05-120 Legionowo"
+        },
+        {
+          "const": "Urząd Skarbowy w Łosicach 11 Listopada 1 08-200 Łosice",
+          "title": "Urząd Skarbowy w Łosicach 11 Listopada 1 08-200 Łosice"
+        },
+        {
+          "const": "Urząd Skarbowy w Makowie Mazowieckim Kopernika 6C 06-200 Maków Mazowiecki",
+          "title": "Urząd Skarbowy w Makowie Mazowieckim Kopernika 6C 06-200 Maków Mazowiecki"
+        },
+        {
+          "const": "Urząd Skarbowy w Mińsku Mazowieckim Szczecińska 2 05-300 Mińsk Mazowiecki",
+          "title": "Urząd Skarbowy w Mińsku Mazowieckim Szczecińska 2 05-300 Mińsk Mazowiecki"
+        },
+        {
+          "const": "Urząd Skarbowy w Mławie Gabriela Narutowicza 19/7 06-500 Mława",
+          "title": "Urząd Skarbowy w Mławie Gabriela Narutowicza 19/7 06-500 Mława"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowym Dworze Mazowieckim Legionów 7 05-100 Nowy Dwór Mazowiecki",
+          "title": "Urząd Skarbowy w Nowym Dworze Mazowieckim Legionów 7 05-100 Nowy Dwór Mazowiecki"
+        },
+        {
+          "const": "Urząd Skarbowy w Ostrołęce Przechodnia 6 07-410 Ostrołęka",
+          "title": "Urząd Skarbowy w Ostrołęce Przechodnia 6 07-410 Ostrołęka"
+        },
+        {
+          "const": "Urząd Skarbowy w Ostrowi Mazowieckiej Stanisława Duboisa 1 07-300 Ostrów Mazowiecka",
+          "title": "Urząd Skarbowy w Ostrowi Mazowieckiej Stanisława Duboisa 1 07-300 Ostrów Mazowiecka"
+        },
+        {
+          "const": "Urząd Skarbowy w Otwocku Jana Matejki 4 05-400 Otwock",
+          "title": "Urząd Skarbowy w Otwocku Jana Matejki 4 05-400 Otwock"
+        },
+        {
+          "const": "Urząd Skarbowy w Piasecznie Energetyczna 5 05-500 Piaseczno",
+          "title": "Urząd Skarbowy w Piasecznie Energetyczna 5 05-500 Piaseczno"
+        },
+        {
+          "const": "Urząd Skarbowy w Płocku 1 Maja 10 09-402 Płock",
+          "title": "Urząd Skarbowy w Płocku 1 Maja 10 09-402 Płock"
+        },
+        {
+          "const": "Urząd Skarbowy w Płońsku Spółdzielcza 2 09-100 Płońsk",
+          "title": "Urząd Skarbowy w Płońsku Spółdzielcza 2 09-100 Płońsk"
+        },
+        {
+          "const": "Urząd Skarbowy w Pruszkowie Stanisława Staszica 1 05-800 Pruszków",
+          "title": "Urząd Skarbowy w Pruszkowie Stanisława Staszica 1 05-800 Pruszków"
+        },
+        {
+          "const": "Urząd Skarbowy w Przasnyszu Świerkowa 3 06-300 Przasnysz",
+          "title": "Urząd Skarbowy w Przasnyszu Świerkowa 3 06-300 Przasnysz"
+        },
+        {
+          "const": "Urząd Skarbowy w Pułtusku Żwirki i Wigury 7 06-100 Pułtusk",
+          "title": "Urząd Skarbowy w Pułtusku Żwirki i Wigury 7 06-100 Pułtusk"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Radomiu Stanisława Zbrowskiego 106 26-615 Radom",
+          "title": "Pierwszy Urząd Skarbowy w Radomiu Stanisława Zbrowskiego 106 26-615 Radom"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Radomiu Toruńska 3 26-600 Radom",
+          "title": "Drugi Urząd Skarbowy w Radomiu Toruńska 3 26-600 Radom"
+        },
+        {
+          "const": "Urząd Skarbowy w Siedlcach Bp. Ignacego Świrskiego 45 08-110 Siedlce",
+          "title": "Urząd Skarbowy w Siedlcach Bp. Ignacego Świrskiego 45 08-110 Siedlce"
+        },
+        {
+          "const": "Urząd Skarbowy w Sierpcu Piastowska 48 09-200 Sierpc",
+          "title": "Urząd Skarbowy w Sierpcu Piastowska 48 09-200 Sierpc"
+        },
+        {
+          "const": "Urząd Skarbowy w Sochaczewie Władysława Grabskiego 4 96-500 Sochaczew",
+          "title": "Urząd Skarbowy w Sochaczewie Władysława Grabskiego 4 96-500 Sochaczew"
+        },
+        {
+          "const": "Urząd Skarbowy w Sokołowie Podlaskim Węgrowska 5 08-300 Sokołów Podlaski",
+          "title": "Urząd Skarbowy w Sokołowie Podlaskim Węgrowska 5 08-300 Sokołów Podlaski"
+        },
+        {
+          "const": "Urząd Skarbowy w Szydłowcu Widok 6 26-500 Szydłowiec",
+          "title": "Urząd Skarbowy w Szydłowcu Widok 6 26-500 Szydłowiec"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Bemowo Białobrzeska 53A 02-325 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Bemowo Białobrzeska 53A 02-325 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Bielany Skalbmierska 5 01-844 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Bielany Skalbmierska 5 01-844 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Mokotów Postępu 16A 02-676 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Mokotów Postępu 16A 02-676 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Praga Jagiellońska 15 03-719 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Praga Jagiellońska 15 03-719 Warszawa"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy Warszawa - Śródmieście Williama Lindleya 14 02-013 Warszawa",
+          "title": "Pierwszy Urząd Skarbowy Warszawa - Śródmieście Williama Lindleya 14 02-013 Warszawa"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy Warszawa - Śródmieście Jagiellońska 15 03-719 Warszawa",
+          "title": "Drugi Urząd Skarbowy Warszawa - Śródmieście Jagiellońska 15 03-719 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Targówek Dąbrowszczaków 14 03-484 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Targówek Dąbrowszczaków 14 03-484 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Ursynów Wynalazek 3 02-677 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Ursynów Wynalazek 3 02-677 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Wawer Ludwika Mycielskiego 21 04-379 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Wawer Ludwika Mycielskiego 21 04-379 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy Warszawa - Wola Powstańców Śląskich 2D 01-381 Warszawa",
+          "title": "Urząd Skarbowy Warszawa - Wola Powstańców Śląskich 2D 01-381 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy w Węgrowie Obrębowa 17 07-100 Węgrów",
+          "title": "Urząd Skarbowy w Węgrowie Obrębowa 17 07-100 Węgrów"
+        },
+        {
+          "const": "Urząd Skarbowy w Wołominie Przejazd 2 05-200 Wołomin",
+          "title": "Urząd Skarbowy w Wołominie Przejazd 2 05-200 Wołomin"
+        },
+        {
+          "const": "Urząd Skarbowy w Wyszkowie Gen. Józefa Sowińskiego 82 07-200 Wyszków",
+          "title": "Urząd Skarbowy w Wyszkowie Gen. Józefa Sowińskiego 82 07-200 Wyszków"
+        },
+        {
+          "const": "Urząd Skarbowy w Zwoleniu Wojska Polskiego 39 26-700 Zwoleń",
+          "title": "Urząd Skarbowy w Zwoleniu Wojska Polskiego 39 26-700 Zwoleń"
+        },
+        {
+          "const": "Urząd Skarbowy w Żurominie Plac Józefa Piłsudskiego 4 09-300 Żuromin",
+          "title": "Urząd Skarbowy w Żurominie Plac Józefa Piłsudskiego 4 09-300 Żuromin"
+        },
+        {
+          "const": "Urząd Skarbowy w Żyrardowie 1 Maja 49A 96-300 Żyrardów",
+          "title": "Urząd Skarbowy w Żyrardowie 1 Maja 49A 96-300 Żyrardów"
+        },
+        {
+          "const": "Urząd Skarbowy w Lipsku Solecka 88 27-300 Lipsko",
+          "title": "Urząd Skarbowy w Lipsku Solecka 88 27-300 Lipsko"
+        },
+        {
+          "const": "Urząd Skarbowy w Przysusze Szkolna 7 26-400 Przysucha",
+          "title": "Urząd Skarbowy w Przysusze Szkolna 7 26-400 Przysucha"
+        },
+        {
+          "const": "Trzeci Urząd Skarbowy Warszawa - Śródmieście Williama Lindleya 14 02-013 Warszawa",
+          "title": "Trzeci Urząd Skarbowy Warszawa - Śródmieście Williama Lindleya 14 02-013 Warszawa"
+        },
+        {
+          "const": "Pierwszy Mazowiecki Urząd Skarbowy w Warszawie Alojzego Felińskiego 2A 01-513 Warszawa",
+          "title": "Pierwszy Mazowiecki Urząd Skarbowy w Warszawie Alojzego Felińskiego 2A 01-513 Warszawa"
+        },
+        {
+          "const": "Drugi Mazowiecki Urząd Skarbowy w Warszawie Stawki 2 00-193 Warszawa",
+          "title": "Drugi Mazowiecki Urząd Skarbowy w Warszawie Stawki 2 00-193 Warszawa"
+        },
+        {
+          "const": "Trzeci Mazowiecki Urząd Skarbowy w Radomiu Andrzeja Struga 26/28 26-610 Radom",
+          "title": "Trzeci Mazowiecki Urząd Skarbowy w Radomiu Andrzeja Struga 26/28 26-610 Radom"
+        },
+        {
+          "const": "Mazowiecki Urząd Celno-Skarbowy w Warszawie Jagiellońska 55B 03-301 Warszawa",
+          "title": "Mazowiecki Urząd Celno-Skarbowy w Warszawie Jagiellońska 55B 03-301 Warszawa"
+        },
+        {
+          "const": "Urząd Skarbowy w Brzegu Składowa 2 49-305 Brzeg",
+          "title": "Urząd Skarbowy w Brzegu Składowa 2 49-305 Brzeg"
+        },
+        {
+          "const": "Urząd Skarbowy w Głubczycach Fabryczna 2 48-100 Głubczyce",
+          "title": "Urząd Skarbowy w Głubczycach Fabryczna 2 48-100 Głubczyce"
+        },
+        {
+          "const": "Urząd Skarbowy w Kędzierzynie-Koźlu Piotra Skargi 19 47-224 Kędzierzyn-Koźle",
+          "title": "Urząd Skarbowy w Kędzierzynie-Koźlu Piotra Skargi 19 47-224 Kędzierzyn-Koźle"
+        },
+        {
+          "const": "Urząd Skarbowy w Kluczborku Sienkiewicza 22A 46-200 Kluczbork",
+          "title": "Urząd Skarbowy w Kluczborku Sienkiewicza 22A 46-200 Kluczbork"
+        },
+        {
+          "const": "Urząd Skarbowy w Namysłowie Marii Skłodowskiej-Curie 12 46-100 Namysłów",
+          "title": "Urząd Skarbowy w Namysłowie Marii Skłodowskiej-Curie 12 46-100 Namysłów"
+        },
+        {
+          "const": "Urząd Skarbowy w Nysie Bolesława Krzywoustego 23 48-300 Nysa",
+          "title": "Urząd Skarbowy w Nysie Bolesława Krzywoustego 23 48-300 Nysa"
+        },
+        {
+          "const": "Urząd Skarbowy w Oleśnie Jana Pieloka 21 46-300 Olesno",
+          "title": "Urząd Skarbowy w Oleśnie Jana Pieloka 21 46-300 Olesno"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Opolu Tadeusza Rejtana 3B 45-331 Opole",
+          "title": "Pierwszy Urząd Skarbowy w Opolu Tadeusza Rejtana 3B 45-331 Opole"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Opolu płk. Witolda Pileckiego 2 45-331 Opole",
+          "title": "Drugi Urząd Skarbowy w Opolu płk. Witolda Pileckiego 2 45-331 Opole"
+        },
+        {
+          "const": "Urząd Skarbowy w Prudniku Mikołaja Kopernika 1A 48-200 Prudnik",
+          "title": "Urząd Skarbowy w Prudniku Mikołaja Kopernika 1A 48-200 Prudnik"
+        },
+        {
+          "const": "Urząd Skarbowy w Strzelcach Opolskich Opolska 13 47-100 Strzelce Opolskie",
+          "title": "Urząd Skarbowy w Strzelcach Opolskich Opolska 13 47-100 Strzelce Opolskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Krapkowicach Opolska 96A 47-300 Krapkowice",
+          "title": "Urząd Skarbowy w Krapkowicach Opolska 96A 47-300 Krapkowice"
+        },
+        {
+          "const": "Opolski Urząd Skarbowy w Opolu Tadeusza Rejtana 3A 45-331 Opole",
+          "title": "Opolski Urząd Skarbowy w Opolu Tadeusza Rejtana 3A 45-331 Opole"
+        },
+        {
+          "const": "Opolski Urząd Celno-Skarbowy w Opolu Drzymały 22 45-342 Opole",
+          "title": "Opolski Urząd Celno-Skarbowy w Opolu Drzymały 22 45-342 Opole"
+        },
+        {
+          "const": "Urząd Skarbowy w Brzozowie Kazimierzowska 1 36-200 Brzozów",
+          "title": "Urząd Skarbowy w Brzozowie Kazimierzowska 1 36-200 Brzozów"
+        },
+        {
+          "const": "Urząd Skarbowy w Dębicy Kolejowa 21 39-200 Dębica",
+          "title": "Urząd Skarbowy w Dębicy Kolejowa 21 39-200 Dębica"
+        },
+        {
+          "const": "Urząd Skarbowy w Jarosławiu Przemysłowa 2A 37-500 Jarosław",
+          "title": "Urząd Skarbowy w Jarosławiu Przemysłowa 2A 37-500 Jarosław"
+        },
+        {
+          "const": "Urząd Skarbowy w Jaśle Stanisława Staszica 3 38-200 Jasło",
+          "title": "Urząd Skarbowy w Jaśle Stanisława Staszica 3 38-200 Jasło"
+        },
+        {
+          "const": "Urząd Skarbowy w Kolbuszowej Tadeusza Kościuszki 20 36-100 Kolbuszowa",
+          "title": "Urząd Skarbowy w Kolbuszowej Tadeusza Kościuszki 20 36-100 Kolbuszowa"
+        },
+        {
+          "const": "Urząd Skarbowy w Krośnie Składowa 5 38-400 Krosno",
+          "title": "Urząd Skarbowy w Krośnie Składowa 5 38-400 Krosno"
+        },
+        {
+          "const": "Urząd Skarbowy w Lesku Rynek 1 38-600 Lesko",
+          "title": "Urząd Skarbowy w Lesku Rynek 1 38-600 Lesko"
+        },
+        {
+          "const": "Urząd Skarbowy w Leżajsku Plac Targowy 3 37-300 Leżajsk",
+          "title": "Urząd Skarbowy w Leżajsku Plac Targowy 3 37-300 Leżajsk"
+        },
+        {
+          "const": "Urząd Skarbowy w Lubaczowie Jana III Sobieskiego 6 37-600 Lubaczów",
+          "title": "Urząd Skarbowy w Lubaczowie Jana III Sobieskiego 6 37-600 Lubaczów"
+        },
+        {
+          "const": "Urząd Skarbowy w Łańcucie Józefa Piłsudskiego 11 37-100 Łańcut",
+          "title": "Urząd Skarbowy w Łańcucie Józefa Piłsudskiego 11 37-100 Łańcut"
+        },
+        {
+          "const": "Urząd Skarbowy w Mielcu Żeromskiego 13 39-300 Mielec",
+          "title": "Urząd Skarbowy w Mielcu Żeromskiego 13 39-300 Mielec"
+        },
+        {
+          "const": "Urząd Skarbowy w Przemyślu Lwowska 9A 37-700 Przemyśl",
+          "title": "Urząd Skarbowy w Przemyślu Lwowska 9A 37-700 Przemyśl"
+        },
+        {
+          "const": "Urząd Skarbowy w Przeworsku Tysiąclecia 1 37-200 Przeworsk",
+          "title": "Urząd Skarbowy w Przeworsku Tysiąclecia 1 37-200 Przeworsk"
+        },
+        {
+          "const": "Urząd Skarbowy w Ropczycach Świętej Barbary 12 39-100 Ropczyce",
+          "title": "Urząd Skarbowy w Ropczycach Świętej Barbary 12 39-100 Ropczyce"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Rzeszowie Podwisłocze 42 35-309 Rzeszów",
+          "title": "Pierwszy Urząd Skarbowy w Rzeszowie Podwisłocze 42 35-309 Rzeszów"
+        },
+        {
+          "const": "Urząd Skarbowy w Sanoku Henryka Sienkiewicza 1 38-500 Sanok",
+          "title": "Urząd Skarbowy w Sanoku Henryka Sienkiewicza 1 38-500 Sanok"
+        },
+        {
+          "const": "Urząd Skarbowy w Stalowej Woli Metalowców 6 37-450 Stalowa Wola",
+          "title": "Urząd Skarbowy w Stalowej Woli Metalowców 6 37-450 Stalowa Wola"
+        },
+        {
+          "const": "Urząd Skarbowy w Strzyżowie Daszyńskiego 6 38-100 Strzyżów",
+          "title": "Urząd Skarbowy w Strzyżowie Daszyńskiego 6 38-100 Strzyżów"
+        },
+        {
+          "const": "Urząd Skarbowy w Tarnobrzegu Stanisława Wyspiańskiego 12 39-400 Tarnobrzeg",
+          "title": "Urząd Skarbowy w Tarnobrzegu Stanisława Wyspiańskiego 12 39-400 Tarnobrzeg"
+        },
+        {
+          "const": "Urząd Skarbowy w Ustrzykach Dolnych Mikołaja Kopernika 1 38-700 Ustrzyki Dolne",
+          "title": "Urząd Skarbowy w Ustrzykach Dolnych Mikołaja Kopernika 1 38-700 Ustrzyki Dolne"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Rzeszowie Lucjana Siemieńskiego 18 35-234 Rzeszów",
+          "title": "Drugi Urząd Skarbowy w Rzeszowie Lucjana Siemieńskiego 18 35-234 Rzeszów"
+        },
+        {
+          "const": "Urząd Skarbowy w Nisku 3 Maja 32B 37-400 Nisko",
+          "title": "Urząd Skarbowy w Nisku 3 Maja 32B 37-400 Nisko"
+        },
+        {
+          "const": "Podkarpacki Urząd Skarbowy w Rzeszowie Geodetów 1 35-959 Rzeszów",
+          "title": "Podkarpacki Urząd Skarbowy w Rzeszowie Geodetów 1 35-959 Rzeszów"
+        },
+        {
+          "const": "Podkarpacki Urząd Celno-Skarbowy w Przemyślu Sielecka 9 37-700 Przemyśl",
+          "title": "Podkarpacki Urząd Celno-Skarbowy w Przemyślu Sielecka 9 37-700 Przemyśl"
+        },
+        {
+          "const": "Urząd Skarbowy w Augustowie Żabia 7 16-300 Augustów",
+          "title": "Urząd Skarbowy w Augustowie Żabia 7 16-300 Augustów"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Białymstoku Świętojańska 13 15-219 Białystok",
+          "title": "Pierwszy Urząd Skarbowy w Białymstoku Świętojańska 13 15-219 Białystok"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Białymstoku Plażowa 17 15-502 Białystok",
+          "title": "Drugi Urząd Skarbowy w Białymstoku Plażowa 17 15-502 Białystok"
+        },
+        {
+          "const": "Urząd Skarbowy w Bielsku Podlaskim Adama Mickiewicza 33 17-100 Bielsk Podlaski",
+          "title": "Urząd Skarbowy w Bielsku Podlaskim Adama Mickiewicza 33 17-100 Bielsk Podlaski"
+        },
+        {
+          "const": "Urząd Skarbowy w Grajewie Elewatorska 8 19-200 Grajewo",
+          "title": "Urząd Skarbowy w Grajewie Elewatorska 8 19-200 Grajewo"
+        },
+        {
+          "const": "Urząd Skarbowy w Kolnie Wojska Polskiego 20 18-500 Kolno",
+          "title": "Urząd Skarbowy w Kolnie Wojska Polskiego 20 18-500 Kolno"
+        },
+        {
+          "const": "Urząd Skarbowy w Łomży Polowa 47 18-400 Łomża",
+          "title": "Urząd Skarbowy w Łomży Polowa 47 18-400 Łomża"
+        },
+        {
+          "const": "Urząd Skarbowy w Mońkach Ełcka 41A 19-100 Mońki",
+          "title": "Urząd Skarbowy w Mońkach Ełcka 41A 19-100 Mońki"
+        },
+        {
+          "const": "Urząd Skarbowy w Siemiatyczach Pałacowa 18 17-300 Siemiatycze",
+          "title": "Urząd Skarbowy w Siemiatyczach Pałacowa 18 17-300 Siemiatycze"
+        },
+        {
+          "const": "Urząd Skarbowy w Sokółce Białostocka 47 16-100 Sokółka",
+          "title": "Urząd Skarbowy w Sokółce Białostocka 47 16-100 Sokółka"
+        },
+        {
+          "const": "Urząd Skarbowy w Suwałkach 1 Maja 2A 16-400 Suwałki",
+          "title": "Urząd Skarbowy w Suwałkach 1 Maja 2A 16-400 Suwałki"
+        },
+        {
+          "const": "Urząd Skarbowy w Wysokiem Mazowieckiem Ludowa 21 18-200 Wysokie Mazowieckie",
+          "title": "Urząd Skarbowy w Wysokiem Mazowieckiem Ludowa 21 18-200 Wysokie Mazowieckie"
+        },
+        {
+          "const": "Urząd Skarbowy w Zambrowie Jantarowa 16 18-300 Zambrów",
+          "title": "Urząd Skarbowy w Zambrowie Jantarowa 16 18-300 Zambrów"
+        },
+        {
+          "const": "Urząd Skarbowy w Hajnówce 3 Maja 34 17-200 Hajnówka",
+          "title": "Urząd Skarbowy w Hajnówce 3 Maja 34 17-200 Hajnówka"
+        },
+        {
+          "const": "Podlaski Urząd Skarbowy w Białymstoku Młynowa 21A 15-404 Białystok",
+          "title": "Podlaski Urząd Skarbowy w Białymstoku Młynowa 21A 15-404 Białystok"
+        },
+        {
+          "const": "Podlaski Urząd Celno-Skarbowy w Białymstoku Octowa 2 15-399 Białystok",
+          "title": "Podlaski Urząd Celno-Skarbowy w Białymstoku Octowa 2 15-399 Białystok"
+        },
+        {
+          "const": "Urząd Skarbowy w Bytowie 1 Maja 16 77-100 Bytów",
+          "title": "Urząd Skarbowy w Bytowie 1 Maja 16 77-100 Bytów"
+        },
+        {
+          "const": "Urząd Skarbowy w Chojnicach Młyńska 22 89-600 Chojnice",
+          "title": "Urząd Skarbowy w Chojnicach Młyńska 22 89-600 Chojnice"
+        },
+        {
+          "const": "Urząd Skarbowy w Człuchowie Jerzego z Dąbrowy 5E 77-300 Człuchów",
+          "title": "Urząd Skarbowy w Człuchowie Jerzego z Dąbrowy 5E 77-300 Człuchów"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Gdańsku Rzeźnicka 54/56 80-822 Gdańsk",
+          "title": "Pierwszy Urząd Skarbowy w Gdańsku Rzeźnicka 54/56 80-822 Gdańsk"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Gdańsku Kołobrzeska 43 80-391 Gdańsk",
+          "title": "Drugi Urząd Skarbowy w Gdańsku Kołobrzeska 43 80-391 Gdańsk"
+        },
+        {
+          "const": "Trzeci Urząd Skarbowy w Gdańsku Chłopska 3 80-362 Gdańsk",
+          "title": "Trzeci Urząd Skarbowy w Gdańsku Chłopska 3 80-362 Gdańsk"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Gdyni Władysława IV 2/4 81-353 Gdynia",
+          "title": "Pierwszy Urząd Skarbowy w Gdyni Władysława IV 2/4 81-353 Gdynia"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Gdyni Hutnicza 25 81-061 Gdynia",
+          "title": "Drugi Urząd Skarbowy w Gdyni Hutnicza 25 81-061 Gdynia"
+        },
+        {
+          "const": "Urząd Skarbowy w Kartuzach Kościerska 13 83-300 Kartuzy",
+          "title": "Urząd Skarbowy w Kartuzach Kościerska 13 83-300 Kartuzy"
+        },
+        {
+          "const": "Urząd Skarbowy w Kościerzynie Staszica 6 83-400 Kościerzyna",
+          "title": "Urząd Skarbowy w Kościerzynie Staszica 6 83-400 Kościerzyna"
+        },
+        {
+          "const": "Urząd Skarbowy w Kwidzynie 3 Maja 6 82-500 Kwidzyn",
+          "title": "Urząd Skarbowy w Kwidzynie 3 Maja 6 82-500 Kwidzyn"
+        },
+        {
+          "const": "Urząd Skarbowy w Lęborku Słupska 23 84-300 Lębork",
+          "title": "Urząd Skarbowy w Lęborku Słupska 23 84-300 Lębork"
+        },
+        {
+          "const": "Urząd Skarbowy w Malborku Mikołaja Kopernika 10 82-200 Malbork",
+          "title": "Urząd Skarbowy w Malborku Mikołaja Kopernika 10 82-200 Malbork"
+        },
+        {
+          "const": "Urząd Skarbowy w Pucku Kmdr. E. Szystowskiego 18 84-100 Puck",
+          "title": "Urząd Skarbowy w Pucku Kmdr. E. Szystowskiego 18 84-100 Puck"
+        },
+        {
+          "const": "Urząd Skarbowy w Słupsku Szczecińska 59 76-200 Słupsk",
+          "title": "Urząd Skarbowy w Słupsku Szczecińska 59 76-200 Słupsk"
+        },
+        {
+          "const": "Urząd Skarbowy w Sopocie 23 Marca 9/11 81-808 Sopot",
+          "title": "Urząd Skarbowy w Sopocie 23 Marca 9/11 81-808 Sopot"
+        },
+        {
+          "const": "Urząd Skarbowy w Starogardzie Gdańskim Lubichowska 4 83-200 Starogard Gdański",
+          "title": "Urząd Skarbowy w Starogardzie Gdańskim Lubichowska 4 83-200 Starogard Gdański"
+        },
+        {
+          "const": "Urząd Skarbowy w Tczewie Gdańska 33 83-110 Tczew",
+          "title": "Urząd Skarbowy w Tczewie Gdańska 33 83-110 Tczew"
+        },
+        {
+          "const": "Urząd Skarbowy w Wejherowie Jana III Sobieskiego 346 84-200 Wejherowo",
+          "title": "Urząd Skarbowy w Wejherowie Jana III Sobieskiego 346 84-200 Wejherowo"
+        },
+        {
+          "const": "Urząd Skarbowy w Pruszczu Gdańskim Ignacego Łukasiewicza 2 83-000 Pruszcz Gdański",
+          "title": "Urząd Skarbowy w Pruszczu Gdańskim Ignacego Łukasiewicza 2 83-000 Pruszcz Gdański"
+        },
+        {
+          "const": "Pomorski Urząd Skarbowy w Gdańsku Żytnia 4/6 80-749 Gdańsk",
+          "title": "Pomorski Urząd Skarbowy w Gdańsku Żytnia 4/6 80-749 Gdańsk"
+        },
+        {
+          "const": "Pomorski Urząd Celno-Skarbowy w Gdyni Północna 9A 81-029 Gdynia",
+          "title": "Pomorski Urząd Celno-Skarbowy w Gdyni Północna 9A 81-029 Gdynia"
+        },
+        {
+          "const": "Urząd Skarbowy w Będzinie Józefa Retingera 1 42-500 Będzin",
+          "title": "Urząd Skarbowy w Będzinie Józefa Retingera 1 42-500 Będzin"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Bielsku-Białej Teodora Sixta 17 43-300 Bielsko-Biała",
+          "title": "Pierwszy Urząd Skarbowy w Bielsku-Białej Teodora Sixta 17 43-300 Bielsko-Biała"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Bielsku-Białej Gen. Stanisława Maczka 73 43-300 Bielsko-Biała",
+          "title": "Drugi Urząd Skarbowy w Bielsku-Białej Gen. Stanisława Maczka 73 43-300 Bielsko-Biała"
+        },
+        {
+          "const": "Urząd Skarbowy w Bytomiu Wrocławska 92 41-902 Bytom",
+          "title": "Urząd Skarbowy w Bytomiu Wrocławska 92 41-902 Bytom"
+        },
+        {
+          "const": "Urząd Skarbowy w Chorzowie Armii Krajowej 5 41-506 Chorzów",
+          "title": "Urząd Skarbowy w Chorzowie Armii Krajowej 5 41-506 Chorzów"
+        },
+        {
+          "const": "Urząd Skarbowy w Cieszynie Ignacego Kraszewskiego 4 43-400 Cieszyn",
+          "title": "Urząd Skarbowy w Cieszynie Ignacego Kraszewskiego 4 43-400 Cieszyn"
+        },
+        {
+          "const": "Urząd Skarbowy w Czechowicach-Dziedzicach Nad Białką 1A 43-502 Czechowice-Dziedzice",
+          "title": "Urząd Skarbowy w Czechowicach-Dziedzicach Nad Białką 1A 43-502 Czechowice-Dziedzice"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Częstochowie Filomatów 18/20 42-217 Częstochowa",
+          "title": "Pierwszy Urząd Skarbowy w Częstochowie Filomatów 18/20 42-217 Częstochowa"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Częstochowie Tkacka 3 42-200 Częstochowa",
+          "title": "Drugi Urząd Skarbowy w Częstochowie Tkacka 3 42-200 Częstochowa"
+        },
+        {
+          "const": "Urząd Skarbowy w Dąbrowie Górniczej Zygmunta Krasińskiego 33A 41-300 Dąbrowa Górnicza",
+          "title": "Urząd Skarbowy w Dąbrowie Górniczej Zygmunta Krasińskiego 33A 41-300 Dąbrowa Górnicza"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Gliwicach Góry Chełmskiej 15 44-100 Gliwice",
+          "title": "Pierwszy Urząd Skarbowy w Gliwicach Góry Chełmskiej 15 44-100 Gliwice"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Gliwicach Młodego Hutnika 2 44-100 Gliwice",
+          "title": "Drugi Urząd Skarbowy w Gliwicach Młodego Hutnika 2 44-100 Gliwice"
+        },
+        {
+          "const": "Urząd Skarbowy w Jastrzębiu-Zdroju 11 Listopada 13 44-335 Jastrzębie-Zdrój",
+          "title": "Urząd Skarbowy w Jastrzębiu-Zdroju 11 Listopada 13 44-335 Jastrzębie-Zdrój"
+        },
+        {
+          "const": "Urząd Skarbowy w Jaworznie Grunwaldzka 274A 43-600 Jaworzno",
+          "title": "Urząd Skarbowy w Jaworznie Grunwaldzka 274A 43-600 Jaworzno"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Katowicach Żwirki i Wigury 17 40-063 Katowice",
+          "title": "Pierwszy Urząd Skarbowy w Katowicach Żwirki i Wigury 17 40-063 Katowice"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Katowicach Ignacego Paderewskiego 32B 40-282 Katowice",
+          "title": "Drugi Urząd Skarbowy w Katowicach Ignacego Paderewskiego 32B 40-282 Katowice"
+        },
+        {
+          "const": "Urząd Skarbowy w Kłobucku Rynek im. Jana Pawła II 13 42-100 Kłobuck",
+          "title": "Urząd Skarbowy w Kłobucku Rynek im. Jana Pawła II 13 42-100 Kłobuck"
+        },
+        {
+          "const": "Urząd Skarbowy w Lublińcu Ignacego Paderewskiego 7B 42-700 Lubliniec",
+          "title": "Urząd Skarbowy w Lublińcu Ignacego Paderewskiego 7B 42-700 Lubliniec"
+        },
+        {
+          "const": "Urząd Skarbowy w Mikołowie prof. Maksymiliana Hubera 4 43-190 Mikołów",
+          "title": "Urząd Skarbowy w Mikołowie prof. Maksymiliana Hubera 4 43-190 Mikołów"
+        },
+        {
+          "const": "Urząd Skarbowy w Mysłowicach Adama Mickiewicza 4 41-400 Mysłowice",
+          "title": "Urząd Skarbowy w Mysłowicach Adama Mickiewicza 4 41-400 Mysłowice"
+        },
+        {
+          "const": "Urząd Skarbowy w Myszkowie Kazimierza Pułaskiego 68 42-300 Myszków",
+          "title": "Urząd Skarbowy w Myszkowie Kazimierza Pułaskiego 68 42-300 Myszków"
+        },
+        {
+          "const": "Urząd Skarbowy w Piekarach Śląskich Bytomska 92 41-940 Piekary Śląskie",
+          "title": "Urząd Skarbowy w Piekarach Śląskich Bytomska 92 41-940 Piekary Śląskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Pszczynie 3 Maja 4 43-200 Pszczyna",
+          "title": "Urząd Skarbowy w Pszczynie 3 Maja 4 43-200 Pszczyna"
+        },
+        {
+          "const": "Urząd Skarbowy w Raciborzu Michała Drzymały 32 47-400 Racibórz",
+          "title": "Urząd Skarbowy w Raciborzu Michała Drzymały 32 47-400 Racibórz"
+        },
+        {
+          "const": "Urząd Skarbowy w Rudzie Śląskiej Kokotek 6 41-700 Ruda Śląska",
+          "title": "Urząd Skarbowy w Rudzie Śląskiej Kokotek 6 41-700 Ruda Śląska"
+        },
+        {
+          "const": "Urząd Skarbowy w Rybniku Pl. Armii Krajowej 3 44-200 Rybnik",
+          "title": "Urząd Skarbowy w Rybniku Pl. Armii Krajowej 3 44-200 Rybnik"
+        },
+        {
+          "const": "Urząd Skarbowy w Siemianowicach Śląskich Śląska 84 41-100 Siemianowice Śląskie",
+          "title": "Urząd Skarbowy w Siemianowicach Śląskich Śląska 84 41-100 Siemianowice Śląskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Sosnowcu 3 Maja 20 41-200 Sosnowiec",
+          "title": "Urząd Skarbowy w Sosnowcu 3 Maja 20 41-200 Sosnowiec"
+        },
+        {
+          "const": "Urząd Skarbowy w Tarnowskich Górach Opolska 23 42-600 Tarnowskie Góry",
+          "title": "Urząd Skarbowy w Tarnowskich Górach Opolska 23 42-600 Tarnowskie Góry"
+        },
+        {
+          "const": "Urząd Skarbowy w Tychach Al. Niepodległości 60 43-100 Tychy",
+          "title": "Urząd Skarbowy w Tychach Al. Niepodległości 60 43-100 Tychy"
+        },
+        {
+          "const": "Urząd Skarbowy w Wodzisławiu Śląskim Bartosza Głowackiego 4 44-300 Wodzisław Śląski",
+          "title": "Urząd Skarbowy w Wodzisławiu Śląskim Bartosza Głowackiego 4 44-300 Wodzisław Śląski"
+        },
+        {
+          "const": "Urząd Skarbowy w Zabrzu Bytomska 2 41-800 Zabrze",
+          "title": "Urząd Skarbowy w Zabrzu Bytomska 2 41-800 Zabrze"
+        },
+        {
+          "const": "Urząd Skarbowy w Zawierciu Leśna 8 42-400 Zawiercie",
+          "title": "Urząd Skarbowy w Zawierciu Leśna 8 42-400 Zawiercie"
+        },
+        {
+          "const": "Urząd Skarbowy w Żorach Wodzisławska 1 44-240 Żory",
+          "title": "Urząd Skarbowy w Żorach Wodzisławska 1 44-240 Żory"
+        },
+        {
+          "const": "Urząd Skarbowy w Żywcu Zygmunta Krasińskiego 11 34-300 Żywiec",
+          "title": "Urząd Skarbowy w Żywcu Zygmunta Krasińskiego 11 34-300 Żywiec"
+        },
+        {
+          "const": "Pierwszy Śląski Urząd Skarbowy w Sosnowcu Braci Mieroszewskich 97 41-219 Sosnowiec",
+          "title": "Pierwszy Śląski Urząd Skarbowy w Sosnowcu Braci Mieroszewskich 97 41-219 Sosnowiec"
+        },
+        {
+          "const": "Drugi Śląski Urząd Skarbowy w Bielsku-Białej Warszawska 45 43-300 Bielsko-Biała",
+          "title": "Drugi Śląski Urząd Skarbowy w Bielsku-Białej Warszawska 45 43-300 Bielsko-Biała"
+        },
+        {
+          "const": "Śląski Urząd Celno-Skarbowy w Katowicach Słoneczna 34 40-136 Katowice",
+          "title": "Śląski Urząd Celno-Skarbowy w Katowicach Słoneczna 34 40-136 Katowice"
+        },
+        {
+          "const": "Urząd Skarbowy w Busku-Zdroju Parkowa 17 28-100 Busko-Zdrój",
+          "title": "Urząd Skarbowy w Busku-Zdroju Parkowa 17 28-100 Busko-Zdrój"
+        },
+        {
+          "const": "Urząd Skarbowy w Jędrzejowie 11 Listopada 33 28-300 Jędrzejów",
+          "title": "Urząd Skarbowy w Jędrzejowie 11 Listopada 33 28-300 Jędrzejów"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Kielcach Wróbla 17 25-661 Kielce",
+          "title": "Pierwszy Urząd Skarbowy w Kielcach Wróbla 17 25-661 Kielce"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Kielcach Częstochowska 20 25-647 Kielce",
+          "title": "Drugi Urząd Skarbowy w Kielcach Częstochowska 20 25-647 Kielce"
+        },
+        {
+          "const": "Urząd Skarbowy w Końskich Marszałka Piłsudskiego 156B 26-200 Końskie",
+          "title": "Urząd Skarbowy w Końskich Marszałka Piłsudskiego 156B 26-200 Końskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Opatowie Jana Kilińskiego 9 27-500 Opatów",
+          "title": "Urząd Skarbowy w Opatowie Jana Kilińskiego 9 27-500 Opatów"
+        },
+        {
+          "const": "Urząd Skarbowy w Ostrowcu Świętokrzyskim Polna 11 27-400 Ostrowiec Świętokrzyski",
+          "title": "Urząd Skarbowy w Ostrowcu Świętokrzyskim Polna 11 27-400 Ostrowiec Świętokrzyski"
+        },
+        {
+          "const": "Urząd Skarbowy w Pińczowie Grodziskowa 1 28-400 Pińczów",
+          "title": "Urząd Skarbowy w Pińczowie Grodziskowa 1 28-400 Pińczów"
+        },
+        {
+          "const": "Urząd Skarbowy w Sandomierzu Żydowska 1 27-600 Sandomierz",
+          "title": "Urząd Skarbowy w Sandomierzu Żydowska 1 27-600 Sandomierz"
+        },
+        {
+          "const": "Urząd Skarbowy w Skarżysku-Kamiennej 1 Maja 56 26-110 Skarżysko-Kamienna",
+          "title": "Urząd Skarbowy w Skarżysku-Kamiennej 1 Maja 56 26-110 Skarżysko-Kamienna"
+        },
+        {
+          "const": "Urząd Skarbowy w Starachowicach Składowa 33 27-200 Starachowice",
+          "title": "Urząd Skarbowy w Starachowicach Składowa 33 27-200 Starachowice"
+        },
+        {
+          "const": "Urząd Skarbowy w Staszowie Oględowska 12 28-200 Staszów",
+          "title": "Urząd Skarbowy w Staszowie Oględowska 12 28-200 Staszów"
+        },
+        {
+          "const": "Urząd Skarbowy w Kazimierzy Wielkiej Tadeusza Kościuszki 16 28-500 Kazimierza Wielka",
+          "title": "Urząd Skarbowy w Kazimierzy Wielkiej Tadeusza Kościuszki 16 28-500 Kazimierza Wielka"
+        },
+        {
+          "const": "Urząd Skarbowy we Włoszczowie Wiśniowa 10 29-100 Włoszczowa",
+          "title": "Urząd Skarbowy we Włoszczowie Wiśniowa 10 29-100 Włoszczowa"
+        },
+        {
+          "const": "Świętokrzyski Urząd Skarbowy w Kielcach Częstochowska 20 25-647 Kielce",
+          "title": "Świętokrzyski Urząd Skarbowy w Kielcach Częstochowska 20 25-647 Kielce"
+        },
+        {
+          "const": "Świętokrzyski Urząd Celno-Skarbowy w Kielcach Wesoła 56 25-363 Kielce",
+          "title": "Świętokrzyski Urząd Celno-Skarbowy w Kielcach Wesoła 56 25-363 Kielce"
+        },
+        {
+          "const": "Urząd Skarbowy w Bartoszycach Boh. Warszawy 5 11-200 Bartoszyce",
+          "title": "Urząd Skarbowy w Bartoszycach Boh. Warszawy 5 11-200 Bartoszyce"
+        },
+        {
+          "const": "Urząd Skarbowy w Braniewie Jana Matejki 6 14-500 Braniewo",
+          "title": "Urząd Skarbowy w Braniewie Jana Matejki 6 14-500 Braniewo"
+        },
+        {
+          "const": "Urząd Skarbowy w Działdowie Marii Skłodowskiej-Curie 35A 13-200 Działdowo",
+          "title": "Urząd Skarbowy w Działdowie Marii Skłodowskiej-Curie 35A 13-200 Działdowo"
+        },
+        {
+          "const": "Urząd Skarbowy w Elblągu Adama Mickiewicza 43 82-300 Elbląg",
+          "title": "Urząd Skarbowy w Elblągu Adama Mickiewicza 43 82-300 Elbląg"
+        },
+        {
+          "const": "Urząd Skarbowy w Ełku Wojska Polskiego 67 19-300 Ełk",
+          "title": "Urząd Skarbowy w Ełku Wojska Polskiego 67 19-300 Ełk"
+        },
+        {
+          "const": "Urząd Skarbowy w Giżycku Tadeusza Kościuszki 15 11-500 Giżycko",
+          "title": "Urząd Skarbowy w Giżycku Tadeusza Kościuszki 15 11-500 Giżycko"
+        },
+        {
+          "const": "Urząd Skarbowy w Iławie Wojska Polskiego 26 14-200 Iława",
+          "title": "Urząd Skarbowy w Iławie Wojska Polskiego 26 14-200 Iława"
+        },
+        {
+          "const": "Urząd Skarbowy w Kętrzynie Powstańców Warszawy 13 11-400 Kętrzyn",
+          "title": "Urząd Skarbowy w Kętrzynie Powstańców Warszawy 13 11-400 Kętrzyn"
+        },
+        {
+          "const": "Urząd Skarbowy w Nidzicy Żeromskiego 11 13-100 Nidzica",
+          "title": "Urząd Skarbowy w Nidzicy Żeromskiego 11 13-100 Nidzica"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowym Mieście Lubawskim Działyńskich 3 13-300 Nowe Miasto Lubawskie",
+          "title": "Urząd Skarbowy w Nowym Mieście Lubawskim Działyńskich 3 13-300 Nowe Miasto Lubawskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Olecku Wojska Polskiego 7 19-400 Olecko",
+          "title": "Urząd Skarbowy w Olecku Wojska Polskiego 7 19-400 Olecko"
+        },
+        {
+          "const": "Urząd Skarbowy w Olsztynie Aleja Marszałka Józefa Piłsudskiego 59 10-950 Olsztyn",
+          "title": "Urząd Skarbowy w Olsztynie Aleja Marszałka Józefa Piłsudskiego 59 10-950 Olsztyn"
+        },
+        {
+          "const": "Urząd Skarbowy w Ostródzie Olsztyńska 5B 14-100 Ostróda",
+          "title": "Urząd Skarbowy w Ostródzie Olsztyńska 5B 14-100 Ostróda"
+        },
+        {
+          "const": "Urząd Skarbowy w Piszu Okopowa 2 12-200 Pisz",
+          "title": "Urząd Skarbowy w Piszu Okopowa 2 12-200 Pisz"
+        },
+        {
+          "const": "Urząd Skarbowy w Szczytnie Warszawska 5 12-100 Szczytno",
+          "title": "Urząd Skarbowy w Szczytnie Warszawska 5 12-100 Szczytno"
+        },
+        {
+          "const": "Warmińsko-Mazurski Urząd Skarbowy w Olsztynie Lubelska 37 10-408 Olsztyn",
+          "title": "Warmińsko-Mazurski Urząd Skarbowy w Olsztynie Lubelska 37 10-408 Olsztyn"
+        },
+        {
+          "const": "Warmińsko-Mazurski Urząd Celno-Skarbowy w Olsztynie Dworcowa 1 10-413 Olsztyn",
+          "title": "Warmińsko-Mazurski Urząd Celno-Skarbowy w Olsztynie Dworcowa 1 10-413 Olsztyn"
+        },
+        {
+          "const": "Urząd Skarbowy w Czarnkowie Wodna 8 64-700 Czarnków",
+          "title": "Urząd Skarbowy w Czarnkowie Wodna 8 64-700 Czarnków"
+        },
+        {
+          "const": "Urząd Skarbowy w Gnieźnie Spichrzowa 4 62-200 Gniezno",
+          "title": "Urząd Skarbowy w Gnieźnie Spichrzowa 4 62-200 Gniezno"
+        },
+        {
+          "const": "Urząd Skarbowy w Gostyniu Lipowa 2 63-800 Gostyń",
+          "title": "Urząd Skarbowy w Gostyniu Lipowa 2 63-800 Gostyń"
+        },
+        {
+          "const": "Urząd Skarbowy w Grodzisku Wielkopolskim Chopina 7 62-065 Grodzisk Wielkopolski",
+          "title": "Urząd Skarbowy w Grodzisku Wielkopolskim Chopina 7 62-065 Grodzisk Wielkopolski"
+        },
+        {
+          "const": "Urząd Skarbowy w Jarocinie Tadeusza Kościuszki 21 63-200 Jarocin",
+          "title": "Urząd Skarbowy w Jarocinie Tadeusza Kościuszki 21 63-200 Jarocin"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Kaliszu Wrocławska 12 62-800 Kalisz",
+          "title": "Pierwszy Urząd Skarbowy w Kaliszu Wrocławska 12 62-800 Kalisz"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Kaliszu Fabryczna 1a 62-800 Kalisz",
+          "title": "Drugi Urząd Skarbowy w Kaliszu Fabryczna 1a 62-800 Kalisz"
+        },
+        {
+          "const": "Urząd Skarbowy w Kępnie Rynek 4 63-600 Kępno",
+          "title": "Urząd Skarbowy w Kępnie Rynek 4 63-600 Kępno"
+        },
+        {
+          "const": "Urząd Skarbowy w Kole Bolesława Prusa 10 62-600 Koło",
+          "title": "Urząd Skarbowy w Kole Bolesława Prusa 10 62-600 Koło"
+        },
+        {
+          "const": "Urząd Skarbowy w Koninie Zakładowa 7A 62-510 Konin",
+          "title": "Urząd Skarbowy w Koninie Zakładowa 7A 62-510 Konin"
+        },
+        {
+          "const": "Urząd Skarbowy w Kościanie Młyńska 5 64-000 Kościan",
+          "title": "Urząd Skarbowy w Kościanie Młyńska 5 64-000 Kościan"
+        },
+        {
+          "const": "Urząd Skarbowy w Krotoszynie Polna 32 63-700 Krotoszyn",
+          "title": "Urząd Skarbowy w Krotoszynie Polna 32 63-700 Krotoszyn"
+        },
+        {
+          "const": "Urząd Skarbowy w Lesznie Adama Mickiewicza 7 64-100 Leszno",
+          "title": "Urząd Skarbowy w Lesznie Adama Mickiewicza 7 64-100 Leszno"
+        },
+        {
+          "const": "Urząd Skarbowy w Międzychodzie Marszałka Piłsudskiego 2 64-400 Międzychód",
+          "title": "Urząd Skarbowy w Międzychodzie Marszałka Piłsudskiego 2 64-400 Międzychód"
+        },
+        {
+          "const": "Urząd Skarbowy w Nowym Tomyślu Kolejowa 38 64-300 Nowy Tomyśl",
+          "title": "Urząd Skarbowy w Nowym Tomyślu Kolejowa 38 64-300 Nowy Tomyśl"
+        },
+        {
+          "const": "Urząd Skarbowy w Ostrowie Wielkopolskim Chłapowskiego 45 63-400 Ostrów Wielkopolski",
+          "title": "Urząd Skarbowy w Ostrowie Wielkopolskim Chłapowskiego 45 63-400 Ostrów Wielkopolski"
+        },
+        {
+          "const": "Urząd Skarbowy w Ostrzeszowie Władysława Grabskiego 1 63-500 Ostrzeszów",
+          "title": "Urząd Skarbowy w Ostrzeszowie Władysława Grabskiego 1 63-500 Ostrzeszów"
+        },
+        {
+          "const": "Urząd Skarbowy w Pile Kossaka 106 64-920 Piła",
+          "title": "Urząd Skarbowy w Pile Kossaka 106 64-920 Piła"
+        },
+        {
+          "const": "Urząd Skarbowy Poznań - Grunwald Mariana Smoluchowskiego 1 60-179 Poznań",
+          "title": "Urząd Skarbowy Poznań - Grunwald Mariana Smoluchowskiego 1 60-179 Poznań"
+        },
+        {
+          "const": "Urząd Skarbowy Poznań - Jeżyce Strzelecka 2/6 61-845 Poznań",
+          "title": "Urząd Skarbowy Poznań - Jeżyce Strzelecka 2/6 61-845 Poznań"
+        },
+        {
+          "const": "Urząd Skarbowy Poznań - Nowe Miasto Dezyderego Chłapowskiego 17/18 60-965 Poznań",
+          "title": "Urząd Skarbowy Poznań - Nowe Miasto Dezyderego Chłapowskiego 17/18 60-965 Poznań"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Poznaniu Dolna Wilda 80 61-501 Poznań",
+          "title": "Pierwszy Urząd Skarbowy w Poznaniu Dolna Wilda 80 61-501 Poznań"
+        },
+        {
+          "const": "Urząd Skarbowy Poznań - Winogrady Zygmunta Wojciechowskiego 3/5 60-685 Poznań",
+          "title": "Urząd Skarbowy Poznań - Winogrady Zygmunta Wojciechowskiego 3/5 60-685 Poznań"
+        },
+        {
+          "const": "Urząd Skarbowy Poznań - Wilda Dolna Wilda 80B 61-501 Poznań",
+          "title": "Urząd Skarbowy Poznań - Wilda Dolna Wilda 80B 61-501 Poznań"
+        },
+        {
+          "const": "Urząd Skarbowy w Rawiczu Stanisława Staszica 4 63-900 Rawicz",
+          "title": "Urząd Skarbowy w Rawiczu Stanisława Staszica 4 63-900 Rawicz"
+        },
+        {
+          "const": "Urząd Skarbowy w Słupcy Wspólna 1 62-400 Słupca",
+          "title": "Urząd Skarbowy w Słupcy Wspólna 1 62-400 Słupca"
+        },
+        {
+          "const": "Urząd Skarbowy w Szamotułach Bolesława Chrobrego 17A 64-500 Szamotuły",
+          "title": "Urząd Skarbowy w Szamotułach Bolesława Chrobrego 17A 64-500 Szamotuły"
+        },
+        {
+          "const": "Urząd Skarbowy w Śremie Wojska Polskiego 12 63-100 Śrem",
+          "title": "Urząd Skarbowy w Śremie Wojska Polskiego 12 63-100 Śrem"
+        },
+        {
+          "const": "Urząd Skarbowy w Środzie Wielkopolskiej Harcerska 2 63-000 Środa Wielkopolska",
+          "title": "Urząd Skarbowy w Środzie Wielkopolskiej Harcerska 2 63-000 Środa Wielkopolska"
+        },
+        {
+          "const": "Urząd Skarbowy w Turku Konińska 1 62-700 Turek",
+          "title": "Urząd Skarbowy w Turku Konińska 1 62-700 Turek"
+        },
+        {
+          "const": "Urząd Skarbowy w Wągrowcu Kościuszki 19A 62-100 Wągrowiec",
+          "title": "Urząd Skarbowy w Wągrowcu Kościuszki 19A 62-100 Wągrowiec"
+        },
+        {
+          "const": "Urząd Skarbowy w Wolsztynie Dworcowa 15 64-200 Wolsztyn",
+          "title": "Urząd Skarbowy w Wolsztynie Dworcowa 15 64-200 Wolsztyn"
+        },
+        {
+          "const": "Urząd Skarbowy we Wrześni Warszawska 26 62-300 Września",
+          "title": "Urząd Skarbowy we Wrześni Warszawska 26 62-300 Września"
+        },
+        {
+          "const": "Urząd Skarbowy w Złotowie Al. Piasta 25 77-400 Złotów",
+          "title": "Urząd Skarbowy w Złotowie Al. Piasta 25 77-400 Złotów"
+        },
+        {
+          "const": "Urząd Skarbowy w Chodzieży Ofiar Gór Morzewskich 1 64-800 Chodzież",
+          "title": "Urząd Skarbowy w Chodzieży Ofiar Gór Morzewskich 1 64-800 Chodzież"
+        },
+        {
+          "const": "Urząd Skarbowy w Obornikach Rynek 4 64-600 Oborniki",
+          "title": "Urząd Skarbowy w Obornikach Rynek 4 64-600 Oborniki"
+        },
+        {
+          "const": "Urząd Skarbowy w Pleszewie M. Bogusza 6 63-300 Pleszew",
+          "title": "Urząd Skarbowy w Pleszewie M. Bogusza 6 63-300 Pleszew"
+        },
+        {
+          "const": "Pierwszy Wielkopolski Urząd Skarbowy w Poznaniu pl. Cyryla Ratajskiego 5 61-726 Poznań",
+          "title": "Pierwszy Wielkopolski Urząd Skarbowy w Poznaniu pl. Cyryla Ratajskiego 5 61-726 Poznań"
+        },
+        {
+          "const": "Drugi Wielkopolski Urząd Skarbowy w Kaliszu Fabryczna 1A 62-800 Kalisz",
+          "title": "Drugi Wielkopolski Urząd Skarbowy w Kaliszu Fabryczna 1A 62-800 Kalisz"
+        },
+        {
+          "const": "Wielkopolski Urząd Celno-Skarbowy w Poznaniu Krańcowa 28 61-037 Poznań",
+          "title": "Wielkopolski Urząd Celno-Skarbowy w Poznaniu Krańcowa 28 61-037 Poznań"
+        },
+        {
+          "const": "Urząd Skarbowy w Białogardzie Mickiewicza 3 78-200 Białogard",
+          "title": "Urząd Skarbowy w Białogardzie Mickiewicza 3 78-200 Białogard"
+        },
+        {
+          "const": "Urząd Skarbowy w Choszcznie Lipcowa 16 73-200 Choszczno",
+          "title": "Urząd Skarbowy w Choszcznie Lipcowa 16 73-200 Choszczno"
+        },
+        {
+          "const": "Urząd Skarbowy w Drawsku Pomorskim Józefa Piłsudskiego 35-37 78-500 Drawsko Pomorskie",
+          "title": "Urząd Skarbowy w Drawsku Pomorskim Józefa Piłsudskiego 35-37 78-500 Drawsko Pomorskie"
+        },
+        {
+          "const": "Urząd Skarbowy w Goleniowie Plac Lotników 1 72-100 Goleniów",
+          "title": "Urząd Skarbowy w Goleniowie Plac Lotników 1 72-100 Goleniów"
+        },
+        {
+          "const": "Urząd Skarbowy w Gryficach Niepodległości 54A 72-300 Gryfice",
+          "title": "Urząd Skarbowy w Gryficach Niepodległości 54A 72-300 Gryfice"
+        },
+        {
+          "const": "Urząd Skarbowy w Gryfinie Szczecińska 24 74-100 Gryfino",
+          "title": "Urząd Skarbowy w Gryfinie Szczecińska 24 74-100 Gryfino"
+        },
+        {
+          "const": "Urząd Skarbowy w Kamieniu Pomorskim Mieszka I 5B 72-400 Kamień Pomorski",
+          "title": "Urząd Skarbowy w Kamieniu Pomorskim Mieszka I 5B 72-400 Kamień Pomorski"
+        },
+        {
+          "const": "Urząd Skarbowy w Kołobrzegu Armii Krajowej 2 78-100 Kołobrzeg",
+          "title": "Urząd Skarbowy w Kołobrzegu Armii Krajowej 2 78-100 Kołobrzeg"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Koszalinie Przemysłowa 3 75-216 Koszalin",
+          "title": "Pierwszy Urząd Skarbowy w Koszalinie Przemysłowa 3 75-216 Koszalin"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Koszalinie Stanisława Moniuszki 15 75-549 Koszalin",
+          "title": "Drugi Urząd Skarbowy w Koszalinie Stanisława Moniuszki 15 75-549 Koszalin"
+        },
+        {
+          "const": "Urząd Skarbowy w Myśliborzu Witolda Pileckiego 18 74-300 Myślibórz",
+          "title": "Urząd Skarbowy w Myśliborzu Witolda Pileckiego 18 74-300 Myślibórz"
+        },
+        {
+          "const": "Urząd Skarbowy w Pyrzycach 1 Maja 16 74-200 Pyrzyce",
+          "title": "Urząd Skarbowy w Pyrzycach 1 Maja 16 74-200 Pyrzyce"
+        },
+        {
+          "const": "Urząd Skarbowy w Stargardzie Towarowa 15 73-110 Stargard",
+          "title": "Urząd Skarbowy w Stargardzie Towarowa 15 73-110 Stargard"
+        },
+        {
+          "const": "Pierwszy Urząd Skarbowy w Szczecinie Michała Drzymały 5 70-217 Szczecin",
+          "title": "Pierwszy Urząd Skarbowy w Szczecinie Michała Drzymały 5 70-217 Szczecin"
+        },
+        {
+          "const": "Drugi Urząd Skarbowy w Szczecinie Wacława Felczaka 19 71-417 Szczecin",
+          "title": "Drugi Urząd Skarbowy w Szczecinie Wacława Felczaka 19 71-417 Szczecin"
+        },
+        {
+          "const": "Trzeci Urząd Skarbowy w Szczecinie Lucjana Rydla 65 70-783 Szczecin",
+          "title": "Trzeci Urząd Skarbowy w Szczecinie Lucjana Rydla 65 70-783 Szczecin"
+        },
+        {
+          "const": "Urząd Skarbowy w Szczecinku Mickiewicza 13,14 78-400 Szczecinek",
+          "title": "Urząd Skarbowy w Szczecinku Mickiewicza 13,14 78-400 Szczecinek"
+        },
+        {
+          "const": "Urząd Skarbowy w Świnoujściu Kazimierza Pułaskiego 7 72-600 Świnoujście",
+          "title": "Urząd Skarbowy w Świnoujściu Kazimierza Pułaskiego 7 72-600 Świnoujście"
+        },
+        {
+          "const": "Urząd Skarbowy w Wałczu T. Kościuszki 4 78-600 Wałcz",
+          "title": "Urząd Skarbowy w Wałczu T. Kościuszki 4 78-600 Wałcz"
+        },
+        {
+          "const": "Zachodniopomorski Urząd Skarbowy w Szczecinie Żołnierska 45 71-210 Szczecin",
+          "title": "Zachodniopomorski Urząd Skarbowy w Szczecinie Żołnierska 45 71-210 Szczecin"
+        },
+        {
+          "const": "Zachodniopomorski Urząd Celno-Skarbowy w Szczecinie Małopolska 44 70-515 Szczecin",
+          "title": "Zachodniopomorski Urząd Celno-Skarbowy w Szczecinie Małopolska 44 70-515 Szczecin"
+        }
+      ],
+      "title": "Name of the Tax office competent to settle the tax",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "voivodship": {
+      "oneOf": [
+        {
+          "const": "Dolnośląskie",
+          "title": "Dolnośląskie"
+        },
+        {
+          "const": "Kujawsko-pomorskie",
+          "title": "Kujawsko-pomorskie"
+        },
+        {
+          "const": "Lubelskie",
+          "title": "Lubelskie"
+        },
+        {
+          "const": "Lubuskie",
+          "title": "Lubuskie"
+        },
+        {
+          "const": "Łódzkie",
+          "title": "Łódzkie"
+        },
+        {
+          "const": "Małopolskie",
+          "title": "Małopolskie"
+        },
+        {
+          "const": "Mazowieckie",
+          "title": "Mazowieckie"
+        },
+        {
+          "const": "Opolskie",
+          "title": "Opolskie"
+        },
+        {
+          "const": "Podkarpackie",
+          "title": "Podkarpackie"
+        },
+        {
+          "const": "Podlaskie",
+          "title": "Podlaskie"
+        },
+        {
+          "const": "Pomorskie",
+          "title": "Pomorskie"
+        },
+        {
+          "const": "Śląskie",
+          "title": "Śląskie"
+        },
+        {
+          "const": "Świętokrzyskie",
+          "title": "Świętokrzyskie"
+        },
+        {
+          "const": "Warmińsko-mazurskie",
+          "title": "Warmińsko-mazurskie"
+        },
+        {
+          "const": "Wielkopolskie",
+          "title": "Wielkopolskie"
+        },
+        {
+          "const": "Zachodniopomorskie",
+          "title": "Zachodniopomorskie"
+        }
+      ],
+      "title": "Voivodship (Region)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    }
+  },
+  "required": [
+    "is_children_under_14_years",
+    "id_number",
+    "marital_status",
+    "medical_check_certificate",
+    "nip_number",
+    "number_of_dependents",
+    "pesel_number",
+    "ppk_employee_capital_plans",
+    "voivodship",
+    "tax_office",
+    "health_fund_branch",
+    "has_disability"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "pesel_number",
+    "health_fund_branch",
+    "voivodship",
+    "tax_office",
+    "nip_number",
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "is_children_under_14_years",
+    "children_birthdate",
+    "medical_check_certificate",
+    "ppk_employee_capital_plans",
+    "ppk_confirmation",
+    "has_disability",
+    "disability_details"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "aadhaar_number": {
+      "description": "Enter your Aadhaar number",
+      "maxLength": 255,
+      "title": "Aadhaar Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "father_full_name": {
+      "description": "Enter your father's full legal name",
+      "maxLength": 255,
+      "title": "Father's full name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "gratuity_nomination_dependants_details": {
+      "description": "Gratuity is a statutory benefit for employees in India. Please specify who would you like to nominate to receive your gratuity proceeds. Please note you can nominate only family members.",
+      "items": {
+        "properties": {
+          "birthdate": {
+            "description": "Enter you nominee's date of birth",
+            "format": "date",
+            "maxLength": 255,
+            "title": "Nominee's Birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "nominee_name": {
+            "description": "Enter your nominee's name",
+            "maxLength": 255,
+            "title": "Nominee's Name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "nominee_share": {
+            "description": "These % shares should add up to 100% but do not need to be equal to each nominee.",
+            "maxLength": 255,
+            "title": "Nominee's Share",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "nominee_status": {
+            "description": "Relationship with employee",
+            "maxLength": 255,
+            "title": "Nominee's Relationship",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "nominee_name",
+          "birthdate",
+          "nominee_share"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "nominee_name",
+          "birthdate",
+          "nominee_status",
+          "nominee_share"
+        ]
+      },
+      "title": "Gratuity Nomination",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "pan_number": {
+      "description": "Enter your PAN number",
+      "maxLength": 255,
+      "title": "PAN Number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "previous_gross_annual_salary": {
+      "description": "Enter your previous annual salary before taxes",
+      "title": "Previous Gross Annual Salary",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "INR",
+        "inputType": "money"
+      }
+    },
+    "tax_regime": {
+      "description": "Choose the tax regime you want to opt for.",
+      "enum": [
+        "Old Tax Regime",
+        "New Tax Regime"
+      ],
+      "oneOf": [
+        {
+          "const": "Old Tax Regime",
+          "title": "Old Tax Regime"
+        },
+        {
+          "const": "New Tax Regime",
+          "title": "New Tax Regime"
+        }
+      ],
+      "title": "Tax Regime",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "uan_number": {
+      "description": "Enter your UAN number. This field is only required if you have and EPF account.",
+      "maxLength": 255,
+      "title": "UAN Number",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "marital_status",
+    "father_full_name",
+    "pan_number",
+    "aadhaar_number",
+    "tax_regime",
+    "gratuity_nomination_dependants_details"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "marital_status",
+    "father_full_name",
+    "uan_number",
+    "pan_number",
+    "aadhaar_number",
+    "tax_regime",
+    "previous_gross_annual_salary",
+    "gratuity_nomination_dependants_details"
+  ]
+}

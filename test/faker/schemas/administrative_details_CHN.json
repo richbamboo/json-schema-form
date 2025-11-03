@@ -1,0 +1,1349 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "degree_details": false,
+          "marital_status": false
+        }
+      },
+      "if": {
+        "properties": {
+          "province_of_residency": {
+            "enum": [
+              "BJ",
+              "GD",
+              "JS",
+              "SD",
+              "SC",
+              "TJ",
+              "ZJ"
+            ]
+          }
+        },
+        "required": [
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "required": [
+          "marital_status",
+          "degree_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "partner_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "enum": [
+              "married",
+              "civil_partnership"
+            ]
+          },
+          "province_of_residency": {
+            "enum": [
+              "BJ",
+              "GD",
+              "JS",
+              "SD",
+              "SC",
+              "TJ",
+              "ZJ"
+            ]
+          }
+        },
+        "required": [
+          "marital_status",
+          "province_of_residency"
+        ]
+      },
+      "then": {
+        "required": [
+          "partner_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "degree_details": {
+      "properties": {
+        "graduation_date": {
+          "format": "date",
+          "title": "Graduation date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "institute_name": {
+          "maxLength": 255,
+          "title": "Name of the institute",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "title": {
+          "oneOf": [
+            {
+              "const": "high_school",
+              "title": "High School/equivalent"
+            },
+            {
+              "const": "bachelor",
+              "title": "Bachelor's Degree"
+            },
+            {
+              "const": "master",
+              "title": "Master's Degree"
+            },
+            {
+              "const": "doctorate_postdoctorate",
+              "title": "Doctorate or Post-doctorate"
+            }
+          ],
+          "title": "Title achieved",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        }
+      },
+      "required": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "title": "Education",
+      "type": "object",
+      "x-jsf-order": [
+        "institute_name",
+        "title",
+        "graduation_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "housing_fund_individual_account_number": {
+      "description": "Please enter your Housing Fund individual account number, if you have Shanghai social welfare records. This information is necessary for verifying your contributions and entitlements related to the Housing Fund. You can find this number on your Housing Fund account statement or relevant documentation.",
+      "minimum": 0,
+      "title": "Housing Fund Individual Account Number",
+      "type": [
+        "number",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "id_number": {
+      "description": "Please provide the number from your national ID card. ",
+      "maxLength": 255,
+      "title": "ID number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "other_job": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "company_name": false,
+              "job_title": false
+            }
+          },
+          "if": {
+            "properties": {
+              "has_other_job": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "has_other_job"
+            ]
+          },
+          "then": {
+            "required": [
+              "job_title",
+              "company_name"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "company_name": {
+          "maxLength": 255,
+          "title": "Company name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "has_other_job": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Do you have another job or perform any other paid activity (for income tax purposes)?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "job_title": {
+          "maxLength": 255,
+          "title": "Job title/activity name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "has_other_job"
+      ],
+      "title": "Other employment",
+      "type": "object",
+      "x-jsf-order": [
+        "has_other_job",
+        "job_title",
+        "company_name"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "participation_local_social_welfare": {
+      "description": "Please indicate whether you have previously joined the local social welfare system. Select \"Yes\" if you have participated in the local social welfare program, and \"No\" if you have not. This information is important for verifying your social welfare status.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Previous Participation in Social Welfare",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "partner_details": {
+      "properties": {
+        "birthdate": {
+          "format": "date",
+          "title": "Date of birth",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "title": "ID number",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "birthdate",
+        "full_name",
+        "id_number"
+      ],
+      "title": "Spouse's or civil partner's details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name",
+        "birthdate",
+        "id_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "previous_employment": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "company_name": false,
+              "end_employment_date": false,
+              "job_title": false,
+              "start_employment_date": false
+            }
+          },
+          "if": {
+            "properties": {
+              "has_previous_employment": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "has_previous_employment"
+            ]
+          },
+          "then": {
+            "required": [
+              "job_title",
+              "company_name",
+              "start_employment_date",
+              "end_employment_date"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "company_name": {
+          "maxLength": 255,
+          "title": "Company name",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "end_employment_date": {
+          "format": "date",
+          "title": "End employment date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "has_previous_employment": {
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Have you been employed before?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        },
+        "job_title": {
+          "maxLength": 255,
+          "title": "Job title",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "start_employment_date": {
+          "format": "date",
+          "title": "Start employment date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        }
+      },
+      "required": [
+        "has_previous_employment"
+      ],
+      "title": "Employment experience from your latest job",
+      "type": "object",
+      "x-jsf-order": [
+        "has_previous_employment",
+        "job_title",
+        "company_name",
+        "start_employment_date",
+        "end_employment_date"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "privacy_policy_acknowledgement": {
+      "const": "acknowledged",
+      "description": "I acknowledge that I have read and accept the privacy policy",
+      "title": "Accept privacy policy",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "I acknowledge that I have read and accept the <a href='https://cdn.employ-assets.remote.com/employee_onboarding/china_shanghai_remote_privacy_policy.pdf' target=\"_blank\" rel=\"noopener noreferrer\">privacy policy</a>",
+        "inputType": "checkbox"
+      }
+    },
+    "province_of_residency": {
+      "oneOf": [
+        {
+          "const": "BJ",
+          "title": "Beijing"
+        },
+        {
+          "const": "GD",
+          "title": "Guangdong"
+        },
+        {
+          "const": "JS",
+          "title": "Jiangsu"
+        },
+        {
+          "const": "SD",
+          "title": "Shandong"
+        },
+        {
+          "const": "SH",
+          "title": "Shanghai"
+        },
+        {
+          "const": "SC",
+          "title": "Sichuan"
+        },
+        {
+          "const": "TJ",
+          "title": "Tianjin"
+        },
+        {
+          "const": "ZJ",
+          "title": "Zhejiang"
+        }
+      ],
+      "title": "Employee's province of residence",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "social_insurance_household_registration": {
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "household_registration_city_chinese": false,
+              "household_registration_city_english": false
+            }
+          },
+          "if": {
+            "properties": {
+              "household_registration_city": {
+                "enum": [
+                  "Beijing",
+                  "Guangzhou",
+                  "Nanjing",
+                  "Qingdao",
+                  "Shanghai",
+                  "Chengdu",
+                  "Tianjin",
+                  "Ningbo",
+                  "Other"
+                ]
+              }
+            },
+            "required": [
+              "household_registration_city"
+            ]
+          },
+          "then": {
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Beijing"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "北京",
+                      "default": "北京",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Beijing",
+                      "default": "Beijing",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Guangzhou"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "广州市",
+                      "default": "广州市",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Guangzhou",
+                      "default": "Guangzhou",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Nanjing"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "南京市",
+                      "default": "南京市",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Nanjing",
+                      "default": "Nanjing",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Qingdao"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "青岛市",
+                      "default": "青岛市",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Qingdao",
+                      "default": "Qingdao",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Shanghai"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "上海",
+                      "default": "上海",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Shanghai",
+                      "default": "Shanghai",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Chengdu"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "成都市",
+                      "default": "成都市",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Chengdu",
+                      "default": "Chengdu",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Tianjin"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "天津",
+                      "default": "天津",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Tianjin",
+                      "default": "Tianjin",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Ningbo"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "const": "宁波市",
+                      "default": "宁波市",
+                      "description": ""
+                    },
+                    "household_registration_city_english": {
+                      "const": "Ningbo",
+                      "default": "Ningbo",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "household_registration_city": {
+                      "const": "Other"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "household_registration_city_chinese": {
+                      "inputType": "text"
+                    },
+                    "household_registration_city_english": {
+                      "inputType": "text"
+                    }
+                  },
+                  "required": [
+                    "household_registration_city_english",
+                    "household_registration_city_chinese"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "social_insurance_city_chinese": false,
+              "social_insurance_city_english": false
+            }
+          },
+          "if": {
+            "properties": {
+              "social_insurance_city": {
+                "enum": [
+                  "Beijing",
+                  "Guangzhou",
+                  "Nanjing",
+                  "Qingdao",
+                  "Shanghai",
+                  "Chengdu",
+                  "Tianjin",
+                  "Ningbo",
+                  "Other"
+                ]
+              }
+            },
+            "required": [
+              "social_insurance_city"
+            ]
+          },
+          "then": {
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Beijing"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "北京",
+                      "default": "北京",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Beijing",
+                      "default": "Beijing",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Guangzhou"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "广州市",
+                      "default": "广州市",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Guangzhou",
+                      "default": "Guangzhou",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Nanjing"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "南京市",
+                      "default": "南京市",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Nanjing",
+                      "default": "Nanjing",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Qingdao"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "青岛市",
+                      "default": "青岛市",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Qingdao",
+                      "default": "Qingdao",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Shanghai"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "上海",
+                      "default": "上海",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Shanghai",
+                      "default": "Shanghai",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Chengdu"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "成都市",
+                      "default": "成都市",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Chengdu",
+                      "default": "Chengdu",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Tianjin"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "天津",
+                      "default": "天津",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Tianjin",
+                      "default": "Tianjin",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Ningbo"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "const": "宁波市",
+                      "default": "宁波市",
+                      "description": ""
+                    },
+                    "social_insurance_city_english": {
+                      "const": "Ningbo",
+                      "default": "Ningbo",
+                      "description": ""
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "social_insurance_city": {
+                      "const": "Other"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "social_insurance_city_chinese": {
+                      "inputType": "text",
+                      "x-jsf-presentation": {
+                        "statement": {
+                          "description": "The city where your Social Insurance and Housing Fund are registered doesn’t match the city of Remote’s registered entity. To continue your onboarding, you will need to agree to access your benefits through the city of Remote’s registered entity.\n\n<a href=\"https://support.remote.com/hc/en-us/articles/33899316467853-Understanding-Social-Insurance-and-Housing-Fund-limitations-in-China\" target=\"_blank\" rel=\"noopener noreferrer\">Learn more about our registered locations and employee benefits in China</a>",
+                          "severity": "info"
+                        }
+                      }
+                    },
+                    "social_insurance_city_english": {
+                      "inputType": "text"
+                    }
+                  },
+                  "required": [
+                    "social_insurance_city_english",
+                    "social_insurance_city_chinese"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "else": {
+            "properties": {
+              "signed_labor_manual_mail_acknowledgement": false
+            }
+          },
+          "if": {
+            "properties": {
+              "household_registration_city": {
+                "const": "Shanghai"
+              }
+            },
+            "required": [
+              "household_registration_city"
+            ]
+          },
+          "then": {
+            "properties": {
+              "signed_labor_manual_mail_acknowledgement": {
+                "description": "I acknowledge that my household registration is in Shanghai. I will mail a hard copy of my signed labor manual to Remote using the address my onboarding specialist emailed to me. After I mail the hard copy, I'll provide tracking details to my onboarding specialist."
+              }
+            },
+            "required": [
+              "signed_labor_manual_mail_acknowledgement"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "household_registration_city": {
+          "oneOf": [
+            {
+              "const": "Beijing",
+              "title": "Beijing (北京)"
+            },
+            {
+              "const": "Guangzhou",
+              "title": "Guangzhou (广州市)"
+            },
+            {
+              "const": "Nanjing",
+              "title": "Nanjing (南京市)"
+            },
+            {
+              "const": "Qingdao",
+              "title": "Qingdao (青岛市)"
+            },
+            {
+              "const": "Shanghai",
+              "title": "Shanghai (上海)"
+            },
+            {
+              "const": "Chengdu",
+              "title": "Chengdu (成都市)"
+            },
+            {
+              "const": "Tianjin",
+              "title": "Tianjin (天津)"
+            },
+            {
+              "const": "Ningbo",
+              "title": "Ningbo (宁波市)"
+            },
+            {
+              "const": "Other",
+              "title": "Other"
+            }
+          ],
+          "title": "City where household is registered",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        },
+        "household_registration_city_chinese": {
+          "description": "This should match what’s listed on your Household Registration (hukou-<span lang='cn'>戶口</span>/huji-<span lang='cn'>户籍</span>).",
+          "maxLength": 255,
+          "title": "City where household is registered (written in Chinese)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "household_registration_city_english": {
+          "description": "This should match what’s listed on your Household Registration (hukou-<span lang='cn'>戶口</span>/huji-<span lang='cn'>户籍</span>).",
+          "maxLength": 255,
+          "title": "City where household is registered (written in English)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "household_registration_joining_date": {
+          "description": "Please enter the date when your household registration (hukou or huji) was officially recorded. This information is typically found on your household registration document. This date is important for verifying your residency status and eligibility for various services.",
+          "format": "date",
+          "title": "Household Registration Date (hukou-戶口 / huji-户籍)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "household_registration_type": {
+          "description": "Please select the type of your household registration (hukou or huji). This typically categorizes your registration as either urban or rural. The type of registration affects your access to certain services and benefits. You can find this information on your household registration document.",
+          "oneOf": [
+            {
+              "const": "urban",
+              "title": "Local Urban (本市城镇)"
+            },
+            {
+              "const": "rural",
+              "title": "Outside of Town, Urban (外埠城镇)"
+            },
+            {
+              "const": "rural_area",
+              "title": "Rural (农村)"
+            }
+          ],
+          "title": "Household Registration Type (hukou-戶口 / huji-户籍)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        },
+        "signed_labor_manual_mail_acknowledgement": {
+          "const": "acknowledged",
+          "title": "I will mail a signed copy of my labor manual (劳动手册)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "checkbox"
+          }
+        },
+        "social_insurance_city": {
+          "oneOf": [
+            {
+              "const": "Beijing",
+              "title": "Beijing (北京)"
+            },
+            {
+              "const": "Guangzhou",
+              "title": "Guangzhou (广州市)"
+            },
+            {
+              "const": "Nanjing",
+              "title": "Nanjing (南京市)"
+            },
+            {
+              "const": "Qingdao",
+              "title": "Qingdao (青岛市)"
+            },
+            {
+              "const": "Shanghai",
+              "title": "Shanghai (上海)"
+            },
+            {
+              "const": "Chengdu",
+              "title": "Chengdu (成都市)"
+            },
+            {
+              "const": "Tianjin",
+              "title": "Tianjin (天津)"
+            },
+            {
+              "const": "Ningbo",
+              "title": "Ningbo (宁波市)"
+            },
+            {
+              "const": "Other",
+              "title": "Other"
+            }
+          ],
+          "title": "City where social insurance and housing fund are registered",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "select"
+          }
+        },
+        "social_insurance_city_chinese": {
+          "maxLength": 255,
+          "title": "City where social insurance and housing fund are registered (in Chinese)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "social_insurance_city_english": {
+          "maxLength": 255,
+          "title": "City where social insurance and housing fund are registered (in English)",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "social_insurance_start_date": {
+          "description": "Please fill in the starting month for social welfare at Remote. This will help us determine if your latest social welfare was managed by your previous employer.",
+          "format": "date",
+          "title": "Social insurance and housing fund start date",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        }
+      },
+      "required": [
+        "household_registration_type",
+        "household_registration_city",
+        "household_registration_joining_date",
+        "social_insurance_city",
+        "social_insurance_start_date"
+      ],
+      "title": "Household and social insurance registration",
+      "type": "object",
+      "x-jsf-order": [
+        "household_registration_type",
+        "household_registration_city",
+        "household_registration_city_english",
+        "household_registration_city_chinese",
+        "household_registration_joining_date",
+        "social_insurance_city",
+        "social_insurance_city_english",
+        "social_insurance_city_chinese",
+        "social_insurance_start_date",
+        "signed_labor_manual_mail_acknowledgement"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    },
+    "tax_number": {
+      "maxLength": 255,
+      "title": "Tax number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "tax_number",
+    "other_job",
+    "social_insurance_household_registration",
+    "previous_employment",
+    "privacy_policy_acknowledgement",
+    "province_of_residency",
+    "participation_local_social_welfare"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "province_of_residency",
+    "id_number",
+    "tax_number",
+    "other_job",
+    "previous_employment",
+    "social_insurance_household_registration",
+    "marital_status",
+    "partner_details",
+    "degree_details",
+    "participation_local_social_welfare",
+    "housing_fund_individual_account_number",
+    "privacy_policy_acknowledgement"
+  ]
+}

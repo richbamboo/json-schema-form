@@ -1,0 +1,395 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "tax_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_tax_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_tax_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "nis_exemption": {
+            "type": [
+              "string"
+            ]
+          },
+          "tax_number": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "tax_number",
+          "nis_exemption"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_tax_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_tax_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_tax_number": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "You must have a tax registration number (TRN) before your start date. If you don’t have one, please reach out to your onboarding manager and they can help you get one.",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "nis_exemption": false,
+          "nis_number": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_nis_number": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_nis_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "nis_exemption": {
+            "type": [
+              "string"
+            ]
+          },
+          "nis_number": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "nis_number",
+          "nis_exemption"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "has_nis_number": {
+            "const": "no"
+          }
+        },
+        "required": [
+          "has_nis_number"
+        ]
+      },
+      "then": {
+        "properties": {
+          "has_nis_number": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "You must have a National insurance scheme number (NIS) before your start date. If you don’t have one, please reach out to your onboarding manager and they can help you get one.",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "other_employer_earning": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_other_employer": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_other_employer"
+        ]
+      },
+      "then": {
+        "properties": {
+          "other_employer_earning": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "other_employer_earning"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "has_nis_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a national insurance scheme number (NIS)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_other_employer": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have another employer?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_tax_number": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Do you have a tax registration number (TRN)?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID or passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "nis_exemption": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Do you have a national insurance scheme exemption?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "nis_number": {
+      "maxLength": 255,
+      "pattern": "^[A-Za-z][0-9]{6}$",
+      "title": "National insurance scheme number (NIS)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4,
+        "skippable": true
+      }
+    },
+    "other_employer_earning": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "title": "Do you earn more than 5,000,000 JMD per year with your other employer?",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "previous_employment_date": {
+      "format": "date",
+      "title": "Last day you worked with your previous employer",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "residency_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "resident",
+          "title": "Resident; I’ve lived in Jamaica for less than 6 months"
+        },
+        {
+          "const": "ordinarily_resident",
+          "title": "Ordinarily resident; I live in Jamaica and have not lived in any other country within the last 12 months"
+        },
+        {
+          "const": "domiciled",
+          "title": "Domiciled; I was born in Jamaica or chose Jamaica as my place of residence"
+        },
+        {
+          "const": "non_resident",
+          "title": "Non-resident; none of these options fit"
+        }
+      ],
+      "title": "Residency status in Jamaica",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "tax_number": {
+      "description": "This is different than your NIS number.",
+      "maxLength": 255,
+      "pattern": "^[0-9]{3}-[0-9]{3}-[0-9]{3}$",
+      "title": "Tax registration number (TRN)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4,
+        "skippable": true
+      }
+    }
+  },
+  "required": [
+    "has_nis_number",
+    "has_other_employer",
+    "has_tax_number",
+    "id_number",
+    "marital_status",
+    "previous_employment_date",
+    "residency_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number",
+    "marital_status",
+    "has_tax_number",
+    "tax_number",
+    "has_nis_number",
+    "nis_number",
+    "nis_exemption",
+    "has_other_employer",
+    "other_employer_earning",
+    "previous_employment_date",
+    "residency_status"
+  ]
+}

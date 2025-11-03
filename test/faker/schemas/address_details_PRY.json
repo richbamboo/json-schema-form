@@ -1,0 +1,81 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "description": "Street name and house number \"calle principal\"",
+      "maxLength": 255,
+      "title": "Address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "Street name and house number <span lang=\"es-PY\"> \"calle principal\" </span>",
+        "inputType": "text"
+      }
+    },
+    "address_line_2": {
+      "description": "(Optional) For example, apartment, block, or building number.",
+      "maxLength": 255,
+      "title": "Address line 2",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "city": {
+      "description": "Enter your city",
+      "maxLength": 255,
+      "title": "City",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "department": {
+      "description": "Department from Spanish \"Departmento\"",
+      "maxLength": 255,
+      "title": "Department",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "Department from Spanish <span lang=\"es-PY\"> \"Departmento\" </span>",
+        "inputType": "text"
+      }
+    },
+    "neighborhood": {
+      "description": "Neighborhood from Spanish \"Barrio\"",
+      "maxLength": 255,
+      "title": "Neighborhood",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "Neighborhood from Spanish <span lang=\"es-PY\"> \"Barrio\" </span>",
+        "inputType": "text"
+      }
+    },
+    "postal_code": {
+      "description": "Your zip or postal code",
+      "maxLength": 255,
+      "title": "Postal code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "postal_code",
+    "neighborhood",
+    "department"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "address",
+    "address_line_2",
+    "city",
+    "neighborhood",
+    "department",
+    "postal_code"
+  ]
+}

@@ -1,0 +1,1305 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "annual_gross_salary": {
+            "minimum": 1835600,
+            "x-jsf-errorMessage": {
+              "minimum": "In Brazil, full-time employees are entitled to a minimum annual salary of R$18,356.00."
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "contract_end_date": false
+        }
+      },
+      "if": {
+        "properties": {
+          "contract_duration_type": {
+            "const": "fixed_term"
+          }
+        },
+        "required": [
+          "contract_duration_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contract_end_date": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "contract_end_date"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "probation_length_days": {
+            "const": 0
+          }
+        },
+        "required": [
+          "probation_length_days"
+        ]
+      },
+      "then": {
+        "properties": {
+          "probation_length_days": {
+            "x-jsf-presentation": {
+              "statement": {
+                "description": "Waiving the probation period is possible but discouraged",
+                "severity": "warning"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "work_hours_per_week": {
+            "maximum": 35,
+            "minimum": 1
+          }
+        },
+        "required": [
+          "work_hours_per_week"
+        ]
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "full_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": {
+            "const": 40,
+            "default": 40,
+            "description": "All employees in Brazil are required to work 40 hours in a full-time position.",
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Total of <b>40 hours</b> per week."
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "annual_bonus_ack": {
+      "const": "acknowledged",
+      "description": "In Brazil, employees receive a 13th month salary (usually called Christmas bonus). This salary is not part of their annual gross salary and its amount is affected by bonuses and commissions.",
+      "title": "I understand I must pay this employee a 13th month salary in addition to their annual gross salary",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about bonus salaries",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4477901994509,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "annual_gross_salary": {
+      "description": "Annual gross salary in BRL, this does not include the 13th month salary or other statutory benefits.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "BRL",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "const": 30,
+      "default": 30,
+      "description": "The employee is entitled to 30 days by-law per year. <strong>This cannot be changed.</strong> Please note that statutory, bank holidays and public holidays are excluded from the above.",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "50307319-12cd-4007-92e2-66ad3c1f8347",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "912e91d1-14ef-4f2e-897c-d69d179e334b",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "50307319-12cd-4007-92e2-66ad3c1f8347",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "88c09e08-8651-4230-ac25-9bb493d663a4",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "50307319-12cd-4007-92e2-66ad3c1f8347",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "10de1501-cb24-4b26-8159-c5c303877789",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "50307319-12cd-4007-92e2-66ad3c1f8347",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "797531d2-6977-4234-908e-a9021c0681ef",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "50307319-12cd-4007-92e2-66ad3c1f8347",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "94926493-603b-4d44-85a1-6305d891155e",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "grocery_voucher": {
+          "oneOf": [
+            {
+              "const": "Grocery Vouchers (Flash - Grocery Plan)",
+              "title": "Grocery Vouchers - 163.83 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "<p>If the employee earns a monthly gross income up to BRL 6,945.95, the employee becomes eligible for an additional grocery voucher at BRL 163.83 per month, as mandated by the Collective Bargaining Agreement. This benefit will be transferred to the employee's Flash card if they are eligible.</p>",
+                "meta": {
+                  "benefitGroupId": "6abd64b4-38fa-4820-804c-d5190af90b57",
+                  "detailsUrl": "https://support.remote.com/hc/en-us/articles/23725958578701-What-distinguishes-a-meal-voucher-from-a-grocery-card-in-Brazil",
+                  "displayCost": "163.83 BRL/mo",
+                  "id": "7d58b28d-02bd-49c4-bba2-9c17a26b1927",
+                  "providerName": "Flash",
+                  "tierName": "Grocery Vouchers",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Grocery Voucher",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "health_insurance": {
+          "oneOf": [
+            {
+              "const": "Standard Medical Tier 2025 (Sul America - Dental 2025; Sul America - Standard Medical Insurance 2025)",
+              "title": "Standard Medical Tier 2025 - 1,125.39 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "<p>Covers medical and dental coverage with a reimbursement limit of BRL 364.50 (~$70 USD). Access to 2,400+ providers and travel assistance up to €30,000 (Europe) and $10,000 (elsewhere).</p>",
+                "meta": {
+                  "benefitGroupId": "63d1b669-c0a1-4677-8a59-3b5b48331fc4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-medical-standard",
+                  "displayCost": "1,125.39 BRL/mo",
+                  "id": "27230b3b-0550-45d0-9d63-2458f804e7f5",
+                  "providerName": "Sul America",
+                  "tierName": "Standard Medical Tier 2025",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Medical Tier 2025 (Sul America - Dental 2025; Sul America - Premium Medical Insurance 2025)",
+              "title": "Premium Medical Tier 2025 - 1,942.43 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "<p>Covers medical and dental coverage with a reimbursement limit of BRL 627.75 (~$110 USD). Access to Albert Einstein and Sírio-Libanês Hospitals and travel assistance up to $20,000.</p>",
+                "meta": {
+                  "benefitGroupId": "63d1b669-c0a1-4677-8a59-3b5b48331fc4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-medical-premium",
+                  "displayCost": "1,942.43 BRL/mo",
+                  "id": "50cc4b2c-ec9a-4a2d-b4a2-9319f22788c9",
+                  "providerName": "Sul America",
+                  "tierName": "Premium Medical Tier 2025",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Prestige Medical Tier 2025 (Sul America - Dental 2025; Sul America - Prestige Medical Insurance 2025)",
+              "title": "Prestige Medical Tier 2025 - 2,741.88 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "<p>Covers medical and dental coverage with a reimbursement limit of BRL 810 (~$140 USD). Access to Hospital Alemão Oswaldo Cruz and travel assistance up to $100,000 globally.</p>",
+                "meta": {
+                  "benefitGroupId": "63d1b669-c0a1-4677-8a59-3b5b48331fc4",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-medical-prestige",
+                  "displayCost": "2,741.88 BRL/mo",
+                  "id": "55bc8000-8ff6-4bb5-ba51-d157bb50a597",
+                  "providerName": "Sul America",
+                  "tierName": "Prestige Medical Tier 2025",
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "dental",
+                    "health"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Health Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "life_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Tier (Fixed BRL 40,000 Coverage) (Prudential - Global Capital Plan (BRL 40,000))",
+              "title": "Basic Tier (Fixed BRL 40,000 Coverage) - 7.34 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Provides a fixed cost of BRL 40,000 coverage in the event of death, special compensation for accidents, permanent total or partial disability due to an accident, and family funeral assistance up to BRL 5,000.",
+                "meta": {
+                  "benefitGroupId": "e135cea9-7126-48ab-b853-c75a4ff03856",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-life-insurance-global-capital",
+                  "displayCost": "7.34 BRL/mo",
+                  "id": "d2c1b380-498c-4232-8c99-cf776bea560c",
+                  "providerName": "Prudential",
+                  "tierName": "Basic Tier (Fixed BRL 40,000 Coverage)",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Enhanced Tier (24x Salary) (Prudential - Salary Multiplier 24x Plan)",
+              "title": "Enhanced Tier (24x Salary) - 0.0044 * monthly salary BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Provides coverage equal to 24 times the employee's salary in the event of death, special compensation for accidents, permanent total or partial disability due to an accident, and family funeral assistance up to BRL 5,000.",
+                "meta": {
+                  "benefitGroupId": "e135cea9-7126-48ab-b853-c75a4ff03856",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-life-insurance-multiple-24",
+                  "displayCost": "0.0044 * monthly salary BRL/mo",
+                  "id": "0d0e3adb-21ad-473e-99bf-f4d5534cd3ac",
+                  "providerName": "Prudential",
+                  "tierName": "Enhanced Tier (24x Salary)",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Tier (12x Salary) (Prudential - Salary Multiplier 12x Plan)",
+              "title": "Standard Tier (12x Salary) - 0.0022 * monthly salary BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Provides coverage equal to 12 times the employee's salary in the event of death, special compensation for accidents, permanent total or partial disability due to an accident, and family funeral assistance up to BRL 5,000.",
+                "meta": {
+                  "benefitGroupId": "e135cea9-7126-48ab-b853-c75a4ff03856",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-life-insurance-multiple-12",
+                  "displayCost": "0.0022 * monthly salary BRL/mo",
+                  "id": "d5b1ab80-cf3c-4294-a678-ee4a1d10a79d",
+                  "providerName": "Prudential",
+                  "tierName": "Standard Tier (12x Salary)",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Tier (36x Salary) (Prudential - Salary Multiplier 36x Plan)",
+              "title": "Premium Tier (36x Salary) - 0.0066 * monthly salary BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Provides coverage equal to 36 times the employee's salary in the event of death, special compensation for accidents, permanent total or partial disability due to an accident, and family funeral assistance up to BRL 5,000.",
+                "meta": {
+                  "benefitGroupId": "e135cea9-7126-48ab-b853-c75a4ff03856",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-life-insurance-multiple-36",
+                  "displayCost": "0.0066 * monthly salary BRL/mo",
+                  "id": "187fccfe-490b-4a6b-803e-ec73c1a8ad55",
+                  "providerName": "Prudential",
+                  "tierName": "Premium Tier (36x Salary)",
+                  "types": [
+                    "life"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Life Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "meal_voucher": {
+          "oneOf": [
+            {
+              "const": "Standard Meal Voucher (Flash - Standard Meal Voucher)",
+              "title": "Standard Meal Voucher - 660 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Offers BRL 30 daily for meals, amounting to BRL 660 across 22 working days per month (approx. USD 133), with funds directly transferred into the employee's Flash card.",
+                "meta": {
+                  "benefitGroupId": "7f81dba7-ee6b-4561-808f-a7cb74573ced",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-meal-voucher-standard",
+                  "displayCost": "660 BRL/mo",
+                  "id": "ee53f950-4d9f-493a-bfc7-f1a39feeb039",
+                  "providerName": "Flash",
+                  "tierName": "Standard Meal Voucher",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Meal Voucher (Flash - Premium Meal Voucher)",
+              "title": "Premium Meal Voucher - 880 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Offers BRL 40 daily for meals, amounting to BRL 880 across 22 working days per month (approx. USD 177), with funds directly transferred into the employee's Flash card.",
+                "meta": {
+                  "benefitGroupId": "7f81dba7-ee6b-4561-808f-a7cb74573ced",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-meal-voucher-premium",
+                  "displayCost": "880 BRL/mo",
+                  "id": "d76b4f0c-f5f6-4aeb-8889-791b072e97d4",
+                  "providerName": "Flash",
+                  "tierName": "Premium Meal Voucher",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Prestige Meal Voucher (Flash - Prestige Meal Voucher)",
+              "title": "Prestige Meal Voucher - 1,000 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "Offers BRL 45.45 daily for meals, amounting to BRL 1,000 across 22 working days per month (approx. USD 200), with funds directly transferred into the employee's Flash card.",
+                "meta": {
+                  "benefitGroupId": "7f81dba7-ee6b-4561-808f-a7cb74573ced",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-brazil-meal-voucher-prestige",
+                  "displayCost": "1,000 BRL/mo",
+                  "id": "d21f479f-d7a3-4028-bb46-bb5ffacef484",
+                  "providerName": "Flash",
+                  "tierName": "Prestige Meal Voucher",
+                  "types": [
+                    "meal"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Meal Voucher",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "997fa514-0857-4652-a660-c62f1e0edd9c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "593093ad-38d7-47cd-8f59-12e2eea9d776",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "997fa514-0857-4652-a660-c62f1e0edd9c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "fa5bee29-50d6-4759-8c37-10de2938ff74",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "997fa514-0857-4652-a660-c62f1e0edd9c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "f0aae8fb-2094-470b-b087-239b1f6ab886",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "997fa514-0857-4652-a660-c62f1e0edd9c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "4631881d-ebc0-4be9-a85e-71b780591d50",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "997fa514-0857-4652-a660-c62f1e0edd9c",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "c0c2ead2-50b2-4255-95fa-cd9493c3b2c7",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "union_dental_assistance": {
+          "oneOf": [
+            {
+              "const": "Union Dental Assistance (Sindeepres Union - Dental Medical Assistance)",
+              "title": "Union Dental Assistance - 28.31 BRL/mo",
+              "x-jsf-presentation": {
+                "description": "<p>As part of the Collective Bargaining Agreement (CBA) in Brazil, Union Dental is a mandatory benefit for all employees. Employees can choose to contribute BRL 11.60 from their salary by providing written consent.</p>",
+                "meta": {
+                  "benefitGroupId": "fac7072b-2871-43d0-9f48-a8f5b7513d54",
+                  "detailsUrl": "https://support.remote.com/hc/en-us/articles/28707169123597-Union-Dental-Assistance",
+                  "displayCost": "28.31 BRL/mo",
+                  "id": "52693cf8-6342-487e-a819-97eecafac035",
+                  "providerName": "Sindeepres Union",
+                  "tierName": "Union Dental Assistance",
+                  "types": [
+                    "dental"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Union Dental Assistance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "life_insurance",
+        "health_insurance",
+        "union_dental_assistance",
+        "grocery_voucher",
+        "mental_health_program",
+        "business_travel_insurance",
+        "meal_voucher"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "health_insurance",
+        "union_dental_assistance",
+        "life_insurance",
+        "meal_voucher",
+        "grocery_voucher",
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "This country operates under CBA (A collective bargaining agreement). We offer employee [only] supplemental, comprehensive coverage in partnership with Sul America.\r\nAll CBA-mandated benefits are offered and categorized under our mandatory social programs",
+        "extra": "Prices listed in USD, local currency equivalent will be determined based on exchange rate at the time of invoicing. Some prices may be taxed.\r\nPlease note that all local payroll deductions for required coverages are included in the TCE.\r\nPricing listed is subject to change based on age of the employee (age banding) and/or plan changes/renewals. Any pricing changes will be communicated in advance of updated billing.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "BRL",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here.",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "Indefinite or fixed-term contract. If the latter, please state duration and if there's possibility for renewal.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "oneOf": [
+        {
+          "const": "indefinite",
+          "title": "Indefinite"
+        },
+        {
+          "const": "fixed_term",
+          "title": "Fixed Term"
+        }
+      ],
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "contract_end_date": {
+      "format": "date",
+      "maxLength": 255,
+      "title": "Contract end date",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "experience_level": {
+      "description": "Please select the experience level that aligns with this role based on the job description (not the employees overall experience).",
+      "oneOf": [
+        {
+          "const": "Level 2 - Entry Level - Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "description": "Employees who perform operational tasks with an average level of complexity. They perform their functions with limited autonomy",
+          "title": "Level 2 - Entry Level"
+        },
+        {
+          "const": "Level 3 - Associate - Employees who perform independently tasks and/or with coordination and control functions",
+          "description": "Employees who perform independently tasks and/or with coordination and control functions",
+          "title": "Level 3 - Associate"
+        },
+        {
+          "const": "Level 4 - Mid-Senior level - Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "description": "Employees with high professional functions, executive management responsibilities, who supervise the production with an initiative and operational autonomy within the responsibilities delegated to them",
+          "title": "Level 4 - Mid-Senior level"
+        },
+        {
+          "const": "Level 5 - Director - Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "description": "Directors perform functions of an ongoing nature that are of significant importance for the development and implementation of the company's objectives",
+          "title": "Level 5 - Director"
+        },
+        {
+          "const": "Level 6 - Executive - An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "description": "An Executive is responsible for running an organization. They create plans to help their organizations grow",
+          "title": "Level 6 - Executive"
+        }
+      ],
+      "title": "Experience level",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "You can outline your policy and pay commission to the employee on the platform. However, commission will not appear in the employment agreement. Please send full policy details directly to the employee.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer commission?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length_days": {
+      "description": "The maximum probationary period allowed in Brazil is 90 days. Not electing a probationary period will adversely impact other employment actions including background checks.",
+      "maximum": 90,
+      "minimum": 0,
+      "title": "Probation period, in days",
+      "type": "number",
+      "x-jsf-errorMessage": {
+        "maximum": "Probation must be at most 90 days",
+        "minimum": "Probation must be at least 0 days"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "If you need Remote to terminate an employee (whether inside or outside of probation) in Brazil because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee.\n\nPerformance-related terminations must meet a high threshold of compliance. \n\nDuring probation, you have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "role_description": {
+      "description": "Please provide the full job description along with the top three actions and top three responsibilities that fall under this role if they are not already included in the job description. Kindly note, we will confirm the Collective Bargaining Agreement the employee is entitled to based on their job title, description and place of work.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Why do I need to do this?",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "BRL",
+        "inputType": "money"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please indicate the number of hours the employee will work per week.",
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "annual_bonus_ack",
+    "available_pto",
+    "contract_duration_type",
+    "equity_compensation",
+    "experience_level",
+    "has_bonus",
+    "has_commissions",
+    "has_signing_bonus",
+    "probation_length_days",
+    "role_description",
+    "work_address_is_home_address",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-fieldsets": {
+    "annual_gross_salary_fieldset": {
+      "propertiesByName": [
+        "annual_gross_salary",
+        "annual_bonus_ack"
+      ],
+      "title": "Annual gross salary"
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "contract_end_date",
+    "work_schedule",
+    "work_hours_per_week",
+    "probation_length_days",
+    "available_pto",
+    "role_description",
+    "experience_level",
+    "work_address_is_home_address",
+    "annual_gross_salary",
+    "annual_bonus_ack",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "benefits"
+  ]
+}

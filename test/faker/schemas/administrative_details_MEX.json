@@ -1,0 +1,156 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "beneficiaries": {
+      "description": "In the case of your death or disappearance your salaries and benefits will be paid to your nominated beneficiaries.",
+      "items": {
+        "properties": {
+          "email": {
+            "maxLength": 255,
+            "title": "Email",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          },
+          "percentage": {
+            "description": "Note: Percentages should add up to 100%",
+            "maximum": 100,
+            "minimum": 1,
+            "title": "Percentage",
+            "type": "number",
+            "x-jsf-presentation": {
+              "inputType": "number"
+            }
+          },
+          "relationship": {
+            "maxLength": 255,
+            "title": "Relationship",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "relationship",
+          "percentage"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "relationship",
+          "email",
+          "percentage"
+        ]
+      },
+      "title": "Beneficiary information",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "birthplace": {
+      "description": "Enter the name of the city and state where you were born",
+      "maxLength": 255,
+      "title": "Place of birth",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "curp": {
+      "description": "Enter your unique population registry code",
+      "maxLength": 255,
+      "title": "Unique Population Registry Code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "rfc": {
+      "description": "Enter your federal taxpayer registration number",
+      "maxLength": 255,
+      "title": "Federal Taxpayer Registration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "ssn": {
+      "maxLength": 255,
+      "title": "Social security number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "birthplace",
+    "curp",
+    "marital_status",
+    "rfc",
+    "ssn"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "ssn",
+    "marital_status",
+    "rfc",
+    "curp",
+    "birthplace",
+    "beneficiaries"
+  ]
+}

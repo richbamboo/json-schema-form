@@ -1,0 +1,162 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "partner_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "enum": [
+              "married",
+              "civil_partnership"
+            ]
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "partner_details"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "id_number": {
+      "description": "The number that appears on your government-issued identification.",
+      "maxLength": 255,
+      "title": "ID/Passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "id_number_type": {
+      "oneOf": [
+        {
+          "const": "passport",
+          "title": "Passport"
+        },
+        {
+          "const": "national_id_number",
+          "title": "National ID number"
+        }
+      ],
+      "title": "ID number type",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "partner_details": {
+      "properties": {
+        "address": {
+          "maxLength": 255,
+          "title": "Address of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "birthdate": {
+          "format": "date",
+          "title": "Date of birth of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "date"
+          }
+        },
+        "full_name": {
+          "maxLength": 255,
+          "title": "Full name of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "id_number": {
+          "maxLength": 255,
+          "title": "ID/Passport number of spouse or civil partner",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        }
+      },
+      "required": [
+        "full_name",
+        "birthdate",
+        "address",
+        "id_number"
+      ],
+      "title": "Partner details",
+      "type": "object",
+      "x-jsf-order": [
+        "full_name",
+        "birthdate",
+        "address",
+        "id_number"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset"
+      }
+    }
+  },
+  "required": [
+    "id_number_type",
+    "id_number",
+    "marital_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "id_number_type",
+    "id_number",
+    "marital_status",
+    "partner_details"
+  ]
+}

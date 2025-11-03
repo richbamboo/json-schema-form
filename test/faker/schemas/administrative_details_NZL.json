@@ -1,0 +1,72 @@
+{
+  "properties": {
+    "ird_number": {
+      "description": "Enter your IRD number",
+      "maxLength": 255,
+      "title": "IRD number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 4
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "tax_code": {
+      "description": "Enter your tax code to help us process your payroll correctly",
+      "maxLength": 255,
+      "title": "Tax Code",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    }
+  },
+  "required": [
+    "ird_number",
+    "tax_code",
+    "marital_status"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "ird_number",
+    "tax_code",
+    "marital_status"
+  ]
+}

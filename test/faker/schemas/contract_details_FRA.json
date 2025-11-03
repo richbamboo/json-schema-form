@@ -1,0 +1,3230 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "commissions_ack": false,
+          "commissions_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_commissions": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_commissions"
+        ]
+      },
+      "then": {
+        "properties": {
+          "commissions_ack": {
+            "type": [
+              "string"
+            ]
+          },
+          "commissions_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "commissions_details",
+          "commissions_ack"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "bonus_amount": false,
+          "bonus_details": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "bonus_details": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        "required": [
+          "bonus_details"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "signing_bonus_amount": false
+        }
+      },
+      "if": {
+        "properties": {
+          "has_signing_bonus": {
+            "const": "yes"
+          }
+        },
+        "required": [
+          "has_signing_bonus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "signing_bonus_amount": {
+            "type": [
+              "integer"
+            ]
+          }
+        },
+        "required": [
+          "signing_bonus_amount"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "description": "Please note that Statutory, Bank Holidays and Public Holidays in the employee's country of residence are excluded from the above."
+          }
+        }
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "part_time_salary_confirmation": false
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "part_time_salary_confirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    },
+    {
+      "else": {
+        "else": {
+          "properties": {
+            "work_days_per_week": false,
+            "work_hours_part_time": false,
+            "work_hours_per_week": false
+          }
+        },
+        "if": {
+          "properties": {
+            "work_schedule": {
+              "const": "full_time"
+            }
+          },
+          "required": [
+            "work_schedule"
+          ]
+        },
+        "then": {
+          "properties": {
+            "work_days_per_week": false,
+            "work_hours_part_time": false
+          },
+          "required": [
+            "work_hours_per_week"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "work_hours_per_week": false
+        },
+        "required": [
+          "work_hours_part_time",
+          "work_days_per_week"
+        ]
+      }
+    },
+    {
+      "else": {
+        "properties": {
+          "available_pto": {
+            "const": 25,
+            "default": 25,
+            "x-jsf-presentation": {
+              "statement": {
+                "title": "Total of <b>25</b> days."
+              }
+            }
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "work_schedule": {
+            "const": "part_time"
+          }
+        },
+        "required": [
+          "work_schedule"
+        ]
+      },
+      "then": {
+        "properties": {
+          "available_pto": {
+            "minimum": 0
+          },
+          "part_time_salary_confirmation": {
+            "const": "acknowledged"
+          }
+        },
+        "required": [
+          "part_time_salary_confirmation"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "annual_gross_salary": {
+      "description": "Minimum salary depending on experience level. In France, there are minimum salaries related to the co-efficient grades.",
+      "title": "Annual gross salary",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-logic-computedAttrs": {
+        "minimum": "minimum_annual_gross_salary_in_cents",
+        "x-jsf-errorMessage": {
+          "minimum": "Must be €{{minimum_annual_gross_salary}} or greater."
+        }
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "available_pto": {
+      "description": "The leave entitlement of 25 days per working years is mandatory under French law. This cannot be changed. Please note that statutory, bank holidays and public holidays, based on employee's country of residence are excluded from the above. Depending on the selected work schedule, the employee might be eligible to additional days of paid time-off called Réduction du temps de travail (RTT).",
+      "title": "Number of paid time off days",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "benefits": {
+      "additionalProperties": false,
+      "properties": {
+        "business_travel_insurance": {
+          "oneOf": [
+            {
+              "const": "Basic Business Travel (Expatriate Group - Basic Business Travel)",
+              "title": "Basic Business Travel - 11.45 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection",
+                "meta": {
+                  "benefitGroupId": "77034c89-82dd-4392-8e20-36c2108db44e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-business-travel",
+                  "displayCost": "11.45 USD/mo",
+                  "id": "cd9669f5-7f2d-4e7c-ad16-c101c8550135",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Basic Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Business Travel (Expatriate Group - Standard Business Travel)",
+              "title": "Standard Business Travel - 11.57 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment. Excludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "77034c89-82dd-4392-8e20-36c2108db44e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-business-travel",
+                  "displayCost": "11.57 USD/mo",
+                  "id": "4f3a75a0-77b0-4a1f-9910-c44ff3fde489",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Business Travel (Expatriate Group - Premium Business Travel)",
+              "title": "Premium Business Travel - 14.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for Personal Accident & Disruption, Business Equipment, Flight Cancellation, and Compassionate Repatriation.\nExcludes Medical & Evacuation",
+                "meta": {
+                  "benefitGroupId": "77034c89-82dd-4392-8e20-36c2108db44e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-business-travel",
+                  "displayCost": "14.47 USD/mo",
+                  "id": "70003050-a4e9-47f5-b105-89f30bdaede1",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Plus Business Travel (Expatriate Group - Standard Plus Business Travel)",
+              "title": "Standard Plus Business Travel - 17.59 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption",
+                "meta": {
+                  "benefitGroupId": "77034c89-82dd-4392-8e20-36c2108db44e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-plus-business-travel",
+                  "displayCost": "17.59 USD/mo",
+                  "id": "a765f135-26d5-4c47-b380-acb0fc8ce810",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Standard Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Plus Business Travel (Expatriate Group - Premium Plus Business Travel)",
+              "title": "Premium Plus Business Travel - 21.77 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Includes coverage for medical emergencies, accidental medical treatment, evacuation, and business equipment protection. In addition to Personal Accident & Disruption, Flight Cancellation, Compassionate Repatriation",
+                "meta": {
+                  "benefitGroupId": "77034c89-82dd-4392-8e20-36c2108db44e",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-plus-business-travel",
+                  "displayCost": "21.77 USD/mo",
+                  "id": "bfe413bd-a798-40bc-a151-1329baf1052e",
+                  "providerName": "Expatriate Group",
+                  "tierName": "Premium Plus Business Travel",
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "travel"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Business Travel Insurance",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        },
+        "mental_health_program": {
+          "oneOf": [
+            {
+              "const": "Basic Mental Health Program (Oliva - Basic Mental Health (Platform Access Only))",
+              "title": "Basic Mental Health Program - 3.00 USD/mo",
+              "x-jsf-presentation": {
+                "description": "Platform access for comprehensive mental health support via Oliva: wellbeing profile, curated self-help content, access to therapy and professional coaching, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "4354438f-e61e-4156-9217-6f7db460fec8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-basic-mental-health-program",
+                  "displayCost": "3.00 USD/mo",
+                  "id": "79534df0-cf38-4fdb-a387-1a4ce819cf01",
+                  "providerName": "Oliva",
+                  "tierName": "Basic Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Standard Mental Health Program (Oliva - Standard Mental Health (Platform Access and 1 Session))",
+              "title": "Standard Mental Health Program - 8.47 USD/mo",
+              "x-jsf-presentation": {
+                "description": "1 therapy or coaching session per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "4354438f-e61e-4156-9217-6f7db460fec8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-standard-mental-health-program",
+                  "displayCost": "8.47 USD/mo",
+                  "id": "a25a5e15-f076-44e8-a889-37ee1b641340",
+                  "providerName": "Oliva",
+                  "tierName": "Standard Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Plus Mental Health Program (Oliva - Plus Mental Health (Platform Access and 3 Sessions))",
+              "title": "Plus Mental Health Program - 15.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "3 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "4354438f-e61e-4156-9217-6f7db460fec8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-plus-mental-health-program",
+                  "displayCost": "15.70 USD/mo",
+                  "id": "1bc75384-b414-4146-a42d-475f0056eb68",
+                  "providerName": "Oliva",
+                  "tierName": "Plus Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Premium Mental Health Program (Oliva - Premium Mental Health (Platform Access and 6 Sessions))",
+              "title": "Premium Mental Health Program - 22.70 USD/mo",
+              "x-jsf-presentation": {
+                "description": "6 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "4354438f-e61e-4156-9217-6f7db460fec8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-premium-mental-health-program",
+                  "displayCost": "22.70 USD/mo",
+                  "id": "de9f08c3-d891-4505-a8ea-d6ab01931543",
+                  "providerName": "Oliva",
+                  "tierName": "Premium Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "Platinum Mental Health Program (Oliva - Platinum Mental Health (Platform Access and 12 Sessions))",
+              "title": "Platinum Mental Health Program - 35.83 USD/mo",
+              "x-jsf-presentation": {
+                "description": "12 therapy or coaching sessions per year, plus platform access and comprehensive mental health support via Oliva: therapy in 35+ languages, wellbeing profile, curated self-help content, 24/7 helpline. Improve productivity, wellbeing, and reduce absences.",
+                "meta": {
+                  "benefitGroupId": "4354438f-e61e-4156-9217-6f7db460fec8",
+                  "detailsUrl": "https://remote.com/benefits-guide/employee-benefits-platinum-mental-health-program",
+                  "displayCost": "35.83 USD/mo",
+                  "id": "16b5ea7c-74d2-46ac-b5c9-fddb03e260e1",
+                  "providerName": "Oliva",
+                  "tierName": "Platinum Mental Health Program",
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            },
+            {
+              "const": "no",
+              "title": "I don't want to offer this benefit.",
+              "x-jsf-presentation": {
+                "meta": {
+                  "types": [
+                    "mental-wellbeing"
+                  ]
+                }
+              }
+            }
+          ],
+          "title": "Mental Health Program",
+          "type": "string",
+          "x-jsf-presentation": {
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "title": "Benefits",
+      "type": "object",
+      "x-jsf-order": [
+        "mental_health_program",
+        "business_travel_insurance"
+      ],
+      "x-jsf-presentation": {
+        "description": "In France, several statutory benefits are available to individuals, including complementary health insurance, a home working allowance, and life insurance.",
+        "extra": "Prices listed in euros, local currency equivalent will be determined based on exchange rate at the time of invoicing.\r\nPlease note that all local payroll deductions for required coverages are included in the TCE.",
+        "inputType": "fieldset"
+      }
+    },
+    "bonus_amount": {
+      "deprecated": true,
+      "readOnly": true,
+      "title": "Bonus amount (deprecated)",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "deprecated": {
+          "description": "Deprecated in favor of 'Bonus Details'. Please, try to leave this field empty."
+        },
+        "inputType": "money"
+      }
+    },
+    "bonus_details": {
+      "description": "Bonus type, payment frequency, and more.",
+      "maxLength": 1000,
+      "title": "Other bonus details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "commission_eligible": {
+      "deprecated": true,
+      "description": "Will the employee be eligible to participate in the Company's commission plan? The terms and conditions of this arrangement must be communicated to the employee separately.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "readOnly": true,
+      "title": "Commission eligible",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because now we're only using the regular Commissions field named \"Commission eligible\"."
+        },
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "commissions_ack": {
+      "const": "acknowledged",
+      "description": "I understand that I am required to provide written details of the commission plan to this employee, and upload this document on the platform for record keeping purposes. I acknowledge that Remote will not liable for any claims or losses associated with the commission or bonus plan.",
+      "title": "Confirm commission plan details",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "(i) Guidance on drafting a commission plan here",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 17932049668109,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "commissions_details": {
+      "description": "Payment amount, frequency, and more.",
+      "maxLength": 1000,
+      "title": "Commission details",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "textarea"
+      }
+    },
+    "contract_duration": {
+      "deprecated": true,
+      "description": "I acknowledge that all employees in France will be hired on indefinite contracts.",
+      "maxLength": 255,
+      "readOnly": true,
+      "title": "Contract duration (deprecated)",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated field in favor of 'contract_duration_type'."
+        },
+        "inputType": "text"
+      }
+    },
+    "contract_duration_type": {
+      "const": "indefinite",
+      "description": "I acknowledge that all employees in France will be hired on indefinite contracts.",
+      "title": "Contract duration",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "checkbox",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about contract duration",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 4410443814157,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "equity_compensation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "equity_cliff": false,
+              "equity_vesting_period": false,
+              "number_of_stock_options": false
+            }
+          },
+          "if": {
+            "properties": {
+              "offer_equity_compensation": {
+                "const": "yes"
+              }
+            },
+            "required": [
+              "offer_equity_compensation"
+            ]
+          },
+          "then": {}
+        }
+      ],
+      "properties": {
+        "equity_cliff": {
+          "deprecated": false,
+          "description": "When the first portion of the stock option grant will vest.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Cliff (in months)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "equity_description": false,
+        "equity_vesting_period": {
+          "deprecated": false,
+          "description": "The number of years it will take for the employee to vest all their options.",
+          "maximum": 100,
+          "minimum": 0,
+          "readOnly": false,
+          "title": "Vesting period (in years)",
+          "type": [
+            "number",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "number"
+          }
+        },
+        "number_of_stock_options": {
+          "deprecated": false,
+          "description": "Tell us the type of equity you're granting as well.",
+          "maxLength": 255,
+          "readOnly": false,
+          "title": "Number of options, RSUs, or other equity granted",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-jsf-presentation": {
+            "inputType": "text"
+          }
+        },
+        "offer_equity_compensation": {
+          "description": "Granting equity to your team generally triggers tax and legal obligations. In order for you to stay compliant, it's important to declare any equity grants.",
+          "oneOf": [
+            {
+              "const": "yes",
+              "title": "Yes"
+            },
+            {
+              "const": "no",
+              "title": "No"
+            }
+          ],
+          "title": "Will this employee receive equity?",
+          "type": "string",
+          "x-jsf-presentation": {
+            "direction": "row",
+            "inputType": "radio"
+          }
+        }
+      },
+      "required": [
+        "offer_equity_compensation"
+      ],
+      "title": "Equity management",
+      "type": "object",
+      "x-jsf-order": [
+        "offer_equity_compensation",
+        "number_of_stock_options",
+        "equity_cliff",
+        "equity_vesting_period",
+        "equity_description"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "fieldset",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about equity management at Remote",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019182760333,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "executive_experience_level": {
+      "description": "Employee who has Bachelor degree of equivalent, or is an Autonomous worker, classifies as Cadre level (Executive)",
+      "enum": [
+        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives.",
+        "Position 1-2, coefficient 100: Entry-level associates with a college degree.",
+        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience.",
+        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience.",
+        "Position 2-2, coefficient 130: Study or research engineers.",
+        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience.",
+        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility.",
+        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates.",
+        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+      ],
+      "oneOf": [
+        {
+          "const": "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives.",
+          "description": "Entry-level associates assimilated with engineers, technical executives and administrative executives.",
+          "title": "Position 1-1, coefficient 95"
+        },
+        {
+          "const": "Position 1-2, coefficient 100: Entry-level associates with a college degree.",
+          "description": "Entry-level associates with a college degree.",
+          "title": "Position 1-2, coefficient 100"
+        },
+        {
+          "const": "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience.",
+          "description": "Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience.",
+          "title": "Position 2-1, coefficient 105"
+        },
+        {
+          "const": "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience.",
+          "description": "Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience.",
+          "title": "Position 2-1, coefficient 115"
+        },
+        {
+          "const": "Position 2-2, coefficient 130: Study or research engineers.",
+          "description": "Study or research engineers.",
+          "title": "Position 2-2, coefficient 130"
+        },
+        {
+          "const": "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience.",
+          "description": "Employee with at least 6 years of professional experience.",
+          "title": "Position 2-3, coefficient 150"
+        },
+        {
+          "const": "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility.",
+          "description": "Employee’s under the orders of a department head without full responsibility.",
+          "title": "Position 3-1, coefficient 170"
+        },
+        {
+          "const": "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates.",
+          "description": "Employee’s directing and supervising the work of associates.",
+          "title": "Position 3-2, coefficient 210"
+        },
+        {
+          "const": "Position 3-3, coefficient 270: Employee’s coordinating several departments",
+          "description": "Employee’s coordinating several departments",
+          "title": "Position 3-3, coefficient 270"
+        }
+      ],
+      "title": "Executive Level (Cadre Level)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "hardship_allowance": {
+      "description": "This allowance compensates for the fact that work from home is compulsory and mandated by the employer. The minimum amount is 25 EUR per month. There is no maximum and is paid on top of gross salary.",
+      "minimum": 2500,
+      "title": "Hardship allowance (Prime de sujétion)",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "minimum": "Must be at least €25.00.",
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "has_bonus": {
+      "description": "These can include things like performance-related bonuses.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer other bonuses?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019142406029,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "has_commissions": {
+      "description": "Will the employee be eligible to participate in the Company's commission plan? The terms and conditions of this arrangement must be communicated to the employee separately.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Commission eligible",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_degree": {
+      "deprecated": true,
+      "description": "Does your employee have a bachelor degree or equivalent?",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "readOnly": true,
+      "title": "(Deprecated) Degree",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because this field is not needed for employment agreements and payroll."
+        },
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "has_signing_bonus": {
+      "description": "This is a one-time payment the employee receives when they join your team.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Offer a signing bonus?",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "home_office_allowance": {
+      "description": "This allowance covers part of fixed expenses (rent, taxes & insurances & utilities) because the employee is using private space for work. The minimum amount is 25 EUR per month. There is no maximum and is paid on top of gross salary.",
+      "minimum": 2500,
+      "title": "Home office allowance (Forfait télétravail)",
+      "type": "integer",
+      "x-jsf-errorMessage": {
+        "minimum": "Must be at least €25.00.",
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "is_autonomous_worker": {
+      "deprecated": true,
+      "description": "In France, we currently only support autonomous roles that don’t require oversight from others, such as executive-level roles. For more information contact us at <a href=\"mailto:help@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">help@remote.com</a>",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        },
+        {
+          "const": null,
+          "description": "N/A",
+          "title": "N/A"
+        }
+      ],
+      "readOnly": true,
+      "title": "(Deprecated) Autonomous worker",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "deprecated": {
+          "description": "Deprecated because this field is not needed for employment agreements and payroll."
+        },
+        "direction": "row",
+        "inputType": "radio"
+      }
+    },
+    "non_compete_clause_apply": {
+      "description": "In France, non-compete clauses carry a large cost for employers and are not enforceable. Because of these reasons, we recommend selecting No.",
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Yes"
+        },
+        {
+          "const": "no",
+          "title": "No"
+        }
+      ],
+      "title": "Non-competition and non-solicitation",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more about non-competition and non-solicitation clauses in France",
+            "content": "<h1 data-component=\"HeadingIcon\">What do I need to know?</h1><p>While we make every effort to include non-competition and non-solicitation clauses in employment agreements, we cannot guarantee that they will be effective. These clauses are fact-specific and we will not be able to institute action to enforce them against an employee.</p><p>In France, you must commit to pay the employee a minimum of 35% of the employee’s monthly gross salary for the length of the non-compete whether or not the employee joins a competitor.</p><p>Because of this significant sum and because we cannot guarantee the effectiveness of a non-compete clause and we will not be able to institute action to enforce a non-compete against an employee, we recommend selecting No.</p>",
+            "title": "Non-competition and non-solicitation clauses in France"
+          }
+        }
+      }
+    },
+    "part_time_salary_confirmation": {
+      "const": "acknowledged",
+      "description": "We'll include the salary in the employment agreement, so please double-check that it's correct.",
+      "title": "I confirm that this amount is the full annual salary for this part-time employee.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-jsf-presentation": {
+        "inputType": "checkbox"
+      }
+    },
+    "probation_length": {
+      "description": "The maximum probation period depends on the selected status (category).",
+      "maximum": 4,
+      "title": "Probation period (in months)",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn about probation period",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 19858883586445,
+            "title": "Help center unavailable"
+          }
+        },
+        "statement": {
+          "description": "If you need Remote to terminate an employee (whether inside or outside of probation) in France because of your company’s economic or organizational circumstances, a mutual termination agreement must be entered into with the employee.\n\nIt is common for employees in France to bring claims and employers to pay settlements or to opt for termination by mutual agreement.\n\nDuring probation, you do still have some more flexibility on termination; for example, when the termination reason is the employee’s performance. For this reason, we still recommend setting the probation period to the maximum allowed.",
+          "severity": "info",
+          "title": "Information on termination - probation"
+        }
+      }
+    },
+    "renewal_probation_length": {
+      "const": "acknowledged",
+      "description": "Probation periods can be renewed once with a similar duration as the initial probation period (example: four months extended for an additional 4 months, for a total of eight months of probation period). Extension is not the default and we must follow a strict process for the extension to be effective. Should you want to extend the employee's probation period, please reach out to help@remote.com (opens in a new tab) to notify our team at least one month before the end date of the initial probation period. The probation period is automatically validated unless you or the employee notify Remote of your intent to extend.",
+      "title": "Renewal of Probation Period",
+      "type": "string",
+      "x-jsf-presentation": {
+        "description": "Probation periods can be renewed once with a similar duration as the initial probation period (example: four months extended for an additional 4 months, for a total of eight months of probation period). Extension is not the default and we must follow a strict process for the extension to be effective.<br><br>Should you want to extend the employee's probation period, please reach out to <a href=\"mailto:help@remote.com\" target=\"_blank\" rel=\"noopener noreferrer\">help@remote.com</a> to notify our team at least one month before the end date of the initial probation period. The probation period is automatically validated unless you or the employee notify Remote of your intent to extend.",
+        "inputType": "checkbox"
+      }
+    },
+    "role_description": {
+      "description": "Please add at least 3 responsibilities, at least 100 characters in total.",
+      "maxLength": 5000,
+      "minLength": 100,
+      "title": "Role description",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "textarea",
+        "meta": {
+          "helpCenter": {
+            "callToAction": "Learn more",
+            "content": "The help center content is currently unavailable.",
+            "error": true,
+            "id": 18019255579405,
+            "title": "Help center unavailable"
+          }
+        }
+      }
+    },
+    "signing_bonus_amount": {
+      "title": "Signing bonus amount",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-jsf-errorMessage": {
+        "type": "Please, use US standard currency format. Ex: 1024.12"
+      },
+      "x-jsf-presentation": {
+        "currency": "EUR",
+        "inputType": "money"
+      }
+    },
+    "work_address_is_home_address": {
+      "oneOf": [
+        {
+          "const": "yes",
+          "title": "Same as their residential address"
+        },
+        {
+          "const": "no",
+          "title": "Different than their residential address"
+        }
+      ],
+      "title": "Employee's work address",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "column",
+        "inputType": "radio"
+      }
+    },
+    "work_days_per_week": {
+      "description": "How many days a week the employee will be working?",
+      "maximum": 7,
+      "minimum": 1,
+      "title": "Number of Working days per week",
+      "type": "number",
+      "x-jsf-errorMessage": {
+        "maximum": "Work days must be at most 7 days",
+        "minimum": "Work days must be at least 1 day"
+      },
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_hours_part_time": {
+      "description": "In France, part-time employees are expected to work between 24H and 34H per week.",
+      "maximum": 34,
+      "minimum": 24,
+      "title": "Work hours per week",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "work_hours_per_week": {
+      "description": "Please pick one of three options",
+      "oneOf": [
+        {
+          "const": "35",
+          "description": "Statutory working time duration is set at 35 hours per week. Overtime hours are possible but it is expressly agreed that no overtime may be performed without the prior written authorisation of the Employee's superior.",
+          "title": "35-hour contract"
+        },
+        {
+          "const": "38",
+          "description": "Lump-sum contract with 38.5 working hours per full week. The payment of the weekly 3.5H hours of overtime is included in the gross salary at the applicable increased rate. The number of working days is capped at 220 per year, with opening rights for taking RTT (Réduction du Temps de Travail).",
+          "title": "38.30-hour contract"
+        },
+        {
+          "const": "lump_sum",
+          "description": "Daily rate contract with no set working hours or overtime possible. The number of working days is capped at 218 per year, with opening rights for taking RTT (Réduction du Temps de Travail).",
+          "title": "Lump-sum contract in days"
+        }
+      ],
+      "title": "Work hours per week",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "radio"
+      }
+    },
+    "work_schedule": {
+      "oneOf": [
+        {
+          "const": "full_time",
+          "title": "Full-time"
+        },
+        {
+          "const": "part_time",
+          "title": "Part-time"
+        }
+      ],
+      "title": "Type of employee",
+      "type": "string",
+      "x-jsf-presentation": {
+        "direction": "row",
+        "inputType": "radio"
+      }
+    }
+  },
+  "required": [
+    "annual_gross_salary",
+    "contract_duration_type",
+    "available_pto",
+    "equity_compensation",
+    "executive_experience_level",
+    "hardship_allowance",
+    "has_signing_bonus",
+    "has_bonus",
+    "has_commissions",
+    "home_office_allowance",
+    "non_compete_clause_apply",
+    "probation_length",
+    "renewal_probation_length",
+    "role_description",
+    "work_address_is_home_address",
+    "work_schedule",
+    "benefits"
+  ],
+  "type": "object",
+  "x-jsf-logic": {
+    "computedValues": {
+      "minimum_annual_gross_salary": {
+        "rule": {
+          "if": [
+            {
+              "===": [
+                {
+                  "var": "work_schedule"
+                },
+                "full_time"
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "has_degree"
+                        },
+                        "no"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "is_autonomous_worker"
+                        },
+                        "no"
+                      ]
+                    }
+                  ]
+                },
+                21621.6,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                25620,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                47100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                94200,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                26880,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                47100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                94200,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                27780,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                47100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                94200,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                30360,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                47100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                94200,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                34200,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                47100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                94200,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                39300,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                47100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                47496,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                43800,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                50370,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                52560,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                53940,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                62031,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                64728,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                69060,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                79419,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                82872
+              ]
+            },
+            {
+              "var": "work_hours_part_time"
+            },
+            {
+              "/": [
+                {
+                  "-": [
+                    {
+                      "if": [
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                2562000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                2688000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                2778000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                3036000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-2, coefficient 130: Study or research engineers."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                3420000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                3930000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                4380000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                5394000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                6906000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "%": [
+                        {
+                          "if": [
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    2562000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    2688000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    2778000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    3036000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 2-2, coefficient 130: Study or research engineers."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    3420000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    3930000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    4380000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    5394000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            },
+                            {
+                              "===": [
+                                {
+                                  "var": "executive_experience_level"
+                                },
+                                "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                              ]
+                            },
+                            {
+                              "*": [
+                                {
+                                  "/": [
+                                    6906000,
+                                    35
+                                  ]
+                                },
+                                {
+                                  "var": "work_hours_part_time"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        1
+                      ]
+                    }
+                  ]
+                },
+                100
+              ]
+            },
+            true,
+            0
+          ]
+        }
+      },
+      "minimum_annual_gross_salary_in_cents": {
+        "rule": {
+          "if": [
+            {
+              "===": [
+                {
+                  "var": "work_schedule"
+                },
+                "full_time"
+              ]
+            },
+            {
+              "if": [
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "has_degree"
+                        },
+                        "no"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "is_autonomous_worker"
+                        },
+                        "no"
+                      ]
+                    }
+                  ]
+                },
+                2162160,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                2562000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                4710000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                9420000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                2688000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                4710000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                9420000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                2778000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                4710000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                9420000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                3036000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                4710000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                9420000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                3420000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                4710000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                9420000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                3930000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                4710000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                4749600,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                4380000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                5037000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                5256000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                5394000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                6203100,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                6472800,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "35"
+                      ]
+                    }
+                  ]
+                },
+                6906000,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "38"
+                      ]
+                    }
+                  ]
+                },
+                7941900,
+                {
+                  "and": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "work_hours_per_week"
+                        },
+                        "lump_sum"
+                      ]
+                    }
+                  ]
+                },
+                8287200
+              ]
+            },
+            {
+              "var": "work_hours_part_time"
+            },
+            {
+              "-": [
+                {
+                  "if": [
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            2562000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            2688000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            2778000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            3036000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-2, coefficient 130: Study or research engineers."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            3420000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            3930000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            4380000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            5394000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    },
+                    {
+                      "===": [
+                        {
+                          "var": "executive_experience_level"
+                        },
+                        "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                      ]
+                    },
+                    {
+                      "*": [
+                        {
+                          "/": [
+                            6906000,
+                            35
+                          ]
+                        },
+                        {
+                          "var": "work_hours_part_time"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "%": [
+                    {
+                      "if": [
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 1-1, coefficient 95: Entry-level associates assimilated with engineers, technical executives and administrative executives."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                2562000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 1-2, coefficient 100: Entry-level associates with a college degree."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                2688000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-1, coefficient 105: Engineers and Executives. Employee under 26 years old, with at least 2 years of professional experience."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                2778000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-1, coefficient 115: Engineers and Executives. Employee at least 26 years old, with at least 2 years of professional experience."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                3036000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-2, coefficient 130: Study or research engineers."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                3420000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 2-3, coefficient 150: Employee with at least 6 years of professional experience."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                3930000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 3-1, coefficient 170: Employee’s under the orders of a department head without full responsibility."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                4380000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 3-2, coefficient 210: Employee’s directing and supervising the work of associates."
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                5394000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        },
+                        {
+                          "===": [
+                            {
+                              "var": "executive_experience_level"
+                            },
+                            "Position 3-3, coefficient 270: Employee’s coordinating several departments"
+                          ]
+                        },
+                        {
+                          "*": [
+                            {
+                              "/": [
+                                6906000,
+                                35
+                              ]
+                            },
+                            {
+                              "var": "work_hours_part_time"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    1
+                  ]
+                }
+              ]
+            },
+            true,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "x-jsf-order": [
+    "contract_duration",
+    "contract_duration_type",
+    "work_schedule",
+    "has_degree",
+    "is_autonomous_worker",
+    "executive_experience_level",
+    "work_hours_per_week",
+    "work_hours_part_time",
+    "work_days_per_week",
+    "annual_gross_salary",
+    "part_time_salary_confirmation",
+    "has_signing_bonus",
+    "signing_bonus_amount",
+    "has_bonus",
+    "bonus_amount",
+    "bonus_details",
+    "has_commissions",
+    "commissions_details",
+    "commissions_ack",
+    "equity_compensation",
+    "available_pto",
+    "role_description",
+    "probation_length",
+    "renewal_probation_length",
+    "home_office_allowance",
+    "hardship_allowance",
+    "commission_eligible",
+    "work_address_is_home_address",
+    "non_compete_clause_apply",
+    "benefits"
+  ]
+}

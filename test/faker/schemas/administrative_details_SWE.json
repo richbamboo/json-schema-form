@@ -1,0 +1,89 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id_number": {
+      "description": "The number that appears on your government-issued identification",
+      "maxLength": 255,
+      "title": "ID/passport number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "number_of_dependents": {
+      "description": "The total number of dependents you claim.",
+      "minimum": 0,
+      "title": "Number of dependents",
+      "type": "number",
+      "x-jsf-presentation": {
+        "inputType": "number"
+      }
+    },
+    "ssn": {
+      "description": "Your social security number (personnummer) can be found in a Swedish passport, drivers license, ID card, or your registration letter from Skatteverket. It follows a 12 digit format: YYYYMMDD-XXXX",
+      "maxLength": 255,
+      "pattern": "^[12][0-9]{3}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])-[0-9]{4}$",
+      "title": "Social security number",
+      "type": "string",
+      "x-jsf-errorMessage": {
+        "pattern": "Must have a valid format. E.g. 19900101-1234"
+      },
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "id_number",
+    "marital_status",
+    "number_of_dependents",
+    "ssn"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "ssn",
+    "id_number",
+    "marital_status",
+    "number_of_dependents"
+  ]
+}

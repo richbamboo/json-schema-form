@@ -1,0 +1,228 @@
+{
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "spouse_birthdate": false,
+          "spouse_full_name": false
+        }
+      },
+      "if": {
+        "properties": {
+          "marital_status": {
+            "const": "married"
+          }
+        },
+        "required": [
+          "marital_status"
+        ]
+      },
+      "then": {
+        "required": [
+          "spouse_full_name",
+          "spouse_birthdate"
+        ]
+      }
+    }
+  ],
+  "properties": {
+    "birthplace": {
+      "description": "Enter the name of the city and state where you were born",
+      "maxLength": 255,
+      "title": "Place of birth",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "dependent_details": {
+      "description": "Do you have any children you would like to add as dependents to your benefits?",
+      "items": {
+        "properties": {
+          "birthdate": {
+            "format": "date",
+            "title": "Child birthdate",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "date"
+            }
+          },
+          "full_name": {
+            "maxLength": 255,
+            "title": "Child full name",
+            "type": "string",
+            "x-jsf-presentation": {
+              "inputType": "text"
+            }
+          }
+        },
+        "required": [
+          "full_name",
+          "birthdate"
+        ],
+        "type": "object",
+        "x-jsf-order": [
+          "full_name",
+          "birthdate"
+        ]
+      },
+      "title": "Child details",
+      "type": "array",
+      "x-jsf-presentation": {
+        "inputType": "group-array"
+      }
+    },
+    "father_birthdate": {
+      "format": "date",
+      "title": "Father's birthdate",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "father_legal_name": {
+      "maxLength": 255,
+      "title": "Father's legal name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "fiscal_number": {
+      "description": "Enter your official tax identification number",
+      "maxLength": 255,
+      "title": "Tax ID",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "marital_status": {
+      "description": "Select the option that best fits.",
+      "oneOf": [
+        {
+          "const": "married",
+          "title": "Married"
+        },
+        {
+          "const": "single",
+          "title": "Single"
+        },
+        {
+          "const": "divorced",
+          "title": "Divorced"
+        },
+        {
+          "const": "widowed",
+          "title": "Widowed"
+        },
+        {
+          "const": "separated",
+          "title": "Separated"
+        },
+        {
+          "const": "cohabiting",
+          "title": "Co-habiting"
+        },
+        {
+          "const": "civil_partnership",
+          "title": "Civil Partnership"
+        }
+      ],
+      "title": "Marital status",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "select"
+      }
+    },
+    "mother_birthdate": {
+      "format": "date",
+      "title": "Mother's birthdate",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "mother_full_maiden_name": {
+      "maxLength": 255,
+      "title": "Mother's full maiden name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "pag_ibig": {
+      "description": "HDMF (Pag-Ibig Number)",
+      "maxLength": 255,
+      "title": "HDMF (Pag-Ibig Number)",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "philhealth": {
+      "description": "Philhealth number",
+      "maxLength": 255,
+      "title": "Philhealth number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "spouse_birthdate": {
+      "format": "date",
+      "title": "Spouse's birthdate",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "date"
+      }
+    },
+    "spouse_full_name": {
+      "description": "Enter your spouse's legal name",
+      "maxLength": 255,
+      "title": "Spouse's legal name",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text"
+      }
+    },
+    "ssn": {
+      "maxLength": 255,
+      "title": "Social security number",
+      "type": "string",
+      "x-jsf-presentation": {
+        "inputType": "text",
+        "maskSecret": 3
+      }
+    }
+  },
+  "required": [
+    "fiscal_number",
+    "ssn",
+    "pag_ibig",
+    "philhealth",
+    "birthplace",
+    "marital_status",
+    "mother_full_maiden_name",
+    "mother_birthdate",
+    "father_legal_name",
+    "father_birthdate"
+  ],
+  "type": "object",
+  "x-jsf-order": [
+    "fiscal_number",
+    "ssn",
+    "pag_ibig",
+    "philhealth",
+    "birthplace",
+    "marital_status",
+    "spouse_full_name",
+    "spouse_birthdate",
+    "dependent_details",
+    "mother_full_maiden_name",
+    "mother_birthdate",
+    "father_legal_name",
+    "father_birthdate"
+  ]
+}
