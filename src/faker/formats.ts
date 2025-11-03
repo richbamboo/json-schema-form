@@ -1,5 +1,6 @@
 import type { Format } from 'json-schema-typed/draft-2020-12'
 import type { SeededRandom } from './rand'
+import type { NonBooleanJsfSchema } from '../types'
 import { faker } from '@faker-js/faker'
 
 /**
@@ -10,6 +11,7 @@ import { faker } from '@faker-js/faker'
 export function generateFormat(
   format: Format | string,
   rng: SeededRandom,
+  schema?: NonBooleanJsfSchema,
 ): string {
   switch (format) {
     case 'email':
@@ -36,10 +38,10 @@ export function generateFormat(
       return faker.internet.ipv6()
 
     case 'date-time':
-      return faker.date.recent().toISOString()
+      return generateDateTime(schema, rng)
 
     case 'date':
-      return faker.date.recent().toISOString().split('T')[0]
+      return generateDate(schema, rng)
 
     case 'time':
       return faker.date.recent().toISOString().split('T')[1]
@@ -68,4 +70,66 @@ export function generateFormat(
       // Fallback for unknown formats
       return faker.lorem.word()
   }
+}
+
+/**
+ * Generate a date string respecting minDate/maxDate from x-jsf-presentation.
+ * Returns format: YYYY-MM-DD
+ */
+function generateDate(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom): string {
+  const presentation = schema?.['x-jsf-presentation'] as Record<string, any> | undefined
+  const minDate = presentation?.minDate as string | undefined
+  const maxDate = presentation?.maxDate as string | undefined
+
+  let fromDate: Date
+  let toDate: Date
+
+  if (maxDate) {
+    toDate = new Date(maxDate)
+  } else {
+    toDate = new Date() // Default to today
+  }
+
+  if (minDate) {
+    fromDate = new Date(minDate)
+  } else {
+    // Default to 100 years before toDate
+    fromDate = new Date(toDate)
+    fromDate.setFullYear(fromDate.getFullYear() - 100)
+  }
+
+  // Generate a random date between fromDate and toDate
+  const date = faker.date.between({ from: fromDate, to: toDate })
+  return date.toISOString().split('T')[0]
+}
+
+/**
+ * Generate a date-time string respecting minDate/maxDate from x-jsf-presentation.
+ * Returns format: ISO 8601 with time
+ */
+function generateDateTime(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom): string {
+  const presentation = schema?.['x-jsf-presentation'] as Record<string, any> | undefined
+  const minDate = presentation?.minDate as string | undefined
+  const maxDate = presentation?.maxDate as string | undefined
+
+  let fromDate: Date
+  let toDate: Date
+
+  if (maxDate) {
+    toDate = new Date(maxDate)
+  } else {
+    toDate = new Date() // Default to now
+  }
+
+  if (minDate) {
+    fromDate = new Date(minDate)
+  } else {
+    // Default to 100 years before toDate
+    fromDate = new Date(toDate)
+    fromDate.setFullYear(fromDate.getFullYear() - 100)
+  }
+
+  // Generate a random date-time between fromDate and toDate
+  const date = faker.date.between({ from: fromDate, to: toDate })
+  return date.toISOString()
 }

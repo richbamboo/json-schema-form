@@ -117,6 +117,44 @@ describe('composition generation', () => {
       // Result should be either string or number
       expect(['string', 'number']).toContain(typeof result)
     })
+
+    it('should merge parent constraints with anyOf branch', () => {
+      const schema = {
+        type: 'string' as const,
+        maxLength: 30,
+        anyOf: [
+          { pattern: '^(\\+1)[0-9]{10}$' }, // US phone
+          { pattern: '^(\\+44)[0-9]{10}$' }, // UK phone
+        ],
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(typeof result).toBe('string')
+      expect(result.length).toBeLessThanOrEqual(30)
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
+    it('should handle anyOf with not+pattern constraints', () => {
+      const schema = {
+        type: 'string' as const,
+        anyOf: [
+          {
+            not: { const: null },
+            pattern: '^(\\+1)[0-9]{10}$',
+          },
+          {
+            not: { const: null },
+            pattern: '^(\\+44)[0-9]{10}$',
+          },
+        ],
+        maxLength: 30,
+      }
+      const result = generateFromSchema(schema, { seed: SEED, maxAttempts: 50 })
+
+      expect(result).not.toBeNull()
+      expect(typeof result).toBe('string')
+      expect(validateSchema(result, schema)).toEqual([])
+    })
   })
 
   describe('oneOf', () => {
@@ -159,6 +197,22 @@ describe('composition generation', () => {
       const result2 = generateFromSchema(schema, { seed: SEED })
 
       expect(result1).toEqual(result2)
+    })
+
+    it('should merge parent constraints with oneOf branch', () => {
+      const schema = {
+        type: 'string' as const,
+        maxLength: 20,
+        oneOf: [
+          { pattern: '^[A-Z]{3}$' }, // 3 uppercase letters
+          { pattern: '^[0-9]{5}$' }, // 5 digits
+        ],
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(typeof result).toBe('string')
+      expect(result.length).toBeLessThanOrEqual(20)
+      expect(validateSchema(result, schema)).toEqual([])
     })
   })
 

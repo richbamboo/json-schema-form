@@ -87,7 +87,7 @@ export function handleAllOf(
 
 /**
  * Handle anyOf composition - pick one viable subschema.
- * Strategy: Pick a random subschema and generate from it.
+ * Strategy: Pick a random subschema and merge it with parent constraints.
  */
 export function handleAnyOf(
   schema: NonBooleanJsfSchema,
@@ -102,12 +102,24 @@ export function handleAnyOf(
 
   // Pick a random subschema
   const chosenSchema = rng.pick(schema.anyOf) as JsfSchema
-  return generateValue(chosenSchema, context)
+  
+  // Merge parent schema constraints with the chosen branch
+  // This ensures properties like maxLength, type, etc. from parent are preserved
+  const { anyOf, ...parentConstraints } = schema
+  
+  // Handle boolean schemas
+  if (typeof chosenSchema === 'boolean') {
+    return generateValue(chosenSchema, context)
+  }
+  
+  const mergedSchema = { ...parentConstraints, ...chosenSchema }
+  
+  return generateValue(mergedSchema, context)
 }
 
 /**
  * Handle oneOf composition - pick exactly one viable subschema.
- * Strategy: Pick a random subschema (similar to anyOf).
+ * Strategy: Pick a random subschema and merge it with parent constraints.
  * Note: Disjointness checking is complex, trust retry loop to validate.
  */
 export function handleOneOf(
@@ -124,7 +136,18 @@ export function handleOneOf(
   // Pick a random subschema
   // The retry loop will validate that it matches exactly one
   const chosenSchema = rng.pick(schema.oneOf) as JsfSchema
-  return generateValue(chosenSchema, context)
+  
+  // Merge parent schema constraints with the chosen branch
+  const { oneOf, ...parentConstraints } = schema
+  
+  // Handle boolean schemas
+  if (typeof chosenSchema === 'boolean') {
+    return generateValue(chosenSchema, context)
+  }
+  
+  const mergedSchema = { ...parentConstraints, ...chosenSchema }
+  
+  return generateValue(mergedSchema, context)
 }
 
 /**

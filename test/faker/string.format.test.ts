@@ -84,4 +84,69 @@ describe('string format generation', () => {
     expect(result.length).toBeGreaterThanOrEqual(20)
     expect(validateSchema(result, schema)).toEqual([])
   })
+
+  describe('date constraints', () => {
+    it('should respect maxDate constraint', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          maxDate: '2007-06-11',
+        },
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(new Date(result).getTime()).toBeLessThanOrEqual(new Date('2007-06-11').getTime())
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
+    it('should respect minDate constraint', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          minDate: '2020-01-01',
+        },
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(new Date(result).getTime()).toBeGreaterThanOrEqual(new Date('2020-01-01').getTime())
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
+    it('should respect both minDate and maxDate constraints', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          minDate: '1990-01-01',
+          maxDate: '2000-12-31',
+        },
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      const resultDate = new Date(result).getTime()
+      expect(resultDate).toBeGreaterThanOrEqual(new Date('1990-01-01').getTime())
+      expect(resultDate).toBeLessThanOrEqual(new Date('2000-12-31').getTime())
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
+    it('should respect maxDate for date-time format', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date-time' as const,
+        'x-jsf-presentation': {
+          maxDate: '2010-12-31',
+        },
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(result).toMatch(/^\d{4}-\d{2}-\d{2}T/)
+      expect(new Date(result).getTime()).toBeLessThanOrEqual(new Date('2010-12-31').getTime())
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+  })
 })

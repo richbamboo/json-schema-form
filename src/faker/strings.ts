@@ -20,7 +20,7 @@ export function generateString(
 
   // If format is specified, use faker
   if (schema.format) {
-    const formatted = generateFormat(schema.format, rng)
+    const formatted = generateFormat(schema.format, rng, schema)
     // Adjust length if needed
     // Note: padding/truncating may break format validation (e.g., truncated UUID)
     // The retry loop in generateSingle will compensate, but may exhaust attempts
