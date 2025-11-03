@@ -113,4 +113,31 @@ describe('number constraint generation', () => {
 
     expect(result1).toBe(result2)
   })
+
+  it('should generate integer when type is array ["integer", "null"]', () => {
+    const schema = { type: ['integer', 'null'] as const }
+    const result = generateFromSchema(schema, { seed: SEED })
+
+    // Should be either integer or null
+    if (result !== null) {
+      expect(Number.isInteger(result)).toBe(true)
+    }
+    expect(validateSchema(result, schema)).toEqual([])
+  })
+
+  it('should respect constraints with type array ["integer", "null"]', () => {
+    const schema = { 
+      type: ['integer', 'null'] as const,
+      minimum: 0,
+      maximum: 100,
+    }
+    const result = generateFromSchema(schema, { seed: SEED })
+
+    if (result !== null) {
+      expect(Number.isInteger(result)).toBe(true)
+      expect(result).toBeGreaterThanOrEqual(0)
+      expect(result).toBeLessThanOrEqual(100)
+    }
+    expect(validateSchema(result, schema)).toEqual([])
+  })
 })

@@ -10,7 +10,8 @@ export function generateNumber(
   context: GeneratorContext,
 ): number {
   const { rng } = context
-  const isInteger = schema.type === 'integer'
+  const isInteger = schema.type === 'integer' || 
+    (Array.isArray(schema.type) && schema.type.includes('integer'))
 
   // Determine bounds - use exclusive if specified, otherwise inclusive, otherwise defaults
   // For exclusive bounds with integers, adjust by 1 since integers can't be "slightly more"
