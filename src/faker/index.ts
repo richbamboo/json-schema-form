@@ -21,6 +21,16 @@ export interface GenerateOptions {
 }
 
 /**
+ * Result of generation including metadata about the process.
+ */
+export interface GenerationResult {
+  /** The generated value */
+  value: SchemaValue
+  /** Number of attempts required to generate valid data */
+  attempts: number
+}
+
+/**
  * Generate fake data that validates against the provided JSON Schema.
  *
  * @param schema - The JSON Schema to generate data for
@@ -40,6 +50,27 @@ export function generateFromSchema(
   schema: JsfSchema,
   options?: GenerateOptions,
 ): SchemaValue | SchemaValue[] {
+  const result = generateFromSchemaWithMetadata(schema, options)
+  
+  // Extract just the values, discarding metadata
+  if (Array.isArray(result)) {
+    return result.map(r => r.value)
+  }
+  return result.value
+}
+
+/**
+ * Generate fake data with metadata about the generation process.
+ * Use this when you need to know how many attempts were required.
+ *
+ * @param schema - The JSON Schema to generate data for
+ * @param options - Generation options
+ * @returns Generated value(s) with metadata
+ */
+export function generateFromSchemaWithMetadata(
+  schema: JsfSchema,
+  options?: GenerateOptions,
+): GenerationResult | GenerationResult[] {
   const normalizedOptions = normalizeOptions(options)
   const count = normalizedOptions.count
   const { SeededRandom } = require('./rand')
@@ -55,7 +86,7 @@ export function generateFromSchema(
     return generateSingle(schema, normalizedOptions, rng)
   }
 
-  const results: SchemaValue[] = []
+  const results: GenerationResult[] = []
   for (let i = 0; i < count; i++) {
     results.push(generateSingle(schema, normalizedOptions, rng))
   }
@@ -90,7 +121,7 @@ function generateSingle(
   schema: JsfSchema,
   options: NormalizedOptions,
   rng: import('./rand').SeededRandom,
-): SchemaValue {
+): GenerationResult {
   const { generateValue } = require('./core')
   const { MaxAttemptsExceededError } = require('./errors')
   const { validateSchema } = require('../validation/schema')
@@ -103,7 +134,7 @@ function generateSingle(
     const errors = validateSchema(value, schema)
 
     if (errors.length === 0) {
-      return value
+      return { value, attempts: attempt }
     }
 
     // On failure, continue to next attempt (no guided retries in MVP)

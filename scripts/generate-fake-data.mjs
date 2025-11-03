@@ -22,7 +22,7 @@
 
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
-import { generateFromSchema } from '../dist/index.mjs'
+import { generateFromSchemaWithMetadata } from '../dist/index.mjs'
 
 function parseArgs() {
   const args = process.argv.slice(2)
@@ -106,17 +106,19 @@ function main() {
 
   const results = []
   const errors = []
+  const attemptCounts = []
 
   for (let i = 0; i < options.count; i++) {
     try {
-      const result = generateFromSchema(schema, {
+      const result = generateFromSchemaWithMetadata(schema, {
         seed: options.seed !== undefined ? options.seed + i : undefined,
         maxAttempts: options.maxAttempts,
         includeOptionalProbability: options.optionalProbability,
       })
 
       // Successfully generated
-      results.push(result)
+      results.push(result.value)
+      attemptCounts.push(result.attempts)
     } catch (error) {
       console.error(`Error generating value ${i + 1}: ${error.message}`)
       errors.push({
@@ -144,6 +146,21 @@ function main() {
   console.error(`\nSummary:`)
   console.error(`  Successfully generated: ${results.length}/${options.count}`)
   console.error(`  Failed: ${errors.length}/${options.count}`)
+  
+  // Show attempt counts for each successful generation
+  if (attemptCounts.length > 0) {
+    if (options.count === 1) {
+      console.error(`  Attempts required: ${attemptCounts[0]}`)
+    } else {
+      console.error(`  Attempts per generation:`)
+      attemptCounts.forEach((count, idx) => {
+        console.error(`    #${idx + 1}: ${count} attempt${count === 1 ? '' : 's'}`)
+      })
+      const avgAttempts = (attemptCounts.reduce((a, b) => a + b, 0) / attemptCounts.length).toFixed(1)
+      const maxAttempts = Math.max(...attemptCounts)
+      console.error(`    Average: ${avgAttempts}, Max: ${maxAttempts}`)
+    }
+  }
 
   if (errors.length > 0) {
     console.error(`\nErrors encountered during generation. See details above.`)
