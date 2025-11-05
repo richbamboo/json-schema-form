@@ -263,6 +263,324 @@ describe('guided retry fixes', () => {
     })
   })
 
+  describe('fixConstError', () => {
+    it('should fix value to match const requirement', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          status: { type: 'string' as const },
+        },
+        allOf: [
+          {
+            properties: {
+              status: { const: 'active' },
+            },
+          },
+        ],
+        required: ['status'],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(result.status).toBe('active')
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
+    it('should fix const in nested object', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          config: {
+            type: 'object' as const,
+            properties: {
+              version: { type: 'number' as const },
+            },
+            required: ['version'],
+          },
+        },
+        required: ['config'],
+        allOf: [
+          {
+            properties: {
+              config: {
+                properties: {
+                  version: { const: 2 },
+                },
+              },
+            },
+          },
+        ],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(result.config.version).toBe(2)
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+  })
+
+  describe('fixTypeError', () => {
+    it('should fix null value when string is required', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          name: { type: ['string', 'null'] as const },
+        },
+        allOf: [
+          {
+            if: {
+              properties: { name: { type: 'null' as const } },
+            },
+            then: {},
+            else: {
+              properties: {
+                name: { type: ['string'] as const },
+              },
+            },
+          },
+        ],
+        required: ['name'],
+      }
+
+      // Generate multiple times - sometimes it will generate null, which should be fixed
+      for (let i = 0; i < 10; i++) {
+        const result = generateFromSchema(schema, { 
+          seed: SEED + i,
+          maxGenerations: 20,
+          maxFixesPerGeneration: 10,
+        }) as any
+
+        const errors = validateSchema(result, schema)
+        expect(errors).toEqual([])
+        
+        // The value should be a string (not null) after fixes
+        if (result.name !== null) {
+          expect(typeof result.name).toBe('string')
+        }
+      }
+    })
+
+    it('should fix type mismatch in nested object', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          config: {
+            type: 'object' as const,
+            properties: {
+              value: { type: ['number', 'null'] as const },
+            },
+            required: ['value'],
+          },
+        },
+        required: ['config'],
+        allOf: [
+          {
+            properties: {
+              config: {
+                properties: {
+                  value: { type: ['number'] as const },
+                },
+              },
+            },
+          },
+        ],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(validateSchema(result, schema)).toEqual([])
+      expect(typeof result.config.value).toBe('number')
+    })
+
+    it('should regenerate with correct type when type array is violated', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          status: { type: ['string', 'boolean'] as const },
+        },
+        allOf: [
+          {
+            if: {
+              properties: { status: { type: 'boolean' as const } },
+            },
+            then: {},
+            else: {
+              properties: {
+                status: { type: ['string'] as const, enum: ['active', 'inactive'] },
+              },
+            },
+          },
+        ],
+        required: ['status'],
+      }
+
+      for (let i = 0; i < 5; i++) {
+        const result = generateFromSchema(schema, { 
+          seed: SEED + i,
+          maxGenerations: 20,
+          maxFixesPerGeneration: 10,
+        }) as any
+
+        expect(validateSchema(result, schema)).toEqual([])
+        
+        if (typeof result.status === 'string') {
+          expect(['active', 'inactive']).toContain(result.status)
+        }
+      }
+    })
+  })
+
+  describe('fixOneOfError', () => {
+    it('should pick valid const value from oneOf branches', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          option: { type: 'string' as const },
+        },
+        allOf: [
+          {
+            properties: {
+              option: {
+                oneOf: [
+                  { const: 'option_a', title: 'Option A' },
+                  { const: 'option_b', title: 'Option B' },
+                  { const: 'option_c', title: 'Option C' },
+                ],
+              },
+            },
+          },
+        ],
+        required: ['option'],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(['option_a', 'option_b', 'option_c']).toContain(result.option)
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
+    it('should fix oneOf in nested object', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          config: {
+            type: 'object' as const,
+            properties: {
+              mode: { type: 'string' as const },
+            },
+            required: ['mode'],
+          },
+        },
+        required: ['config'],
+        allOf: [
+          {
+            properties: {
+              config: {
+                properties: {
+                  mode: {
+                    oneOf: [
+                      { const: 'auto' },
+                      { const: 'manual' },
+                    ],
+                  },
+                },
+              },
+            },
+          },
+        ],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(['auto', 'manual']).toContain(result.config.mode)
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+  })
+
+  describe('fixUniqueItemsError', () => {
+    it('should regenerate array when value is wrong type', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          tags: {
+            type: 'array' as const,
+            items: { type: 'string' as const },
+            uniqueItems: true,
+          },
+        },
+        required: ['tags'],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(Array.isArray(result.tags)).toBe(true)
+      expect(validateSchema(result, schema)).toEqual([])
+      
+      // Check uniqueness
+      const uniqueTags = new Set(result.tags)
+      expect(uniqueTags.size).toBe(result.tags.length)
+    })
+
+    it('should handle uniqueItems with enum items', () => {
+      const schema = {
+        type: 'object' as const,
+        properties: {
+          days: {
+            type: 'array' as const,
+            items: {
+              type: 'string' as const,
+              enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
+            },
+            uniqueItems: true,
+          },
+        },
+        required: ['days'],
+      }
+
+      const result = generateFromSchema(schema, { 
+        seed: SEED,
+        maxGenerations: 20,
+        maxFixesPerGeneration: 10,
+      }) as any
+
+      expect(Array.isArray(result.days)).toBe(true)
+      expect(validateSchema(result, schema)).toEqual([])
+      
+      // Check uniqueness
+      const uniqueDays = new Set(result.days)
+      expect(uniqueDays.size).toBe(result.days.length)
+      
+      // Check all are valid enum values
+      for (const day of result.days) {
+        expect(['monday', 'tuesday', 'wednesday', 'thursday', 'friday']).toContain(day)
+      }
+    })
+  })
+
   describe('fixEnumError', () => {
     it('should pick valid enum value', () => {
       const schema = {

@@ -57,6 +57,18 @@ function fixError(
     case 'exclusiveMaximum':
       return fixNumberBoundsError(value, error, schema, context)
 
+    case 'type':
+      return fixTypeError(value, error, schema, context)
+
+    case 'const':
+      return fixConstError(value, error, schema, context)
+
+    case 'oneOf':
+      return fixOneOfError(value, error, schema, context)
+
+    case 'uniqueItems':
+      return fixUniqueItemsError(value, error, schema, context)
+
     // More fix types can be added here
     default:
       return { value, changed: false }
@@ -226,6 +238,174 @@ function fixNumberBoundsError(
     const newValue = generateNumber(mergedSchema, context)
     
     // If this is a nested property, update it in the parent object
+    if (dataPath.length > 0) {
+      return updateNestedValue(value, dataPath, newValue)
+    }
+    
+    return { value: newValue, changed: true }
+  } catch {
+    return { value, changed: false }
+  }
+}
+
+/**
+ * Fix a 'const' error by setting the value to the required constant.
+ */
+function fixConstError(
+  value: SchemaValue,
+  error: ValidationError,
+  schema: JsfSchema,
+  context: GeneratorContext,
+): FixResult {
+  const dataPath = extractDataPath(error.path)
+  const errorSchema = error.schema as NonBooleanJsfSchema
+  
+  if (errorSchema.const === undefined) {
+    return { value, changed: false }
+  }
+  
+  const constValue = errorSchema.const as SchemaValue
+  
+  // If this is a nested property, update it in the parent object
+  if (dataPath.length > 0) {
+    return updateNestedValue(value, dataPath, constValue)
+  }
+  
+  return { value: constValue, changed: true }
+}
+
+/**
+ * Fix a 'type' error by regenerating the value with the correct type.
+ */
+function fixTypeError(
+  value: SchemaValue,
+  error: ValidationError,
+  schema: JsfSchema,
+  context: GeneratorContext,
+): FixResult {
+  const dataPath = extractDataPath(error.path)
+  
+  // Get the property schema from the root schema
+  const propertySchema = dataPath.length > 0
+    ? getPropertySchemaFromPath(schema, dataPath)
+    : schema
+  
+  if (!propertySchema || typeof propertySchema === 'boolean') {
+    return { value, changed: false }
+  }
+  
+  // Merge with error schema to get complete type information
+  const errorSchema = error.schema as NonBooleanJsfSchema
+  const mergedSchema: NonBooleanJsfSchema = {
+    ...propertySchema,
+    ...errorSchema,
+  }
+  
+  // Generate a new value with the correct type
+  const { generateValue } = require('./core')
+  try {
+    const newValue = generateValue(mergedSchema, context)
+    
+    // If this is a nested property, update it in the parent object
+    if (dataPath.length > 0) {
+      return updateNestedValue(value, dataPath, newValue)
+    }
+    
+    return { value: newValue, changed: true }
+  } catch {
+    return { value, changed: false }
+  }
+}
+
+/**
+ * Fix a 'oneOf' error by picking a valid option.
+ * Works best when oneOf branches are const values (enum-like).
+ */
+function fixOneOfError(
+  value: SchemaValue,
+  error: ValidationError,
+  schema: JsfSchema,
+  context: GeneratorContext,
+): FixResult {
+  const dataPath = extractDataPath(error.path)
+  const errorSchema = error.schema as NonBooleanJsfSchema
+  
+  if (!errorSchema.oneOf || errorSchema.oneOf.length === 0) {
+    return { value, changed: false }
+  }
+  
+  // Try to extract const values from oneOf branches (enum-like pattern)
+  const constValues: unknown[] = []
+  for (const branch of errorSchema.oneOf) {
+    if (typeof branch !== 'boolean' && branch.const !== undefined) {
+      constValues.push(branch.const)
+    }
+  }
+  
+  // If we found const values, pick one randomly
+  if (constValues.length > 0) {
+    const newValue = context.rng.pick(constValues) as SchemaValue
+    
+    if (dataPath.length > 0) {
+      return updateNestedValue(value, dataPath, newValue)
+    }
+    
+    return { value: newValue, changed: true }
+  }
+  
+  // Otherwise, try to generate a value that matches one of the branches
+  const { generateValue } = require('./core')
+  for (const branch of errorSchema.oneOf) {
+    try {
+      const newValue = generateValue(branch, context)
+      
+      if (dataPath.length > 0) {
+        return updateNestedValue(value, dataPath, newValue)
+      }
+      
+      return { value: newValue, changed: true }
+    } catch {
+      // Try next branch
+      continue
+    }
+  }
+  
+  return { value, changed: false }
+}
+
+/**
+ * Fix a 'uniqueItems' error by regenerating the array.
+ * This often happens when the value is not an array at all (type error).
+ */
+function fixUniqueItemsError(
+  value: SchemaValue,
+  error: ValidationError,
+  schema: JsfSchema,
+  context: GeneratorContext,
+): FixResult {
+  const dataPath = extractDataPath(error.path)
+  
+  // Get the property schema
+  const propertySchema = dataPath.length > 0
+    ? getPropertySchemaFromPath(schema, dataPath)
+    : schema
+  
+  if (!propertySchema || typeof propertySchema === 'boolean') {
+    return { value, changed: false }
+  }
+  
+  // Merge with error schema
+  const errorSchema = error.schema as NonBooleanJsfSchema
+  const mergedSchema: NonBooleanJsfSchema = {
+    ...propertySchema,
+    ...errorSchema,
+  }
+  
+  // Regenerate the array
+  const { generateValue } = require('./core')
+  try {
+    const newValue = generateValue(mergedSchema, context)
+    
     if (dataPath.length > 0) {
       return updateNestedValue(value, dataPath, newValue)
     }
