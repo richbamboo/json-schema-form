@@ -10,7 +10,11 @@ export interface GenerateOptions {
   count?: number
   /** Probability of including optional properties (0-1). Default: 0.3. */
   includeOptionalProbability?: number
-  /** Maximum number of generation attempts before throwing. Default: 30. */
+  /** Maximum number of fresh random generations. Default: 100. */
+  maxGenerations?: number
+  /** Maximum fixes per generation (resets on progress). Default: 5. */
+  maxFixesPerGeneration?: number
+  /** Absolute maximum attempts (generations + fixes). Default: 1000. */
   maxAttempts?: number
   /** Use `default` values from schema when present. Default: false. */
   useDefaults?: boolean
@@ -106,7 +110,9 @@ function normalizeOptions(options?: GenerateOptions): NormalizedOptions {
     seed: options?.seed,
     count: options?.count ?? 1,
     includeOptionalProbability: options?.includeOptionalProbability ?? 0.3,
-    maxAttempts: options?.maxAttempts ?? 30,
+    maxGenerations: options?.maxGenerations ?? 100,
+    maxFixesPerGeneration: options?.maxFixesPerGeneration ?? 5,
+    maxAttempts: options?.maxAttempts ?? 1000,
     useDefaults: options?.useDefaults ?? false,
     useExamples: options?.useExamples ?? false,
     mode: options?.mode ?? 'random',
@@ -114,7 +120,7 @@ function normalizeOptions(options?: GenerateOptions): NormalizedOptions {
 }
 
 /**
- * Generate a single value with attempt+retry loop.
+ * Generate a single value with hybrid retry loop (random + guided fixes).
  * RNG is passed in to allow state to advance across multiple calls (for count > 1).
  */
 function generateSingle(
@@ -125,27 +131,63 @@ function generateSingle(
   const { generateValue } = require('./core')
   const { MaxAttemptsExceededError } = require('./errors')
   const { validateSchema } = require('../validation/schema')
+  const { applyFixes } = require('./fixes')
 
-  for (let attempt = 1; attempt <= options.maxAttempts; attempt++) {
-    const context = { rng, options, attempt }
-    const value = generateValue(schema, context)
+  let totalAttempts = 0
+  let lastErrors: any[] = []
 
-    // Validate the generated value
-    const errors = validateSchema(value, schema)
-
-    if (errors.length === 0) {
-      return { value, attempts: attempt }
+  // Outer loop: random regenerations
+  for (let generation = 1; generation <= options.maxGenerations; generation++) {
+    if (totalAttempts >= options.maxAttempts) {
+      break // Hit absolute limit
     }
 
-    // On failure, continue to next attempt (no guided retries in MVP)
-    if (attempt === options.maxAttempts) {
-      throw new MaxAttemptsExceededError(
-        `Failed to generate valid value after ${options.maxAttempts} attempts. Last errors: ${JSON.stringify(errors.slice(0, 3))}`,
-        options.maxAttempts,
-        errors,
-      )
+    const context = { rng, options, attempt: generation }
+    let value = generateValue(schema, context)
+    totalAttempts++
+
+    // Inner loop: guided fixes
+    let remainingFixAttempts = options.maxFixesPerGeneration
+    let previousErrorCount = Infinity
+
+    while (remainingFixAttempts > 0 && totalAttempts < options.maxAttempts) {
+      const errors = validateSchema(value, schema)
+
+      if (errors.length === 0) {
+        return { value, attempts: totalAttempts }
+      }
+
+      lastErrors = errors
+
+      // Try to apply fixes
+      const fixed = applyFixes(value, errors, schema, context)
+
+      // Check if we made any changes
+      if (fixed === value) {
+        break // Can't fix anything, regenerate
+      }
+
+      // Check if we made progress (reduced error count)
+      if (errors.length < previousErrorCount) {
+        remainingFixAttempts = options.maxFixesPerGeneration // Reset on progress!
+      } else {
+        remainingFixAttempts--
+      }
+
+      previousErrorCount = errors.length
+      value = fixed
+      totalAttempts++
     }
+
+    // If we exhausted fix attempts, loop will regenerate
   }
+
+  // Failed to generate valid value
+  throw new MaxAttemptsExceededError(
+    `Failed to generate valid value after ${totalAttempts} attempts (${options.maxGenerations} generations). Last errors: ${JSON.stringify(lastErrors.slice(0, 3))}`,
+    totalAttempts,
+    lastErrors,
+  )
 
   // Unreachable, but TypeScript needs it
   throw new Error('Unexpected: loop should have thrown MaxAttemptsExceededError')

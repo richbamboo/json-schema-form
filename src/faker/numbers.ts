@@ -13,16 +13,16 @@ export function generateNumber(
   const isInteger = schema.type === 'integer' || 
     (Array.isArray(schema.type) && schema.type.includes('integer'))
 
-  // Determine bounds - use exclusive if specified, otherwise inclusive, otherwise defaults
+  // Determine bounds - use exclusive if specified, otherwise inclusive, otherwise safe integer limits
   // For exclusive bounds with integers, adjust by 1 since integers can't be "slightly more"
   // For exclusive bounds with floats, trust the validator to check > / < instead of adjusting
   const min = schema.exclusiveMinimum !== undefined
     ? schema.exclusiveMinimum + (isInteger ? 1 : 0)
-    : schema.minimum ?? -1000
+    : schema.minimum ?? Number.MIN_SAFE_INTEGER
   
   const max = schema.exclusiveMaximum !== undefined
     ? schema.exclusiveMaximum - (isInteger ? 1 : 0)
-    : schema.maximum ?? 1000
+    : schema.maximum ?? Number.MAX_SAFE_INTEGER
 
   // Generate base value
   let value: number

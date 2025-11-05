@@ -106,6 +106,16 @@ describe('number constraint generation', () => {
     expect(validateSchema(result, schema)).toEqual([])
   })
 
+  it('should handle minimum greater than old default maximum (regression test)', () => {
+    // This tests the bug fix where minimum > 1000 (old default max) would generate invalid values
+    const schema = { type: 'integer' as const, minimum: 2500 }
+    const result = generateFromSchema(schema, { seed: SEED }) as number
+
+    expect(Number.isInteger(result)).toBe(true)
+    expect(result).toBeGreaterThanOrEqual(2500)
+    expect(validateSchema(result, schema)).toEqual([])
+  })
+
   it('should be deterministic with same seed', () => {
     const schema = { type: 'number' as const, minimum: 0, maximum: 100 }
     const result1 = generateFromSchema(schema, { seed: SEED }) as number
