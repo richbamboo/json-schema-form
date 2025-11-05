@@ -12,8 +12,20 @@ export function applyFixes(
   schema: JsfSchema,
   context: GeneratorContext,
 ): SchemaValue {
+  // Validate inputs
+  if (!Array.isArray(errors) || errors.length === 0) {
+    return value
+  }
+  
   // Clone the value to avoid mutations
-  let fixed = structuredClone(value)
+  let fixed: SchemaValue
+  try {
+    fixed = structuredClone(value)
+  } catch {
+    // If cloning fails, return original value (can't safely fix)
+    return value
+  }
+  
   let madeChanges = false
 
   for (const error of errors) {
@@ -123,7 +135,12 @@ function fixRequiredError(
   const { generateValue } = require('./core')
   try {
     // Clone the value
-    const cloned = structuredClone(value)
+    let cloned: SchemaValue
+    try {
+      cloned = structuredClone(value)
+    } catch {
+      return { value, changed: false }
+    }
     
     // Navigate to the parent object
     let current: any = cloned
@@ -161,7 +178,12 @@ function fixForbiddenError(value: SchemaValue, error: ValidationError): FixResul
   }
 
   // Clone the value
-  const cloned = structuredClone(value)
+  let cloned: SchemaValue
+  try {
+    cloned = structuredClone(value)
+  } catch {
+    return { value, changed: false }
+  }
   
   // Navigate to the parent object
   let current: any = cloned
@@ -191,7 +213,7 @@ function fixEnumError(
   context: GeneratorContext,
 ): FixResult {
   const enumSchema = error.schema as { enum?: unknown[] }
-  if (!enumSchema.enum || enumSchema.enum.length === 0) {
+  if (!enumSchema.enum || !Array.isArray(enumSchema.enum) || enumSchema.enum.length === 0) {
     return { value, changed: false }
   }
 
@@ -330,7 +352,7 @@ function fixOneOfError(
   const dataPath = extractDataPath(error.path)
   const errorSchema = error.schema as NonBooleanJsfSchema
   
-  if (!errorSchema.oneOf || errorSchema.oneOf.length === 0) {
+  if (!errorSchema.oneOf || !Array.isArray(errorSchema.oneOf) || errorSchema.oneOf.length === 0) {
     return { value, changed: false }
   }
   
@@ -435,6 +457,11 @@ function getPropertySchemaFromPath(
   schema: JsfSchema,
   path: (string | number)[],
 ): JsfSchema | undefined {
+  // Validate input
+  if (!Array.isArray(path)) {
+    return undefined
+  }
+  
   if (typeof schema === 'boolean' || path.length === 0) {
     return schema
   }
@@ -471,6 +498,11 @@ function getPropertySchemaFromPath(
  * - ['items', 0, 'properties', 'id'] → [0, 'id']  (0 is data array index)
  */
 function extractDataPath(schemaPath: (string | number)[]): (string | number)[] {
+  // Validate input
+  if (!Array.isArray(schemaPath)) {
+    return []
+  }
+  
   const compositionKeywords = new Set([
     'allOf', 'anyOf', 'oneOf', 'not',
     'if', 'then', 'else',
@@ -512,6 +544,11 @@ function updateNestedValue(
   path: (string | number)[],
   newValue: SchemaValue,
 ): FixResult {
+  // Validate input
+  if (!Array.isArray(path)) {
+    return { value, changed: false }
+  }
+  
   if (path.length === 0) {
     return { value: newValue, changed: true }
   }
@@ -521,7 +558,14 @@ function updateNestedValue(
   }
 
   // Clone and navigate to the parent of the target
-  const cloned = structuredClone(value)
+  let cloned: SchemaValue
+  try {
+    cloned = structuredClone(value)
+  } catch {
+    // If cloning fails, can't safely update
+    return { value, changed: false }
+  }
+  
   let current: any = cloned
 
   for (let i = 0; i < path.length - 1; i++) {

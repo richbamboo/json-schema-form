@@ -5,16 +5,20 @@ import { validateSchema } from '../../src/validation/schema'
 const SEED = 42
 
 describe('object edge cases', () => {
-  it('should throw when required property is not in properties', () => {
+  it('should skip required property not in properties (valid for conditional schemas)', () => {
     const schema = {
       type: 'object' as const,
       properties: {
         name: { type: 'string' as const }
       },
-      required: ['name', 'age'] // 'age' not in properties
+      required: ['name', 'age'] // 'age' not in properties - valid for conditional schemas
     }
     
-    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('Required property "age" is not defined in properties')
+    // Should generate without error, but may fail validation
+    // This is valid JSON Schema - properties can be conditionally required
+    const result = generateFromSchema(schema, { seed: SEED, maxGenerations: 5 }) as any
+    expect(result).toHaveProperty('name')
+    // 'age' won't be generated since it's not in properties
   })
 
   it('should handle optional property with false schema', () => {

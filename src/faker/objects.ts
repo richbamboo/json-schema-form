@@ -26,8 +26,10 @@ export function generateObject(
   for (const key of requiredProps) {
     const propertySchema = schema.properties[key]
     if (propertySchema === undefined) {
-      // Required property not defined in properties - this is a schema error
-      throw new Error(`Required property "${key}" is not defined in properties`)
+      // Required property not defined in properties
+      // This can happen with conditional schemas where properties are defined in then/else branches
+      // Skip it - the retry loop will handle it if needed
+      continue
     }
     // Skip if property schema is false (forbidden property)
     if (propertySchema !== false) {
