@@ -17,6 +17,18 @@ export function generateArray(
   // Determine array length
   const minItems = schema.minItems ?? 0
   const maxItems = schema.maxItems ?? Math.max(minItems + 5, 10)
+  
+  // Validate constraints
+  if (!Number.isInteger(minItems) || minItems < 0) {
+    throw new Error(`minItems must be a non-negative integer, got ${minItems}`)
+  }
+  if (!Number.isInteger(maxItems) || maxItems < 0) {
+    throw new Error(`maxItems must be a non-negative integer, got ${maxItems}`)
+  }
+  if (minItems > maxItems) {
+    throw new Error(`minItems must be <= maxItems, got minItems=${minItems}, maxItems=${maxItems}`)
+  }
+  
   const length = rng.integer(minItems, maxItems)
 
   const result: SchemaValue[] = []

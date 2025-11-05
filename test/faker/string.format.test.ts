@@ -246,5 +246,68 @@ describe('string format generation', () => {
       expect(new Date(result).getTime()).toBeLessThanOrEqual(new Date('2010-12-31').getTime())
       expect(validateSchema(result, schema)).toEqual([])
     })
+
+    // Phase 3 Fix Tests: Invalid date validation
+    it('should throw for invalid minDate', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          minDate: 'not-a-date',
+        },
+      }
+
+      expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('Invalid minDate')
+    })
+
+    it('should throw for invalid maxDate', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          maxDate: 'invalid-date-string',
+        },
+      }
+
+      expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('Invalid maxDate')
+    })
+
+    it('should throw when minDate > maxDate', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          minDate: '2020-01-01',
+          maxDate: '2019-01-01',
+        },
+      }
+
+      expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('minDate must be <= maxDate')
+    })
+
+    it('should throw for invalid minDate in date-time format', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date-time' as const,
+        'x-jsf-presentation': {
+          minDate: 'bad-date',
+        },
+      }
+
+      expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('Invalid minDate')
+    })
+
+    it('should throw when minDate > maxDate in date-time format', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date-time' as const,
+        'x-jsf-presentation': {
+          minDate: '2025-01-01',
+          maxDate: '2024-01-01',
+        },
+      }
+
+      expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('minDate must be <= maxDate')
+    })
   })
 })

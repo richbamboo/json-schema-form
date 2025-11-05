@@ -73,10 +73,12 @@ export function generateFormat(
 }
 
 /**
- * Generate a date string respecting minDate/maxDate from x-jsf-presentation.
- * Returns format: YYYY-MM-DD
+ * Parse and validate date range from schema presentation.
+ * @returns {from: Date, to: Date} validated date range
  */
-function generateDate(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom): string {
+function parseDateRange(
+  schema: NonBooleanJsfSchema | undefined,
+): { from: Date; to: Date } {
   const presentation = schema?.['x-jsf-presentation'] as Record<string, any> | undefined
   const minDate = presentation?.minDate as string | undefined
   const maxDate = presentation?.maxDate as string | undefined
@@ -86,20 +88,39 @@ function generateDate(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom
 
   if (maxDate) {
     toDate = new Date(maxDate)
+    if (isNaN(toDate.getTime())) {
+      throw new Error(`Invalid maxDate: ${maxDate}`)
+    }
   } else {
-    toDate = new Date() // Default to today
+    toDate = new Date() // Default to today/now
   }
 
   if (minDate) {
     fromDate = new Date(minDate)
+    if (isNaN(fromDate.getTime())) {
+      throw new Error(`Invalid minDate: ${minDate}`)
+    }
   } else {
     // Default to 100 years before toDate
     fromDate = new Date(toDate)
     fromDate.setFullYear(fromDate.getFullYear() - 100)
   }
 
-  // Generate a random date between fromDate and toDate
-  const date = faker.date.between({ from: fromDate, to: toDate })
+  // Validate date range
+  if (fromDate > toDate) {
+    throw new Error(`minDate must be <= maxDate, got minDate=${minDate}, maxDate=${maxDate}`)
+  }
+
+  return { from: fromDate, to: toDate }
+}
+
+/**
+ * Generate a date string respecting minDate/maxDate from x-jsf-presentation.
+ * Returns format: YYYY-MM-DD
+ */
+function generateDate(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom): string {
+  const { from, to } = parseDateRange(schema)
+  const date = faker.date.between({ from, to })
   return date.toISOString().split('T')[0]
 }
 
@@ -108,28 +129,7 @@ function generateDate(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom
  * Returns format: ISO 8601 with time
  */
 function generateDateTime(schema: NonBooleanJsfSchema | undefined, rng: SeededRandom): string {
-  const presentation = schema?.['x-jsf-presentation'] as Record<string, any> | undefined
-  const minDate = presentation?.minDate as string | undefined
-  const maxDate = presentation?.maxDate as string | undefined
-
-  let fromDate: Date
-  let toDate: Date
-
-  if (maxDate) {
-    toDate = new Date(maxDate)
-  } else {
-    toDate = new Date() // Default to now
-  }
-
-  if (minDate) {
-    fromDate = new Date(minDate)
-  } else {
-    // Default to 100 years before toDate
-    fromDate = new Date(toDate)
-    fromDate.setFullYear(fromDate.getFullYear() - 100)
-  }
-
-  // Generate a random date-time between fromDate and toDate
-  const date = faker.date.between({ from: fromDate, to: toDate })
+  const { from, to } = parseDateRange(schema)
+  const date = faker.date.between({ from, to })
   return date.toISOString()
 }

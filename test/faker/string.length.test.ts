@@ -57,4 +57,16 @@ describe('string length generation', () => {
     expect(graphemeCount).toBe(3)
     expect(validateSchema(result, schema)).toEqual([])
   })
+
+  // Phase 3 Fix Tests: Validation for invalid length constraints
+  it('should handle very long strings efficiently (performance test)', () => {
+    const schema = { type: 'string' as const, minLength: 1000, maxLength: 1000 }
+    const start = Date.now()
+    const result = generateFromSchema(schema, { seed: SEED }) as string
+    const duration = Date.now() - start
+
+    expect(result.length).toBe(1000)
+    expect(duration).toBeLessThan(100) // Should be fast with array join optimization
+    expect(validateSchema(result, schema)).toEqual([])
+  })
 })

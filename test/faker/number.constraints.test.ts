@@ -150,4 +150,90 @@ describe('number constraint generation', () => {
     }
     expect(validateSchema(result, schema)).toEqual([])
   })
+
+  // Phase 3 Fix Tests: Exclusive minimum for floats
+  it('should never generate exactly exclusiveMinimum for floats', () => {
+    const schema = { type: 'number' as const, exclusiveMinimum: 5.0, maximum: 5.1 }
+    
+    // Generate multiple times to ensure we never hit exactly 5.0
+    for (let i = 0; i < 100; i++) {
+      const result = generateFromSchema(schema, { seed: SEED + i }) as number
+      expect(result).toBeGreaterThan(5.0)
+      expect(result).toBeLessThanOrEqual(5.1)
+      expect(validateSchema(result, schema)).toEqual([])
+    }
+  })
+
+  // Phase 3 Fix Tests: multipleOf with no valid multiple in range
+  it('should throw when no valid multiple exists in range', () => {
+    const schema = { type: 'number' as const, minimum: 5, maximum: 6, multipleOf: 10 }
+    
+    // No multiple of 10 exists between 5 and 6
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('No valid multiple')
+  })
+
+  it('should handle multipleOf at exact boundaries', () => {
+    const schema = { type: 'number' as const, minimum: 10, maximum: 10, multipleOf: 10 }
+    const result = generateFromSchema(schema, { seed: SEED }) as number
+    
+    expect(result).toBe(10)
+    expect(validateSchema(result, schema)).toEqual([])
+  })
+
+  it('should handle multipleOf with tight range', () => {
+    const schema = { type: 'integer' as const, minimum: 10, maximum: 20, multipleOf: 5 }
+    const result = generateFromSchema(schema, { seed: SEED }) as number
+    
+    expect([10, 15, 20]).toContain(result)
+    expect(result % 5).toBe(0)
+    expect(validateSchema(result, schema)).toEqual([])
+  })
+
+  // Phase 3 Round 3 Fix Tests: multipleOf validation
+  it('should throw for negative multipleOf', () => {
+    const schema = { type: 'number' as const, multipleOf: -5 }
+    
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('multipleOf must be > 0')
+  })
+
+  it('should throw for zero multipleOf', () => {
+    const schema = { type: 'number' as const, multipleOf: 0 }
+    
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('multipleOf must be > 0')
+  })
+
+  it('should throw for NaN multipleOf', () => {
+    const schema = { type: 'number' as const, multipleOf: NaN }
+    
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('multipleOf must be a finite number')
+  })
+
+  it('should throw for Infinity multipleOf', () => {
+    const schema = { type: 'number' as const, multipleOf: Infinity }
+    
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('multipleOf must be a finite number')
+  })
+
+  // Phase 3 Round 4 Fix Tests: min/max range validation
+  it('should throw when exclusiveMinimum and exclusiveMaximum create invalid range for integers', () => {
+    const schema = { type: 'integer' as const, exclusiveMinimum: 5, exclusiveMaximum: 6 }
+    
+    // After adjustment: min=6, max=5 which is invalid
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('Invalid range')
+  })
+
+  it('should throw when minimum > maximum', () => {
+    const schema = { type: 'number' as const, minimum: 10, maximum: 5 }
+    
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('Invalid range')
+  })
+
+  it('should handle exclusiveMinimum and exclusiveMaximum with valid range for integers', () => {
+    const schema = { type: 'integer' as const, exclusiveMinimum: 5, exclusiveMaximum: 8 }
+    const result = generateFromSchema(schema, { seed: SEED }) as number
+    
+    // Valid range is 6, 7
+    expect([6, 7]).toContain(result)
+    expect(validateSchema(result, schema)).toEqual([])
+  })
 })

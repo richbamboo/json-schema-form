@@ -38,6 +38,7 @@ export function generateString(
 /**
  * Generate a string from a regex pattern using randexp.
  * Seed randexp with our PRNG for determinism.
+ * @throws {Error} If pattern is invalid
  */
 function generateFromPattern(
   pattern: string,
@@ -45,7 +46,12 @@ function generateFromPattern(
   maxLength: number | undefined,
   rng: import('./rand').SeededRandom,
 ): string {
-  const randexp = new RandExp(pattern)
+  let randexp: RandExp
+  try {
+    randexp = new RandExp(pattern)
+  } catch (err) {
+    throw new Error(`Invalid regex pattern: ${pattern}. ${err instanceof Error ? err.message : String(err)}`)
+  }
 
   // Override randexp's RNG with our seeded one
   randexp.randInt = (min: number, max: number) => rng.integer(min, max)
@@ -71,6 +77,17 @@ function adjustStringLength(
   minLength: number | undefined,
   maxLength: number | undefined,
 ): string {
+  // Validate inputs
+  if (minLength !== undefined && minLength < 0) {
+    throw new Error(`minLength must be >= 0, got ${minLength}`)
+  }
+  if (maxLength !== undefined && maxLength < 0) {
+    throw new Error(`maxLength must be >= 0, got ${maxLength}`)
+  }
+  if (minLength !== undefined && maxLength !== undefined && minLength > maxLength) {
+    throw new Error(`minLength must be <= maxLength, got minLength=${minLength}, maxLength=${maxLength}`)
+  }
+
   const graphemes = [...new Intl.Segmenter().segment(str)].map(s => s.segment)
   const currentLength = graphemes.length
 
@@ -92,10 +109,13 @@ function adjustStringLength(
  * Generate a random alphanumeric string of specified length.
  */
 function generateRandomString(length: number, rng: import('./rand').SeededRandom): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-  let result = ''
-  for (let i = 0; i < length; i++) {
-    result += chars[rng.integer(0, chars.length - 1)]
+  if (length < 0) {
+    throw new Error(`length must be >= 0, got ${length}`)
   }
-  return result
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  const result: string[] = []
+  for (let i = 0; i < length; i++) {
+    result.push(chars[rng.integer(0, chars.length - 1)])
+  }
+  return result.join('')
 }
