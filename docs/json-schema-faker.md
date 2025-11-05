@@ -31,8 +31,7 @@ npm run generate-fake -- path/to/schema.json --seed 42
 - **`src/faker/strings.ts`** - String generation with formats and patterns
 - **`src/faker/arrays.ts`** - Array generation with uniqueItems support
 - **`src/faker/objects.ts`** - Object generation with required/optional properties
-- **`src/faker/composition.ts`** - allOf/anyOf/oneOf/not handlers
-- **`src/faker/conditionals.ts`** - if/then/else conditional logic
+- **`src/faker/composition.ts`** - allOf/anyOf/oneOf/not/if/then/else handlers
 - **`src/faker/formats.ts`** - Format-specific generators (20+ types)
 - **`src/faker/errors.ts`** - Custom error types
 
@@ -77,11 +76,11 @@ npm run generate-fake -- path/to/schema.json --seed 42
 // src/faker/index.ts
 export interface GenerateOptions {
   seed?: string | number
-  count?: number // default 1; when >1 returns array of instances
+  count?: number // default 1, max 10000; when >1 returns array of instances
   includeOptionalProbability?: number // default 0.3
-  maxGenerations?: number // default 100 - max fresh random generations
-  maxFixesPerGeneration?: number // default 5 - fix budget per generation (resets on progress)
-  maxAttempts?: number // default 1000 - absolute safety limit (generations + fixes)
+  maxGenerations?: number // default 100, max 10000 - max fresh random generations
+  maxFixesPerGeneration?: number // default 5, max 1000 - fix budget per generation (resets on progress)
+  maxAttempts?: number // default 1000, max 100000 - absolute safety limit (generations + fixes)
   useDefaults?: boolean // default false
   useExamples?: boolean // default false
 }
@@ -185,8 +184,9 @@ All formats respect `minLength`/`maxLength` constraints and validation patterns 
 
 ### Test Structure
 
-- **Fast Tests** (~2s): Unit tests for each type, constraint, and fix
-- **Slow Tests** (~7s): Smoke tests across 530 real-world schemas
+- **Fast Tests** (~3s): 657 unit tests for each type, constraint, and fix
+- **Slow Tests** (~9s): 530 smoke tests across real-world schemas
+- **Total**: 1,187 tests with 100% pass rate
 - **Deterministic**: All tests use fixed seeds for reproducibility
 - **Validator Integration**: Uses project's validator as oracle
 
@@ -198,6 +198,8 @@ All formats respect `minLength`/`maxLength` constraints and validation patterns 
 - Conditional tests (if/then/else)
 - Fix tests (all 9 error correction types)
 - Integration tests (realistic form scenarios)
+- Security tests (ReDoS, stack overflow, resource limits, prototype pollution)
+- End-to-end tests (API, errors, determinism, performance)
 - Smoke tests (530 real-world schemas)
 
 ## Design Decisions
@@ -300,6 +302,38 @@ All formats respect `minLength`/`maxLength` constraints and validation patterns 
   - Example: `password === confirmPassword`
   - Reason: Random generation unlikely to match; no constraint solver
   - Workaround: Use simpler validation or post-process generated data
+
+## Security & Resource Limits
+
+The generator includes comprehensive security protections against malicious schemas:
+
+### Resource Limits
+
+- **Pattern Length**: RandExp-generated strings limited to 10,000 characters
+- **Recursion Depth**: Schema nesting limited to 100 levels
+- **Object Properties**: Maximum 10,000 properties per object
+- **Array Items**: Maximum 10,000 items per array
+- **String Length**: Pre-truncated to 50,000 chars before grapheme segmentation
+- **Generation Count**: Maximum 10,000 instances per call
+- **Generation Attempts**: Configurable limits (maxGenerations ≤ 10,000, maxAttempts ≤ 100,000)
+
+### Protection Against
+
+- **ReDoS Attacks**: Pattern generation bounded by length limits
+- **Stack Overflow**: Recursion depth tracking prevents infinite loops
+- **Memory Exhaustion**: All data structures have upper bounds
+- **CPU Exhaustion**: All operations have time/size limits
+- **Prototype Pollution**: Dangerous keys (`__proto__`, `constructor`, `prototype`) filtered
+- **Type Confusion**: All numeric constraints validated for NaN/Infinity
+
+### Error Handling
+
+All invalid inputs throw descriptive errors:
+- Negative or fractional constraints → Error with actual value
+- NaN/Infinity values → Error with type information
+- Excessive limits → Error with suggested maximum
+- Contradictory constraints → UnsatisfiableSchemaError
+- Unsupported features → UnsupportedGenerationError
 
 ## Future Enhancements
 
