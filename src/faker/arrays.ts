@@ -19,11 +19,11 @@ export function generateArray(
   const maxItems = schema.maxItems ?? Math.max(minItems + 5, 10)
   
   // Validate constraints
-  if (!Number.isInteger(minItems) || minItems < 0) {
-    throw new Error(`minItems must be a non-negative integer, got ${minItems}`)
+  if (!Number.isFinite(minItems) || !Number.isInteger(minItems) || minItems < 0) {
+    throw new Error(`minItems must be a non-negative finite integer, got ${minItems}`)
   }
-  if (!Number.isInteger(maxItems) || maxItems < 0) {
-    throw new Error(`maxItems must be a non-negative integer, got ${maxItems}`)
+  if (!Number.isFinite(maxItems) || !Number.isInteger(maxItems) || maxItems < 0) {
+    throw new Error(`maxItems must be a non-negative finite integer, got ${maxItems}`)
   }
   if (minItems > maxItems) {
     throw new Error(`minItems must be <= maxItems, got minItems=${minItems}, maxItems=${maxItems}`)

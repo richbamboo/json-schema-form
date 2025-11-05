@@ -18,7 +18,13 @@ export interface GeneratorContext {
   rng: SeededRandom
   options: NormalizedOptions
   attempt: number
+  depth?: number
 }
+
+/**
+ * Maximum recursion depth to prevent stack overflow.
+ */
+const MAX_RECURSION_DEPTH = 100
 
 /**
  * Get the effective type from a schema, handling type arrays.
@@ -42,6 +48,15 @@ export function generateValue(
   schema: JsfSchema,
   context: GeneratorContext,
 ): SchemaValue {
+  // Check recursion depth to prevent stack overflow
+  const currentDepth = context.depth || 0
+  if (currentDepth > MAX_RECURSION_DEPTH) {
+    throw new Error(`Maximum recursion depth (${MAX_RECURSION_DEPTH}) exceeded. Schema may be too deeply nested or contain circular references.`)
+  }
+  
+  // Increment depth for recursive calls
+  const nextContext = { ...context, depth: currentDepth + 1 }
+  
   // Handle boolean schemas
   if (typeof schema === 'boolean') {
     if (schema === true) {
@@ -109,28 +124,28 @@ export function generateValue(
 
   switch (type) {
     case 'string':
-      return generateString(schema, context)
+      return generateString(schema, nextContext)
 
     case 'number':
     case 'integer':
-      return generateNumber(schema, context)
+      return generateNumber(schema, nextContext)
 
     case 'boolean':
-      return context.rng.boolean()
+      return nextContext.rng.boolean()
 
     case 'null':
       return null
 
     case 'array':
-      return generateArray(schema, context)
+      return generateArray(schema, nextContext)
 
     case 'object':
-      return generateObject(schema, context)
+      return generateObject(schema, nextContext)
 
     default:
       // No type specified; default to object if it has object-like keywords
       if (schema.properties || schema.required) {
-        return generateObject(schema, context)
+        return generateObject(schema, nextContext)
       }
       // Fallback: generate a simple string
       return 'generated-value'

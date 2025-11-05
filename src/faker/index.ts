@@ -147,11 +147,20 @@ function normalizeOptions(options?: GenerateOptions): NormalizedOptions {
   if (!Number.isFinite(maxGenerations) || maxGenerations < 1 || !Number.isInteger(maxGenerations)) {
     throw new Error(`maxGenerations must be a finite integer >= 1, got ${maxGenerations}`)
   }
+  if (maxGenerations > 10000) {
+    throw new Error(`maxGenerations must be <= 10000, got ${maxGenerations}. Excessive generations can cause performance issues.`)
+  }
   if (!Number.isFinite(maxFixesPerGeneration) || maxFixesPerGeneration < 0 || !Number.isInteger(maxFixesPerGeneration)) {
     throw new Error(`maxFixesPerGeneration must be a finite integer >= 0, got ${maxFixesPerGeneration}`)
   }
+  if (maxFixesPerGeneration > 1000) {
+    throw new Error(`maxFixesPerGeneration must be <= 1000, got ${maxFixesPerGeneration}. Excessive fixes can cause performance issues.`)
+  }
   if (!Number.isFinite(maxAttempts) || maxAttempts < 1 || !Number.isInteger(maxAttempts)) {
     throw new Error(`maxAttempts must be a finite integer >= 1, got ${maxAttempts}`)
+  }
+  if (maxAttempts > 100000) {
+    throw new Error(`maxAttempts must be <= 100000, got ${maxAttempts}. Excessive attempts can cause performance issues.`)
   }
 
   return {

@@ -21,6 +21,12 @@ export function generateObject(
     return result
   }
 
+  // Prevent memory exhaustion from schemas with excessive properties
+  const propertyCount = Object.keys(schema.properties).length
+  if (propertyCount > 10000) {
+    throw new Error(`Schema has ${propertyCount} properties, but maximum is 10000. Reduce the number of properties to prevent memory exhaustion.`)
+  }
+
   // Generate required properties first
   const requiredProps = Array.isArray(schema.required) ? schema.required : []
   for (const key of requiredProps) {

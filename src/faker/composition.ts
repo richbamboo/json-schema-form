@@ -90,7 +90,13 @@ export function handleAllOf(
       }
       
       // Copy other properties (last one wins for conflicts)
-      Object.assign(mergedSchema, subSchema)
+      // Protect against prototype pollution
+      const dangerousKeys = ['__proto__', 'constructor', 'prototype']
+      for (const [key, val] of Object.entries(subSchema)) {
+        if (!dangerousKeys.includes(key)) {
+          ;(mergedSchema as any)[key] = val
+        }
+      }
     }
   }
   
@@ -277,8 +283,10 @@ export function handleConditional(
     }
     
     // Copy other constraints from branch (last wins)
+    // Protect against prototype pollution
+    const dangerousKeys = ['__proto__', 'constructor', 'prototype']
     for (const [key, val] of Object.entries(branchObj)) {
-      if (key !== 'properties' && key !== 'required') {
+      if (key !== 'properties' && key !== 'required' && !dangerousKeys.includes(key)) {
         ;(mergedSchema as any)[key] = val
       }
     }

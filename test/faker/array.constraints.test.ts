@@ -8,13 +8,13 @@ describe('array constraint validation', () => {
   it('should throw for negative minItems', () => {
     const schema = { type: 'array' as const, minItems: -1 }
     
-    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('minItems must be a non-negative integer')
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('minItems must be a non-negative finite integer')
   })
 
   it('should throw for negative maxItems', () => {
     const schema = { type: 'array' as const, maxItems: -5 }
     
-    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('maxItems must be a non-negative integer')
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('maxItems must be a non-negative finite integer')
   })
 
   it('should throw when minItems > maxItems', () => {
@@ -26,13 +26,13 @@ describe('array constraint validation', () => {
   it('should throw for fractional minItems', () => {
     const schema = { type: 'array' as const, minItems: 2.5 }
     
-    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('minItems must be a non-negative integer')
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('minItems must be a non-negative finite integer')
   })
 
   it('should throw for fractional maxItems', () => {
     const schema = { type: 'array' as const, maxItems: 10.7 }
     
-    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('maxItems must be a non-negative integer')
+    expect(() => generateFromSchema(schema, { seed: SEED })).toThrow('maxItems must be a non-negative finite integer')
   })
 
   it('should handle minItems = 0', () => {

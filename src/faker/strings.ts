@@ -30,6 +30,18 @@ export function generateString(
   // Generate a random string within length constraints
   const minLength = schema.minLength ?? 1 // Default to at least 1 character
   const maxLength = schema.maxLength ?? Math.max(minLength + 20, 50)
+  
+  // Validate length constraints
+  if (typeof minLength === 'number' && (!Number.isFinite(minLength) || minLength < 0 || !Number.isInteger(minLength))) {
+    throw new Error(`minLength must be a non-negative finite integer, got ${minLength}`)
+  }
+  if (typeof maxLength === 'number' && (!Number.isFinite(maxLength) || maxLength < 0 || !Number.isInteger(maxLength))) {
+    throw new Error(`maxLength must be a non-negative finite integer, got ${maxLength}`)
+  }
+  if (typeof minLength === 'number' && typeof maxLength === 'number' && minLength > maxLength) {
+    throw new Error(`minLength (${minLength}) must be <= maxLength (${maxLength})`)
+  }
+  
   const length = rng.integer(minLength, maxLength)
 
   return generateRandomString(length, rng)
@@ -55,6 +67,11 @@ function generateFromPattern(
 
   // Override randexp's RNG with our seeded one
   randexp.randInt = (min: number, max: number) => rng.integer(min, max)
+
+  // Set a maximum length to prevent ReDoS and memory exhaustion
+  // Use maxLength if provided, otherwise cap at 10000 characters
+  const safeMax = maxLength !== undefined ? maxLength : 10000
+  randexp.max = safeMax
 
   let generated = randexp.gen()
 
@@ -86,6 +103,12 @@ function adjustStringLength(
   }
   if (minLength !== undefined && maxLength !== undefined && minLength > maxLength) {
     throw new Error(`minLength must be <= maxLength, got minLength=${minLength}, maxLength=${maxLength}`)
+  }
+  
+  // Safety check: if string is excessively long, truncate before grapheme segmentation
+  // to prevent CPU exhaustion from Intl.Segmenter on very long strings
+  if (str.length > 50000) {
+    str = str.substring(0, 50000)
   }
 
   const graphemes = [...new Intl.Segmenter().segment(str)].map(s => s.segment)
