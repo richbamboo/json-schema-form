@@ -1,16 +1,17 @@
 # JSON Schema Faker — Implementation Plan
 
-## 🎉 MVP Status: COMPLETE + M12 BONUS
+## 🎉 MVP Status: COMPLETE + M11 & M12 BONUSES
 
-**All core milestones (M0-M8, M10, M12) are complete and tested.**
+**All core milestones (M0-M8, M10, M11, M12) are complete and tested.**
 
-- ✅ **48 test suites** passing with **1,497+ tests**
+- ✅ **48 test suites** passing with **519 fast tests + 530 slow integration tests**
 - ✅ All JSON Schema keywords supported (strings, numbers, arrays, objects, composition, formats)
 - ✅ **if/then/else conditionals fully supported** (M12)
+- ✅ **Guided retry system with targeted fixes** (M11)
 - ✅ 20+ format types implemented (email, uuid, uri, date-time, etc.)
-- ✅ Real-world integration tests with complex schemas (including Albania onboarding)
+- ✅ **100% success rate on 530 real-world schemas**
 - ✅ CLI test harness tool (`npm run generate-fake`)
-- ⏸️ Optional features deferred: file inputs (M9), guided retries (M11)
+- ⏸️ Optional features deferred: file inputs (M9)
 
 **Quick Start:**
 ```bash
@@ -22,17 +23,20 @@ See [Milestones & Deliverables](#milestones--deliverables) for detailed completi
 ### What Was Delivered
 
 **Core Implementation:**
-- `src/faker/index.ts` - Main API (`generateFromSchema`)
-- `src/faker/core.ts` - Core generation engine with retry loop
+- `src/faker/index.ts` - Main API (`generateFromSchema`) with hybrid retry loop
+- `src/faker/core.ts` - Core generation engine
+- `src/faker/fixes.ts` - Guided error correction system
 - `src/faker/rand.ts` - Seedable PRNG wrapper
-- `src/faker/generators/` - Type-specific generators (strings, numbers, arrays, objects, composition, formats)
+- `src/faker/numbers.ts`, `strings.ts`, `arrays.ts`, `objects.ts` - Type-specific generators
+- `src/faker/composition.ts` - Composition keyword handlers (allOf, anyOf, oneOf, not)
+- `src/faker/conditionals.ts` - if/then/else support
 - `src/faker/errors.ts` - Custom error types
 
 **Test Coverage:**
-- `test/faker/` - 17 test suites covering all keywords and formats
-- Unit tests for each type and constraint
+- `test/faker/` - 48 test suites with 519 fast tests
+- Unit tests for each type, constraint, and fix
 - Integration tests with realistic form schemas
-- Real-world JSON file loading tests
+- Smoke test with 530 real-world schemas (100% passing)
 
 **Tools:**
 - `scripts/generate-fake-data.mjs` - CLI test harness
@@ -71,16 +75,17 @@ See [Milestones & Deliverables](#milestones--deliverables) for detailed completi
 ## API Surface (programmatic only)
 
 ```ts
-// src/faker/index.ts (new)
+// src/faker/index.ts
 export interface GenerateOptions {
   seed?: string | number
   count?: number // default 1; when >1 returns array of instances
   includeOptionalProbability?: number // default 0.3
-  maxAttempts?: number // default 30
+  maxGenerations?: number // default 100 - max fresh random generations
+  maxFixesPerGeneration?: number // default 5 - fix budget per generation (resets on progress)
+  maxAttempts?: number // default 1000 - absolute safety limit (generations + fixes)
   useDefaults?: boolean // default false
   useExamples?: boolean // default false
-  // future modes; for now, 'random' uses faker/randexp under the hood
-  mode?: 'random' | 'faker' | 'ai'
+  mode?: 'random' | 'faker' | 'ai' // default 'random'
 }
 
 export function generateFromSchema(schema: import('../types').JsfSchema, options?: GenerateOptions): any
@@ -252,10 +257,13 @@ Example test files:
   - Error messages and unsupported cases documentation.
   - Test harness CLI tool (`scripts/generate-fake-data.mjs`).
 
-- ⏸️ **M11: Guided retries and solvers (deferred)**
-  - Implement branch switching, simple-not complements, array salvage for `uniqueItems`/`contains`, and JSON-Logic simple-op solver.
-  - Tests accordingly.
-  - Status: Deferred - current retry strategy sufficient for MVP.
+- ✅ **M11: Guided retries and targeted fixes**
+  - Implemented hybrid retry strategy: random generation + guided error correction
+  - Targeted fixes for: `required`, `forbidden`, `type`, `const`, `enum`, `oneOf`, `minimum`/`maximum`, `uniqueItems`
+  - Path extraction to handle nested properties and composition keywords
+  - Progress tracking with fix budget reset on improvement
+  - Tests: 23 tests covering all fix types
+  - Status: **COMPLETE** - Achieves 100% success rate on 530 real-world schemas
 
 - ✅ **M12: Conditionals (if/then/else)**
   - Implement `if/then/else` conditional schema application.
@@ -283,7 +291,8 @@ const schema: JsfSchema = {
 const value = generateFromSchema(schema, {
   seed: 42,
   includeOptionalProbability: 0.3,
-  maxAttempts: 30,
+  maxGenerations: 100,
+  maxFixesPerGeneration: 5,
   useDefaults: true,
 })
 ```
