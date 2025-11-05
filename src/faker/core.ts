@@ -48,8 +48,9 @@ export function generateValue(
       // true schema: any value is valid; generate a simple string
       return 'valid'
     }
-    // false schema: no value is valid
-    throw new UnsupportedGenerationError('Cannot generate value for false schema', schema)
+    // false schema: no value is valid - this is unsatisfiable, not unsupported
+    const { UnsatisfiableSchemaError } = require('./errors')
+    throw new UnsatisfiableSchemaError('false schema rejects all values - no valid data can be generated', schema)
   }
 
   // Check for const/enum first (highest priority)
@@ -61,7 +62,11 @@ export function generateValue(
     return schema.value
   }
 
-  if (schema.enum !== undefined && schema.enum.length > 0) {
+  if (schema.enum !== undefined) {
+    if (schema.enum.length === 0) {
+      const { UnsatisfiableSchemaError } = require('./errors')
+      throw new UnsatisfiableSchemaError('enum array is empty - no valid values exist', schema)
+    }
     return context.rng.pick(schema.enum)
   }
 

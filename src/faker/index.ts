@@ -5,7 +5,7 @@ import type { JsfSchema, SchemaValue } from '../types'
  */
 export interface GenerateOptions {
   /** Seed for deterministic generation. If omitted, generation is non-deterministic. */
-  seed?: number
+  seed?: string | number
   /** Number of instances to generate. Default: 1. When >1, returns an array. */
   count?: number
   /** Probability of including optional properties (0-1). Default: 0.3. */
@@ -83,7 +83,12 @@ export function generateFromSchemaWithMetadata(
   // Setup: create RNG and seed faker once for all generations
   const rng = new SeededRandom(normalizedOptions.seed)
   if (normalizedOptions.seed !== undefined) {
-    faker.seed(normalizedOptions.seed)
+    // faker.seed() expects a number or number array
+    // Use simple hash for string seeds to ensure better distribution
+    const numericSeed = typeof normalizedOptions.seed === 'string' 
+      ? stringToSeed(normalizedOptions.seed)
+      : normalizedOptions.seed
+    faker.seed(numericSeed)
   }
 
   if (count === 1) {
@@ -103,16 +108,59 @@ export function generateFromSchemaWithMetadata(
 type NormalizedOptions = Required<Omit<GenerateOptions, 'seed'>> & Pick<GenerateOptions, 'seed'>
 
 /**
+ * Convert a string to a numeric seed using a simple hash function.
+ * Uses djb2 algorithm for better distribution than simple character code sum.
+ * Applies >>> 0 after each iteration to keep hash within 32-bit integer range.
+ */
+function stringToSeed(str: string): number {
+  if (str.length === 0) {
+    throw new Error('seed cannot be an empty string')
+  }
+  let hash = 5381
+  for (let i = 0; i < str.length; i++) {
+    // Apply >>> 0 after each step to prevent overflow and ensure 32-bit integer
+    hash = (((hash << 5) + hash) + str.charCodeAt(i)) >>> 0
+  }
+  return hash
+}
+
+/**
  * Normalize and validate generation options.
  */
 function normalizeOptions(options?: GenerateOptions): NormalizedOptions {
+  const count = options?.count ?? 1
+  const includeOptionalProbability = options?.includeOptionalProbability ?? 0.3
+  const maxGenerations = options?.maxGenerations ?? 100
+  const maxFixesPerGeneration = options?.maxFixesPerGeneration ?? 5
+  const maxAttempts = options?.maxAttempts ?? 1000
+
+  // Validate inputs
+  if (!Number.isFinite(count) || count < 1 || !Number.isInteger(count)) {
+    throw new Error(`count must be a finite integer >= 1, got ${count}`)
+  }
+  if (count > 10000) {
+    throw new Error(`count must be <= 10000, got ${count}. For bulk generation, call generateFromSchema multiple times.`)
+  }
+  if (!Number.isFinite(includeOptionalProbability) || includeOptionalProbability < 0 || includeOptionalProbability > 1) {
+    throw new Error(`includeOptionalProbability must be a finite number in [0, 1], got ${includeOptionalProbability}`)
+  }
+  if (!Number.isFinite(maxGenerations) || maxGenerations < 1 || !Number.isInteger(maxGenerations)) {
+    throw new Error(`maxGenerations must be a finite integer >= 1, got ${maxGenerations}`)
+  }
+  if (!Number.isFinite(maxFixesPerGeneration) || maxFixesPerGeneration < 0 || !Number.isInteger(maxFixesPerGeneration)) {
+    throw new Error(`maxFixesPerGeneration must be a finite integer >= 0, got ${maxFixesPerGeneration}`)
+  }
+  if (!Number.isFinite(maxAttempts) || maxAttempts < 1 || !Number.isInteger(maxAttempts)) {
+    throw new Error(`maxAttempts must be a finite integer >= 1, got ${maxAttempts}`)
+  }
+
   return {
     seed: options?.seed,
-    count: options?.count ?? 1,
-    includeOptionalProbability: options?.includeOptionalProbability ?? 0.3,
-    maxGenerations: options?.maxGenerations ?? 100,
-    maxFixesPerGeneration: options?.maxFixesPerGeneration ?? 5,
-    maxAttempts: options?.maxAttempts ?? 1000,
+    count,
+    includeOptionalProbability,
+    maxGenerations,
+    maxFixesPerGeneration,
+    maxAttempts,
     useDefaults: options?.useDefaults ?? false,
     useExamples: options?.useExamples ?? false,
     mode: options?.mode ?? 'random',
@@ -135,6 +183,7 @@ function generateSingle(
 
   let totalAttempts = 0
   let lastErrors: any[] = []
+  let generationsCompleted = 0
 
   // Outer loop: random regenerations
   for (let generation = 1; generation <= options.maxGenerations; generation++) {
@@ -142,6 +191,7 @@ function generateSingle(
       break // Hit absolute limit
     }
 
+    generationsCompleted = generation
     const context = { rng, options, attempt: generation }
     let value = generateValue(schema, context)
     totalAttempts++
@@ -183,12 +233,13 @@ function generateSingle(
   }
 
   // Failed to generate valid value
+  const errorSummary = lastErrors.slice(0, 3).map(e => 
+    typeof e === 'object' && e !== null && 'message' in e ? e.message : String(e)
+  ).join('; ')
+  
   throw new MaxAttemptsExceededError(
-    `Failed to generate valid value after ${totalAttempts} attempts (${options.maxGenerations} generations). Last errors: ${JSON.stringify(lastErrors.slice(0, 3))}`,
+    `Failed to generate valid value after ${totalAttempts} attempts (${generationsCompleted} generations). Last errors: ${errorSummary}`,
     totalAttempts,
     lastErrors,
   )
-
-  // Unreachable, but TypeScript needs it
-  throw new Error('Unexpected: loop should have thrown MaxAttemptsExceededError')
 }
