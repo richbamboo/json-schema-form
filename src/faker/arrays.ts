@@ -28,6 +28,10 @@ export function generateArray(
   if (minItems > maxItems) {
     throw new Error(`minItems must be <= maxItems, got minItems=${minItems}, maxItems=${maxItems}`)
   }
+  // Prevent memory exhaustion from very large arrays
+  if (maxItems > 10000) {
+    throw new Error(`maxItems must be <= 10000, got ${maxItems}. For large arrays, use smaller maxItems.`)
+  }
   
   const length = rng.integer(minItems, maxItems)
 
@@ -43,17 +47,26 @@ export function generateArray(
   }
 
   // Generate remaining items using 'items' schema
-  if (result.length < length && schema.items) {
-    for (let i = result.length; i < length; i++) {
-      const value = generateValue(schema.items, context)
-      result.push(value)
-    }
-  } else if (result.length < length && !schema.items) {
-    // No items schema specified, generate simple values
-    for (let i = result.length; i < length; i++) {
-      const value = rng.pick(['string', 'number', 'boolean', 'null'])
-      const generatedValue = generateSimpleValue(value, rng)
-      result.push(generatedValue)
+  if (result.length < length) {
+    if (schema.items === false) {
+      // items: false means no additional items allowed beyond prefixItems
+      // If we need more items, this is an error
+      throw new Error(
+        `Array requires ${length} items but items schema is false (only ${result.length} prefixItems allowed)`
+      )
+    } else if (schema.items) {
+      // Generate items using the items schema
+      for (let i = result.length; i < length; i++) {
+        const value = generateValue(schema.items, context)
+        result.push(value)
+      }
+    } else {
+      // No items schema specified, generate simple values
+      for (let i = result.length; i < length; i++) {
+        const value = rng.pick(['string', 'number', 'boolean', 'null'])
+        const generatedValue = generateSimpleValue(value, rng)
+        result.push(generatedValue)
+      }
     }
   }
 

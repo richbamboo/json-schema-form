@@ -25,8 +25,12 @@ export function generateObject(
   const requiredProps = Array.isArray(schema.required) ? schema.required : []
   for (const key of requiredProps) {
     const propertySchema = schema.properties[key]
+    if (propertySchema === undefined) {
+      // Required property not defined in properties - this is a schema error
+      throw new Error(`Required property "${key}" is not defined in properties`)
+    }
     // Skip if property schema is false (forbidden property)
-    if (propertySchema !== undefined && propertySchema !== false) {
+    if (propertySchema !== false) {
       result[key] = generateValue(propertySchema as JsfSchema, context)
     }
   }
