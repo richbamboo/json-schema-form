@@ -80,4 +80,4 @@ The generator uses a **hybrid retry strategy**:
 - **Full schema support**: All JSON Schema keywords including `if/then/else` conditionals
 - **Deterministic**: Same seed produces same output
 - **Validated**: Generated data is validated internally during generation
-- **Success rate**: 100% on 530 real-world schemas (99.8%+ typical)
+- **Success rate**: 100% on 530 real-world schemas

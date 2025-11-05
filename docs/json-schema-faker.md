@@ -1,62 +1,61 @@
-# JSON Schema Faker — Implementation Plan
+# JSON Schema Faker — Architecture & Design
 
-## 🎉 MVP Status: COMPLETE + M11 & M12 BONUSES
+> **Note**: This document describes the architecture, design decisions, and technical approach.
+> For usage instructions, see the main README and `scripts/README.md`.
 
-**All core milestones (M0-M8, M10, M11, M12) are complete and tested.**
+## Overview
 
-- ✅ **48 test suites** passing with **519 fast tests + 530 slow integration tests**
-- ✅ All JSON Schema keywords supported (strings, numbers, arrays, objects, composition, formats)
-- ✅ **if/then/else conditionals fully supported** (M12)
-- ✅ **Guided retry system with targeted fixes** (M11)
-- ✅ 20+ format types implemented (email, uuid, uri, date-time, etc.)
-- ✅ **100% success rate on 530 real-world schemas**
-- ✅ CLI test harness tool (`npm run generate-fake`)
-- ⏸️ Optional features deferred: file inputs (M9)
+Production-ready JSON Schema data generator achieving 100% success rate on 530+ real-world schemas.
+
+**Key Features:**
+- Deterministic generation with seedable PRNG
+- Hybrid retry strategy with guided error correction
+- Full JSON Schema keyword support (strings, numbers, arrays, objects, composition, conditionals)
+- 20+ format types (email, uuid, uri, date-time, etc.)
+- CLI tool for testing and development
 
 **Quick Start:**
 ```bash
 npm run generate-fake -- path/to/schema.json --seed 42
 ```
 
-See [Milestones & Deliverables](#milestones--deliverables) for detailed completion status.
+## Architecture
 
-### What Was Delivered
+### Core Modules
 
-**Core Implementation:**
-- `src/faker/index.ts` - Main API (`generateFromSchema`) with hybrid retry loop
-- `src/faker/core.ts` - Core generation engine
-- `src/faker/fixes.ts` - Guided error correction system
-- `src/faker/rand.ts` - Seedable PRNG wrapper
-- `src/faker/numbers.ts`, `strings.ts`, `arrays.ts`, `objects.ts` - Type-specific generators
-- `src/faker/composition.ts` - Composition keyword handlers (allOf, anyOf, oneOf, not)
-- `src/faker/conditionals.ts` - if/then/else support
-- `src/faker/errors.ts` - Custom error types
+- **`src/faker/index.ts`** - Main API (`generateFromSchema`) with hybrid retry loop
+- **`src/faker/core.ts`** - Generation dispatcher by type and keywords
+- **`src/faker/fixes.ts`** - Guided error correction system (9 fix types)
+- **`src/faker/rand.ts`** - Seedable PRNG wrapper (seedrandom-based)
+- **`src/faker/numbers.ts`** - Number/integer generation with safe limits
+- **`src/faker/strings.ts`** - String generation with formats and patterns
+- **`src/faker/arrays.ts`** - Array generation with uniqueItems support
+- **`src/faker/objects.ts`** - Object generation with required/optional properties
+- **`src/faker/composition.ts`** - allOf/anyOf/oneOf/not handlers
+- **`src/faker/conditionals.ts`** - if/then/else conditional logic
+- **`src/faker/formats.ts`** - Format-specific generators (20+ types)
+- **`src/faker/errors.ts`** - Custom error types
 
-**Test Coverage:**
-- `test/faker/` - 48 test suites with 519 fast tests
-- Unit tests for each type, constraint, and fix
-- Integration tests with realistic form schemas
-- Smoke test with 530 real-world schemas (100% passing)
+### Tools
 
-**Tools:**
-- `scripts/generate-fake-data.mjs` - CLI test harness
-- `scripts/README.md` - Tool documentation
+- **`scripts/generate-fake-data.mjs`** - CLI for testing and development
+- **`scripts/README.md`** - CLI documentation
 
----
+## Design Goals
 
-## Goals
+### Primary Goals
 
-- **Generate realistic-looking JSON strings** that validate against this project’s validator (`src/validation/schema.ts`).
-- **Deterministic by seed**, Node-only runtime.
-- **Attempt+retry strategy** with guided fix-ups and strict `maxAttempts`.
-- **Support exactly the keywords/formats/features this repo validates**. No `$ref` (not implemented here).
-- **Use @faker-js/faker** for formats/realistic values; **use randexp** for `pattern`.
+- **Validation Compatibility**: Generate data that validates against this project's validator (`src/validation/schema.ts`)
+- **Determinism**: Identical seed produces identical output for reproducible testing
+- **Intelligent Retry**: Hybrid strategy combining random generation with targeted error correction
+- **Keyword Coverage**: Support all JSON Schema keywords this repository validates
+- **Realistic Data**: Use @faker-js/faker for formats and randexp for pattern-based strings
 
-## Non-goals (initially)
+### Explicit Non-Goals
 
-- CLI interface.
-- Remote `$ref` resolution.
-- Browser support.
+- **Browser Support**: Node-only runtime (uses Node.js filesystem APIs)
+- **$ref Resolution**: Not implemented in the validator, so omitted from generator
+- **Remote Schemas**: No network fetching or remote $ref resolution
 
 ## Scope (mirrors repository validators)
 
@@ -85,7 +84,6 @@ export interface GenerateOptions {
   maxAttempts?: number // default 1000 - absolute safety limit (generations + fixes)
   useDefaults?: boolean // default false
   useExamples?: boolean // default false
-  mode?: 'random' | 'faker' | 'ai' // default 'random'
 }
 
 export function generateFromSchema(schema: import('../types').JsfSchema, options?: GenerateOptions): any
@@ -95,183 +93,224 @@ export function generateFromSchema(schema: import('../types').JsfSchema, options
 - **Defaults precedence**: if enabled, `default` > first `examples` > random.
 - **Return type**: single value by default; array when `count` is provided.
 
-## Dependencies
+## Generation Strategy
 
-- `@faker-js/faker` — realistic formats/data.
-- `randexp` — regex-based string generation.
-- `seedrandom` — seedable PRNG.
+### Core Generation Flow
 
-## Internals Architecture
+1. **Type Dispatch**: `core.ts` routes to type-specific generators based on schema `type`
+2. **Constraint Application**: Each generator respects schema constraints (min/max, length, patterns, etc.)
+3. **PRNG Usage**: All randomness uses seedable PRNG for determinism
+4. **Composition Handling**: `composition.ts` merges constraints from allOf/anyOf/oneOf/not
+5. **Conditional Evaluation**: `conditionals.ts` applies if/then/else branches
 
-- **Core generator**: `src/faker/core.ts`
-  - Dispatch by type and keywords.
-  - Uses PRNG wrapper from `src/faker/rand.ts` (seedrandom-based).
-  - Helpers per domain: `strings.ts`, `numbers.ts`, `arrays.ts`, `objects.ts`, `formats.ts`.
-  - Composition engine: `composition.ts` handles `allOf`/`anyOf`/`oneOf`/`not` selection/merging.
-  - Logic integration: `logic.ts` — evaluate JSON-Logic via validator; solving deferred until after M8.
-  - Deferred: no error fixers in MVP; consider a `fixers.ts` post-M8 if needed.
+### Validator Integration
 
-- **Validator integration**: use `validateSchema(value, schema, options, path?, jsonLogicContext?)` from `src/validation/schema.ts` as oracle on each attempt.
+Uses `validateSchema(value, schema)` from `src/validation/schema.ts` as an oracle:
+- Validates generated values
+- Provides error details for guided fixes
+- Ensures output matches validation rules exactly
 
-- **Error taxonomy**:
-  - `UnsupportedGenerationError` — cases we explicitly do not support (e.g., composite regex intersection under `allOf`).
-  - `UnsatisfiableSchemaError` — contradictory constraints after intersection (e.g., `minLength > maxLength`).
-  - `MaxAttemptsExceededError` — attempts exhausted; include last error set and summary of fixers run.
+### Error Types
 
-## Attempt+Retry Algorithm
+- **`UnsupportedGenerationError`** - Explicitly unsupported cases (e.g., composite regex intersection in allOf)
+- **`UnsatisfiableSchemaError`** - Contradictory constraints (e.g., minimum > maximum)
+- **`MaxAttemptsExceededError`** - Exhausted retry budget; includes last validation errors
 
-1. **Init**: normalize `GenerateOptions`; seed PRNG; set `maxAttempts`.
-2. **Attempt loop (≤ maxAttempts)**:
-   - 2.1 Build `jsonLogicContext` if schema contains `x-jsf-logic` (mirroring `getJsonLogicContextFromSchema`).
-   - 2.2 Generate candidate value using a priori rules:
-     - Strings: respect length; single `pattern` via `randexp` (seeded); `format` via `faker` when available; else simple synth.
-     - Numbers/integers: sample in-range; enforce `exclusive*`, `multipleOf`.
-     - Booleans: PRNG boolean.
-     - Objects: include all `required`; include optionals with probability; no `additionalProperties`.
-     - Arrays: choose length in `[minItems,maxItems]`; satisfy `uniqueItems` using set-building; handle `prefixItems` and `items`.
-     - Enums/const: sample from set; const is exact.
-     - Composition:
-       - `allOf`: intersect constraints; if multiple `pattern`s → throw `UnsupportedGenerationError("unsupported composite pattern")`.
-       - `anyOf`: pick a branch (prefer disjoint by `type`).
-       - `oneOf`: pick a branch that appears disjoint; if ambiguous, error.
-       - `not`: handle simple complements (`const`, `enum`, simple `type`); otherwise unsupported.
-   - 2.3 Validate with `validateSchema`.
-   - 2.4 If valid → return.
-   - 2.5 Else, re-generate the minimal failing subtree(s). For `anyOf`/`oneOf`, try an alternate branch. No guided solving for `json-logic` or complex `not` during MVP; re-generate impacted fields or the whole object and re-validate.
-3. **Fail** with `MaxAttemptsExceededError` including last errors.
+## Hybrid Retry Algorithm
 
-### Guided Retries (deferred until after M8)
+The generator uses a two-phase approach: random generation followed by guided error correction.
 
-Deferred from MVP. If baseline re-generation proves insufficient, we will add targeted, error-driven interventions:
+### Phase 1: Random Generation
 
-- `anyOf`/`oneOf`: branch switching with subtree re-generation.
-- `not`: simple complements (e.g., avoid `const`/`enum`/simple `type`).
-- Arrays: `uniqueItems` duplicate salvage and `contains` min/max adjustments.
-- `json-logic`: var-scan and simple-op solver for referenced fields; else re-generate only those fields.
+Generate candidate values using constraint-aware random generation:
 
-## x-jsf-logic Support (MVP)
+- **Strings**: Apply length constraints; use `randexp` for patterns; use `@faker-js/faker` for formats
+- **Numbers**: Generate within min/max bounds; apply `multipleOf`; use safe integer limits when unconstrained
+- **Booleans**: Random true/false via PRNG
+- **Arrays**: Choose length in `[minItems, maxItems]`; ensure `uniqueItems`; handle `prefixItems` and `items`
+- **Objects**: Include all `required` properties; include optional properties by probability; respect `additionalProperties`
+- **Enums/Const**: Select from enum set; use exact value for const
+- **Composition**:
+  - `allOf`: Merge constraints (reject composite regex patterns)
+  - `anyOf`/`oneOf`: Pick a branch (prefer type-disjoint options)
+  - `not`: Handle simple complements (const, enum, simple type)
 
-- **Validations**: Always evaluated by the validator as part of `validateSchema` and `validateJsonLogicRules`.
-- **Guidance**: Scan rules for `{"var": "field"}` to identify fields to adjust/re-roll when `json-logic` fails.
-- **Computed attrs**: Defer initial application during generation. If later needed (constraints depend on computed attrs), we’ll apply a schema pass using `applyComputedAttrsToSchema` between attempts.
+### Phase 2: Guided Error Correction
 
-## Formats Generation (via Faker)
+When validation fails, apply targeted fixes based on error type:
 
-- Map formats to faker:
-  - `email` → `faker.internet.email()`
-  - `uuid` → `faker.string.uuid()`
-  - `hostname` → `faker.internet.domainName()` (then split/use single label if needed)
-  - `ipv4`/`ipv6` → `faker.internet.ip()` with version control
-  - `uri`/`iri`/`uri-reference`/`iri-reference` → synthesize with `new URL(...)` and faker path/host; fallbacks for references
-  - `date-time`, `date`, `time`, `duration` → `faker.date` + formatters to match regex in `format.ts`
-  - Others: minimal deterministic helpers if faker lacks direct support, ensuring compliance with `format.ts` patterns.
+1. **`required`** - Add missing properties (navigates nested paths)
+2. **`forbidden`** - Remove disallowed properties (handles nested objects)
+3. **`type`** - Regenerate with correct type (merges constraints)
+4. **`const`** - Set exact required value
+5. **`enum`/`oneOf`** - Pick valid option from set
+6. **`minimum`/`maximum`** - Regenerate within bounds (preserves type)
+7. **`uniqueItems`** - Regenerate array with unique elements
 
-## Testing Strategy (deterministic)
+### Progress Tracking
 
-- **Location**: `test/faker/`
-- **Harness**: Jest (existing setup). Use this project’s validator.
-- **Seeding**: Each test uses a fixed seed. No fuzzing.
+- **Fix Budget**: Each generation gets a budget of fixes (default: 5)
+- **Progress Reset**: Budget resets when error count decreases
+- **Fallback**: Regenerate from scratch if fixes don't help
+- **Limits**: Configurable `maxGenerations` (100), `maxFixesPerGeneration` (5), `maxAttempts` (1000)
 
-### Micro-schemas (keyword-focused unit tests)
+## Custom Extensions
 
-- Strings: `minLength`, `maxLength`, `pattern` (single), formats each.
-- Numbers: each bound/combo with `multipleOf`.
-- Arrays: boundaries, `uniqueItems`, `contains` with `min/maxContains`, `prefixItems` + `items`.
-- Objects: `required`, absence of extras when `additionalProperties: false`, `patternProperties` interaction.
-- Enums/const.
-- Composition: `allOf` (no composite regex), `anyOf`, `oneOf` (disjoint), `not` (simple complements).
-- JSON-Logic: simple relational rules over referenced fields.
+### x-jsf-logic Support
 
-Example test files:
+- **Validations**: Evaluated by validator during `validateSchema` and `validateJsonLogicRules`
+- **Strategy**: Rely on retry loop rather than attempting to solve JSON Logic constraints
+- **Computed Attributes**: Not applied during generation; handled by validation layer
 
-- `test/faker/string.min-max-length.test.ts`
-- `test/faker/string.pattern.single.test.ts`
-- `test/faker/format.email-uuid-uri.test.ts`
-- `test/faker/number.bounds-multipleOf.test.ts`
-- `test/faker/array.length-unique-contains.test.ts`
-- `test/faker/object.required-additionalProperties.test.ts`
-- `test/faker/enum-const.test.ts`
-- `test/faker/composition.allOf-anyOf-oneOf-not.test.ts`
-- `test/faker/json-logic.simple-ops.test.ts`
+## Format Generation
 
-### Integration schemas
+Formats are generated using `@faker-js/faker` with fallbacks for unsupported types:
 
-- Combine multiple keywords and conditionals; assert single generated instance validates.
+| Format | Implementation |
+|--------|----------------|
+| `email`, `idn-email` | `faker.internet.email()` |
+| `uuid` | `faker.string.uuid()` |
+| `hostname`, `idn-hostname` | `faker.internet.domainName()` |
+| `ipv4`, `ipv6` | `faker.internet.ip()` with version |
+| `uri`, `iri`, `uri-reference`, `iri-reference` | Synthesized with `new URL()` and faker components |
+| `date-time`, `date`, `time` | `faker.date` with ISO formatters |
+| `duration` | Custom ISO 8601 duration format |
+| `regex` | Simple deterministic pattern |
+| `json-pointer`, `json-pointer-uri-fragment`, `relative-json-pointer` | Custom generators |
+| `uri-template` | Simple template with placeholders |
 
-## Milestones & Deliverables
+All formats respect `minLength`/`maxLength` constraints and validation patterns from `src/validation/format.ts`.
 
-> **Status Legend:**  
-> ✅ = Complete and tested  
-> 🚧 = In progress  
-> ⏸️ = Deferred/Optional  
-> ⬜ = Not started
+## Testing Approach
 
-- ✅ **M0: Scaffolding**
-  - Add dependencies: `@faker-js/faker`, `randexp`, `seedrandom`.
-  - Files: `src/faker/` directory with skeleton; export in package main.
+### Test Structure
 
-- ✅ **M1: Core + Strings**
-  - PRNG wrapper; options parsing; base generator.
-  - Implement strings (`min/maxLength`, single `pattern`, basic formats via faker).
-  - Tests: string micro-schemas + basic integration.
+- **Fast Tests** (~2s): Unit tests for each type, constraint, and fix
+- **Slow Tests** (~7s): Smoke tests across 530 real-world schemas
+- **Deterministic**: All tests use fixed seeds for reproducibility
+- **Validator Integration**: Uses project's validator as oracle
 
-- ✅ **M2: Numbers**
-  - Implement numeric bounds and `multipleOf`.
-  - Tests: numeric micro-schemas, combos with strings.
+### Coverage
 
-- ✅ **M3: Arrays**
-  - Implement length, `uniqueItems`, `contains` family, `prefixItems`/`items`.
-  - Tests accordingly.
+- Type-specific tests (strings, numbers, arrays, objects)
+- Constraint tests (bounds, lengths, patterns, formats)
+- Composition tests (allOf, anyOf, oneOf, not)
+- Conditional tests (if/then/else)
+- Fix tests (all 9 error correction types)
+- Integration tests (realistic form scenarios)
+- Smoke tests (530 real-world schemas)
 
-- ✅ **M4: Objects**
-  - Implement required/optional generation, `additionalProperties: false`, recurse properties.
-  - Tests accordingly.
+## Design Decisions
 
-- ✅ **M5: Enums/Const**
-  - Always select from `enum`/`const`/`value`.
-  - Tests accordingly.
+### Why Seedable PRNG?
 
-- ✅ **M6: Composition**
-  - `allOf` intersection (no composite regex), `anyOf` selection, `oneOf` disjoint selection, `not` simple complements.
-  - Tests accordingly.
+**Decision**: Use `seedrandom` for all randomness
 
-- ✅ **M7: x-jsf-logic (validations)**
-  - x-jsf-logic is a custom extension that adds JSON Logic rules for cross-field validation and computed attributes.
-  - Strategy: No active generation logic needed. The validator (`validateJsonLogicRules`) checks `x-jsf-logic-validations`.
-  - If validation fails, the retry loop regenerates. This "trust the validator" approach is sufficient for MVP.
-  - Known limitation: Cross-field equality constraints (e.g., password === confirmPassword) are nearly impossible to satisfy via random retry.
-  - Tests: simple relational rules over fields should pass when generation aligns with constraints.
-  - Note: `x-jsf-logic-computedAttrs` are applied during validation/mutation, not during generation.
+**Rationale**: Deterministic generation is critical for:
+- Reproducible test data
+- Debugging failed generations
+- Consistent CI/CD results
+- Regression testing
 
-- ✅ **M8: Formats round-out**
-  - Fill remaining formats from `format.ts` with faker or helpers, ensure compliance with patterns.
-  - All 20+ formats implemented and tested.
+### Why Safe Integer Limits?
 
-- ⏸️ **M9: Optional: file inputs**
-  - Generate `FileLike[]` honoring `maxFileSize`, `accept`.
-  - Tests based on `src/validation/file.ts`.
-  - Status: Deferred - not required for MVP.
+**Decision**: Use `Number.MIN_SAFE_INTEGER` / `Number.MAX_SAFE_INTEGER` instead of arbitrary bounds
 
-- ✅ **M10: Docs & polish**
-  - README section + examples.
-  - Error messages and unsupported cases documentation.
-  - Test harness CLI tool (`scripts/generate-fake-data.mjs`).
+**Rationale**:
+- No artificial restrictions on valid JSON numbers
+- Handles any schema without special cases
+- Mathematically correct for unconstrained schemas
+- Previous `-1000/1000` limits caused failures on schemas with `minimum > 1000`
 
-- ✅ **M11: Guided retries and targeted fixes**
-  - Implemented hybrid retry strategy: random generation + guided error correction
-  - Targeted fixes for: `required`, `forbidden`, `type`, `const`, `enum`, `oneOf`, `minimum`/`maximum`, `uniqueItems`
-  - Path extraction to handle nested properties and composition keywords
-  - Progress tracking with fix budget reset on improvement
-  - Tests: 23 tests covering all fix types
-  - Status: **COMPLETE** - Achieves 100% success rate on 530 real-world schemas
+### Why Hybrid Retry Strategy?
 
-- ✅ **M12: Conditionals (if/then/else)**
-  - Implement `if/then/else` conditional schema application.
-  - Evaluate `if` condition, apply `then` or `else` branch accordingly.
-  - Merge conditional branch with base schema.
-  - Tests for various conditional scenarios.
-  - Status: **COMPLETE** - Full support for conditionals, including within `allOf`.
-  - Works with real-world schemas like Albania onboarding without workarounds.
+**Decision**: Combine random generation with targeted error correction
+
+**Rationale**:
+- Pure random retry: Simple but low success rate on complex schemas
+- Pure constraint solving: Complex, fragile, hard to maintain
+- Hybrid approach: Best of both worlds
+  - Random generation handles most cases
+  - Targeted fixes handle common validation failures
+  - Achieves 100% success rate on real-world schemas
+
+### Why Node-Only?
+
+**Decision**: No browser support
+
+**Rationale**:
+- Uses Node.js filesystem APIs for schema loading
+- Target use case is testing/development, not production
+- Simpler implementation and maintenance
+- Browser support can be added later if needed
+
+### Why No $ref Support?
+
+**Decision**: Omit `$ref` resolution
+
+**Rationale**:
+- Not implemented in this project's validator
+- Adds significant complexity (remote fetching, circular refs, etc.)
+- Real-world schemas in this project don't use `$ref`
+- Can be added later if validator adds support
+
+### Why @faker-js/faker?
+
+**Decision**: Use `@faker-js/faker` for realistic data
+
+**Rationale**:
+- Industry-standard library for fake data
+- Supports most JSON Schema formats out of the box
+- Deterministic when seeded
+- Active maintenance and good documentation
+
+### Why randexp?
+
+**Decision**: Use `randexp` for pattern-based strings
+
+**Rationale**:
+- Generates strings matching regex patterns
+- Deterministic when seeded
+- Handles complex patterns better than manual generation
+- Well-tested library
+
+## Known Limitations
+
+### Unsupported Features
+
+- **Composite Regex in allOf**: Multiple `pattern` constraints in `allOf` throw `UnsupportedGenerationError`
+  - Reason: Regex intersection is computationally complex and rarely needed
+  - Workaround: Use single pattern or anyOf instead
+
+- **$ref Resolution**: No support for `$ref` keywords
+  - Reason: Not implemented in validator
+  - Workaround: Inline schemas or preprocess with $ref resolver
+
+- **File Inputs**: No generation of `FileLike[]` objects
+  - Reason: Deferred feature, not needed for current use cases
+  - Workaround: Generate file metadata as objects
+
+### Edge Cases
+
+- **Unsatisfiable Schemas**: Contradictory constraints throw `UnsatisfiableSchemaError`
+  - Example: `{ minimum: 10, maximum: 5 }`
+  - This is a schema error, not a generator bug
+
+- **Complex JSON Logic**: Cross-field constraints may fail to satisfy
+  - Example: `password === confirmPassword`
+  - Reason: Random generation unlikely to match; no constraint solver
+  - Workaround: Use simpler validation or post-process generated data
+
+## Future Enhancements
+
+Potential improvements (not currently planned):
+
+- **Performance**: Memoization, caching, branch heuristics
+- **Plugin System**: Custom providers for specialized data types
+- **AI Mode**: LLM-based generation for complex constraints
+- **Browser Support**: Client-side generation (requires refactoring filesystem usage)
+- **JSON Logic Solver**: Constraint solving for cross-field validations
+- **$ref Support**: If added to validator
 
 ## Invocation Examples
 
@@ -295,18 +334,9 @@ const value = generateFromSchema(schema, {
   maxFixesPerGeneration: 5,
   useDefaults: true,
 })
-```
 
-## Limitations and Notes
-
-- **Unsupported composite regex in `allOf`** → `UnsupportedGenerationError`.
-- **Ambiguous `oneOf`** (multiple branches likely valid) → error to avoid accidental multiple-matches.
-- **Unsatisfiable constraints** → `UnsatisfiableSchemaError`.
-- **No `$ref`** in MVP (absent in this repo’s validator).
-
-## Future Work
-
-- CLI for local JSON generation.
-- Plugin hooks for custom providers; `mode: 'faker' | 'ai'` with async support and API keys.
-- Enhanced JSON-Logic solver coverage; computedAttrs application during generation.
-- Performance: memoization/caching, branch heuristics, diagnostics.
+// Output (deterministic with seed 42):
+// {
+//   email: 'Valentine.Miller15@hotmail.com',
+//   age: 30
+// }
