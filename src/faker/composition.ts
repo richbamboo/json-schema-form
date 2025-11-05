@@ -3,6 +3,30 @@ import type { GeneratorContext } from './core'
 import { UnsupportedGenerationError } from './errors'
 
 /**
+ * Keys that should never be copied to prevent prototype pollution.
+ */
+const DANGEROUS_KEYS = ['__proto__', 'constructor', 'prototype']
+
+/**
+ * Safely copy properties from source to target, excluding dangerous keys.
+ * @param target - Target object to copy to
+ * @param source - Source object to copy from
+ * @param excludeKeys - Additional keys to exclude (beyond dangerous keys)
+ */
+function safeCopyProperties(
+  target: any,
+  source: any,
+  excludeKeys: string[] = []
+): void {
+  const allExcludedKeys = [...DANGEROUS_KEYS, ...excludeKeys]
+  for (const [key, val] of Object.entries(source)) {
+    if (!allExcludedKeys.includes(key)) {
+      target[key] = val
+    }
+  }
+}
+
+/**
  * Handle allOf composition - generate value satisfying all subschemas.
  * Strategy: Merge constraints from all subschemas, then generate.
  * Note: Complex constraint intersections (e.g., multiple patterns) are unsupported.
@@ -91,12 +115,7 @@ export function handleAllOf(
       
       // Copy other properties (last one wins for conflicts)
       // Protect against prototype pollution
-      const dangerousKeys = ['__proto__', 'constructor', 'prototype']
-      for (const [key, val] of Object.entries(subSchema)) {
-        if (!dangerousKeys.includes(key)) {
-          ;(mergedSchema as any)[key] = val
-        }
-      }
+      safeCopyProperties(mergedSchema, subSchema)
     }
   }
   
@@ -284,12 +303,7 @@ export function handleConditional(
     
     // Copy other constraints from branch (last wins)
     // Protect against prototype pollution
-    const dangerousKeys = ['__proto__', 'constructor', 'prototype']
-    for (const [key, val] of Object.entries(branchObj)) {
-      if (key !== 'properties' && key !== 'required' && !dangerousKeys.includes(key)) {
-        ;(mergedSchema as any)[key] = val
-      }
-    }
+    safeCopyProperties(mergedSchema, branchObj, ['properties', 'required'])
 
     // Generate from merged schema
     // The retry loop will validate this against the full schema (including if/then/else)
