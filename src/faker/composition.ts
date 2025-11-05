@@ -13,8 +13,8 @@ export function handleAllOf(
 ): SchemaValue {
   const { generateValue } = require('./core')
   
-  if (!schema.allOf || schema.allOf.length === 0) {
-    throw new Error('allOf must have at least one subschema')
+  if (!schema.allOf || !Array.isArray(schema.allOf) || schema.allOf.length === 0) {
+    throw new Error('allOf must be a non-empty array')
   }
 
   // Check for unsupported cases: multiple patterns
@@ -42,6 +42,19 @@ export function handleAllOf(
   const conditionals: NonBooleanJsfSchema[] = []
   
   for (const subSchema of schema.allOf) {
+    // Handle boolean schemas
+    if (subSchema === false) {
+      // false in allOf makes the entire schema unsatisfiable
+      throw new UnsupportedGenerationError(
+        'allOf with false schema is unsatisfiable',
+        schema
+      )
+    }
+    if (subSchema === true) {
+      // true schema has no effect, skip it
+      continue
+    }
+    
     if (typeof subSchema === 'object') {
       // If this subschema has if/then/else, save it for later
       if (subSchema.if) {
@@ -55,6 +68,12 @@ export function handleAllOf(
           if (propSchema === false) {
             // false schema means property is forbidden - remove it
             delete allProperties[key]
+          } else if (propSchema === true) {
+            // true schema means any value is allowed - only set if not already defined
+            if (!(key in allProperties)) {
+              allProperties[key] = true
+            }
+            // If already defined, keep the existing constraint (more restrictive)
           } else if (allProperties[key] && typeof allProperties[key] === 'object' && typeof propSchema === 'object') {
             // Merge with existing property schema
             allProperties[key] = { ...allProperties[key], ...propSchema } as JsfSchema
@@ -107,8 +126,8 @@ export function handleAnyOf(
   const { generateValue } = require('./core')
   const { rng } = context
   
-  if (!schema.anyOf || schema.anyOf.length === 0) {
-    throw new Error('anyOf must have at least one subschema')
+  if (!schema.anyOf || !Array.isArray(schema.anyOf) || schema.anyOf.length === 0) {
+    throw new Error('anyOf must be a non-empty array')
   }
 
   // Pick a random subschema
@@ -140,8 +159,8 @@ export function handleOneOf(
   const { generateValue } = require('./core')
   const { rng } = context
   
-  if (!schema.oneOf || schema.oneOf.length === 0) {
-    throw new Error('oneOf must have at least one subschema')
+  if (!schema.oneOf || !Array.isArray(schema.oneOf) || schema.oneOf.length === 0) {
+    throw new Error('oneOf must be a non-empty array')
   }
 
   // Pick a random subschema
@@ -197,7 +216,21 @@ export function handleConditional(
 
   // Try to merge and generate with the chosen branch
   for (const branch of branches) {
-    if (!branch.schema || typeof branch.schema !== 'object') {
+    if (!branch.schema) {
+      continue
+    }
+    
+    // Handle boolean schemas
+    if (typeof branch.schema === 'boolean') {
+      if ((branch.schema as boolean) === false) {
+        // false schema means this branch is unsatisfiable, skip it
+        continue
+      }
+      // true schema means no additional constraints, use base schema
+      return generateValue(baseSchema as JsfSchema, context)
+    }
+    
+    if (typeof branch.schema !== 'object') {
       continue
     }
 
