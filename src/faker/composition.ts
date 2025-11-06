@@ -158,6 +158,24 @@ export function handleAnyOf(
   // Pick a random subschema
   const chosenSchema = rng.pick(schema.anyOf) as JsfSchema
   
+  // If useConstTitles is enabled and chosen schema has both const and title, record mapping
+  if (
+    context.options.useConstTitles &&
+    context.constTitleMappings &&
+    context.path &&
+    typeof chosenSchema === 'object' &&
+    chosenSchema !== null &&
+    'const' in chosenSchema &&
+    'title' in chosenSchema &&
+    typeof chosenSchema.title === 'string'
+  ) {
+    const pathKey = context.path.join('.')
+    context.constTitleMappings.set(pathKey, {
+      constValue: chosenSchema.const,
+      title: chosenSchema.title,
+    })
+  }
+  
   // Merge parent schema constraints with the chosen branch
   // This ensures properties like maxLength, type, etc. from parent are preserved
   const { anyOf, ...parentConstraints } = schema
@@ -191,6 +209,24 @@ export function handleOneOf(
   // Pick a random subschema
   // The retry loop will validate that it matches exactly one
   const chosenSchema = rng.pick(schema.oneOf) as JsfSchema
+  
+  // If useConstTitles is enabled and chosen schema has both const and title, record mapping
+  if (
+    context.options.useConstTitles &&
+    context.constTitleMappings &&
+    context.path &&
+    typeof chosenSchema === 'object' &&
+    chosenSchema !== null &&
+    'const' in chosenSchema &&
+    'title' in chosenSchema &&
+    typeof chosenSchema.title === 'string'
+  ) {
+    const pathKey = context.path.join('.')
+    context.constTitleMappings.set(pathKey, {
+      constValue: chosenSchema.const,
+      title: chosenSchema.title,
+    })
+  }
   
   // Merge parent schema constraints with the chosen branch
   const { oneOf, ...parentConstraints } = schema

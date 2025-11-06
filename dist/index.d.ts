@@ -246,6 +246,13 @@ interface GenerateOptions {
     useExamples?: boolean;
     /** Generation mode. Default: 'random'. Other modes deferred. */
     mode?: 'random' | 'faker' | 'ai';
+    /**
+     * Replace 'const' values with their 'title' in the final output.
+     * Only applies to oneOf/anyOf options with both const and title.
+     * Generated value validates before substitution occurs.
+     * Default: false.
+     */
+    useConstTitles?: boolean;
 }
 /**
  * Result of generation including metadata about the process.

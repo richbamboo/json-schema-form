@@ -39,7 +39,10 @@ export function generateObject(
     }
     // Skip if property schema is false (forbidden property)
     if (propertySchema !== false) {
-      result[key] = generateValue(propertySchema as JsfSchema, context)
+      // Create child context with updated path
+      const childPath = context.path ? [...context.path, key] : [key]
+      const childContext = { ...context, path: childPath }
+      result[key] = generateValue(propertySchema as JsfSchema, childContext)
     }
   }
 
@@ -52,7 +55,10 @@ export function generateObject(
 
     // Include optional property based on probability
     if (rng.random() < options.includeOptionalProbability) {
-      result[key] = generateValue(propertySchema as JsfSchema, context)
+      // Create child context with updated path
+      const childPath = context.path ? [...context.path, key] : [key]
+      const childContext = { ...context, path: childPath }
+      result[key] = generateValue(propertySchema as JsfSchema, childContext)
     }
   }
 

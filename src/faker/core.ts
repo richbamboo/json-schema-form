@@ -12,6 +12,14 @@ import { generateObject } from './objects'
 export type NormalizedOptions = Required<Omit<import('./index').GenerateOptions, 'seed'>> & Pick<import('./index').GenerateOptions, 'seed'>
 
 /**
+ * Mapping from a const value to its title for a specific path.
+ */
+export interface ConstTitleMapping {
+  constValue: unknown
+  title: string
+}
+
+/**
  * Core generator context passed through recursive calls.
  */
 export interface GeneratorContext {
@@ -19,6 +27,10 @@ export interface GeneratorContext {
   options: NormalizedOptions
   attempt: number
   depth?: number
+  /** Current JSON path (e.g., ['user', 'status']) */
+  path?: string[]
+  /** Map of JSON paths to const→title mappings for post-processing */
+  constTitleMappings?: Map<string, ConstTitleMapping>
 }
 
 /**

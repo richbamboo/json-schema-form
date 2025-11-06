@@ -22,6 +22,13 @@ export interface GenerateOptions {
   useExamples?: boolean
   /** Generation mode. Default: 'random'. Other modes deferred. */
   mode?: 'random' | 'faker' | 'ai'
+  /** 
+   * Replace 'const' values with their 'title' in the final output.
+   * Only applies to oneOf/anyOf options with both const and title.
+   * Generated value validates before substitution occurs.
+   * Default: false.
+   */
+  useConstTitles?: boolean
 }
 
 /**
@@ -173,7 +180,46 @@ function normalizeOptions(options?: GenerateOptions): NormalizedOptions {
     useDefaults: options?.useDefaults ?? false,
     useExamples: options?.useExamples ?? false,
     mode: options?.mode ?? 'random',
+    useConstTitles: options?.useConstTitles ?? false,
   }
+}
+
+/**
+ * Post-process generated value to replace const values with their titles.
+ * Walks the value tree and replaces values at paths recorded in constTitleMappings.
+ */
+function applyConstTitleReplacements(
+  value: SchemaValue,
+  mappings: Map<string, import('./core').ConstTitleMapping>,
+): SchemaValue {
+  function walk(current: SchemaValue, path: string[]): SchemaValue {
+    const pathKey = path.join('.')
+    const mapping = mappings.get(pathKey)
+    
+    // If we have a mapping for this path and the value matches the const, replace it
+    if (mapping && current === mapping.constValue) {
+      return mapping.title
+    }
+    
+    // Recursively walk objects
+    if (current !== null && typeof current === 'object' && !Array.isArray(current)) {
+      const result: Record<string, SchemaValue> = {}
+      for (const [key, val] of Object.entries(current)) {
+        result[key] = walk(val, [...path, key])
+      }
+      return result
+    }
+    
+    // Recursively walk arrays
+    if (Array.isArray(current)) {
+      return current.map((item, index) => walk(item, [...path, String(index)]))
+    }
+    
+    // Primitive value with no mapping
+    return current
+  }
+  
+  return walk(value, [])
 }
 
 /**
@@ -193,6 +239,11 @@ function generateSingle(
   let totalAttempts = 0
   let lastErrors: any[] = []
   let generationsCompleted = 0
+  
+  // Initialize const→title mappings if requested
+  const constTitleMappings = options.useConstTitles 
+    ? new Map<string, import('./core').ConstTitleMapping>() 
+    : undefined
 
   // Outer loop: random regenerations
   for (let generation = 1; generation <= options.maxGenerations; generation++) {
@@ -201,7 +252,17 @@ function generateSingle(
     }
 
     generationsCompleted = generation
-    const context = { rng, options, attempt: generation }
+    
+    // Reset mappings for each generation attempt
+    constTitleMappings?.clear()
+    
+    const context = { 
+      rng, 
+      options, 
+      attempt: generation,
+      path: [],
+      constTitleMappings,
+    }
     let value = generateValue(schema, context)
     totalAttempts++
 
@@ -213,7 +274,11 @@ function generateSingle(
       const errors = validateSchema(value, schema)
 
       if (errors.length === 0) {
-        return { value, attempts: totalAttempts }
+        // Apply const→title replacements if enabled
+        const finalValue = constTitleMappings && constTitleMappings.size > 0
+          ? applyConstTitleReplacements(value, constTitleMappings)
+          : value
+        return { value: finalValue, attempts: totalAttempts }
       }
 
       lastErrors = errors

@@ -41,7 +41,10 @@ export function generateArray(
   if (schema.prefixItems && Array.isArray(schema.prefixItems)) {
     for (let i = 0; i < Math.min(length, schema.prefixItems.length); i++) {
       const itemSchema = schema.prefixItems[i] as JsfSchema
-      const value = generateValue(itemSchema, context)
+      // Create child context with updated path
+      const childPath = context.path ? [...context.path, String(i)] : [String(i)]
+      const childContext = { ...context, path: childPath }
+      const value = generateValue(itemSchema, childContext)
       result.push(value)
     }
   }
@@ -57,7 +60,10 @@ export function generateArray(
     } else if (schema.items) {
       // Generate items using the items schema
       for (let i = result.length; i < length; i++) {
-        const value = generateValue(schema.items, context)
+        // Create child context with updated path
+        const childPath = context.path ? [...context.path, String(i)] : [String(i)]
+        const childContext = { ...context, path: childPath }
+        const value = generateValue(schema.items, childContext)
         result.push(value)
       }
     } else {
