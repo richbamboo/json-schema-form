@@ -214,6 +214,21 @@ describe('string format generation', () => {
       expect(validateSchema(result, schema)).toEqual([])
     })
 
+    it('should respect minDate in future with no maxDate', () => {
+      const schema = {
+        type: 'string' as const,
+        format: 'date' as const,
+        'x-jsf-presentation': {
+          minDate: '2025-12-06', // Future date
+        },
+      }
+      const result = generateFromSchema(schema, { seed: SEED }) as string
+
+      expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+      expect(new Date(result).getTime()).toBeGreaterThanOrEqual(new Date('2025-12-06').getTime())
+      expect(validateSchema(result, schema)).toEqual([])
+    })
+
     it('should respect both minDate and maxDate constraints', () => {
       const schema = {
         type: 'string' as const,

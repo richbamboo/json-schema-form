@@ -86,24 +86,26 @@ function parseDateRange(
   let fromDate: Date
   let toDate: Date
 
-  if (maxDate) {
-    toDate = new Date(maxDate)
-    if (isNaN(toDate.getTime())) {
-      throw new Error(`Invalid maxDate: ${maxDate}`)
-    }
-  } else {
-    toDate = new Date() // Default to today/now
-  }
-
   if (minDate) {
     fromDate = new Date(minDate)
     if (isNaN(fromDate.getTime())) {
       throw new Error(`Invalid minDate: ${minDate}`)
     }
   } else {
-    // Default to 100 years before toDate
-    fromDate = new Date(toDate)
+    fromDate = new Date()
     fromDate.setFullYear(fromDate.getFullYear() - 100)
+  }
+
+  if (maxDate) {
+    toDate = new Date(maxDate)
+    if (isNaN(toDate.getTime())) {
+      throw new Error(`Invalid maxDate: ${maxDate}`)
+    }
+  } else {
+    // If no maxDate, default to 100 years after max(today, minDate)
+    const referenceDate = minDate ? new Date(Math.max(new Date().getTime(), fromDate.getTime())) : new Date()
+    toDate = new Date(referenceDate)
+    toDate.setFullYear(toDate.getFullYear() + 100)
   }
 
   // Validate date range
