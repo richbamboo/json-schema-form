@@ -43,8 +43,13 @@ export function generateString(
   }
   
   const length = rng.integer(minLength, maxLength)
+  
+  // Check if schema indicates this should be Lorem Ipsum text
+  const presentation = schema['x-jsf-presentation'] as Record<string, any> | undefined
+  const inputType = presentation?.inputType as string | undefined
+  const useLoremIpsum = inputType === 'textarea'
 
-  return generateRandomString(length, rng)
+  return generateRandomString(length, rng, useLoremIpsum)
 }
 
 /**
@@ -129,16 +134,102 @@ function adjustStringLength(
 }
 
 /**
- * Generate a random alphanumeric string of specified length.
+ * Generate a random string of specified length.
+ * Uses Lorem Ipsum for textarea fields or longer strings (>30 chars) for readability.
+ * Uses alphanumeric for shorter strings or text inputs.
  */
-function generateRandomString(length: number, rng: import('./rand').SeededRandom): string {
+function generateRandomString(
+  length: number, 
+  rng: import('./rand').SeededRandom,
+  useLoremIpsum?: boolean
+): string {
   if (length < 0) {
     throw new Error(`length must be >= 0, got ${length}`)
   }
+  
+  // Use Lorem Ipsum if explicitly requested (textarea) or for longer strings
+  if (useLoremIpsum || length > 30) {
+    return generateLoremIpsum(length, rng)
+  }
+  
+  // For shorter strings or text inputs, use alphanumeric
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   const result: string[] = []
   for (let i = 0; i < length; i++) {
     result.push(chars[rng.integer(0, chars.length - 1)])
   }
   return result.join('')
+}
+
+/**
+ * Generate Lorem Ipsum text of approximately the specified length.
+ */
+function generateLoremIpsum(length: number, rng: import('./rand').SeededRandom): string {
+  const loremWords = [
+    'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+    'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+    'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+    'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+    'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+    'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+    'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+    'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'
+  ]
+  
+  const words: string[] = []
+  let currentLength = 0
+  
+  while (currentLength < length) {
+    const word = loremWords[rng.integer(0, loremWords.length - 1)]
+    
+    // Add space before word (except first word)
+    const addSpace = words.length > 0
+    const wordWithSpace = addSpace ? ' ' + word : word
+    
+    // Check if adding this word would exceed length
+    if (currentLength + wordWithSpace.length > length) {
+      // If we need more characters, add partial word
+      const remaining = length - currentLength
+      if (remaining > 0) {
+        words.push(addSpace ? ' ' + word.substring(0, remaining - 1) : word.substring(0, remaining))
+      }
+      break
+    }
+    
+    words.push(wordWithSpace)
+    currentLength += wordWithSpace.length
+    
+    // Occasionally add punctuation for readability
+    if (words.length > 0 && rng.random() < 0.15 && currentLength < length - 10) {
+      const punct = rng.random() < 0.7 ? ',' : '.'
+      words.push(punct)
+      currentLength += 1
+      
+      // Capitalize next word after period
+      if (punct === '.' && currentLength < length - 5) {
+        const nextWord = loremWords[rng.integer(0, loremWords.length - 1)]
+        const capitalized = ' ' + nextWord.charAt(0).toUpperCase() + nextWord.slice(1)
+        if (currentLength + capitalized.length <= length) {
+          words.push(capitalized)
+          currentLength += capitalized.length
+        }
+      }
+    }
+  }
+  
+  let result = words.join('')
+  
+  // Capitalize first letter
+  if (result.length > 0) {
+    result = result.charAt(0).toUpperCase() + result.slice(1)
+  }
+  
+  // Ensure exact length by padding or trimming
+  if (result.length < length) {
+    result += ' '.repeat(length - result.length)
+  } else if (result.length > length) {
+    result = result.substring(0, length)
+  }
+  
+  return result
 }
