@@ -187,4 +187,134 @@ describe('const title replacement', () => {
     // Should be either the const value 'active' or title 'Inactive'
     expect(['active', 'Inactive']).toContain(result.status)
   })
+
+  describe('function-based useConstTitles', () => {
+    it('should use function predicate to selectively apply titles', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          selectField: {
+            oneOf: [
+              { const: 'option1', title: 'Option One' },
+              { const: 'option2', title: 'Option Two' },
+            ],
+            'x-jsf-presentation': { inputType: 'select' },
+          },
+          radioField: {
+            oneOf: [
+              { const: 'radio1', title: 'Radio One' },
+              { const: 'radio2', title: 'Radio Two' },
+            ],
+            'x-jsf-presentation': { inputType: 'radio' },
+          },
+        },
+        required: ['selectField', 'radioField'],
+      } as const
+
+      const result = generateFromSchema(schema, { 
+        seed: 42,
+        useConstTitles: (path, schema) => {
+          const presentation = schema['x-jsf-presentation'] as any
+          return presentation?.inputType === 'select'
+        },
+      }) as any
+
+      expect(result).toHaveProperty('selectField')
+      expect(result).toHaveProperty('radioField')
+      
+      // Select field should use title
+      expect(['Option One', 'Option Two']).toContain(result.selectField)
+      
+      // Radio field should use const
+      expect(['radio1', 'radio2']).toContain(result.radioField)
+    })
+
+    it('should use function predicate based on path', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          display: {
+            type: 'object',
+            properties: {
+              status: {
+                oneOf: [
+                  { const: 'active', title: 'Active Display' },
+                  { const: 'inactive', title: 'Inactive Display' },
+                ],
+              },
+            },
+            required: ['status'],
+          },
+          internal: {
+            type: 'object',
+            properties: {
+              status: {
+                oneOf: [
+                  { const: 'active', title: 'Active Internal' },
+                  { const: 'inactive', title: 'Inactive Internal' },
+                ],
+              },
+            },
+            required: ['status'],
+          },
+        },
+        required: ['display', 'internal'],
+      } as const
+
+      const result = generateFromSchema(schema, { 
+        seed: 42,
+        useConstTitles: (path) => path.startsWith('display.'),
+      }) as any
+
+      expect(result.display).toHaveProperty('status')
+      expect(result.internal).toHaveProperty('status')
+      
+      // Display path should use title
+      expect(['Active Display', 'Inactive Display']).toContain(result.display.status)
+      
+      // Internal path should use const
+      expect(['active', 'inactive']).toContain(result.internal.status)
+    })
+
+    it('should handle complex predicate logic', () => {
+      const schema = {
+        type: 'object',
+        properties: {
+          category: {
+            oneOf: [
+              { const: 'cat1', title: 'Category 1' },
+              { const: 'cat2', title: 'Category 2' },
+            ],
+            'x-jsf-presentation': { inputType: 'select', displayMode: 'dropdown' },
+          },
+          type: {
+            oneOf: [
+              { const: 'type1', title: 'Type 1' },
+              { const: 'type2', title: 'Type 2' },
+            ],
+            'x-jsf-presentation': { inputType: 'select', displayMode: 'buttons' },
+          },
+        },
+        required: ['category', 'type'],
+      } as const
+
+      const result = generateFromSchema(schema, { 
+        seed: 42,
+        useConstTitles: (path, schema) => {
+          const presentation = schema['x-jsf-presentation'] as any
+          return presentation?.inputType === 'select' && 
+                 presentation?.displayMode === 'dropdown'
+        },
+      }) as any
+
+      expect(result).toHaveProperty('category')
+      expect(result).toHaveProperty('type')
+      
+      // Category should use title (dropdown)
+      expect(['Category 1', 'Category 2']).toContain(result.category)
+      
+      // Type should use const (buttons, not dropdown)
+      expect(['type1', 'type2']).toContain(result.type)
+    })
+  })
 })

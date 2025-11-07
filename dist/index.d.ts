@@ -250,9 +250,22 @@ interface GenerateOptions {
      * Replace 'const' values with their 'title' in the final output.
      * Only applies to oneOf/anyOf options with both const and title.
      * Generated value validates before substitution occurs.
-     * Default: false.
+     *
+     * - boolean: Apply to all oneOf/anyOf with const+title
+     * - function: Conditionally apply based on field path and schema
+     *
+     * Default: false
+     *
+     * @example
+     * // Apply to all fields
+     * useConstTitles: true
+     *
+     * @example
+     * // Apply only to select fields
+     * useConstTitles: (path, schema) =>
+     *   schema['x-jsf-presentation']?.inputType === 'select'
      */
-    useConstTitles?: boolean;
+    useConstTitles?: boolean | ((fieldPath: string, fieldSchema: NonBooleanJsfSchema) => boolean);
 }
 /**
  * Result of generation including metadata about the process.
