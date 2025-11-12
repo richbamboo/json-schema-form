@@ -80,7 +80,7 @@ export function generateValue(
     throw new UnsatisfiableSchemaError('false schema rejects all values - no valid data can be generated', schema)
   }
 
-  // Check for const/enum first (highest priority)
+  // Check for const first (highest priority)
   if (schema.const !== undefined) {
     return schema.const
   }
@@ -89,6 +89,24 @@ export function generateValue(
     return schema.value
   }
 
+  // Handle composition keywords before enum to support const→title mappings
+  // When enum exists with oneOf/anyOf, delegate to composition handler
+  if (schema.allOf) {
+    const { handleAllOf } = require('./composition')
+    return handleAllOf(schema, context)
+  }
+
+  if (schema.anyOf) {
+    const { handleAnyOf } = require('./composition')
+    return handleAnyOf(schema, context)
+  }
+
+  if (schema.oneOf) {
+    const { handleOneOf } = require('./composition')
+    return handleOneOf(schema, context)
+  }
+
+  // Handle enum after composition to avoid bypassing const→title mappings
   if (schema.enum !== undefined) {
     if (schema.enum.length === 0) {
       const { UnsatisfiableSchemaError } = require('./errors')
@@ -104,22 +122,6 @@ export function generateValue(
 
   if (context.options.useExamples && schema.examples && schema.examples.length > 0) {
     return schema.examples[0]
-  }
-
-  // Handle composition keywords before type dispatch
-  if (schema.allOf) {
-    const { handleAllOf } = require('./composition')
-    return handleAllOf(schema, context)
-  }
-
-  if (schema.anyOf) {
-    const { handleAnyOf } = require('./composition')
-    return handleAnyOf(schema, context)
-  }
-
-  if (schema.oneOf) {
-    const { handleOneOf } = require('./composition')
-    return handleOneOf(schema, context)
   }
 
   // Handle if/then/else conditionals

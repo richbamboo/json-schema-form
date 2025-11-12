@@ -317,4 +317,80 @@ describe('const title replacement', () => {
       expect(['type1', 'type2']).toContain(result.type)
     })
   })
+
+  describe('enum with oneOf/anyOf', () => {
+    it('should handle enum + oneOf with useConstTitles', () => {
+      // Test for schemas that have both enum and oneOf with const+title pairs
+      // This was previously broken - enum was checked before oneOf, bypassing const→title mappings
+      const schema = {
+        type: 'object',
+        properties: {
+          work_schedule_type: {
+            enum: ['flexible', 'core_business_hours', 'fixed_hours'],
+            oneOf: [
+              { const: 'flexible', title: "Employee's hours are flexible" },
+              { const: 'core_business_hours', title: "Employee to work client's core business hours" },
+              { const: 'fixed_hours', title: 'Employee to work fixed hours' },
+            ],
+            'x-jsf-presentation': {
+              inputType: 'select' as const,
+            },
+          },
+        },
+        required: ['work_schedule_type'],
+      }
+
+      const result = generateFromSchema(schema, {
+        seed: 1762981347542,
+        includeOptionalProbability: 0.8,
+        useDefaults: true,
+        useConstTitles: (fieldPath: string, fieldSchema: any) => {
+          return fieldSchema['x-jsf-presentation']?.inputType === 'select'
+        },
+      }) as any
+
+      expect(result).toHaveProperty('work_schedule_type')
+      
+      // Should use title, not const value
+      expect([
+        "Employee's hours are flexible",
+        "Employee to work client's core business hours",
+        'Employee to work fixed hours',
+      ]).toContain(result.work_schedule_type)
+    })
+
+    it('should handle oneOf alone (without enum) for comparison', () => {
+      // This test confirms that oneOf alone always worked correctly
+      const schema = {
+        type: 'object',
+        properties: {
+          work_schedule_type: {
+            oneOf: [
+              { const: 'flexible', title: "Employee's hours are flexible" },
+              { const: 'core_business_hours', title: "Employee to work client's core business hours" },
+              { const: 'fixed_hours', title: 'Employee to work fixed hours' },
+            ],
+            'x-jsf-presentation': {
+              inputType: 'select' as const,
+            },
+          },
+        },
+        required: ['work_schedule_type'],
+      }
+
+      const result = generateFromSchema(schema, {
+        seed: 42,
+        useConstTitles: (fieldPath: string, fieldSchema: any) => {
+          return fieldSchema['x-jsf-presentation']?.inputType === 'select'
+        },
+      }) as any
+
+      expect(result).toHaveProperty('work_schedule_type')
+      expect([
+        "Employee's hours are flexible",
+        "Employee to work client's core business hours",
+        'Employee to work fixed hours',
+      ]).toContain(result.work_schedule_type)
+    })
+  })
 })
