@@ -2,6 +2,17 @@ import type { JsfSchema, NonBooleanJsfSchema, ObjectValue } from '../types'
 import type { GeneratorContext } from './core'
 
 /**
+ * Check if a property has computed attributes and should be skipped during generation.
+ * Properties with x-jsf-logic-computedAttrs will have their values computed at runtime
+ * by the application based on other form values, so we don't generate them.
+ */
+function hasComputedAttrs(propertySchema: JsfSchema): boolean {
+  return typeof propertySchema === 'object' && 
+         propertySchema !== null &&
+         'x-jsf-logic-computedAttrs' in propertySchema
+}
+
+/**
  * Generate an object value satisfying schema constraints.
  * Handles: properties, required.
  * Note: additionalProperties and patternProperties are not actively generated,
@@ -38,18 +49,27 @@ export function generateObject(
       continue
     }
     // Skip if property schema is false (forbidden property)
-    if (propertySchema !== false) {
-      // Create child context with updated path
-      const childPath = context.path ? [...context.path, key] : [key]
-      const childContext = { ...context, path: childPath }
-      result[key] = generateValue(propertySchema as JsfSchema, childContext)
+    if (propertySchema === false) {
+      continue
     }
+    // Skip if property has computed attributes - these will be computed at runtime
+    if (hasComputedAttrs(propertySchema)) {
+      continue
+    }
+    // Create child context with updated path
+    const childPath = context.path ? [...context.path, key] : [key]
+    const childContext = { ...context, path: childPath }
+    result[key] = generateValue(propertySchema as JsfSchema, childContext)
   }
 
   // Generate optional properties based on includeOptionalProbability
   for (const [key, propertySchema] of Object.entries(schema.properties)) {
     // Skip if already generated (required) or if property schema is false (forbidden property)
     if (key in result || propertySchema === false) {
+      continue
+    }
+    // Skip if property has computed attributes - these will be computed at runtime
+    if (hasComputedAttrs(propertySchema)) {
       continue
     }
 
