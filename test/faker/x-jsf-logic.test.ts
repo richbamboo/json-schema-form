@@ -1,12 +1,13 @@
 import { describe, expect, it } from '@jest/globals'
 import { generateFromSchema } from '../../src/faker'
 import { validateSchema } from '../../src/validation/schema'
-import type { ObjectValue } from '../../src/types'
+import type { JsfSchema, ObjectValue } from '../../src/types'
 
 const SEED = 42
 
 describe('x-jsf-logic generation', () => {
-  it('should generate values that pass x-jsf-logic validations via retry loop', () => {
+  describe('validations', () => {
+    it('should generate values that pass x-jsf-logic validations via retry loop', () => {
     const schema = {
       type: 'object' as const,
       'x-jsf-logic': {
@@ -133,5 +134,113 @@ describe('x-jsf-logic generation', () => {
     
     // And the constraint must hold
     expect(result.min as number).toBeLessThan(result.max as number)
+  })
+  })
+
+  describe('computedAttrs', () => {
+    it('should skip computed field when defined in allOf then branch', () => {
+      const schema: JsfSchema = {
+        type: 'object',
+        properties: {
+          trigger_field: {
+            type: 'string',
+            enum: ['yes', 'no'],
+          },
+          computed_field: {
+            type: 'integer',
+            title: 'Computed Field',
+          },
+        },
+        required: ['trigger_field'],
+        allOf: [
+          {
+            if: {
+              properties: {
+                trigger_field: {
+                  const: 'yes',
+                },
+              },
+              required: ['trigger_field'],
+            },
+            then: {
+              properties: {
+                computed_field: {
+                  'x-jsf-logic-computedAttrs': {
+                    const: 'some_computed_value',
+                    default: 'some_computed_value',
+                  },
+                },
+              },
+              required: ['computed_field'],
+            },
+            else: {
+              properties: {
+                computed_field: false,
+              },
+            },
+          },
+        ],
+        'x-jsf-logic': {
+          computedValues: {
+            some_computed_value: {
+              rule: { var: 'trigger_field' },
+            },
+          },
+        },
+      }
+
+      // Generate with trigger_field: 'yes' which should activate the computed field
+      const result = generateFromSchema(schema, { seed: 42 }) as any
+
+      // computed_field should NOT be present since it has x-jsf-logic-computedAttrs
+      expect(result).toHaveProperty('trigger_field')
+      expect(result.computed_field).toBeUndefined()
+    })
+
+    it('should fail when computed field is unconditionally required', () => {
+      // This schema is ungenerable because computed_field is both:
+      // - required (from then branch which always applies)
+      // - computed (has x-jsf-logic-computedAttrs)
+      // We can't generate it (it's computed) but we can't skip validation (it's required)
+      const schema: JsfSchema = {
+        type: 'object',
+        properties: {
+          trigger_field: {
+            type: 'string',
+            const: 'yes',
+          },
+        },
+        required: ['trigger_field'],
+        if: {
+          properties: {
+            trigger_field: {
+              const: 'yes',
+            },
+          },
+          required: ['trigger_field'],
+        },
+        then: {
+          properties: {
+            computed_field: {
+              type: 'integer',
+              'x-jsf-logic-computedAttrs': {
+                const: 'some_computed_value',
+              },
+            },
+          },
+          required: ['computed_field'],
+        },
+        'x-jsf-logic': {
+          computedValues: {
+            some_computed_value: {
+              rule: { var: 'trigger_field' },
+            },
+          },
+        },
+      }
+
+      // Should throw MaxAttemptsExceededError because the schema is ungenerable
+      expect(() => generateFromSchema(schema, { seed: 42, maxAttempts: 50 })).toThrow('Failed to generate valid value')
+    })
   })
 })

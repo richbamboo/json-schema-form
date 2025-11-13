@@ -110,24 +110,30 @@ function fixRequiredError(
     return { value, changed: false }
   }
 
-  // For required errors, the error.schema often contains the required constraint
-  // Try to get the property schema from the root schema first
   const parentPath = dataPath.slice(0, -1)
-  const parentSchema = parentPath.length > 0 
-    ? getPropertySchemaFromPath(schema, parentPath)
-    : schema
+
+  // For required errors, error.schema comes from the validator and includes
+  // conditionally-applied properties. Use it first to check for computed attrs.
+  // Fall back to root schema only if error.schema is not available.
+  let propertySchema: JsfSchema | undefined = error.schema
   
-  let propertySchema: JsfSchema | undefined
-  if (parentSchema && typeof parentSchema !== 'boolean' && parentSchema.properties) {
-    propertySchema = parentSchema.properties[propertyName]
-  }
-  
-  // If we can't find it in the root schema, use the error schema (which might have const/default)
-  if (!propertySchema) {
-    propertySchema = error.schema
+  // If error.schema is not a property schema, try to get it from the root schema
+  if (!propertySchema || typeof propertySchema === 'boolean') {
+    const parentSchema = parentPath.length > 0 
+      ? getPropertySchemaFromPath(schema, parentPath)
+      : schema
+    
+    if (parentSchema && typeof parentSchema !== 'boolean' && parentSchema.properties) {
+      propertySchema = parentSchema.properties[propertyName]
+    }
   }
   
   if (!propertySchema || typeof propertySchema === 'boolean') {
+    return { value, changed: false }
+  }
+
+  // Skip if property has computed attributes - these will be computed at runtime
+  if (typeof propertySchema === 'object' && 'x-jsf-logic-computedAttrs' in propertySchema) {
     return { value, changed: false }
   }
 
