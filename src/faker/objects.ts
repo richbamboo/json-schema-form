@@ -27,11 +27,32 @@ export function generateObject(
     throw new Error(`Schema has ${propertyCount} properties, but maximum is 10000. Reduce the number of properties to prevent memory exhaustion.`)
   }
 
+  // Helper to check if property has computed attrs anywhere
+  function isComputedField(propertyName: string): boolean {
+    if (!context.computedFieldPaths) return false
+    
+    // First, check exact path match
+    const exactPathKey = `${propertyName}@${context.conditionalPath || ''}`
+    if (context.computedFieldPaths.has(exactPathKey)) {
+      return true
+    }
+    
+    // Fallback: check if this property is computed anywhere in the schema
+    // This handles cases where we're in allOf[0] but the computed field is in allOf[1]
+    for (const pathKey of context.computedFieldPaths) {
+      if (pathKey.startsWith(`${propertyName}@`)) {
+        return true
+      }
+    }
+    
+    return false
+  }
+
   // Generate required properties first
   const requiredProps = Array.isArray(schema.required) ? schema.required : []
   for (const key of requiredProps) {
     // Skip if property has computed attributes - these will be computed at runtime
-    if (context.computedFields?.has(key)) {
+    if (isComputedField(key)) {
       continue
     }
     const propertySchema = schema.properties?.[key]
@@ -58,7 +79,7 @@ export function generateObject(
       continue
     }
     // Skip if property has computed attributes - these will be computed at runtime
-    if (context.computedFields?.has(key)) {
+    if (isComputedField(key)) {
       continue
     }
 

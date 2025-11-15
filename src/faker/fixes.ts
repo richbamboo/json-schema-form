@@ -111,8 +111,20 @@ function fixRequiredError(
   }
 
   // Skip if property has computed attributes (preprocessing found it)
-  if (context.computedFields?.has(propertyName)) {
-    return { value, changed: false }
+  if (context.computedFieldPaths) {
+    // First, check exact path match
+    const exactPathKey = `${propertyName}@${context.conditionalPath || ''}`
+    if (context.computedFieldPaths.has(exactPathKey)) {
+      return { value, changed: false }
+    }
+    
+    // Fallback: check if this property is computed anywhere in the schema
+    // This handles cases where we're in allOf[0] but the computed field is in allOf[1]
+    for (const pathKey of context.computedFieldPaths) {
+      if (pathKey.startsWith(`${propertyName}@`)) {
+        return { value, changed: false }
+      }
+    }
   }
 
   const parentPath = dataPath.slice(0, -1)

@@ -63,9 +63,10 @@ export function handleAllOf(
   
   const allProperties: Record<string, JsfSchema> = { ...schema.properties }
   const allRequired: string[] = [...(schema.required || [])]
-  const conditionals: NonBooleanJsfSchema[] = []
+  const conditionals: Array<{ schema: NonBooleanJsfSchema; index: number }> = []
   
-  for (const subSchema of schema.allOf) {
+  for (let i = 0; i < schema.allOf.length; i++) {
+    const subSchema = schema.allOf[i]
     // Handle boolean schemas
     if (subSchema === false) {
       // false in allOf makes the entire schema unsatisfiable
@@ -80,9 +81,9 @@ export function handleAllOf(
     }
     
     if (typeof subSchema === 'object') {
-      // If this subschema has if/then/else, save it for later
+      // If this subschema has if/then/else, save it for later with its index
       if (subSchema.if) {
-        conditionals.push(subSchema)
+        conditionals.push({ schema: subSchema, index: i })
         continue // Don't merge conditional schemas directly
       }
       
@@ -130,11 +131,18 @@ export function handleAllOf(
   // If there are conditionals, we can only directly apply one at schema generation time
   // Others will be checked during validation and fixed in retry loop
   // Note: Computed fields (x-jsf-logic-computedAttrs) in 2nd+ conditionals are handled
-  // correctly via preprocessing, but other constraint keywords may not be visible
+  // correctly via path-based preprocessing
   if (conditionals.length > 0) {
-    mergedSchema.if = conditionals[0].if
-    mergedSchema.then = conditionals[0].then
-    mergedSchema.else = conditionals[0].else
+    const firstConditional = conditionals[0]
+    mergedSchema.if = firstConditional.schema.if
+    mergedSchema.then = firstConditional.schema.then
+    mergedSchema.else = firstConditional.schema.else
+    
+    // Update conditional path to track which allOf index we're processing
+    const basePath = context.conditionalPath || ''
+    const newPath = basePath ? `${basePath}.allOf.${firstConditional.index}` : `allOf.${firstConditional.index}`
+    const updatedContext = { ...context, conditionalPath: newPath }
+    return generateValue(mergedSchema as JsfSchema, updatedContext)
   }
 
   return generateValue(mergedSchema as JsfSchema, context)
@@ -334,9 +342,14 @@ export function handleConditional(
     // Protect against prototype pollution
     safeCopyProperties(mergedSchema, branchObj, ['properties', 'required'])
 
+    // Update conditional path to track which branch (then/else) we chose
+    const basePath = context.conditionalPath || ''
+    const newPath = basePath ? `${basePath}.${branch.name}` : branch.name
+    const updatedContext = { ...context, conditionalPath: newPath }
+    
     // Generate from merged schema
     // The retry loop will validate this against the full schema (including if/then/else)
-    return generateValue(mergedSchema as JsfSchema, context)
+    return generateValue(mergedSchema as JsfSchema, updatedContext)
   }
 
   // No branches to apply, generate from base

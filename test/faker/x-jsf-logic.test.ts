@@ -366,5 +366,60 @@ describe('x-jsf-logic generation', () => {
         }
       }
     })
+
+    it('should skip property with computed attrs in allOf even when defined in later branches', () => {
+      // Guatemala pattern: property appears in multiple allOf branches  
+      // If ANY branch marks it as computed, fallback logic skips it everywhere
+      const schema: JsfSchema = {
+        type: 'object',
+        properties: {
+          field_a: {
+            type: 'string',
+            const: 'value',
+          },
+          computed_field: {
+            type: 'integer',
+          },
+        },
+        required: ['field_a'],
+        allOf: [
+          // First conditional doesn't mention computed_field
+          {
+            if: {
+              properties: { field_a: { const: 'value' } },
+            },
+            then: {
+              properties: {
+                other_field: { type: 'string' },
+              },
+            },
+          },
+          // Second conditional marks computed_field as computed
+          {
+            if: {
+              properties: { field_a: { const: 'value' } },
+            },
+            then: {
+              properties: {
+                computed_field: {
+                  'x-jsf-logic-computedAttrs': {
+                    const: 'some_computation',
+                  },
+                },
+              },
+            },
+          },
+        ],
+      }
+
+      // Even though we're in allOf[0] (first conditional), the fallback logic
+      // sees that computed_field has x-jsf-logic-computedAttrs in allOf[1]
+      // and skips it
+      for (let seed = 0; seed < 5; seed++) {
+        const result = generateFromSchema(schema, { seed }) as any
+        expect(result.field_a).toBe('value')
+        expect(result.computed_field).toBeUndefined()
+      }
+    })
   })
 })

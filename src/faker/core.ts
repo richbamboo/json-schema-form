@@ -31,8 +31,10 @@ export interface GeneratorContext {
   path?: string[]
   /** Map of JSON paths to const→title mappings for post-processing */
   constTitleMappings?: Map<string, ConstTitleMapping>
-  /** Set of property names that have x-jsf-logic-computedAttrs anywhere in the schema */
-  computedFields?: Set<string>
+  /** Set of "property@path" keys for fields with x-jsf-logic-computedAttrs at specific conditional paths */
+  computedFieldPaths?: Set<string>
+  /** Current conditional path in schema hierarchy (e.g., "allOf.3.then.if.then") */
+  conditionalPath?: string
 }
 
 /**
