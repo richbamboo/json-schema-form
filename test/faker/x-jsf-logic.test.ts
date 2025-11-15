@@ -244,8 +244,8 @@ describe('x-jsf-logic generation', () => {
     })
 
     it('should not generate computed field with metadata in nested conditionals (production case)', () => {
-      // Real production schema pattern where property has type + metadata (title, description, x-jsf-*)
-      // but no constraint keywords. The x-jsf-logic-computedAttrs is in deeply nested conditionals.
+      // Real production schema pattern where x-jsf-logic-computedAttrs is defined in deeply
+      // nested conditionals. Preprocessing finds these computed fields regardless of nesting depth.
       const schema: JsfSchema = {
         type: 'object',
         properties: {
@@ -266,7 +266,7 @@ describe('x-jsf-logic generation', () => {
             minimum: 1,
             maximum: 40,
           },
-          // Property with metadata but no constraints - looks safe to generate
+          // Property with metadata - should NOT be generated (has x-jsf-logic-computedAttrs in conditionals)
           working_hours_exemption_allowance: {
             type: 'integer',
             title: 'Extended work hours allowance',

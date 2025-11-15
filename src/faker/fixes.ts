@@ -110,6 +110,11 @@ function fixRequiredError(
     return { value, changed: false }
   }
 
+  // Skip if property has computed attributes (preprocessing found it)
+  if (context.computedFields?.has(propertyName)) {
+    return { value, changed: false }
+  }
+
   const parentPath = dataPath.slice(0, -1)
 
   // For required errors, error.schema comes from the validator and includes
@@ -132,7 +137,7 @@ function fixRequiredError(
     return { value, changed: false }
   }
 
-  // Double-check for computed attributes in the resolved property schema
+  // Double-check: if preprocessing missed it, check the resolved property schema directly
   if (typeof propertySchema === 'object' && 'x-jsf-logic-computedAttrs' in propertySchema) {
     return { value, changed: false }
   }

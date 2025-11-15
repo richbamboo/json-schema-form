@@ -258,6 +258,11 @@ function generateSingle(
     ? new Map<string, import('./core').ConstTitleMapping>() 
     : undefined
 
+  // Preprocessing: find all properties with x-jsf-logic-computedAttrs anywhere in the schema
+  // This allows us to skip them during generation regardless of where they're defined
+  const { findComputedFields } = require('./preprocessing')
+  const computedFields = findComputedFields(schema)
+
   // Outer loop: random regenerations
   for (let generation = 1; generation <= options.maxGenerations; generation++) {
     if (totalAttempts >= options.maxAttempts) {
@@ -275,6 +280,7 @@ function generateSingle(
       attempt: generation,
       path: [],
       constTitleMappings,
+      computedFields,
     }
     let value = generateValue(schema, context)
     totalAttempts++

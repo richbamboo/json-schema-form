@@ -127,14 +127,14 @@ export function handleAllOf(
     mergedSchema.required = [...new Set(allRequired)] // Deduplicate
   }
 
-  // If there are conditionals, apply them to the merged schema
+  // If there are conditionals, we can only directly apply one at schema generation time
+  // Others will be checked during validation and fixed in retry loop
+  // Note: Computed fields (x-jsf-logic-computedAttrs) in 2nd+ conditionals are handled
+  // correctly via preprocessing, but other constraint keywords may not be visible
   if (conditionals.length > 0) {
-    // For now, just apply the first conditional
-    // In the future, we could handle multiple conditionals
-    const conditional = conditionals[0]
-    mergedSchema.if = conditional.if
-    mergedSchema.then = conditional.then
-    mergedSchema.else = conditional.else
+    mergedSchema.if = conditionals[0].if
+    mergedSchema.then = conditionals[0].then
+    mergedSchema.else = conditionals[0].else
   }
 
   return generateValue(mergedSchema as JsfSchema, context)

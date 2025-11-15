@@ -31,6 +31,8 @@ export interface GeneratorContext {
   path?: string[]
   /** Map of JSON paths to const→title mappings for post-processing */
   constTitleMappings?: Map<string, ConstTitleMapping>
+  /** Set of property names that have x-jsf-logic-computedAttrs anywhere in the schema */
+  computedFields?: Set<string>
 }
 
 /**

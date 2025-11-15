@@ -2,17 +2,6 @@ import type { JsfSchema, NonBooleanJsfSchema, ObjectValue } from '../types'
 import type { GeneratorContext } from './core'
 
 /**
- * Check if a property has computed attributes and should be skipped during generation.
- * Properties with x-jsf-logic-computedAttrs will have their values computed at runtime
- * by the application based on other form values, so we don't generate them.
- */
-function hasComputedAttrs(propertySchema: JsfSchema): boolean {
-  return typeof propertySchema === 'object' && 
-         propertySchema !== null &&
-         'x-jsf-logic-computedAttrs' in propertySchema
-}
-
-/**
  * Generate an object value satisfying schema constraints.
  * Handles: properties, required.
  * Note: additionalProperties and patternProperties are not actively generated,
@@ -41,7 +30,11 @@ export function generateObject(
   // Generate required properties first
   const requiredProps = Array.isArray(schema.required) ? schema.required : []
   for (const key of requiredProps) {
-    const propertySchema = schema.properties[key]
+    // Skip if property has computed attributes - these will be computed at runtime
+    if (context.computedFields?.has(key)) {
+      continue
+    }
+    const propertySchema = schema.properties?.[key]
     if (propertySchema === undefined) {
       // Required property not defined in properties
       // This can happen with conditional schemas where properties are defined in then/else branches
@@ -50,10 +43,6 @@ export function generateObject(
     }
     // Skip if property schema is false (forbidden property)
     if (propertySchema === false) {
-      continue
-    }
-    // Skip if property has computed attributes - these will be computed at runtime
-    if (hasComputedAttrs(propertySchema)) {
       continue
     }
     // Create child context with updated path
@@ -69,38 +58,8 @@ export function generateObject(
       continue
     }
     // Skip if property has computed attributes - these will be computed at runtime
-    if (hasComputedAttrs(propertySchema)) {
+    if (context.computedFields?.has(key)) {
       continue
-    }
-
-    // On first attempt, be conservative: skip optional properties that have type + metadata
-    // but NO JSON Schema constraint keywords. These are suspicious and might have conditional
-    // computed attrs that were lost during merging. Simple schemas like {type: 'string'} are OK.
-    if (context.attempt === 1 && typeof propertySchema === 'object' && propertySchema !== null) {
-      const keys = Object.keys(propertySchema)
-      const hasType = keys.includes('type')
-      
-      // Metadata fields that don't affect generation
-      const metadataFields = ['title', 'description', 'default', 'examples', 'readOnly', 'writeOnly', 'deprecated']
-      const xJsfFields = keys.filter(k => k.startsWith('x-jsf-'))
-      const hasMetadata = keys.some(k => metadataFields.includes(k)) || xJsfFields.length > 0
-      
-      // Constraint keywords that guide generation
-      const constraintKeywords = [
-        'minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum',
-        'minLength', 'maxLength', 'pattern', 'format',
-        'minItems', 'maxItems', 'uniqueItems', 'items',
-        'minProperties', 'maxProperties', 'required', 'properties', 'additionalProperties',
-        'enum', 'const', 'multipleOf',
-        'allOf', 'anyOf', 'oneOf', 'not', 'if', 'then', 'else',
-      ]
-      const hasConstraints = keys.some(key => constraintKeywords.includes(key))
-      
-      // Skip if it has type + metadata but NO constraints (suspicious pattern)
-      // Don't skip simple schemas like {type: 'string'} which have no metadata
-      if (hasType && hasMetadata && !hasConstraints) {
-        continue
-      }
     }
 
     // Include optional property based on probability
