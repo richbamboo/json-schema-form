@@ -132,7 +132,7 @@ function fixRequiredError(
     return { value, changed: false }
   }
 
-  // Skip if property has computed attributes - these will be computed at runtime
+  // Double-check for computed attributes in the resolved property schema
   if (typeof propertySchema === 'object' && 'x-jsf-logic-computedAttrs' in propertySchema) {
     return { value, changed: false }
   }

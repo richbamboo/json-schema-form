@@ -73,6 +73,20 @@ export function generateObject(
       continue
     }
 
+    // On first attempt, be conservative: skip optional properties with ONLY type+title
+    // (no other constraints). These are suspicious and might have conditional computed attrs
+    // that were lost during merging of nested conditionals. This is a targeted workaround for
+    // the Portugal schema pattern where base property is {type, title} and conditionals add
+    // x-jsf-logic-computedAttrs. This is necessary because handleConditional cannot recursively
+    // resolve nested conditional schemas (it generates values, not schemas).
+    if (context.attempt === 1 && typeof propertySchema === 'object' && propertySchema !== null) {
+      const keys = Object.keys(propertySchema).sort()
+      const isTypeAndTitleOnly = keys.length === 2 && keys[0] === 'title' && keys[1] === 'type'
+      if (isTypeAndTitleOnly) {
+        continue
+      }
+    }
+
     // Include optional property based on probability
     if (rng.random() < options.includeOptionalProbability) {
       // Create child context with updated path
