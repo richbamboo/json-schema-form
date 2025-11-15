@@ -49,8 +49,6 @@ describe('Nested object generation bug', () => {
 
     const generated = generateFromSchema(schema, { seed: 42 }) as any
 
-    console.log('Generated:', JSON.stringify(generated, null, 2))
-
     // The nested object should NOT be null
     expect(generated.equity_compensation).not.toBeNull()
     expect(generated.equity_compensation).toHaveProperty('offer_equity_compensation')
@@ -76,8 +74,6 @@ describe('Nested object generation bug', () => {
     }
 
     const generated = generateFromSchema(schema, { seed: 42 }) as any
-
-    console.log('Simple nested:', JSON.stringify(generated, null, 2))
 
     expect(generated.nested).not.toBeNull()
     expect(generated.nested).toHaveProperty('field')
@@ -108,8 +104,6 @@ describe('Nested object generation bug', () => {
 
     const generated = generateFromSchema(schema, { seed: 42 }) as any
 
-    console.log('Nullable properties:', JSON.stringify(generated, null, 2))
-
     // Container should be an object, not null
     expect(generated.container).not.toBeNull()
     expect(typeof generated.container).toBe('object')
@@ -134,8 +128,6 @@ describe('Nested object generation bug', () => {
     }
 
     const generated = generateFromSchema(schema, { seed: 42, includeOptionalProbability: 0 }) as any
-
-    console.log('Optional nested:', JSON.stringify(generated, null, 2))
 
     // Since it's optional and probability is 0, it should be omitted (not generated)
     expect(generated.optionalNested).toBeUndefined()
@@ -166,8 +158,6 @@ describe('Nested object generation bug', () => {
     }
 
     const generated = generateFromSchema(schema, { seed: 42 }) as any
-
-    console.log('Deeply nested:', JSON.stringify(generated, null, 2))
 
     expect(generated.level1).not.toBeNull()
     expect(generated.level1.level2).not.toBeNull()

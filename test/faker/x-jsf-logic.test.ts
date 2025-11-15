@@ -242,5 +242,129 @@ describe('x-jsf-logic generation', () => {
       // Should throw MaxAttemptsExceededError because the schema is ungenerable
       expect(() => generateFromSchema(schema, { seed: 42, maxAttempts: 50 })).toThrow('Failed to generate valid value')
     })
+
+    it('should not generate computed field with metadata in nested conditionals (production case)', () => {
+      // Real production schema pattern where property has type + metadata (title, description, x-jsf-*)
+      // but no constraint keywords. The x-jsf-logic-computedAttrs is in deeply nested conditionals.
+      const schema: JsfSchema = {
+        type: 'object',
+        properties: {
+          working_hours_exemption: {
+            type: 'string',
+            enum: ['yes', 'no'],
+          },
+          maximum_working_hours_regime: {
+            type: 'string',
+            enum: ['yes', 'no'],
+          },
+          annual_gross_salary: {
+            type: 'integer',
+            minimum: 1218000,
+          },
+          work_hours_per_week: {
+            type: 'number',
+            minimum: 1,
+            maximum: 40,
+          },
+          // Property with metadata but no constraints - looks safe to generate
+          working_hours_exemption_allowance: {
+            type: 'integer',
+            title: 'Extended work hours allowance',
+            description: '',
+            'x-jsf-presentation': {
+              currency: 'EUR',
+              inputType: 'money',
+            },
+          },
+        },
+        required: ['working_hours_exemption', 'annual_gross_salary', 'work_hours_per_week'],
+        allOf: [
+          {
+            if: {
+              properties: {
+                working_hours_exemption: { const: 'yes' },
+              },
+              required: ['working_hours_exemption'],
+            },
+            then: {
+              required: ['maximum_working_hours_regime'],
+            },
+            else: {
+              properties: {
+                maximum_working_hours_regime: false,
+              },
+            },
+          },
+          {
+            if: {
+              properties: {
+                annual_gross_salary: { minimum: 1 },
+                maximum_working_hours_regime: { enum: ['yes', 'no'] },
+                work_hours_per_week: { minimum: 1 },
+                working_hours_exemption: { const: 'yes' },
+              },
+              required: ['working_hours_exemption', 'maximum_working_hours_regime', 'work_hours_per_week'],
+            },
+            then: {
+              // Deeply nested conditional with computed attrs
+              if: {
+                properties: {
+                  maximum_working_hours_regime: { const: 'yes' },
+                },
+                required: ['maximum_working_hours_regime'],
+              },
+              then: {
+                properties: {
+                  working_hours_exemption_allowance: {
+                    'x-jsf-logic-computedAttrs': {
+                      const: 'working_hours_exemption_allowance_with_max_hours_value_in_cents',
+                      default: 'working_hours_exemption_allowance_with_max_hours_value_in_cents',
+                    },
+                  },
+                },
+                required: ['working_hours_exemption_allowance'],
+              },
+              else: {
+                properties: {
+                  working_hours_exemption_allowance: {
+                    'x-jsf-logic-computedAttrs': {
+                      const: 'working_hours_exemption_allowance_no_max_hours_value_in_cents',
+                      default: 'working_hours_exemption_allowance_no_max_hours_value_in_cents',
+                    },
+                  },
+                },
+                required: ['working_hours_exemption_allowance'],
+              },
+            },
+            else: {
+              properties: {
+                working_hours_exemption_allowance: false,
+              },
+            },
+          },
+        ],
+        'x-jsf-logic': {
+          computedValues: {
+            working_hours_exemption_allowance_with_max_hours_value_in_cents: {
+              rule: { '*': [{ var: 'annual_gross_salary' }, 0.05] },
+            },
+            working_hours_exemption_allowance_no_max_hours_value_in_cents: {
+              rule: { '*': [{ var: 'annual_gross_salary' }, 0.03] },
+            },
+          },
+        },
+      }
+
+      // Run multiple times to test different conditional branches
+      for (let seed = 0; seed < 20; seed++) {
+        const result = generateFromSchema(schema, { seed }) as any
+
+        // If working_hours_exemption is 'yes', the allowance should NOT be generated
+        // because it has x-jsf-logic-computedAttrs in the nested conditional
+        if (result.working_hours_exemption === 'yes') {
+          expect(result.working_hours_exemption_allowance).toBeUndefined()
+        }
+      }
+    })
   })
 })

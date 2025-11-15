@@ -73,16 +73,32 @@ export function generateObject(
       continue
     }
 
-    // On first attempt, be conservative: skip optional properties with ONLY type+title
-    // (no other constraints). These are suspicious and might have conditional computed attrs
-    // that were lost during merging of nested conditionals. This is a targeted workaround for
-    // the Portugal schema pattern where base property is {type, title} and conditionals add
-    // x-jsf-logic-computedAttrs. This is necessary because handleConditional cannot recursively
-    // resolve nested conditional schemas (it generates values, not schemas).
+    // On first attempt, be conservative: skip optional properties that have type + metadata
+    // but NO JSON Schema constraint keywords. These are suspicious and might have conditional
+    // computed attrs that were lost during merging. Simple schemas like {type: 'string'} are OK.
     if (context.attempt === 1 && typeof propertySchema === 'object' && propertySchema !== null) {
-      const keys = Object.keys(propertySchema).sort()
-      const isTypeAndTitleOnly = keys.length === 2 && keys[0] === 'title' && keys[1] === 'type'
-      if (isTypeAndTitleOnly) {
+      const keys = Object.keys(propertySchema)
+      const hasType = keys.includes('type')
+      
+      // Metadata fields that don't affect generation
+      const metadataFields = ['title', 'description', 'default', 'examples', 'readOnly', 'writeOnly', 'deprecated']
+      const xJsfFields = keys.filter(k => k.startsWith('x-jsf-'))
+      const hasMetadata = keys.some(k => metadataFields.includes(k)) || xJsfFields.length > 0
+      
+      // Constraint keywords that guide generation
+      const constraintKeywords = [
+        'minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum',
+        'minLength', 'maxLength', 'pattern', 'format',
+        'minItems', 'maxItems', 'uniqueItems', 'items',
+        'minProperties', 'maxProperties', 'required', 'properties', 'additionalProperties',
+        'enum', 'const', 'multipleOf',
+        'allOf', 'anyOf', 'oneOf', 'not', 'if', 'then', 'else',
+      ]
+      const hasConstraints = keys.some(key => constraintKeywords.includes(key))
+      
+      // Skip if it has type + metadata but NO constraints (suspicious pattern)
+      // Don't skip simple schemas like {type: 'string'} which have no metadata
+      if (hasType && hasMetadata && !hasConstraints) {
         continue
       }
     }
