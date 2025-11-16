@@ -28,6 +28,12 @@ export interface LegacyOptions {
    */
   treatNullAsUndefined?: boolean
   /**
+   * Set of property names that have x-jsf-logic-computedAttrs and should not be required during validation.
+   * Used during generation to allow missing computed fields.
+   * @internal
+   */
+  computedFieldPaths?: Set<string>
+  /**
    * A value against a schema "false" will be allowed.
    * When true, providing a value to a non-required field that is not of type 'null' or ['null']
    * the validation will succeed instead of returning a type error.
@@ -241,6 +247,18 @@ export function validateSchema(
   // If the schema defines "required", run required checks even when type is undefined.
   if (schema.required && isObjectValue(value)) {
     const missingKeys = schema.required.filter((key: string) => {
+      // Skip validation for computed fields - they will be populated at runtime by the application
+      if (options.computedFieldPaths && options.computedFieldPaths.size > 0) {
+        // Check if this field is computed anywhere in the schema
+        // Use Array.from().some() for early exit optimization
+        const isComputed = Array.from(options.computedFieldPaths).some(
+          computedPath => computedPath.startsWith(`${key}@`)
+        )
+        if (isComputed) {
+          return false // Not considered missing - will be computed
+        }
+      }
+      
       const fieldValue = value[key]
       // Field is considered missing if:
       // - it's undefined OR

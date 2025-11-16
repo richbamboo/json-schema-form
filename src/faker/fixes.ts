@@ -129,13 +129,22 @@ function fixRequiredError(
 
   const parentPath = dataPath.slice(0, -1)
 
-  // For required errors, error.schema comes from the validator and includes
-  // conditionally-applied properties. Use it first to check for computed attrs.
-  // Fall back to root schema only if error.schema is not available.
-  let propertySchema: JsfSchema | undefined = error.schema
+  // For required errors, try multiple sources to find the property schema.
+  // error.schema from validator contains the parent schema with 'required' array.
+  let propertySchema: JsfSchema | undefined
   
-  // If error.schema is not a property schema, try to get it from the root schema
-  if (!propertySchema || typeof propertySchema === 'boolean') {
+  // First, check if error.schema has the property definition
+  // This handles conditional branches where properties are conditionally defined
+  const errorSchema = error.schema
+  if (errorSchema && typeof errorSchema === 'object' && !Array.isArray(errorSchema) && errorSchema.properties) {
+    const propFromError = errorSchema.properties[propertyName]
+    if (propFromError && typeof propFromError !== 'boolean') {
+      propertySchema = propFromError
+    }
+  }
+  
+  // If not found from error context, try root schema's properties
+  if (!propertySchema) {
     const parentSchema = parentPath.length > 0 
       ? getPropertySchemaFromPath(schema, parentPath)
       : schema
@@ -145,6 +154,9 @@ function fixRequiredError(
     }
   }
   
+  // If still not found, property likely only exists in conditional branches
+  // or is required without a schema definition (invalid but we can't fix it)
+  // Don't try to fix it - return unchanged to trigger regeneration
   if (!propertySchema || typeof propertySchema === 'boolean') {
     return { value, changed: false }
   }

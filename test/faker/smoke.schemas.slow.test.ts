@@ -3,6 +3,7 @@ import { readdirSync, readFileSync } from 'fs'
 import { join } from 'path'
 import { generateFromSchema } from '../../src/faker'
 import { validateSchema } from '../../src/validation/schema'
+import { findComputedFields } from '../../src/faker/preprocessing'
 
 /**
  * Smoke tests for all real-world schemas.
@@ -34,8 +35,9 @@ describe('smoke test: all real-world schemas @slow', () => {
         maxAttempts: 100,
       })
 
-      // Validate the generated data
-      const errors = validateSchema(result, schema)
+      // Validate the generated data, allowing computed fields to be missing
+      const computedFieldPaths = findComputedFields(schema)
+      const errors = validateSchema(result, schema, { computedFieldPaths })
       
       if (errors.length > 0) {
         console.error(`Validation errors for ${file}:`, JSON.stringify(errors, null, 2))

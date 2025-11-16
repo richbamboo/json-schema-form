@@ -127,6 +127,12 @@ interface LegacyOptions {
      */
     treatNullAsUndefined?: boolean;
     /**
+     * Set of property names that have x-jsf-logic-computedAttrs and should not be required during validation.
+     * Used during generation to allow missing computed fields.
+     * @internal
+     */
+    computedFieldPaths?: Set<string>;
+    /**
      * A value against a schema "false" will be allowed.
      * When true, providing a value to a non-required field that is not of type 'null' or ['null']
      * the validation will succeed instead of returning a type error.

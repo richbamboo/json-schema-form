@@ -197,11 +197,11 @@ describe('x-jsf-logic generation', () => {
       expect(result.computed_field).toBeUndefined()
     })
 
-    it('should fail when computed field is unconditionally required', () => {
-      // This schema is ungenerable because computed_field is both:
+    it('should allow missing computed field even when unconditionally required', () => {
+      // This schema has computed_field that is both:
       // - required (from then branch which always applies)
       // - computed (has x-jsf-logic-computedAttrs)
-      // We can't generate it (it's computed) but we can't skip validation (it's required)
+      // With the validator fix, this now succeeds - validator allows missing computed required fields
       const schema: JsfSchema = {
         type: 'object',
         properties: {
@@ -239,8 +239,10 @@ describe('x-jsf-logic generation', () => {
         },
       }
 
-      // Should throw MaxAttemptsExceededError because the schema is ungenerable
-      expect(() => generateFromSchema(schema, { seed: 42, maxAttempts: 50 })).toThrow('Failed to generate valid value')
+      // Should succeed - validator allows missing computed required fields
+      const result = generateFromSchema(schema, { seed: 42 }) as any
+      expect(result.trigger_field).toBe('yes')
+      expect(result.computed_field).toBeUndefined() // Not generated, will be computed at runtime
     })
 
     it('should not generate computed field with metadata in nested conditionals (production case)', () => {

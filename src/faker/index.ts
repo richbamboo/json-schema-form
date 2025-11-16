@@ -291,7 +291,7 @@ function generateSingle(
     let previousErrorCount = Infinity
 
     while (remainingFixAttempts > 0 && totalAttempts < options.maxAttempts) {
-      const errors = validateSchema(value, schema)
+      const errors = validateSchema(value, schema, { computedFieldPaths })
 
       if (errors.length === 0) {
         // Apply const→title replacements if enabled

@@ -120,6 +120,42 @@ export function handleAllOf(
     }
   }
   
+  // Collect all potentially forbidden properties from ALL conditionals
+  // This prevents infinite loops where globally required fields are conditionally forbidden
+  const potentiallyForbiddenProps = new Set<string>()
+  for (const conditional of conditionals) {
+    const cond = conditional.schema
+    // Check then branch
+    if (cond.then && typeof cond.then === 'object' && cond.then.properties) {
+      for (const [key, propSchema] of Object.entries(cond.then.properties)) {
+        if (propSchema === false) {
+          potentiallyForbiddenProps.add(key)
+        }
+      }
+    }
+    // Check else branch
+    if (cond.else && typeof cond.else === 'object' && cond.else.properties) {
+      for (const [key, propSchema] of Object.entries(cond.else.properties)) {
+        if (propSchema === false) {
+          potentiallyForbiddenProps.add(key)
+        }
+      }
+    }
+  }
+  
+  // Remove potentially forbidden properties from both required and properties
+  // They may be required in some branches but forbidden in others
+  // Don't include them in merged schema - let conditional branches define them
+  if (potentiallyForbiddenProps.size > 0) {
+    allRequired.splice(0, allRequired.length, 
+      ...allRequired.filter(key => !potentiallyForbiddenProps.has(key))
+    )
+    // Remove from properties to prevent optional generation
+    for (const key of potentiallyForbiddenProps) {
+      delete allProperties[key]
+    }
+  }
+  
   // Set merged properties and required
   if (Object.keys(allProperties).length > 0) {
     mergedSchema.properties = allProperties
