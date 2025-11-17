@@ -423,5 +423,48 @@ describe('x-jsf-logic generation', () => {
         expect(result.computed_field).toBeUndefined()
       }
     })
+
+    it('should generate fields with computed CONSTRAINTS but not computed VALUES', () => {
+      // Regression test: fields with x-jsf-logic-computedAttrs that only have
+      // computed constraints (minimum, maximum, etc.) should still be GENERATED.
+      // Only fields with computed VALUES (const, default) should be skipped.
+      const schema: JsfSchema = {
+        type: 'object',
+        properties: {
+          work_hours: {
+            type: 'integer',
+            minimum: 1,
+            maximum: 40,
+          },
+          annual_salary: {
+            type: 'integer',
+            // This field has a computed CONSTRAINT (minimum), not a computed VALUE
+            // It should still be generated
+            'x-jsf-logic-computedAttrs': {
+              minimum: 'computed_minimum_salary',
+              'x-jsf-errorMessage': {
+                minimum: 'Minimum salary is {{computed_minimum_salary}}',
+              },
+            },
+          },
+        },
+        required: ['work_hours', 'annual_salary'],
+        'x-jsf-logic': {
+          computedValues: {
+            computed_minimum_salary: {
+              rule: { '*': [{ var: 'work_hours' }, 1000] },
+            },
+          },
+        },
+      }
+
+      // annual_salary should be generated (not skipped)
+      for (let seed = 0; seed < 5; seed++) {
+        const result = generateFromSchema(schema, { seed }) as any
+        expect(result.work_hours).toBeDefined()
+        expect(result.annual_salary).toBeDefined()
+        expect(typeof result.annual_salary).toBe('number')
+      }
+    })
   })
 })

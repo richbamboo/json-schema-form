@@ -25,10 +25,16 @@ export function findComputedFields(schema: JsfSchema): Set<string> {
       return
     }
     
-    // If this node has x-jsf-logic-computedAttrs and we know the property name, record it
+    // If this node has x-jsf-logic-computedAttrs with computed VALUE (const/default), record it
+    // Fields with only computed CONSTRAINTS (minimum/maximum/etc.) should still be generated
     if ('x-jsf-logic-computedAttrs' in node && currentProp) {
-      const key = `${currentProp}@${conditionalPath}`
-      computedFieldPaths.add(key)
+      const computedAttrs = (node as any)['x-jsf-logic-computedAttrs']
+      // Only skip generation if the field VALUE is computed (has const or default)
+      if (computedAttrs && typeof computedAttrs === 'object' && 
+          ('const' in computedAttrs || 'default' in computedAttrs)) {
+        const key = `${currentProp}@${conditionalPath}`
+        computedFieldPaths.add(key)
+      }
     }
     
     // Recursively traverse the schema tree
